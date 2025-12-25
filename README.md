@@ -1,38 +1,69 @@
-# sv
+# Open Rosary
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A beautiful, modern, and open-source web application for praying the Rosary. Designed with a focus on aesthetics, simplicity, and accessibility.
 
-## Creating a project
+## ✨ Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+-   **Modes**:
+    -   **Digital**: Track your progress bead-by-bead on screen.
+    -   **Physical**: A simple list view for those who have their own physical Rosary.
+-   **Liturgical Support**: Automatically selects the correct Mystery for the day and adjusts the color theme based on the Liturgical Season.
+-   **Multi-Language**: Support for English (US), Spanish (MX), Portuguese (BR), and Latin (VA).
+-   **PWA**: Installable on mobile devices and works offline.
+-   **Responsive**: Optimized for both mobile and desktop experiences.
 
-```sh
-# create a new project in the current directory
-npx sv create
+## 🛠️ Tech Stack
 
-# create a new project in my-app
-npx sv create my-app
-```
+-   **Framework**: [SvelteKit](https://kit.svelte.dev/) (Svelte 5)
+-   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+-   **Language**: TypeScript
+-   **Build Tool**: Vite
 
-## Developing
+## 📂 Project Structure
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+-   `src/routes`: Application pages and routing logic.
+-   `src/lib`: Shared components (`components/`), stores (`stores.ts`), and utilities (`liturgical.ts`, `i18n/`).
+-   `prayers-and-verses`: Centralized repository for all prayer text and scripture translations.
+    -   Each language has its own folder (e.g., `en-us/`, `es-mx/`) containing a `constants.ts` file which feeds the UI.
 
-```sh
-npm run dev
+## 🚀 Getting Started
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/guidrezza/open-rosary.git
+    cd open-rosary
+    ```
 
-## Building
+2.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
 
-To create a production version of your app:
+3.  **Run the development server**:
+    ```bash
+    npm run dev
+    ```
 
-```sh
-npm run build
-```
+4.  **Build for production**:
+    ```bash
+    npm run build
+    ```
 
-You can preview the production build with `npm run preview`.
+## 🤝 Contributing
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+We welcome contributions! Whether it's a new language, a bug fix, or a feature enhancement.
+
+### Adding a New Language
+
+1.  **Create a Folder**: Inside `prayers-and-verses/`, create a new folder for your locale (e.g., `fr-fr`).
+2.  **Create Constants**: Create a `constants.ts` file inside that folder. You can copy the structure from `prayers-and-verses/en-us/constants.ts`.
+    -   Ensure you implement the `LocalizationData` interface.
+    -   Translate all prayers, mysteries, and UI strings.
+3.  **Register Locale**: Open `src/lib/i18n/index.ts`:
+    -   Import your new constants file.
+    -   Add it to the `locales` object exported at the top.
+4.  **Test**: Run the app and manually switch the URL to your new locale (e.g., `/fr-fr`) to verify.
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).

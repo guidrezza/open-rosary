@@ -248,7 +248,7 @@
                                         openPrayer(step);
                                     }}
                                 >
-                                    <span class="text-[10px] font-bold">{step.label}</span>
+                                    <span class="text-xs font-bold">{step.label}</span>
                                     
                                     {#if mode === 'digital' && absIndex === currentBeadIndex}
                                         <div class="absolute inset-0 rounded-full animate-ping opacity-20 bg-white"></div>
@@ -279,7 +279,7 @@
                      {#if steps[currentBeadIndex].prayerId === 'announce'}
                         <p class="text-lg leading-relaxed text-white/90 italic">{steps[currentBeadIndex].passage}</p>
                      {:else}
-                        <p class="text-lg leading-relaxed text-white/90 whitespace-pre-wrap">
+                        <p class="text-xl leading-relaxed text-white/90 whitespace-pre-wrap">
                             {t.prayers[steps[currentBeadIndex].prayerId].content}
                         </p>
                      {/if}

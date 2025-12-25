@@ -22,8 +22,16 @@ export const pt_br: LocalizationData = {
         },
         actions: {
             next: 'Próximo',
-            back: 'Voltar'
-        }
+            back: 'Voltar',
+            exit: 'SAIR?'
+        },
+        announce: 'Anunciar Mistério',
+        sections: {
+            intro: 'Introdução',
+            decade: 'Mistério',
+            conclusion: 'Conclusão'
+        },
+        ordinals: ['1º', '2º', '3º', '4º', '5º']
     },
     prayers: {
         sign_of_cross: {
@@ -33,7 +41,7 @@ export const pt_br: LocalizationData = {
         },
         creed: {
             id: 'creed',
-            title: 'Creio (Símbolo dos Apóstolos)',
+            title: 'Creio',
             content: 'Creio em Deus Pai Todo-Poderoso, criador do céu e da terra. E em Jesus Cristo, seu único Filho, nosso Senhor, que foi concebido pelo poder do Espírito Santo; nasceu da Virgem Maria; padeceu sob Pôncio Pilatos, foi crucificado, morto e sepultado. Desceu à mansão dos mortos; ressuscitou ao terceiro dia; subiu aos céus; está sentado à direita de Deus Pai Todo-Poderoso, donde há de vir a julgar os vivos e os mortos. Creio no Espírito Santo; na Santa Igreja Católica; na comunhão dos santos; na remissão dos pecados; na ressurreição da carne; na vida eterna. Amém.'
         },
         our_father: {
