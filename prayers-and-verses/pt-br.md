@@ -17,70 +17,70 @@
 
 ## II. Guia de Sequência (Os Números)
 **Orações Introdutórias:**
-1 -> 2 -> 3 -> 4 -> 4 -> 4 -> 5
+S -> C -> P -> A -> A -> A -> G
 
 **As Cinco Dezenas (Repetir 5 vezes):**
-9 -> 3 -> 4 (x10) -> 5 -> 6
+M -> P -> A (x10) -> G -> J
 
 **Orações Finais:**
-7 -> 8 -> 1
+R -> O -> S
 
 ---
 
 ## III. Guia de Texto
 **Orações Introdutórias:**
-1. Sinal da Cruz
-2. Creio (Símbolo dos Apóstolos)
-3. Pai Nosso
-4. Ave Maria (rezar 3 vezes)
-5. Glória ao Pai
+S. Sinal da Cruz
+C. Creio (Símbolo dos Apóstolos)
+P. Pai Nosso
+A. Ave Maria (rezar 3 vezes)
+G. Glória ao Pai
 
 **As Dezenas (Repetir para cada um dos 5 Mistérios):**
-9. Anúncio do Mistério e Leitura
-3. Pai Nosso
-4. Ave Maria (rezar 10 vezes)
-5. Glória ao Pai
-6. Jaculatória de Fátima (Ó meu Jesus)
+M. Anúncio do Mistério e Leitura
+P. Pai Nosso
+A. Ave Maria (rezar 10 vezes)
+G. Glória ao Pai
+J. Jaculatória de Fátima (Ó meu Jesus)
 
 **Conclusão:**
-7. Salve Rainha
-8. Oração Final (Ó Deus, cujo Unigênito...)
-1. Sinal da Cruz
+R. Salve Rainha
+O. Oração Final (Ó Deus, cujo Unigênito...)
+S. Sinal da Cruz
 
 ---
 
 ## IV. Orações e Escritura
 
-**1. O Sinal da Cruz**
+**S. O Sinal da Cruz**
 Em nome do Pai e do Filho e do Espírito Santo. Amém.
 
-**2. Creio (Símbolo dos Apóstolos)**
+**C. Creio (Símbolo dos Apóstolos)**
 Creio em Deus Pai Todo-Poderoso, criador do céu e da terra. E em Jesus Cristo, seu único Filho, nosso Senhor, que foi concebido pelo poder do Espírito Santo; nasceu da Virgem Maria; padeceu sob Pôncio Pilatos, foi crucificado, morto e sepultado. Desceu à mansão dos mortos; ressuscitou ao terceiro dia; subiu aos céus; está sentado à direita de Deus Pai Todo-Poderoso, donde há de vir a julgar os vivos e os mortos.
 Creio no Espírito Santo; na Santa Igreja Católica; na comunhão dos santos; na remissão dos pecados; na ressurreição da carne; na vida eterna. Amém.
 
-**3. Pai Nosso**
+**P. Pai Nosso**
 Pai Nosso que estais nos Céus, santificado seja o vosso Nome, venha a nós o vosso Reino, seja feita a vossa vontade assim na terra como no Céu. O pão nosso de cada dia nos dai hoje, perdoai-nos as nossas ofensas assim como nós perdoamos a quem nos tem ofendido, e não nos deixeis cair em tentação, mas livrai-nos do mal. Amém.
 
-**4. Ave Maria**
+**A. Ave Maria**
 Ave Maria, cheia de graça, o Senhor é convosco, bendita sois vós entre as mulheres e bendito é o fruto do vosso ventre, Jesus. Santa Maria, Mãe de Deus, rogai por nós, pecadores, agora e na hora de nossa morte. Amém.
 
-**5. Glória ao Pai**
+**G. Glória ao Pai**
 Glória ao Pai e ao Filho e ao Espírito Santo. Como era no princípio, agora e sempre. Amém.
 
-**6. Jaculatória de Fátima**
+**J. Jaculatória de Fátima**
 Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno, levai as almas todas para o céu e socorrei principalmente as que mais precisarem.
 
-**7. Salve Rainha**
+**R. Salve Rainha**
 Salve, Rainha, Mãe de misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos os degredados filhos de Eva. A vós suspiramos, gemendo e chorando neste vale de lágrimas. Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei, e depois deste desterro mostrai-nos Jesus, bendito fruto do vosso ventre, ó clemente, ó piedosa, ó doce sempre Virgem Maria.
 V. Rogai por nós, Santa Mãe de Deus.
 R. Para que sejamos dignos das promessas de Cristo.
 
-**8. Oração Final**
+**O. Oração Final**
 Oremos. Ó Deus, cujo Unigênito Filho, por sua vida, morte e ressurreição, nos alcançou os prêmios da vida eterna, concedei-nos, nós vo-lo pedimos, que, meditando estes mistérios do Sacratíssimo Rosário da Bem-Aventurada Virgem Maria, imitemos o que contêm e consigamos o que prometem. Pelo mesmo Cristo, nosso Senhor. Amém.
 
 ---
 
-**9. Os Mistérios**
+**M. Os Mistérios**
 
 **Mistérios Gozosos**
 1. **A Anunciação:** "Disse Maria: 'Eis aqui a serva do Senhor; faça-se em mim segundo a tua palavra!'" (Lucas 1, 38)

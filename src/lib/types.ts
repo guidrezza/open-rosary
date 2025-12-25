@@ -22,11 +22,14 @@ export type RosarySection =
     | 'decade-5'
     | 'conclusion';
 
+import type { LiturgicalTheme } from './liturgical';
+
 export interface RosaryState {
     mode: 'digital' | 'physical';
     currentSection: RosarySection;
     stepIndex: number;
     activeMysteryId?: string; // Track which mystery is being prayed
+    theme?: LiturgicalTheme;
 }
 
 export interface LocalizationData {

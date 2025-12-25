@@ -17,70 +17,70 @@
 
 ## II. Guía de Secuencia (Los Números)
 **Oraciones Introductorias:**
-1 -> 2 -> 3 -> 4 -> 4 -> 4 -> 5
+S -> C -> P -> A -> A -> A -> G
 
 **Las Cinco Decenas (Repetir 5 veces):**
-9 -> 3 -> 4 (x10) -> 5 -> 6
+M -> P -> A (x10) -> G -> J
 
 **Oraciones Finales:**
-7 -> 8 -> 1
+R -> O -> S
 
 ---
 
 ## III. Guía de Texto
 **Oraciones Introductorias:**
-1. Señal de la Cruz
-2. Credo de los Apóstoles
-3. Padre Nuestro
-4. Ave María (rezar 3 veces)
-5. Gloria
+S. Señal de la Cruz
+C. Credo de los Apóstoles
+P. Padre Nuestro
+A. Ave María (rezar 3 veces)
+G. Gloria
 
 **Las Decenas (Repetir para cada uno de los 5 Misterios):**
-9. Anuncio del Misterio y Lectura
-3. Padre Nuestro
-4. Ave María (rezar 10 veces)
-5. Gloria
-6. Jaculatoria de Fátima (Oh Jesús mío)
+M. Anuncio del Misterio y Lectura
+P. Padre Nuestro
+A. Ave María (rezar 10 veces)
+G. Gloria
+J. Jaculatoria de Fátima (Oh Jesús mío)
 
 **Conclusión:**
-7. La Salve
-8. Oración Final (Oh Dios, cuyo Unigénito...)
-1. Señal de la Cruz
+R. La Salve
+O. Oración Final (Oh Dios, cuyo Unigénito...)
+S. Señal de la Cruz
 
 ---
 
 ## IV. Oraciones y Escritura
 
-**1. La Señal de la Cruz**
+**S. La Señal de la Cruz**
 En el nombre del Padre, y del Hijo, y del Espíritu Santo. Amén.
 
-**2. El Credo de los Apóstoles**
+**C. El Credo de los Apóstoles**
 Creo en Dios, Padre todopoderoso, Creador del cielo y de la tierra. Creo en Jesucristo, su único Hijo, nuestro Señor, que fue concebido por obra y gracia del Espíritu Santo, nació de Santa María Virgen, padeció bajo el poder de Poncio Pilato, fue crucificado, muerto y sepultado, descendió a los infiernos, al tercer día resucitó de entre los muertos, subió a los cielos y está sentado a la derecha de Dios, Padre todopoderoso. Desde allí ha de venir a juzgar a vivos y muertos.
 Creo en el Espíritu Santo, la santa Iglesia católica, la comunión de los santos, el perdón de los pecados, la resurrección de la carne y la vida eterna. Amén.
 
-**3. Padre Nuestro**
+**P. Padre Nuestro**
 Padre nuestro, que estás en el cielo, santificado sea tu nombre; venga a nosotros tu reino; hágase tu voluntad en la tierra como en el cielo. Danos hoy nuestro pan de cada día; perdona nuestras ofensas, como también nosotros perdonamos a los que nos ofenden; no nos dejes caer en la tentación, y líbranos del mal. Amén.
 
-**4. Ave María**
+**A. Ave María**
 Dios te salve, María, llena eres de gracia; el Señor es contigo. Bendita tú eres entre todas las mujeres, y bendito es el fruto de tu vientre, Jesús. Santa María, Madre de Dios, ruega por nosotros, pecadores, ahora y en la hora de nuestra muerte. Amén.
 
-**5. Gloria**
+**G. Gloria**
 Gloria al Padre y al Hijo y al Espíritu Santo. Como era en el principio, ahora y siempre, por los siglos de los siglos. Amén.
 
-**6. Jaculatoria de Fátima**
+**J. Jaculatoria de Fátima**
 ¡Oh Jesús mío!, perdona nuestros pecados, líbranos del fuego del infierno, lleva al cielo a todas las almas, especialmente a las más necesitadas de tu misericordia.
 
-**7. La Salve (Salve Regina)**
+**R. La Salve (Salve Regina)**
 Dios te salve, Reina y Madre de misericordia, vida, dulzura y esperanza nuestra; Dios te salve. A ti llamamos los desterrados hijos de Eva; a ti suspiramos, gimiendo y llorando, en este valle de lágrimas. Ea, pues, Señora, abogada nuestra, vuelve a nosotros esos tus ojos misericordiosos; y después de este destierro muéstranos a Jesús, fruto bendito de tu vientre. ¡Oh clementísima, oh piadosa, oh dulce Virgen María!
 V. Ruega por nosotros, Santa Madre de Dios.
 R. Para que seamos dignos de alcanzar las promesas de Nuestro Señor Jesucristo.
 
-**8. Oración Final**
+**O. Oración Final**
 Oremos. Oh Dios, cuyo Unigénito Hijo, con su vida, muerte y resurrección, nos alcanzó el premio de la vida eterna: concédenos, a los que meditamos estos misterios del Santísimo Rosario de la Bienaventurada Virgen María, imitar lo que contienen y alcanzar lo que prometen. Por el mismo Jesucristo Nuestro Señor. Amén.
 
 ---
 
-**9. Los Misterios**
+**M. Los Misterios**
 
 **Misterios Gozosos**
 1. **La Encarnación del Hijo de Dios:** "Dijo María: «He aquí la esclava del Señor; hágase en mí según tu palabra»." (Lucas 1, 38)

@@ -6,6 +6,7 @@
 	import GlassPanel from '$lib/components/GlassPanel.svelte';
 	import PrayerModal from '$lib/components/PrayerModal.svelte';
 	import MysteryImage from '$lib/components/MysteryImage.svelte';
+    import SectionMenu from '$lib/components/SectionMenu.svelte';
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
 	import { onMount, tick } from 'svelte';
@@ -17,32 +18,31 @@
 
 	// Initialize state
 	let currentSection = $state<RosarySection>('intro');
-	let stepIndex = $state(0);
+    // We no longer track 'stepIndex' for navigation purposes, only for visual or modal context if needed.
+    // Actually, we show all steps at once now.
 	
 	// Get mystery from query param (safe for prerender)
 	let mysteryId = $derived(browser ? $page.url.searchParams.get('mystery') || 'joyful' : 'joyful');
 	let mystery = $derived(t.mysteries[mysteryId] || t.mysteries['joyful']);
 
 	// Computed Steps for current section
-	// Define step structure: { label: string, prayerId: string, count?: number }
-	// We map the numbers to prayer IDs.
-	
 	function getStepsForSection(sec: RosarySection, mys: Mystery) {
 		if (sec === 'intro') {
 			return [
-				{ prayerId: 'sign_of_cross', label: '1' },
-				{ prayerId: 'creed', label: '2' },
-				{ prayerId: 'our_father', label: '3' },
-				{ prayerId: 'hail_mary', label: '4' },
-				{ prayerId: 'hail_mary', label: '4' },
-				{ prayerId: 'hail_mary', label: '4' },
-				{ prayerId: 'glory_be', label: '5' }
+				{ prayerId: 'sign_of_cross', label: 'S' },
+				{ prayerId: 'creed', label: 'C' },
+				{ prayerId: 'our_father', label: 'P' },
+				{ prayerId: 'hail_mary', label: 'A' },
+				{ prayerId: 'hail_mary', label: 'A' },
+				{ prayerId: 'hail_mary', label: 'A' },
+				{ prayerId: 'glory_be', label: 'G' },
+                { prayerId: 'personal_intentions', label: 'V' }
 			];
 		} else if (sec === 'conclusion') {
 			return [
-				{ prayerId: 'hail_holy_queen', label: '7' },
-				{ prayerId: 'closing_prayer', label: '8' },
-				{ prayerId: 'sign_of_cross', label: '1' }
+				{ prayerId: 'hail_holy_queen', label: 'R' },
+				{ prayerId: 'closing_prayer', label: 'O' },
+				{ prayerId: 'sign_of_cross', label: 'S' }
 			];
 		} else {
 			// Decade 1-5
@@ -50,49 +50,49 @@
 			const passage = mys.passages[decadeNum - 1];
 			
 			return [
-				{ prayerId: 'announce', label: '9', passage }, 
-				{ prayerId: 'our_father', label: '3' },
-				...Array(10).fill({ prayerId: 'hail_mary', label: '4' }),
-				{ prayerId: 'glory_be', label: '5' },
-				{ prayerId: 'fatima', label: '6' }
+				{ prayerId: 'announce', label: 'M', passage }, 
+				{ prayerId: 'our_father', label: 'P' },
+				...Array(10).fill({ prayerId: 'hail_mary', label: 'A' }),
+				{ prayerId: 'glory_be', label: 'G' },
+				{ prayerId: 'fatima', label: 'J' }
 			];
 		}
 	}
 
 	let steps = $derived(getStepsForSection(currentSection, mystery));
-    let currentStep = $derived(steps[stepIndex]);
     
-    // Auto-scroll logic if list gets long (simple version)
-    
+    // Header Logic
+    let exitState = $state(false);
+    let sectionMenuOpen = $state(false);
+
+    function handleMysteryClick() {
+        if (!exitState) {
+            exitState = true;
+            setTimeout(() => exitState = false, 3000); // Reset after 3s if not clicked
+        } else {
+            goto(`${base}/`);
+        }
+    }
+
     // Navigation
-    function next() {
-        if (stepIndex < steps.length - 1) {
-             stepIndex++;
-        } else {
-            // Move to next section
-            goToNextSection();
-        }
-    }
-
-    function back() {
-        if (stepIndex > 0) {
-            stepIndex--;
-        } else {
-             // Move to prev section (simple logic: just reset or go back logic if critical, but simplified: assume user stays or restarts)
-             // Implementing "Back" across sections is complex, let's just stay at 0 or warn.
-        }
-    }
-
     function goToNextSection() {
         const order: RosarySection[] = ['intro', 'decade-1', 'decade-2', 'decade-3', 'decade-4', 'decade-5', 'conclusion'];
         const idx = order.indexOf(currentSection);
         if (idx < order.length - 1) {
             currentSection = order[idx + 1];
-            stepIndex = 0;
-             // Scroll to top or reset view
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
             // Finished
             goto(`${base}/${lang}`);
+        }
+    }
+
+    function goToPrevSection() {
+        const order: RosarySection[] = ['intro', 'decade-1', 'decade-2', 'decade-3', 'decade-4', 'decade-5', 'conclusion'];
+        const idx = order.indexOf(currentSection);
+        if (idx > 0) {
+            currentSection = order[idx - 1];
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }
 
@@ -100,15 +100,15 @@
     let modalOpen = $state(false);
     let modalContent = $state({ title: '', content: '' });
 
-    function openPrayer(prayerId: string, passage?: string) {
-        if (prayerId === 'announce') {
+    function openPrayer(step: any) {
+        if (step.prayerId === 'announce') {
             const decadeNum = parseInt(currentSection.split('-')[1]);
              modalContent = {
                 title: `${mystery.name} - ${decadeNum}`,
-                content: passage || ''
+                content: step.passage || ''
             };
         } else {
-            const prayer = t.prayers[prayerId];
+            const prayer = t.prayers[step.prayerId];
             modalContent = {
                 title: prayer.title,
                 content: prayer.content
@@ -117,105 +117,147 @@
         modalOpen = true;
     }
     
-    // Handle physical mode skipping
-    function handleNext() {
-        if ($rosary.mode === 'physical') {
-            // Skip directly to next section if it was a decade? 
-            // The plan says: "Next ignores the numbers and skips directly to the next page/section."
-            // But intro has multiple prayers. Does physical mode skip ALL intro prayers?
-            // "Physical Beads" - "I have my own Rosary. Just show me the prayers."
-            // Probably means show the text for the section, but don't force clicking 10 times for Hail Mary.
-            // But if user clicks Next, they might want to move to next *Instruction*.
-            // Wait, "Numbers are visible but static; no individual step highlighting."
-            // "Next ignores the numbers and skips directly to the next page/section."
-            // This implies: Showing Intro -> Click Next -> Decade 1 -> Click Next -> Decade 2...
-            goToNextSection();
-        } else {
-            next();
-        }
-    }
-    
     // Resolve Text for UI
     let sectionTitle = $derived.by(() => {
         if (currentSection === 'intro') return 'Introduction';
         if (currentSection === 'conclusion') return 'Conclusion';
         const num = currentSection.split('-')[1];
-        return `${num}ª Decade`; // TODO: i18n this properly if needed, kept simple
+        // Simple manual mapping for 1-5 to ordinals if needed, or just "Decade X"
+        const ordinals = ['1st', '2nd', '3rd', '4th', '5th'];
+        return `${ordinals[parseInt(num) - 1]} Decade`;
+    });
+
+    let mysteryMessage = $derived.by(() => {
+        if (currentSection.startsWith('decade')) {
+             const decadeNum = parseInt(currentSection.split('-')[1]);
+             // Passage format: "Title: 'Quote' (Ref)"
+             // We want to split title and quote if possible, but for now just showing it.
+             // User said: "Mystery messages are the title and description... like for example: 'The Annunciation: ...'"
+             // We can just display the passage string as is, it contains both.
+             return mystery.passages[decadeNum - 1];
+        }
+        return '';
     });
 
 </script>
 
-<div class="min-h-screen bg-black text-white flex flex-col relative pb-24">
+<div class="min-h-screen bg-black text-white flex flex-col relative pb-32">
     <!-- Header -->
     <header class="sticky top-0 z-30 p-4">
         <GlassPanel class="flex justify-between items-center py-3 px-4">
-             <div class="text-sm font-medium text-white/60">{mystery.name}</div>
-             <div class="text-white font-bold">{sectionTitle}</div>
+             <button 
+                class="text-sm font-medium transition-colors duration-200 {exitState ? 'text-red-400 font-bold' : 'text-white/60'}"
+                onclick={handleMysteryClick}
+             >
+                {exitState ? 'EXIT?' : mystery.name}
+             </button>
+             
+             <button 
+                class="text-white font-bold hover:text-white/80 transition-colors"
+                onclick={() => sectionMenuOpen = true}
+             >
+                {sectionTitle} ▾
+             </button>
         </GlassPanel>
     </header>
 
     <!-- Main Content -->
     <main class="flex-1 px-4 flex flex-col gap-6 w-full max-w-lg mx-auto">
-        <!-- Mystery Image -->
-        <MysteryImage />
-        
-        <!-- Step Counter (Digital Only active state) -->
-        <div class="flex flex-wrap justify-center gap-1.5 px-2">
-            {#each steps as step, i}
-                <div 
-                    class="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold transition-all duration-300
-                    {i === stepIndex && $rosary.mode === 'digital' ? 'bg-white text-black scale-110 shadow-[0_0_10px_rgba(255,255,255,0.5)]' : 'bg-white/10 text-white/40'}
-                    {$rosary.mode === 'physical' ? 'opacity-50' : ''}"
-                >
-                    {step.label}
-                </div>
-            {/each}
+        <!-- Mystery Image (Smaller) -->
+        <div class="w-1/2 mx-auto aspect-square max-w-[200px]">
+             <MysteryImage />
         </div>
         
-        <!-- Current Prayer / Intention -->
-        <div class="flex-1 flex flex-col justify-center min-h-[200px]" key={currentStep}>
-            {#if currentStep.prayerId === 'announce'}
-                 <div class="text-center space-y-4">
-                    <h2 class="text-2xl font-bold text-white mb-2">{mystery.name}</h2>
-                    <p class="text-white/80 italic leading-relaxed">"{currentStep.passage}"</p>
-                 </div>
-            {:else}
-                <div class="text-center space-y-4">
-                    <h2 class="text-3xl font-bold text-white">{t.prayers[currentStep.prayerId].title}</h2>
-                    <p class="text-white/60 line-clamp-3">{t.prayers[currentStep.prayerId].content}</p>
-                    <button class="text-sm text-blue-400 font-medium hover:text-blue-300 transition-colors" onclick={() => openPrayer(currentStep.prayerId, currentStep.passage)}>
-                        Read Full Prayer
-                    </button>
-                </div>
-            {/if}
+        <!-- Mystery Message (Decades only) -->
+        {#if mysteryMessage}
+            <div class="text-center px-2">
+                <p class="text-white/90 italic text-sm leading-relaxed">{mysteryMessage}</p>
+            </div>
+        {/if}
+
+        <!-- Step Counter / Beads -->
+        <!-- Split by 7s using grid/flex wrap logic -->
+        <div class="w-full px-2">
+            <div class="flex flex-wrap justify-center gap-1.5">
+               {#each steps as step, i}
+                    <!-- Force line break every 7 items? Flex wrap handles it naturally if width is constrained, 
+                         but to enforce strictly 7 per line we might need a grid or specific container width. 
+                         Let's try a grid with 7 columns. -->
+                {/each}
+            </div>
+             <!-- Better approach: Grid with centered content, max 7 cols -->
+             <div class="grid grid-cols-7 gap-y-2 gap-x-1 justify-items-center max-w-[280px] mx-auto">
+                {#each steps as step, i}
+                     <div class="w-8 h-8 rounded-full bg-white/10 text-white/40 flex items-center justify-center text-xs font-bold border border-white/5">
+                        {step.label}
+                     </div>
+                {/each}
+             </div>
+        </div>
+        
+        <!-- Prayer List -->
+        <div class="flex-1 flex flex-col gap-2 mt-2">
+            {#each steps as step, i}
+                 <button 
+                    class="w-full flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 active:scale-[0.98] transition-all border border-white/5 text-left group"
+                    onclick={() => openPrayer(step)}
+                >
+                    <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-sm font-bold text-white/70 group-hover:bg-white/20 group-hover:text-white transition-colors">
+                        {step.label}
+                    </div>
+                    <div class="flex-1">
+                        {#if step.prayerId === 'announce'}
+                            <span class="font-bold text-white block">Announce Mystery</span>
+                        {:else}
+                             <span class="font-medium text-white/80 group-hover:text-white transition-colors">
+                                {t.prayers[step.prayerId].title}
+                             </span>
+                        {/if}
+                    </div>
+                    <div class="text-white/20 text-lg">›</div>
+                 </button>
+            {/each}
         </div>
     </main>
 
     <!-- Navigation Controls -->
-    <div class="fixed bottom-0 left-0 right-0 p-6 z-40 bg-gradient-to-t from-black via-black/80 to-transparent pt-12 flex justify-between max-w-lg mx-auto w-full">
-        <!-- Transparent huge tap areas technically, but using visible buttons for clarity first as per glassmorphism usually implies buttons -->
-        <!-- Plan says "Large transparent tap areas at bottom-left and bottom-right" -->
-        
+    <div class="fixed bottom-0 left-0 right-0 p-6 z-40 bg-gradient-to-t from-black via-black/95 to-transparent pt-12 flex justify-between max-w-lg mx-auto w-full">
         <button 
-           class="h-16 w-1/3 flex items-center justify-start pl-4 text-white/50 hover:text-white transition-colors"
-           onclick={back}
+           class="h-14 px-6 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium backdrop-blur-md border border-white/10 transition-all flex items-center gap-2"
+           onclick={goToPrevSection}
+           disabled={currentSection === 'intro'}
+           title="Previous Section"
         >
-           <span class="text-lg font-medium tracking-widest uppercase">Back</span>
+           <span>←</span>
+           <span class="text-sm uppercase tracking-wider">Back</span>
         </button>
 
         <button 
-           class="h-16 w-1/3 flex items-center justify-end pr-4 text-white font-bold hover:scale-105 transition-transform"
-           onclick={handleNext}
+           class="h-14 px-8 rounded-full bg-white text-black font-bold hover:scale-105 transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+           onclick={goToNextSection}
+           title="Next Section"
         >
-           <span class="text-2xl tracking-widest uppercase">Next</span>
+           <span class="text-sm uppercase tracking-wider">Next</span>
+           <span>→</span>
         </button>
     </div>
 
-    <!-- Modal -->
+    <!-- Modals -->
     <PrayerModal 
         isOpen={modalOpen} 
         title={modalContent.title} 
         content={modalContent.content} 
         onClose={() => modalOpen = false} 
+    />
+    
+    <SectionMenu
+        isOpen={sectionMenuOpen}
+        {currentSection}
+        onSelect={(sec) => {
+            currentSection = sec;
+            sectionMenuOpen = false;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        onClose={() => sectionMenuOpen = false}
     />
 </div>

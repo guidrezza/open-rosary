@@ -17,70 +17,70 @@
 
 ## II. Sequence Guide (The Numbers)
 **Introductory Prayers:**
-1 -> 2 -> 3 -> 4 -> 4 -> 4 -> 5
+S -> C -> P -> A -> A -> A -> G
 
 **The Five Decades (Loop 5 times):**
-9 -> 3 -> 4 (x10) -> 5 -> 6
+M -> P -> A (x10) -> G -> J
 
 **Concluding Prayers:**
-7 -> 8 -> 1
+R -> O -> S
 
 ---
 
 ## III. Text Guide
 **Introductory Prayers:**
-1. Signum Crucis
-2. Symbolum Apostolorum (Credo)
-3. Pater Noster
-4. Ave Maria (pray 3 times)
-5. Gloria Patri
+S. Signum Crucis
+C. Symbolum Apostolorum (Credo)
+P. Pater Noster
+A. Ave Maria (pray 3 times)
+G. Gloria Patri
 
 **The Decades (Repeat for each of the 5 Mysteries):**
-9. Announce Mystery & Reading
-3. Pater Noster
-4. Ave Maria (pray 10 times)
-5. Gloria Patri
-6. Oratio Fatimae
+M. Announce Mystery & Reading
+P. Pater Noster
+A. Ave Maria (pray 10 times)
+G. Gloria Patri
+J. Oratio Fatimae
 
 **Conclusion:**
-7. Salve Regina
-8. Oremus (Deus, cuius Unigénitus...)
-1. Signum Crucis
+R. Salve Regina
+O. Oremus (Deus, cuius Unigénitus...)
+S. Signum Crucis
 
 ---
 
 ## IV. Prayers & Scripture
 
-**1. Signum Crucis**
+**S. Signum Crucis**
 In nómine Patris, et Fílii, et Spíritus Sancti. Amen.
 
-**2. Symbolum Apostolorum (Credo)**
+**C. Symbolum Apostolorum (Credo)**
 Credo in Deum Patrem omnipoténtem, Creatórem cæli et terræ. Et in Iesum Christum, Fílium eius únicum, Dóminum nostrum, qui concéptus est de Spíritu Sancto, natus ex María Vírgine, passus sub Póntio Piláto, crucifíxus, mórtuus, et sepúltus, descéndit ad ínferos, tértia die resurréxit a mórtuis, ascéndit ad cælos, sedet ad déxteram Dei Patris omnipoténtis, inde ventúrus est iudicáre vivos et mórtuos.
 Credo in Spíritum Sanctum, sanctam Ecclésiam cathólicam, sanctórum communiónem, remissiónem peccatórum, carnis resurrectiónem, vitam ætérnam. Amen.
 
-**3. Pater Noster**
+**P. Pater Noster**
 Pater noster, qui es in cælis, sanctificétur nomen tuum. Advéniat regnum tuum. Fiat volúntas tua, sicut in cælo et in terra. Panem nostrum cotidiánum da nobis hódie, et dimítte nobis débita nostra sicut et nos dimíttimus debitóribus nostris. Et ne nos indúcas in tentatiónem, sed líbera nos a malo. Amen.
 
-**4. Ave Maria**
+**A. Ave Maria**
 Ave María, grátia plena, Dóminus tecum. Benedícta tu in muliéribus, et benedíctus fructus ventris tui, Iesus. Sancta María, Mater Dei, ora pro nobis peccatóribus, nunc, et in hora mortis nostræ. Amen.
 
-**5. Gloria Patri**
+**G. Gloria Patri**
 Glória Patri, et Fílio, et Spirítui Sancto. Sicut erat in princípio, et nunc, et semper, et in sǽcula sæculórum. Amen.
 
-**6. Oratio Fatimae**
+**J. Oratio Fatimae**
 Dómine Iesu, dimítte nobis débita nostra, salva nos ab igne inférni, pérduc in cælum omnes ánimas, præsértim illas quæ máxime índigent misericórdia tua.
 
-**7. Salve Regina**
+**R. Salve Regina**
 Salve, Regína, mater misericórdiæ; vita, dulcédo et spes nostra, salve. Ad te clamámus éxsules fílii Hevæ. Ad te suspirámus geméntes et flentes in hac lacrimárum valle. Eia ergo, advocáta nostra, illos tuos misericórdes óculos ad nos convérte. Et Iesum, benedíctum fructum ventris tui, nobis post hoc exsílium osténde. O clemens, o pia, o dulcis Virgo María.
 V. Ora pro nobis, sancta Dei Génitrix.
 R. Ut digni efficiámur promissiónibus Christi.
 
-**8. Oremus**
+**O. Oremus**
 Orémus. Deus, cuius Unigénitus per vitam, mortem et resurrectiónem suam nobis salútis ætérnæ prǽmia comparávit, concéde, quǽsumus: ut hæc mystéria sacratíssimo Beátæ Maríæ Vírginis Rosário recoléntes, et imitémur quod cóntinent, et quod promíttunt assequámur. Per eúndem Christum Dóminum nostrum. Amen.
 
 ---
 
-**9. The Mysteries**
+**M. The Mysteries**
 
 **Mystéria Gaudiósa**
 1. **Annuntiátio:** "Dixit autem María: «Ecce ancílla Dómini; fiat mihi secúndum verbum tuum»." (Lc 1, 38)

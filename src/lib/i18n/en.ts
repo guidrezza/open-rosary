@@ -65,12 +65,17 @@ export const en: LocalizationData = {
             id: 'closing_prayer',
             title: 'Closing Prayer',
             content: 'Let us pray. O God, whose only begotten Son, by his life, death, and resurrection, has purchased for us the rewards of eternal life, grant, we beseech thee, that meditating upon these mysteries of the most holy Rosary of the Blessed Virgin Mary, we may imitate what they contain and obtain what they promise, through the same Christ our Lord. Amen.'
+        },
+        personal_intentions: {
+            id: 'personal_intentions',
+            title: 'Personal Intentions (Optional)',
+            content: 'This is a good time to make any personal intentions you may have.'
         }
     },
     mysteries: {
         joyful: {
             id: 'joyful',
-            name: 'The Joyful Mysteries',
+            name: 'Joyful Mysteries',
             days: [1, 6],
             passages: [
                 "The Annunciation: \"Mary said, 'Behold, I am the handmaid of the Lord. May it be done to me according to your word.'\" (Luke 1:38)",
@@ -82,7 +87,7 @@ export const en: LocalizationData = {
         },
         luminous: {
             id: 'luminous',
-            name: 'The Luminous Mysteries',
+            name: 'Luminous Mysteries',
             days: [4],
             passages: [
                 "The Baptism in the Jordan: \"And a voice came from the heavens, saying, 'This is my beloved Son, with whom I am well pleased.'\" (Matthew 3:17)",
@@ -94,7 +99,7 @@ export const en: LocalizationData = {
         },
         sorrowful: {
             id: 'sorrowful',
-            name: 'The Sorrowful Mysteries',
+            name: 'Sorrowful Mysteries',
             days: [2, 5],
             passages: [
                 "The Agony in the Garden: \"He was in such agony and he prayed so fervently that his sweat became like drops of blood falling on the ground.\" (Luke 22:44)",
@@ -106,7 +111,7 @@ export const en: LocalizationData = {
         },
         glorious: {
             id: 'glorious',
-            name: 'The Glorious Mysteries',
+            name: 'Glorious Mysteries',
             days: [0, 3],
             passages: [
                 "The Resurrection: \"He has been raised; he is not here. Behold the place where they laid him.\" (Mark 16:6)",

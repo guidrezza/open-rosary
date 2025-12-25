@@ -7,7 +7,18 @@ const STORAGE_KEY = 'open-rosary-state';
 const defaultState: RosaryState = {
     mode: 'digital',
     currentSection: 'intro',
-    stepIndex: 0
+    currentSection: 'intro',
+    stepIndex: 0,
+    theme: {
+        color: 'green',
+        season: 'Ordinary Time',
+        cssVars: {
+            '--theme-color': '#2d4a3e',
+            '--glass-bg': 'rgba(20, 40, 30, 0.4)',
+            '--glass-border': 'rgba(100, 200, 150, 0.2)',
+            '--text-highlight': '#86efac'
+        }
+    }
 };
 
 function createRosaryStore() {
