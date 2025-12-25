@@ -22,8 +22,16 @@ export const en: LocalizationData = {
         },
         actions: {
             next: 'Next',
-            back: 'Back'
-        }
+            back: 'Back',
+            exit: 'EXIT?'
+        },
+        announce: 'Announce Mystery',
+        sections: {
+            intro: 'Introduction',
+            decade: 'Decade',
+            conclusion: 'Conclusion'
+        },
+        ordinals: ['1st', '2nd', '3rd', '4th', '5th']
     },
     prayers: {
         sign_of_cross: {

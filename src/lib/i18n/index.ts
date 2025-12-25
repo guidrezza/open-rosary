@@ -1,4 +1,4 @@
-import { en } from './en';
+import { en } from '../../../prayers-and-verses/en-us/constants';
 import type { LocalizationData } from '$lib/types';
 
 export const locales: Record<string, LocalizationData> = {

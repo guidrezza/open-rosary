@@ -51,6 +51,14 @@ export interface LocalizationData {
         actions: {
             next: string;
             back: string;
-        }
+            exit: string;
+        };
+        announce: string;
+        sections: {
+            intro: string;
+            decade: string;
+            conclusion: string;
+        };
+        ordinals: string[];
     };
 }

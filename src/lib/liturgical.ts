@@ -18,39 +18,39 @@ export interface LiturgicalTheme {
 // Modern, Glass-Friendly Palettes
 export const PALETTES: Record<LiturgicalColor, LiturgicalTheme['cssVars']> = {
     green: {
-        '--theme-color': '#10b981', // Emerald 500
-        '--glass-bg': 'rgba(6, 78, 59, 0.3)',
-        '--glass-border': 'rgba(52, 211, 153, 0.2)',
+        '--theme-color': '#059669', // Emerald 600 (Darker than 500)
+        '--glass-bg': 'rgba(6, 78, 59, 0.4)', // Slightly more opaque
+        '--glass-border': 'rgba(52, 211, 153, 0.15)',
         '--text-highlight': '#6ee7b7'
     },
     white: {
-        '--theme-color': '#f3f4f6', // Gray 100
-        '--glass-bg': 'rgba(255, 255, 255, 0.1)',
-        '--glass-border': 'rgba(255, 255, 255, 0.2)',
-        '--text-highlight': '#ffffff'
+        '--theme-color': '#64748b', // Slate 500 (Much darker than Gray 100 for visibility)
+        '--glass-bg': 'rgba(255, 255, 255, 0.08)', // Reduced white opacity
+        '--glass-border': 'rgba(255, 255, 255, 0.15)',
+        '--text-highlight': '#e2e8f0' // Slate 200
     },
     red: {
-        '--theme-color': '#ef4444', // Red 500
-        '--glass-bg': 'rgba(127, 29, 29, 0.3)',
-        '--glass-border': 'rgba(248, 113, 113, 0.2)',
+        '--theme-color': '#dc2626', // Red 600
+        '--glass-bg': 'rgba(127, 29, 29, 0.4)',
+        '--glass-border': 'rgba(248, 113, 113, 0.15)',
         '--text-highlight': '#fca5a5'
     },
     purple: {
-        '--theme-color': '#8b5cf6', // Violet 500
-        '--glass-bg': 'rgba(76, 29, 149, 0.3)',
-        '--glass-border': 'rgba(167, 139, 250, 0.2)',
+        '--theme-color': '#7c3aed', // Violet 600
+        '--glass-bg': 'rgba(76, 29, 149, 0.4)',
+        '--glass-border': 'rgba(167, 139, 250, 0.15)',
         '--text-highlight': '#d8b4fe'
     },
     rose: {
-        '--theme-color': '#f43f5e', // Rose 500
-        '--glass-bg': 'rgba(136, 19, 55, 0.3)',
-        '--glass-border': 'rgba(251, 113, 133, 0.2)',
+        '--theme-color': '#e11d48', // Rose 600
+        '--glass-bg': 'rgba(136, 19, 55, 0.4)',
+        '--glass-border': 'rgba(251, 113, 133, 0.15)',
         '--text-highlight': '#fda4af'
     },
     black: {
-        '--theme-color': '#2e2e2e', // Neutral Gray (lighter than deep black for blobs)
-        '--glass-bg': 'rgba(0, 0, 0, 0.5)',
-        '--glass-border': 'rgba(100, 100, 100, 0.2)',
+        '--theme-color': '#404040', // Neutral 700 (Slightly lighter than pure black to show up)
+        '--glass-bg': 'rgba(0, 0, 0, 0.6)',
+        '--glass-border': 'rgba(100, 100, 100, 0.15)',
         '--text-highlight': '#e5e5e5'
     }
 };

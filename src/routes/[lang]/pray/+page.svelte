@@ -149,11 +149,11 @@
 
     // UI Text
     let sectionTitle = $derived.by(() => {
-        if (currentSection === 'intro') return 'Introduction';
-        if (currentSection === 'conclusion') return 'Conclusion';
+        if (currentSection === 'intro') return t.ui.sections.intro;
+        if (currentSection === 'conclusion') return t.ui.sections.conclusion;
         const num = currentSection.split('-')[1];
-        const ordinals = ['1st', '2nd', '3rd', '4th', '5th'];
-        return `${ordinals[parseInt(num) - 1]} Decade`;
+        const ordinals = t.ui.ordinals;
+        return `${ordinals[parseInt(num) - 1]} ${t.ui.sections.decade}`;
     });
 
     let mysteryMessage = $derived.by(() => {
@@ -173,7 +173,7 @@
                 class="text-sm font-medium transition-colors duration-200 {exitState ? 'text-red-400 font-bold' : 'text-white/60'}"
                 onclick={handleMysteryClick}
              >
-                {exitState ? 'EXIT?' : mystery.name}
+                {exitState ? t.ui.actions.exit : mystery.name}
              </button>
              
              <button 
@@ -207,7 +207,7 @@
                 <div class="text-center h-16 flex items-center justify-center">
                     <h2 class="text-2xl font-bold text-white leading-tight">
                          {#if steps[currentBeadIndex].prayerId === 'announce'}
-                            Announce Mystery
+                            {t.ui.announce}
                          {:else}
                             {t.prayers[steps[currentBeadIndex].prayerId].title}
                          {/if}
@@ -257,11 +257,11 @@
                             {/each}
                         </div>
 
-                        <!-- Elbow Connector (between rows) -->
+						<!-- Elbow Connector (between rows) -->
                         {#if rowIndex === 0 && steps.length > 7}
                              {@const lastOfRow1 = 6}
                              {@const isActive = mode === 'digital' && currentBeadIndex >= 7}
-                             <div class="relative w-full h-8 flex justify-end pr-[15px]"> 
+                             <div class="relative w-full h-5 flex justify-end pr-[15px]"> 
                                 <!-- Vertical line dropping down from last bead -->
                                 <div class="w-0.5 h-full bg-white/20 {isActive ? 'bg-white/60' : ''}"></div>
                              </div>
@@ -297,7 +297,7 @@
                             </div>
                             <div class="flex-1 leading-none">
                                 {#if step.prayerId === 'announce'}
-                                    <span class="font-normal text-white text-base block">Announce Mystery</span> <!-- Unbolded as requested -->
+                                    <span class="font-normal text-white text-base block">{t.ui.announce}</span> <!-- Unbolded as requested -->
                                 {:else}
                                      <span class="font-medium text-white/80 text-base group-hover:text-white transition-colors">
                                         {t.prayers[step.prayerId].title}
@@ -318,18 +318,18 @@
             class="h-14 px-6 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium backdrop-blur-md border border-white/10 transition-all flex items-center gap-2 pointer-events-auto shadow-lg active:scale-95"
             onclick={goToPrev}
             disabled={currentSection === 'intro' && (mode === 'physical' || currentBeadIndex === 0)}
-            title="Back"
+            title={t.ui.actions.back}
         >
             <span>←</span>
-            <span class="text-sm uppercase tracking-wider">Back</span>
+            <span class="text-sm uppercase tracking-wider">{t.ui.actions.back}</span>
         </button>
 
         <button 
             class="h-14 px-8 rounded-full bg-white text-black font-bold hover:scale-105 transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.3)] pointer-events-auto active:scale-95"
             onclick={goToNext}
-            title="Next"
+            title={t.ui.actions.next}
         >
-            <span class="text-sm uppercase tracking-wider">Next</span>
+            <span class="text-sm uppercase tracking-wider">{t.ui.actions.next}</span>
             <span>→</span>
         </button>
     </div>
