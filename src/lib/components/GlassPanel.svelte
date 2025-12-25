@@ -8,7 +8,7 @@
     style="
         background-color: var(--glass-bg, rgba(255, 255, 255, 0.15));
         border-color: var(--glass-border, rgba(255, 255, 255, 0.2));
-        transition: background-color 1s, border-color 1s;
+        border-color: var(--glass-border, rgba(255, 255, 255, 0.2));
     "
     role="button"
     tabindex={onclick ? 0 : -1}  

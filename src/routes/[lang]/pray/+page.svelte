@@ -9,23 +9,21 @@
     import SectionMenu from '$lib/components/SectionMenu.svelte';
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
-	import { onMount, tick } from 'svelte';
-    import { fade } from 'svelte/transition';
     import { browser } from '$app/environment';
 
 	let lang = $derived($page.params.lang);
 	let t = $derived(getLocale(lang));
+    let mode = $derived($rosary.mode);
 
 	// Initialize state
 	let currentSection = $state<RosarySection>('intro');
-    // We no longer track 'stepIndex' for navigation purposes, only for visual or modal context if needed.
-    // Actually, we show all steps at once now.
+    let currentBeadIndex = $state(0); // For Digital Mode
 	
-	// Get mystery from query param (safe for prerender)
+	// Get mystery from query param
 	let mysteryId = $derived(browser ? $page.url.searchParams.get('mystery') || 'joyful' : 'joyful');
 	let mystery = $derived(t.mysteries[mysteryId] || t.mysteries['joyful']);
 
-	// Computed Steps for current section
+	// Computed Steps
 	function getStepsForSection(sec: RosarySection, mys: Mystery) {
 		if (sec === 'intro') {
 			return [
@@ -35,8 +33,7 @@
 				{ prayerId: 'hail_mary', label: 'A' },
 				{ prayerId: 'hail_mary', label: 'A' },
 				{ prayerId: 'hail_mary', label: 'A' },
-				{ prayerId: 'glory_be', label: 'G' },
-                { prayerId: 'personal_intentions', label: 'V' }
+				{ prayerId: 'glory_be', label: 'G' }
 			];
 		} else if (sec === 'conclusion') {
 			return [
@@ -68,31 +65,9 @@
     function handleMysteryClick() {
         if (!exitState) {
             exitState = true;
-            setTimeout(() => exitState = false, 3000); // Reset after 3s if not clicked
+            setTimeout(() => exitState = false, 3000); // Reset after 3s
         } else {
             goto(`${base}/`);
-        }
-    }
-
-    // Navigation
-    function goToNextSection() {
-        const order: RosarySection[] = ['intro', 'decade-1', 'decade-2', 'decade-3', 'decade-4', 'decade-5', 'conclusion'];
-        const idx = order.indexOf(currentSection);
-        if (idx < order.length - 1) {
-            currentSection = order[idx + 1];
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-            // Finished
-            goto(`${base}/${lang}`);
-        }
-    }
-
-    function goToPrevSection() {
-        const order: RosarySection[] = ['intro', 'decade-1', 'decade-2', 'decade-3', 'decade-4', 'decade-5', 'conclusion'];
-        const idx = order.indexOf(currentSection);
-        if (idx > 0) {
-            currentSection = order[idx - 1];
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }
 
@@ -116,13 +91,67 @@
         }
         modalOpen = true;
     }
-    
-    // Resolve Text for UI
+
+    // Navigation Logic
+    const SECTIONS: RosarySection[] = ['intro', 'decade-1', 'decade-2', 'decade-3', 'decade-4', 'decade-5', 'conclusion'];
+
+    function goToNext() {
+        if (mode === 'digital') {
+            // Move bead by bead
+            if (currentBeadIndex < steps.length - 1) {
+                currentBeadIndex++;
+            } else {
+                // Next Section
+                const idx = SECTIONS.indexOf(currentSection);
+                if (idx < SECTIONS.length - 1) {
+                    currentSection = SECTIONS[idx + 1];
+                    currentBeadIndex = 0;
+                } else {
+                    goto(`${base}/${lang}`);
+                }
+            }
+        } else {
+            // Physical: Page by Page
+             const idx = SECTIONS.indexOf(currentSection);
+            if (idx < SECTIONS.length - 1) {
+                currentSection = SECTIONS[idx + 1];
+            } else {
+                goto(`${base}/${lang}`);
+            }
+        }
+    }
+
+    function goToPrev() {
+        if (mode === 'digital') {
+             if (currentBeadIndex > 0) {
+                currentBeadIndex--;
+            } else {
+                // Prev Section
+                const idx = SECTIONS.indexOf(currentSection);
+                if (idx > 0) {
+                    const prevSec = SECTIONS[idx - 1];
+                    // Should we go to LAST bead of prev section? 
+                    // Usually yes for true navigation, but let's simplify to start of prev section or maintain intuitive flow.
+                    // User said: "Hitting next should move... only then switch". Reverse implies similar.
+                    // Let's go to start of prev section for simplicity or last bead? Last bead is better UX.
+                    const prevSteps = getStepsForSection(prevSec, mystery);
+                    currentSection = prevSec;
+                    currentBeadIndex = prevSteps.length - 1;
+                }
+            }
+        } else {
+            const idx = SECTIONS.indexOf(currentSection);
+            if (idx > 0) {
+                currentSection = SECTIONS[idx - 1];
+            }
+        }
+    }
+
+    // UI Text
     let sectionTitle = $derived.by(() => {
         if (currentSection === 'intro') return 'Introduction';
         if (currentSection === 'conclusion') return 'Conclusion';
         const num = currentSection.split('-')[1];
-        // Simple manual mapping for 1-5 to ordinals if needed, or just "Decade X"
         const ordinals = ['1st', '2nd', '3rd', '4th', '5th'];
         return `${ordinals[parseInt(num) - 1]} Decade`;
     });
@@ -130,20 +159,15 @@
     let mysteryMessage = $derived.by(() => {
         if (currentSection.startsWith('decade')) {
              const decadeNum = parseInt(currentSection.split('-')[1]);
-             // Passage format: "Title: 'Quote' (Ref)"
-             // We want to split title and quote if possible, but for now just showing it.
-             // User said: "Mystery messages are the title and description... like for example: 'The Annunciation: ...'"
-             // We can just display the passage string as is, it contains both.
              return mystery.passages[decadeNum - 1];
         }
         return '';
     });
-
 </script>
 
-<div class="min-h-screen bg-black text-white flex flex-col relative pb-32">
+<div class="h-screen flex flex-col relative pb-32">
     <!-- Header -->
-    <header class="sticky top-0 z-30 p-4">
+    <header class="flex-none p-4 z-30">
         <GlassPanel class="flex justify-between items-center py-3 px-4">
              <button 
                 class="text-sm font-medium transition-colors duration-200 {exitState ? 'text-red-400 font-bold' : 'text-white/60'}"
@@ -162,83 +186,151 @@
     </header>
 
     <!-- Main Content -->
-    <main class="flex-1 px-4 flex flex-col gap-6 w-full max-w-lg mx-auto">
-        <!-- Mystery Image (Smaller) -->
-        <div class="w-1/2 mx-auto aspect-square max-w-[200px]">
-             <MysteryImage />
-        </div>
+    <main class="flex-1 px-4 flex flex-col justify-start items-center w-full max-w-lg mx-auto gap-6 overflow-hidden">
         
-        <!-- Mystery Message (Decades only) -->
-        {#if mysteryMessage}
-            <div class="text-center px-2">
-                <p class="text-white/90 italic text-sm leading-relaxed">{mysteryMessage}</p>
+        <!-- Top Visuals -->
+        <div class="w-full flex flex-col items-center gap-4 flex-none">
+            <!-- Mystery Image -->
+            <div class="w-[120px] aspect-square">
+                 <MysteryImage />
             </div>
-        {/if}
+            
+            <!-- Context Text -->
+            {#if mysteryMessage && mode === 'physical'}
+                <div class="text-center px-2">
+                    <p class="text-white/90 italic text-sm leading-relaxed">{mysteryMessage}</p>
+                </div>
+            {/if}
+            
+            <!-- Digital Mode Context (Current Prayer) -->
+            {#if mode === 'digital'}
+                <div class="text-center h-16 flex items-center justify-center">
+                    <h2 class="text-2xl font-bold text-white leading-tight">
+                         {#if steps[currentBeadIndex].prayerId === 'announce'}
+                            Announce Mystery
+                         {:else}
+                            {t.prayers[steps[currentBeadIndex].prayerId].title}
+                         {/if}
+                    </h2>
+                </div>
+            {/if}
+        </div>
 
-        <!-- Step Counter / Beads -->
-        <!-- Split by 7s using grid/flex wrap logic -->
-        <div class="w-full px-2">
-            <div class="flex flex-wrap justify-center gap-1.5">
-               {#each steps as step, i}
-                    <!-- Force line break every 7 items? Flex wrap handles it naturally if width is constrained, 
-                         but to enforce strictly 7 per line we might need a grid or specific container width. 
-                         Let's try a grid with 7 columns. -->
-                {/each}
-            </div>
-             <!-- Better approach: Grid with centered content, max 7 cols -->
-             <div class="grid grid-cols-7 gap-y-2 gap-x-1 justify-items-center max-w-[280px] mx-auto">
-                {#each steps as step, i}
-                     <div class="w-8 h-8 rounded-full bg-white/10 text-white/40 flex items-center justify-center text-xs font-bold border border-white/5">
-                        {step.label}
-                     </div>
+        <!-- Beads Container (Snake Layout) -->
+        <div class="w-full flex justify-center items-center py-2 flex-none overflow-visible">
+             <div class="flex flex-col items-center">
+                {#each [0, 1] as rowIndex}
+                    {#if steps.length > rowIndex * 7}
+                        {@const rowStart = rowIndex * 7}
+                        {@const rowEnd = Math.min((rowIndex + 1) * 7, steps.length)}
+                        {@const isReverse = rowIndex % 2 !== 0}
+                        {@const rowSteps = steps.slice(rowStart, rowEnd)}
+                        
+                        <!-- The Row -->
+                        <div class="flex items-center {isReverse ? 'flex-row-reverse' : 'flex-row'}">
+                            {#each rowSteps as step, i}
+                                {@const absIndex = rowStart + i}
+                                
+                                <!-- Connector within row -->
+                                {#if i > 0}
+                                    <div class="w-3 h-0.5 bg-white/20 transition-colors duration-300 {mode === 'digital' && absIndex <= currentBeadIndex ? 'bg-white/60' : ''}"></div>
+                                {/if}
+
+                                <!-- Bead -->
+                                <button 
+                                    class="
+                                        relative w-8 h-8 flex items-center justify-center rounded-full transition-all duration-300 z-10
+                                        {mode === 'physical' ? 'bg-white/10 text-white/50' : (absIndex <= currentBeadIndex ? 'bg-white text-black' : 'bg-white/10 text-white/50')}
+                                    "
+                                    style="transform: scale({mode === 'digital' && absIndex === currentBeadIndex ? 1.25 : 1});"
+                                    onclick={() => {
+                                        if (mode === 'digital') currentBeadIndex = absIndex;
+                                        openPrayer(step);
+                                    }}
+                                >
+                                    <span class="text-[10px] font-bold">{step.label}</span>
+                                    
+                                    {#if mode === 'digital' && absIndex === currentBeadIndex}
+                                        <div class="absolute inset-0 rounded-full animate-ping opacity-20 bg-white"></div>
+                                    {/if}
+                                </button>
+                            {/each}
+                        </div>
+
+                        <!-- Elbow Connector (between rows) -->
+                        {#if rowIndex === 0 && steps.length > 7}
+                             {@const lastOfRow1 = 6}
+                             {@const isActive = mode === 'digital' && currentBeadIndex >= 7}
+                             <div class="relative w-full h-8 flex justify-end pr-[15px]"> 
+                                <!-- Vertical line dropping down from last bead -->
+                                <div class="w-0.5 h-full bg-white/20 {isActive ? 'bg-white/60' : ''}"></div>
+                             </div>
+                        {/if}
+                    {/if}
                 {/each}
              </div>
         </div>
-        
-        <!-- Prayer List -->
-        <div class="flex-1 flex flex-col gap-2 mt-2">
-            {#each steps as step, i}
-                 <button 
-                    class="w-full flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 active:scale-[0.98] transition-all border border-white/5 text-left group"
-                    onclick={() => openPrayer(step)}
-                >
-                    <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-sm font-bold text-white/70 group-hover:bg-white/20 group-hover:text-white transition-colors">
-                        {step.label}
-                    </div>
-                    <div class="flex-1">
-                        {#if step.prayerId === 'announce'}
-                            <span class="font-bold text-white block">Announce Mystery</span>
-                        {:else}
-                             <span class="font-medium text-white/80 group-hover:text-white transition-colors">
-                                {t.prayers[step.prayerId].title}
-                             </span>
-                        {/if}
-                    </div>
-                    <div class="text-white/20 text-lg">›</div>
-                 </button>
-            {/each}
+
+        <!-- Prayer Text / List Area -->
+        <div class="w-full flex-1 overflow-y-auto min-h-0 pl-1 pr-2">
+            {#if mode === 'digital'}
+                <!-- Digital: Show FULL TEXT of current prayer -->
+                 <div class="bg-white/5 rounded-2xl p-6 backdrop-blur-sm border border-white/5 h-full overflow-y-auto">
+                     {#if steps[currentBeadIndex].prayerId === 'announce'}
+                        <p class="text-lg leading-relaxed text-white/90 italic">{steps[currentBeadIndex].passage}</p>
+                     {:else}
+                        <p class="text-lg leading-relaxed text-white/90 whitespace-pre-wrap">
+                            {t.prayers[steps[currentBeadIndex].prayerId].content}
+                        </p>
+                     {/if}
+                 </div>
+            {:else}
+                <!-- Physical: List View (Deduplicated) -->
+                 <div class="flex flex-col gap-1">
+                    {#each Array.from(new Set(steps.map(s => s.prayerId + (s.passage || '')))).map(key => steps.find(s => (s.prayerId + (s.passage||'')) === key)!) as step}
+                         <button 
+                            class="w-full flex items-center gap-3 p-3 rounded-lg transition-colors text-left group hover:bg-white/5"
+                            onclick={() => openPrayer(step)}
+                        >
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white/40 bg-white/5 group-hover:text-white group-hover:bg-white/10 transition-colors">
+                                {step.label}
+                            </div>
+                            <div class="flex-1 leading-none">
+                                {#if step.prayerId === 'announce'}
+                                    <span class="font-normal text-white text-base block">Announce Mystery</span> <!-- Unbolded as requested -->
+                                {:else}
+                                     <span class="font-medium text-white/80 text-base group-hover:text-white transition-colors">
+                                        {t.prayers[step.prayerId].title}
+                                     </span>
+                                {/if}
+                            </div>
+                         </button>
+                    {/each}
+                 </div>
+            {/if}
         </div>
+        
     </main>
 
     <!-- Navigation Controls -->
-    <div class="fixed bottom-0 left-0 right-0 p-6 z-40 bg-gradient-to-t from-black via-black/95 to-transparent pt-12 flex justify-between max-w-lg mx-auto w-full">
+    <div class="fixed bottom-0 left-0 right-0 p-6 z-40 flex justify-between max-w-lg mx-auto w-full pointer-events-none">
         <button 
-           class="h-14 px-6 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium backdrop-blur-md border border-white/10 transition-all flex items-center gap-2"
-           onclick={goToPrevSection}
-           disabled={currentSection === 'intro'}
-           title="Previous Section"
+            class="h-14 px-6 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium backdrop-blur-md border border-white/10 transition-all flex items-center gap-2 pointer-events-auto shadow-lg active:scale-95"
+            onclick={goToPrev}
+            disabled={currentSection === 'intro' && (mode === 'physical' || currentBeadIndex === 0)}
+            title="Back"
         >
-           <span>←</span>
-           <span class="text-sm uppercase tracking-wider">Back</span>
+            <span>←</span>
+            <span class="text-sm uppercase tracking-wider">Back</span>
         </button>
 
         <button 
-           class="h-14 px-8 rounded-full bg-white text-black font-bold hover:scale-105 transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
-           onclick={goToNextSection}
-           title="Next Section"
+            class="h-14 px-8 rounded-full bg-white text-black font-bold hover:scale-105 transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.3)] pointer-events-auto active:scale-95"
+            onclick={goToNext}
+            title="Next"
         >
-           <span class="text-sm uppercase tracking-wider">Next</span>
-           <span>→</span>
+            <span class="text-sm uppercase tracking-wider">Next</span>
+            <span>→</span>
         </button>
     </div>
 
@@ -255,9 +347,20 @@
         {currentSection}
         onSelect={(sec) => {
             currentSection = sec;
+            currentBeadIndex = 0;
             sectionMenuOpen = false;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
         onClose={() => sectionMenuOpen = false}
     />
 </div>
+
+<style>
+    /* Hide scrollbar for bead row */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>

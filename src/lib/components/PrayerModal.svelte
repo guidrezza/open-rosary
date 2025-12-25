@@ -7,19 +7,22 @@
 
 {#if isOpen}
 	<div 
-		class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" 
+		class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm focus:outline-none" 
 		transition:fade={{ duration: 200 }}
 		onclick={onClose}
-		role="dialog"
-		aria-modal="true"
+        onkeydown={(e) => e.key === 'Escape' && onClose()}
+		role="button"
+		tabindex="0"
 	>
 		<div 
-			class="w-full max-w-lg" 
+			class="w-full max-w-lg cursor-default" 
 			onclick={(e) => e.stopPropagation()}
+            onkeydown={(e) => e.key === 'Escape' && onClose()}
 			role="document"
+            tabindex="-1"
 			transition:fly={{ y: 20, duration: 300 }}
 		>
-			<GlassPanel class="relative max-h-[80vh] overflow-y-auto">
+			<GlassPanel class="relative max-h-[80vh] overflow-y-auto p-8">
 				<button 
 					class="absolute top-4 right-4 text-white/50 hover:text-white transition-colors" 
 					onclick={onClose}

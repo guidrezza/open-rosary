@@ -4,34 +4,45 @@
     import { onMount } from 'svelte';
     import { getLiturgicalTheme } from '$lib/liturgical';
     import { rosary } from '$lib/stores';
+    import Background from '$lib/components/Background.svelte';
 
 	let { children } = $props();
     
-    let theme = $state(getLiturgicalTheme(new Date()));
+    // We want to trigger reactivity when $rosary.theme changes
+    let theme = $derived($rosary.theme || getLiturgicalTheme(new Date()));
 
     onMount(() => {
-        // Recalculate on client to match local time exactly if needed, 
-        // or allow an "override" param later.
-        theme = getLiturgicalTheme(new Date());
-        rosary.update(s => ({ ...s, theme }));
+        // Initialize if empty, but respect existing override logic if we want persistence
+        if (!$rosary.theme) {
+            rosary.update(s => ({ ...s, theme: getLiturgicalTheme(new Date()) }));
+        }
     });
 </script>
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
 
 <div 
-    class="min-h-screen transition-colors duration-1000 ease-in-out"
+    class="min-h-screen transition-colors duration-1000 ease-in-out relative overflow-hidden"
     style="
-        background-color: {theme.cssVars['--theme-color']};
         --theme-color: {theme.cssVars['--theme-color']};
         --glass-bg: {theme.cssVars['--glass-bg']};
         --glass-border: {theme.cssVars['--glass-border']};
         --text-highlight: {theme.cssVars['--text-highlight']};
     "
 >
-    <!-- Background Gradient/Noise Overlay could go here for "heavily blurred" effect -->
-    <div class="fixed inset-0 bg-gradient-to-br from-black/20 to-transparent pointer-events-none z-0"></div>
-    <div class="relative z-10">
+    <!-- Global Background -->
+    <Background />
+    
+    <div class="relative z-10 w-full h-full overflow-hidden">
         {@render children()}
     </div>
 </div>
+
+<style>
+    :global(body) {
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        background-color: #000;
+    }
+</style>

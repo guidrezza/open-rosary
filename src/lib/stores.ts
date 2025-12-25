@@ -7,7 +7,6 @@ const STORAGE_KEY = 'open-rosary-state';
 const defaultState: RosaryState = {
     mode: 'digital',
     currentSection: 'intro',
-    currentSection: 'intro',
     stepIndex: 0,
     theme: {
         color: 'green',

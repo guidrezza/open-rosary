@@ -1,154 +1,264 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { getLocale } from '$lib/i18n';
-	import { rosary } from '$lib/stores';
-	import type { Weekday } from '$lib/types';
-	import GlassPanel from '$lib/components/GlassPanel.svelte';
-	import { goto } from '$app/navigation';
-	import { base } from '$app/paths';
+    import { onMount } from 'svelte';
+    import { goto } from '$app/navigation';
+    import { base } from '$app/paths';
+    import { page } from '$app/stores';
+    import { getLiturgicalTheme, PALETTES } from '$lib/liturgical';
+    import type { LiturgicalColor } from '$lib/liturgical';
+    import { rosary } from '$lib/stores';
+    import GlassPanel from '$lib/components/GlassPanel.svelte';
+    import BottomSheet from '$lib/components/BottomSheet.svelte';
 
-	// Get language from route params
-	let lang = $derived($page.params.lang);
-	let t = $derived(getLocale(lang));
+    // Get language from route params
+    let lang = $derived($page.params.lang);
 
-	// Determine today's mystery
-	const today = new Date();
-	const dayOfWeek = today.getDay() as Weekday;
-	
-	function getMysteryForDay(day: Weekday) {
-		const mysteries = Object.values(t.mysteries);
-		return mysteries.find(m => m.days.includes(day)) || mysteries[0];
-	}
+    // Initial Theme Logic (Client-side mainly for Date)
+    // Initial Theme Logic (Client-side mainly for Date)
+    let currentDate = $state(new Date()); 
+    
+    onMount(() => {
+        // Ensure we rely on browser time on mount to avoid hydration mismatch if SSR differs
+        currentDate = new Date();
+    });
 
-	let recommendedMystery = $derived(getMysteryForDay(dayOfWeek));
+    let initialTheme = getLiturgicalTheme(currentDate);
 
-	// Mode selection handling
-	let showModeSelection = $state(false);
+    // We rely on the store 'theme' if manual override happens.
+    // If store theme not set or default, we might update it? 
+    // Ideally layout handles global theme state, but specific page logic here.
+    // Let's use the local theme derived from store if present, else calc.
+    let theme = $derived($rosary.theme?.season ? $rosary.theme : initialTheme); 
+    
+    // Formatting Date: "<WEEKDAY>, <MONTH>, <2-LETTER YEAR>"
+    let dateString = $derived.by(() => {
+        const d = currentDate;
+        const weekday = d.toLocaleDateString('en-US', { weekday: 'long' }).toUpperCase();
+        const month = d.toLocaleDateString('en-US', { month: 'long' }).toUpperCase();
+        const year = d.getFullYear().toString().slice(-2);
+        return `${weekday}, ${month}, ${year}`;
+    });
 
-	function startPraying(mode: 'digital' | 'physical') {
-		rosary.setMode(mode);
-		// Navigate to pray page with the recommended mystery (can be changed later if we add query param or store)
-		// For now just go to pray page
-		goto(`${base}/${lang}/pray?mystery=${recommendedMystery.id}`);
-	}
+    let seasonString = $derived(theme.season.toUpperCase());
 
-	const flags: Record<string, string> = {
-		'en': '🇺🇸',
-		'en-us': '🇺🇸',
-		'pt': '🇧🇷',
-		'pt-br': '🇧🇷'
-	};
+    // Mystery Logic
+    function getMysteryForDay(date: Date): string {
+        const day = date.getDay(); // 0=Sun
+        if (day === 1 || day === 6) return 'joyful';
+        if (day === 2 || day === 5) return 'sorrowful';
+        if (day === 4) return 'luminous';
+        return 'glorious'; // 0, 3
+    }
 
-	let currentFlag = $derived(flags[lang.toLowerCase()] || '🌐');
-    let showLangMenu = $state(false);
+    let recommendedMystery = $derived(getMysteryForDay(currentDate));
+    let mysteryName = $derived.by(() => {
+        const names: Record<string, string> = {
+            joyful: 'Joyful Mysteries',
+            luminous: 'Luminous Mysteries',
+            sorrowful: 'Sorrowful Mysteries',
+            glorious: 'Glorious Mysteries'
+        };
+        return names[recommendedMystery];
+    });
+
+    // Menus
+    let themeMenuOpen = $state(false);
+    let mysteryMenuOpen = $state(false);
+    let langMenuOpen = $state(false);
+    let modeMenuOpen = $state(false);
+    
+    // Selection State
+    let selectedMysteryForMode = $state(recommendedMystery); // Track which mystery triggered mode selection
+
+    function changeTheme(color: LiturgicalColor, seasonName: string) {
+        const palette = PALETTES[color];
+        rosary.update(s => ({
+            ...s,
+            theme: {
+                color,
+                season: seasonName,
+                cssVars: palette
+            }
+        }));
+        themeMenuOpen = false;
+    }
+
+    // Language
+    const flags: Record<string, string> = {
+        'en': '🇺🇸',
+        'en-us': '🇺🇸',
+        'pt': '🇧🇷',
+        'pt-br': '🇧🇷'
+    };
+    let currentFlag = $derived(flags[lang.toLowerCase()] || '🌐');
 
     function switchLang(newLang: string) {
         goto(`${base}/${newLang}`, { replaceState: true });
-        showLangMenu = false;
+        langMenuOpen = false;
+    }
+
+    // Start Prayer Flow
+    function initiatePrayer(mysteryKey: string) {
+        selectedMysteryForMode = mysteryKey;
+        modeMenuOpen = true;
+    }
+
+    function selectMode(mode: 'digital' | 'physical') {
+        rosary.setMode(mode);
+        modeMenuOpen = false;
+        goto(`${base}/${lang}/pray?mystery=${selectedMysteryForMode}`);
     }
 </script>
 
-<svelte:head>
-	<title>{t.seo.title}</title>
-	<meta name="description" content={t.seo.description} />
-</svelte:head>
+<div class="min-h-screen flex flex-col items-center justify-center p-6 relative z-10 overflow-hidden">
+    <!-- Lang Switcher (Top Right) -->
+    <div class="absolute top-6 right-6 z-20">
+         <button 
+            class="text-2xl hover:scale-110 transition-transform drop-shadow-md"
+            onclick={() => langMenuOpen = true}
+         >
+            {currentFlag}
+         </button>
+    </div>
 
-<div class="min-h-screen flex flex-col items-center justify-between p-6 bg-black relative overflow-hidden">
-	<!-- Background Elements -->
-	<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-900/20 blur-[100px] rounded-full pointer-events-none"></div>
-	<div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-900/20 blur-[100px] rounded-full pointer-events-none"></div>
+    <!-- Header -->
+    <div class="text-center space-y-2 mb-12 animate-fade-in-down">
+        <h2 class="text-sm font-bold tracking-widest text-white/60">{dateString}</h2>
+        <h1 
+            class="text-2xl font-bold tracking-wider uppercase drop-shadow-sm"
+            style="color: var(--text-highlight, white);"
+        >
+            {seasonString}
+        </h1>
+    </div>
 
-	<!-- Header -->
-	<header class="w-full flex justify-between items-center z-10">
-		<h1 class="text-xl font-light tracking-wide text-white/80">Open Rosary</h1>
-		
-        <div class="relative">
-            <button class="text-2xl hover:scale-110 transition-transform" onclick={() => showLangMenu = !showLangMenu}>
-                {currentFlag}
-            </button>
-            {#if showLangMenu}
-             <div class="absolute right-0 top-10 z-50">
-                <GlassPanel class="p-2 space-y-2 flex flex-col min-w-[100px]">
-                     <button class="flex items-center gap-2 hover:bg-white/10 p-2 rounded transition-colors w-full text-left" onclick={() => switchLang('en-us')}>
-                        <span>🇺🇸</span> English
-                     </button>
-                     <button class="flex items-center gap-2 hover:bg-white/10 p-2 rounded transition-colors w-full text-left" onclick={() => switchLang('pt-br')}>
-                        <span>🇧🇷</span> Português
-                     </button>
-                </GlassPanel>
-             </div>
-            {/if}
+    <!-- Main Content -->
+     <div class="w-full max-w-sm flex flex-col items-center gap-6 mb-8 animate-fade-in">
+        <div class="text-xs uppercase tracking-widest text-white/50">Recommended Mystery</div>
+        
+        <h2 class="text-3xl font-bold text-center leading-tight drop-shadow-md">
+            {mysteryName}
+        </h2>
+        
+        <button 
+            class="w-full max-w-sm py-4 rounded-xl font-medium text-white/80 transition-all active:scale-[0.98] border shadow-lg backdrop-blur-md"
+            style="
+                background-color: var(--glass-bg, rgba(255,255,255,0.1));
+                border-color: var(--glass-border, rgba(255,255,255,0.2));
+            "
+            onclick={() => initiatePrayer(recommendedMystery)}
+        >
+            Pray {mysteryName}
+        </button>
+     </div>
+
+    <!-- Secondary Actions -->
+    <button 
+        class="w-full max-w-sm py-4 rounded-xl font-medium text-white/80 transition-all active:scale-[0.98] mb-12 border shadow-lg backdrop-blur-md"
+        style="
+            background-color: var(--glass-bg, rgba(255,255,255,0.1));
+            border-color: var(--glass-border, rgba(255,255,255,0.2));
+        "
+        onclick={() => mysteryMenuOpen = true}
+    >
+        Pick a Different Mystery
+    </button>
+
+    <button 
+        class="text-xs text-white/30 hover:text-white/60 transition-colors uppercase tracking-widest"
+        onclick={() => themeMenuOpen = true}
+    >
+        Change theme
+    </button>
+    
+    <!-- Footer -->
+    <div class="absolute bottom-4 text-[10px] text-white/20">
+        made by <a href="https://guidrezza.com" target="_blank" rel="noopener noreferrer" class="hover:text-white/40 transition-colors">guidrezza</a>
+    </div>
+    
+    <!-- Modals -->
+    <!-- Language Menu -->
+    <BottomSheet isOpen={langMenuOpen} title="Select Language" onClose={() => langMenuOpen = false}>
+        <div class="flex flex-col gap-2">
+             <button class="w-full text-left p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors flex items-center gap-3" onclick={() => switchLang('en-us')}>
+                <span class="text-2xl">🇺🇸</span> <span class="text-lg font-medium">English (US)</span>
+             </button>
+             <!-- Placeholder for other langs -->
         </div>
-	</header>
+    </BottomSheet>
 
-	<!-- Hero -->
-	<main class="flex-1 flex flex-col items-center justify-center w-full max-w-md gap-8 z-10">
-		<div class="text-center space-y-2">
-			<p class="text-white/60 text-sm uppercase tracking-widest">{today.toLocaleDateString(lang, { weekday: 'long', month: 'long', day: 'numeric' })}</p>
-			<h2 class="text-3xl font-bold text-white leading-tight">
-				{t.ui.start_button} <br />
-				<span class="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-					{recommendedMystery.name}
-				</span>
-			</h2>
-		</div>
+    <!-- Mystery Menu -->
+    <BottomSheet isOpen={mysteryMenuOpen} title="Select Mystery" onClose={() => mysteryMenuOpen = false}>
+        <div class="flex flex-col gap-2">
+            {#each ['joyful', 'luminous', 'sorrowful', 'glorious'] as m}
+                <button 
+                    class="w-full text-left p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors capitalize text-lg font-medium"
+                    onclick={() => {
+                        mysteryMenuOpen = false;
+                        initiatePrayer(m);
+                    }}
+                >
+                    {m} Mysteries
+                </button>
+            {/each}
+        </div>
+    </BottomSheet>
 
-		<button 
-			class="w-full py-4 px-6 rounded-full bg-white text-black font-semibold text-lg shadow-lg shadow-white/10 hover:scale-[1.02] active:scale-[0.98] transition-all"
-			onclick={() => showModeSelection = true}
-		>
-			{t.ui.start_button}
-		</button>
-		
-		<button class="text-white/50 text-sm hover:text-white transition-colors underline decoration-white/30 underline-offset-4">
-			{t.ui.pick_mystery}
-		</button>
-	</main>
+    <!-- Mode Menu -->
+    <BottomSheet isOpen={modeMenuOpen} title="Select Mode" onClose={() => modeMenuOpen = false}>
+        <div class="flex flex-col gap-4">
+             <button 
+                class="w-full text-left p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors flex items-start gap-4 group"
+                onclick={() => selectMode('digital')}
+            >
+                <div class="text-3xl grayscale group-hover:grayscale-0 transition-all">📱</div>
+                <div>
+                    <div class="font-bold text-lg text-white">Digital Beads</div>
+                    <div class="text-sm text-white/60">Track your progress on screen using the app.</div>
+                </div>
+             </button>
 
-	<!-- Footer -->
-	<footer class="w-full text-center py-4 z-10">
-		<p class="text-white/30 text-xs">
-			{t.ui.made_by} <a href="https://guidrezza.com" class="hover:text-white transition-colors">guidrezza.com</a>
-		</p>
-	</footer>
+             <button 
+                class="w-full text-left p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors flex items-start gap-4 group"
+                onclick={() => selectMode('physical')}
+            >
+                <div class="text-3xl grayscale group-hover:grayscale-0 transition-all">📿</div>
+                <div>
+                    <div class="font-bold text-lg text-white">Physical Beads</div>
+                    <div class="text-sm text-white/60">I have my own Rosary. Just show me the prayers.</div>
+                </div>
+             </button>
+        </div>
+    </BottomSheet>
 
-	<!-- Mode Selection Bottom Sheet -->
-	{#if showModeSelection}
-		<div class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end justify-center" onclick={() => showModeSelection = false}>
-			<div class="w-full max-w-lg p-4" onclick={(e) => e.stopPropagation()}>
-				<GlassPanel class="space-y-4">
-					<div class="w-12 h-1 bg-white/20 rounded-full mx-auto mb-4"></div>
-					<h3 class="text-center text-white text-lg font-medium mb-4">Choose Mode</h3>
-					
-					<button 
-						class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors text-left group"
-						onclick={() => startPraying('digital')}
-					>
-						<div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 group-hover:bg-blue-500/30 transition-colors">
-							📱
-						</div>
-						<div>
-							<div class="font-semibold text-white">{t.ui.modes.digital.title}</div>
-							<div class="text-sm text-white/50">{t.ui.modes.digital.desc}</div>
-						</div>
-					</button>
-
-					<div class="h-px w-full bg-white/10"></div>
-
-					<button 
-						class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors text-left group"
-						onclick={() => startPraying('physical')}
-					>
-						<div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 group-hover:bg-purple-500/30 transition-colors">
-							📿
-						</div>
-						<div>
-							<div class="font-semibold text-white">{t.ui.modes.physical.title}</div>
-							<div class="text-sm text-white/50">{t.ui.modes.physical.desc}</div>
-						</div>
-					</button>
-				</GlassPanel>
-			</div>
-		</div>
-	{/if}
+    <!-- Theme Menu -->
+    <BottomSheet isOpen={themeMenuOpen} title="Select Theme" onClose={() => themeMenuOpen = false}>
+        <div class="grid grid-cols-2 gap-3">
+             <button class="p-4 rounded-xl bg-[#10b981]/80 border border-white/10 text-white font-medium shadow-lg" onclick={() => changeTheme('green', 'Ordinary Time')}>Ordinary Time</button>
+             <button class="p-4 rounded-xl bg-[#f3f4f6]/50 border border-white/10 text-white font-medium shadow-lg" onclick={() => changeTheme('white', 'Christmas / Easter')}>Christmas / Easter</button>
+             <button class="p-4 rounded-xl bg-[#8b5cf6]/80 border border-white/10 text-white font-medium shadow-lg" onclick={() => changeTheme('purple', 'Advent / Lent')}>Advent / Lent</button>
+             <button class="p-4 rounded-xl bg-[#ef4444]/80 border border-white/10 text-white font-medium shadow-lg" onclick={() => changeTheme('red', 'Pentecost')}>Pentecost</button>
+             <button class="p-4 rounded-xl bg-[#f43f5e]/80 border border-white/10 text-white font-medium shadow-lg" onclick={() => changeTheme('rose', 'Gaudete')}>Gaudete</button>
+             <button class="p-4 rounded-xl bg-[#2e2e2e]/80 border border-white/10 text-white font-medium shadow-lg" onclick={() => changeTheme('black', 'Requiem')}>Requiem</button>
+        </div>
+    </BottomSheet>
 </div>
+
+<style>
+    :global(body) {
+        overflow: hidden; /* Global no-scroll per request */
+    }
+    .animate-fade-in-down {
+        animation: fadeInDown 0.8s ease-out;
+    }
+    .animate-fade-in {
+        animation: fadeIn 1s ease-out 0.2s backwards;
+    }
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+</style>

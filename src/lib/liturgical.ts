@@ -15,42 +15,43 @@ export interface LiturgicalTheme {
 // We need "diffused theme color with a heavily blurred glassmorphism effect"
 // So --theme-color is the strong background connection, --glass-bg is the panel background.
 
-const PALETTES: Record<LiturgicalColor, LiturgicalTheme['cssVars']> = {
+// Modern, Glass-Friendly Palettes
+export const PALETTES: Record<LiturgicalColor, LiturgicalTheme['cssVars']> = {
     green: {
-        '--theme-color': '#2d4a3e', // Deep forest green
-        '--glass-bg': 'rgba(20, 40, 30, 0.4)',
-        '--glass-border': 'rgba(100, 200, 150, 0.2)',
-        '--text-highlight': '#86efac' // Light green
+        '--theme-color': '#10b981', // Emerald 500
+        '--glass-bg': 'rgba(6, 78, 59, 0.3)',
+        '--glass-border': 'rgba(52, 211, 153, 0.2)',
+        '--text-highlight': '#6ee7b7'
     },
     white: {
-        '--theme-color': '#a3a3a3', // Silver/White (darkened for bg)
-        '--glass-bg': 'rgba(255, 255, 255, 0.15)',
-        '--glass-border': 'rgba(255, 255, 255, 0.3)',
+        '--theme-color': '#f3f4f6', // Gray 100
+        '--glass-bg': 'rgba(255, 255, 255, 0.1)',
+        '--glass-border': 'rgba(255, 255, 255, 0.2)',
         '--text-highlight': '#ffffff'
     },
     red: {
-        '--theme-color': '#5a1a1a', // Deep crimson
-        '--glass-bg': 'rgba(60, 10, 10, 0.4)',
-        '--glass-border': 'rgba(200, 50, 50, 0.2)',
-        '--text-highlight': '#fca5a5' // Light red
+        '--theme-color': '#ef4444', // Red 500
+        '--glass-bg': 'rgba(127, 29, 29, 0.3)',
+        '--glass-border': 'rgba(248, 113, 113, 0.2)',
+        '--text-highlight': '#fca5a5'
     },
     purple: {
-        '--theme-color': '#3b214a', // Deep violet
-        '--glass-bg': 'rgba(40, 20, 60, 0.4)',
-        '--glass-border': 'rgba(150, 100, 200, 0.2)',
-        '--text-highlight': '#d8b4fe' // Light purple
+        '--theme-color': '#8b5cf6', // Violet 500
+        '--glass-bg': 'rgba(76, 29, 149, 0.3)',
+        '--glass-border': 'rgba(167, 139, 250, 0.2)',
+        '--text-highlight': '#d8b4fe'
     },
     rose: {
-        '--theme-color': '#5e2d3e', // Muted rose
-        '--glass-bg': 'rgba(80, 40, 60, 0.4)',
-        '--glass-border': 'rgba(240, 150, 180, 0.2)',
-        '--text-highlight': '#fda4af' // Light pink
+        '--theme-color': '#f43f5e', // Rose 500
+        '--glass-bg': 'rgba(136, 19, 55, 0.3)',
+        '--glass-border': 'rgba(251, 113, 133, 0.2)',
+        '--text-highlight': '#fda4af'
     },
     black: {
-        '--theme-color': '#1a1a1a', // Near black
-        '--glass-bg': 'rgba(0, 0, 0, 0.6)',
+        '--theme-color': '#2e2e2e', // Neutral Gray (lighter than deep black for blobs)
+        '--glass-bg': 'rgba(0, 0, 0, 0.5)',
         '--glass-border': 'rgba(100, 100, 100, 0.2)',
-        '--text-highlight': '#d4d4d4'
+        '--text-highlight': '#e5e5e5'
     }
 };
 

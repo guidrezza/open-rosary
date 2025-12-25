@@ -65,11 +65,6 @@ export const en: LocalizationData = {
             id: 'closing_prayer',
             title: 'Closing Prayer',
             content: 'Let us pray. O God, whose only begotten Son, by his life, death, and resurrection, has purchased for us the rewards of eternal life, grant, we beseech thee, that meditating upon these mysteries of the most holy Rosary of the Blessed Virgin Mary, we may imitate what they contain and obtain what they promise, through the same Christ our Lord. Amen.'
-        },
-        personal_intentions: {
-            id: 'personal_intentions',
-            title: 'Personal Intentions (Optional)',
-            content: 'This is a good time to make any personal intentions you may have.'
         }
     },
     mysteries: {
@@ -78,11 +73,11 @@ export const en: LocalizationData = {
             name: 'Joyful Mysteries',
             days: [1, 6],
             passages: [
-                "The Annunciation: \"Mary said, 'Behold, I am the handmaid of the Lord. May it be done to me according to your word.'\" (Luke 1:38)",
-                "The Visitation: \"Most blessed are you among women, and blessed is the fruit of your womb.\" (Luke 1:42)",
-                "The Nativity: \"She gave birth to her firstborn son. She wrapped him in swaddling clothes and laid him in a manger.\" (Luke 2:7)",
-                "The Presentation: \"My eyes have seen your salvation, which you prepared in sight of all the peoples.\" (Luke 2:30-31)",
-                "The Finding in the Temple: \"After three days they found him in the temple, sitting in the midst of the teachers, listening to them and asking them questions.\" (Luke 2:46)"
+                "The Annunciation: \"Mary said, 'Behold, I am the handmaid of the Lord. May it be done to me according to your word.'\" (Luke 1:38)\n\nFruit of the Mystery: Humility",
+                "The Visitation: \"Most blessed are you among women, and blessed is the fruit of your womb.\" (Luke 1:42)\n\nFruit of the Mystery: Love of Neighbor",
+                "The Nativity: \"She gave birth to her firstborn son. She wrapped him in swaddling clothes and laid him in a manger.\" (Luke 2:7)\n\nFruit of the Mystery: Poverty of Spirit",
+                "The Presentation: \"My eyes have seen your salvation, which you prepared in sight of all the peoples.\" (Luke 2:30-31)\n\nFruit of the Mystery: Obedience",
+                "The Finding in the Temple: \"After three days they found him in the temple, sitting in the midst of the teachers, listening to them and asking them questions.\" (Luke 2:46)\n\nFruit of the Mystery: Piety"
             ]
         },
         luminous: {
@@ -90,11 +85,11 @@ export const en: LocalizationData = {
             name: 'Luminous Mysteries',
             days: [4],
             passages: [
-                "The Baptism in the Jordan: \"And a voice came from the heavens, saying, 'This is my beloved Son, with whom I am well pleased.'\" (Matthew 3:17)",
-                "The Wedding at Cana: \"His mother said to the servers, 'Do whatever he tells you.'\" (John 2:5)",
-                "The Proclamation of the Kingdom: \"This is the time of fulfillment. The kingdom of God is at hand. Repent, and believe in the gospel.\" (Mark 1:15)",
-                "The Transfiguration: \"And he was transfigured before them; his face shone like the sun and his clothes became white as light.\" (Matthew 17:2)",
-                "The Institution of the Eucharist: \"Take and eat; this is my body.\" (Matthew 26:26)"
+                "The Baptism in the Jordan: \"And a voice came from the heavens, saying, 'This is my beloved Son, with whom I am well pleased.'\" (Matthew 3:17)\n\nFruit of the Mystery: Openness to the Holy Spirit",
+                "The Wedding at Cana: \"His mother said to the servers, 'Do whatever he tells you.'\" (John 2:5)\n\nFruit of the Mystery: To Jesus through Mary",
+                "The Proclamation of the Kingdom: \"This is the time of fulfillment. The kingdom of God is at hand. Repent, and believe in the gospel.\" (Mark 1:15)\n\nFruit of the Mystery: Repentance and Trust in God",
+                "The Transfiguration: \"And he was transfigured before them; his face shone like the sun and his clothes became white as light.\" (Matthew 17:2)\n\nFruit of the Mystery: Desire for Holiness",
+                "The Institution of the Eucharist: \"Take and eat; this is my body.\" (Matthew 26:26)\n\nFruit of the Mystery: Adoration"
             ]
         },
         sorrowful: {
@@ -102,11 +97,11 @@ export const en: LocalizationData = {
             name: 'Sorrowful Mysteries',
             days: [2, 5],
             passages: [
-                "The Agony in the Garden: \"He was in such agony and he prayed so fervently that his sweat became like drops of blood falling on the ground.\" (Luke 22:44)",
-                "The Scourging at the Pillar: \"Then Pilate took Jesus and had him scourged.\" (John 19:1)",
-                "The Crowning with Thorns: \"They clothed him in purple and, weaving a crown of thorns, placed it on him.\" (Mark 15:17)",
-                "The Carrying of the Cross: \"And carrying the cross himself he went out to what is called the Place of the Skull.\" (John 19:17)",
-                "The Crucifixion: \"Jesus cried out in a loud voice, 'Father, into your hands I commend my spirit'; and when he had said this he breathed his last.\" (Luke 23:46)"
+                "The Agony in the Garden: \"He was in such agony and he prayed so fervently that his sweat became like drops of blood falling on the ground.\" (Luke 22:44)\n\nFruit of the Mystery: Sorrow for Sin",
+                "The Scourging at the Pillar: \"Then Pilate took Jesus and had him scourged.\" (John 19:1)\n\nFruit of the Mystery: Purity",
+                "The Crowning with Thorns: \"They clothed him in purple and, weaving a crown of thorns, placed it on him.\" (Mark 15:17)\n\nFruit of the Mystery: Moral Courage",
+                "The Carrying of the Cross: \"And carrying the cross himself he went out to what is called the Place of the Skull.\" (John 19:17)\n\nFruit of the Mystery: Patience",
+                "The Crucifixion: \"Jesus cried out in a loud voice, 'Father, into your hands I commend my spirit'; and when he had said this he breathed his last.\" (Luke 23:46)\n\nFruit of the Mystery: Perseverance"
             ]
         },
         glorious: {
@@ -114,11 +109,11 @@ export const en: LocalizationData = {
             name: 'Glorious Mysteries',
             days: [0, 3],
             passages: [
-                "The Resurrection: \"He has been raised; he is not here. Behold the place where they laid him.\" (Mark 16:6)",
-                "The Ascension: \"So then the Lord Jesus, after he spoke to them, was taken up into heaven and took his seat at the right hand of God.\" (Mark 16:19)",
-                "The Descent of the Holy Spirit: \"And they were all filled with the holy Spirit and began to speak in different tongues, as the Spirit enabled them to proclaim.\" (Acts 2:4)",
-                "The Assumption: \"Blessed are you, daughter, by the Most High God, above all the women on earth.\" (Judith 13:18)",
-                "The Coronation: \"A great sign appeared in the sky, a woman clothed with the sun, with the moon under her feet, and on her head a crown of twelve stars.\" (Revelation 12:1)"
+                "The Resurrection: \"He has been raised; he is not here. Behold the place where they laid him.\" (Mark 16:6)\n\nFruit of the Mystery: Faith",
+                "The Ascension: \"So then the Lord Jesus, after he spoke to them, was taken up into heaven and took his seat at the right hand of God.\" (Mark 16:19)\n\nFruit of the Mystery: Hope",
+                "The Descent of the Holy Spirit: \"And they were all filled with the holy Spirit and began to speak in different tongues, as the Spirit enabled them to proclaim.\" (Acts 2:4)\n\nFruit of the Mystery: Wisdom",
+                "The Assumption: \"Blessed are you, daughter, by the Most High God, above all the women on earth.\" (Judith 13:18)\n\nFruit of the Mystery: Grace of a Happy Death",
+                "The Coronation: \"A great sign appeared in the sky, a woman clothed with the sun, with the moon under her feet, and on her head a crown of twelve stars.\" (Revelation 12:1)\n\nFruit of the Mystery: Trust in Mary's Intercession"
             ]
         }
     }
