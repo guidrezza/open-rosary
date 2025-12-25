@@ -190,17 +190,19 @@
 	});
 
 	// Bead Layout Config
-	const BEAD_SPACING = 20; // Even tighter
-	const BEAD_OFFSET_Y = 22; // Tighter vertical zigzag
-	const BEAD_SIZE = 22;
+	const BEAD_SPACING = 23;
+	const BEAD_OFFSET_Y = 22;
+	const BEAD_SIZE = 25;
 	const CENTER_OFFSET = BEAD_SIZE / 2;
+	const VERTICAL_OFFSET = 12; // Centering offset
 
 	function getConnectorPath(i: number, active: boolean) {
 		const x1 = i * BEAD_SPACING + CENTER_OFFSET;
-		const y1 = i % 2 === 0 ? CENTER_OFFSET : CENTER_OFFSET + BEAD_OFFSET_Y;
+		const y1 = (i % 2 === 0 ? CENTER_OFFSET : CENTER_OFFSET + BEAD_OFFSET_Y) + VERTICAL_OFFSET;
 
 		const x2 = (i + 1) * BEAD_SPACING + CENTER_OFFSET;
-		const y2 = (i + 1) % 2 === 0 ? CENTER_OFFSET : CENTER_OFFSET + BEAD_OFFSET_Y;
+		const y2 =
+			((i + 1) % 2 === 0 ? CENTER_OFFSET : CENTER_OFFSET + BEAD_OFFSET_Y) + VERTICAL_OFFSET;
 
 		// Squiggly S-curve
 		// Control points
