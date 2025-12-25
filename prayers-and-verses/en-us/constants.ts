@@ -8,8 +8,11 @@ export const en: LocalizationData = {
     },
     ui: {
         start_button: 'Start Praying',
-        pick_mystery: 'Pick a different mystery',
+        pick_mystery: 'Change Mystery',
         made_by: 'Made by guidrezza',
+        recommended_mystery: 'Recommended Mystery',
+        pray_button_prefix: 'Pray Recommended',
+        change_theme: 'Change Theme',
         modes: {
             digital: {
                 title: 'Digital Beads',
@@ -31,7 +34,22 @@ export const en: LocalizationData = {
             decade: 'Decade',
             conclusion: 'Conclusion'
         },
-        ordinals: ['1st', '2nd', '3rd', '4th', '5th']
+        ordinals: ['1st', '2nd', '3rd', '4th', '5th'],
+        menus: {
+            language: 'Select Language',
+            mystery: 'Select Mystery',
+            mode: 'Select Mode',
+            theme: 'Select Theme',
+            jump_to_section: 'Jump to Section'
+        },
+        themes: {
+            ordinary: 'Ordinary Time',
+            christmas_easter: 'Christmas / Easter',
+            advent_lent: 'Advent / Lent',
+            pentecost: 'Pentecost',
+            gaudete: 'Gaudete',
+            requiem: 'Requiem'
+        }
     },
     prayers: {
         sign_of_cross: {

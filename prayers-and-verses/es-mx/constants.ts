@@ -8,8 +8,11 @@ export const es_mx: LocalizationData = {
     },
     ui: {
         start_button: 'Comenzar a Rezar',
-        pick_mystery: 'Cambiar misterio',
+        pick_mystery: 'Cambiar Misterio',
         made_by: 'Hecho por guidrezza',
+        recommended_mystery: 'Misterio Recomendado',
+        pray_button_prefix: 'Rezar Recomendado',
+        change_theme: 'Cambiar Tema',
         modes: {
             digital: {
                 title: 'Cuentas Digitales',
@@ -21,9 +24,9 @@ export const es_mx: LocalizationData = {
             }
         },
         actions: {
-            next: 'Siguiente',
-            back: 'Atrás',
-            exit: 'SALIR?'
+            next: 'Next',
+            back: 'Back',
+            exit: 'EXIT?'
         },
         announce: 'Anunciar Misterio',
         sections: {
@@ -31,7 +34,22 @@ export const es_mx: LocalizationData = {
             decade: 'Misterio',
             conclusion: 'Conclusión'
         },
-        ordinals: ['1º', '2º', '3º', '4º', '5º']
+        ordinals: ['1º', '2º', '3º', '4º', '5º'],
+        menus: {
+            language: 'Seleccionar Idioma',
+            mystery: 'Seleccionar Misterio',
+            mode: 'Seleccionar Modo',
+            theme: 'Seleccionar Tema',
+            jump_to_section: 'Ir a la Sección'
+        },
+        themes: {
+            ordinary: 'Tiempo Ordinario',
+            christmas_easter: 'Navidad / Pascua',
+            advent_lent: 'Adviento / Cuaresma',
+            pentecost: 'Pentecostés',
+            gaudete: 'Gaudete',
+            requiem: 'Réquiem'
+        }
     },
     prayers: {
         sign_of_cross: {

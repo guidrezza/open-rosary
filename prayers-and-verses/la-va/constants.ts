@@ -8,8 +8,11 @@ export const la_va: LocalizationData = {
     },
     ui: {
         start_button: 'Incipe Orare',
-        pick_mystery: 'Mysterium mutare',
+        pick_mystery: 'Mysterium Mutare',
         made_by: 'Factum a guidrezza',
+        recommended_mystery: 'Mysterium Commendatum',
+        pray_button_prefix: 'Orare Commendatum',
+        change_theme: 'Thema Mutare',
         modes: {
             digital: {
                 title: 'Grana Digitalia',
@@ -21,9 +24,9 @@ export const la_va: LocalizationData = {
             }
         },
         actions: {
-            next: 'Proximus',
-            back: 'Retrorsum',
-            exit: 'EXITUS?'
+            next: 'Next',
+            back: 'Back',
+            exit: 'EXIT?'
         },
         announce: 'Annuntiare Mysterium',
         sections: {
@@ -31,7 +34,22 @@ export const la_va: LocalizationData = {
             decade: 'Mysterium',
             conclusion: 'Conclusio'
         },
-        ordinals: ['Prima', 'Secunda', 'Tertia', 'Quarta', 'Quinta']
+        ordinals: ['Prima', 'Secunda', 'Tertia', 'Quarta', 'Quinta'],
+        menus: {
+            language: 'Linguam Eligere',
+            mystery: 'Mysterium Eligere',
+            mode: 'Modum Eligere',
+            theme: 'Thema Eligere',
+            jump_to_section: 'Ad Sectionem'
+        },
+        themes: {
+            ordinary: 'Tempus Ordinarium',
+            christmas_easter: 'Nativitatis / Pascha',
+            advent_lent: 'Adventus / Quadragesima',
+            pentecost: 'Pentecostes',
+            gaudete: 'Gaudete',
+            requiem: 'Requiem'
+        }
     },
     prayers: {
         sign_of_cross: {

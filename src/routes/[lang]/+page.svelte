@@ -9,8 +9,11 @@
 	import GlassPanel from '$lib/components/GlassPanel.svelte';
 	import BottomSheet from '$lib/components/BottomSheet.svelte';
 
+	import { getLocale } from '$lib/i18n';
+
 	// Get language from route params
 	let lang = $derived($page.params.lang);
+	let t = $derived(getLocale(lang));
 
 	// Initial Theme Logic (Client-side mainly for Date)
 	// Initial Theme Logic (Client-side mainly for Date)
@@ -32,13 +35,14 @@
 	// Formatting Date: "<WEEKDAY>, <MONTH>, <2-LETTER YEAR>"
 	let dateString = $derived.by(() => {
 		const d = currentDate;
-		const weekday = d.toLocaleDateString('en-US', { weekday: 'long' }).toUpperCase();
-		const month = d.toLocaleDateString('en-US', { month: 'long' }).toUpperCase();
+		const locale = lang === 'en' ? 'en-US' : lang; // formatting support
+		const weekday = d.toLocaleDateString(locale, { weekday: 'long' }).toUpperCase();
+		const month = d.toLocaleDateString(locale, { month: 'long' }).toUpperCase();
 		const year = d.getFullYear().toString().slice(-2);
 		return `${weekday}, ${month}, ${year}`;
 	});
 
-	let seasonString = $derived(theme.season.toUpperCase());
+	let seasonString = $derived(theme.season.toUpperCase()); // Theme season names are hardcoded in liturgical.ts for now, but UI shows localized theme names in menu
 
 	// Mystery Logic
 	function getMysteryForDay(date: Date): string {
@@ -51,13 +55,7 @@
 
 	let recommendedMystery = $derived(getMysteryForDay(currentDate));
 	let mysteryName = $derived.by(() => {
-		const names: Record<string, string> = {
-			joyful: 'Joyful Mysteries',
-			luminous: 'Luminous Mysteries',
-			sorrowful: 'Sorrowful Mysteries',
-			glorious: 'Glorious Mysteries'
-		};
-		return names[recommendedMystery];
+		return t.mysteries[recommendedMystery]?.name || 'Mystery';
 	});
 
 	// Menus
@@ -75,7 +73,7 @@
 			...s,
 			theme: {
 				color,
-				season: seasonName,
+				season: seasonName, // Keeping internal English string for logic if needed, or purely cosmetic
 				cssVars: palette
 			}
 		}));
@@ -139,7 +137,7 @@
 
 	<!-- Main Content -->
 	<div class="animate-fade-in mb-8 flex w-full max-w-sm flex-col items-center gap-6">
-		<div class="text-xs tracking-widest text-white/50 uppercase">Recommended Mystery</div>
+		<div class="text-xs tracking-widest text-white/50 uppercase">{t.ui.recommended_mystery}</div>
 
 		<h2 class="text-center text-3xl leading-tight font-bold drop-shadow-md">
 			{mysteryName}
@@ -153,7 +151,7 @@
             "
 			onclick={() => initiatePrayer(recommendedMystery)}
 		>
-			Pray {mysteryName}
+			{t.ui.pray_button_prefix}
 		</button>
 	</div>
 
@@ -166,29 +164,28 @@
         "
 		onclick={() => (mysteryMenuOpen = true)}
 	>
-		Pick a Different Mystery
+		{t.ui.pick_mystery}
 	</button>
 
 	<button
 		class="text-xs tracking-widest text-white/30 uppercase transition-colors hover:text-white/60"
 		onclick={() => (themeMenuOpen = true)}
 	>
-		Change theme
+		{t.ui.change_theme}
 	</button>
 
 	<!-- Footer -->
 	<div class="absolute bottom-4 text-[10px] text-white/20">
-		made by <a
-			href="https://guidrezza.com"
-			target="_blank"
-			rel="noopener noreferrer"
-			class="transition-colors hover:text-white/40">guidrezza</a
-		>
+		{t.ui.made_by}
 	</div>
 
 	<!-- Modals -->
 	<!-- Language Menu -->
-	<BottomSheet isOpen={langMenuOpen} title="Select Language" onClose={() => (langMenuOpen = false)}>
+	<BottomSheet
+		isOpen={langMenuOpen}
+		title={t.ui.menus.language}
+		onClose={() => (langMenuOpen = false)}
+	>
 		<div class="flex flex-col gap-2">
 			<button
 				class="flex w-full items-center gap-3 rounded-xl bg-white/5 p-4 text-left transition-colors hover:bg-white/10"
@@ -221,7 +218,7 @@
 	<!-- Mystery Menu -->
 	<BottomSheet
 		isOpen={mysteryMenuOpen}
-		title="Select Mystery"
+		title={t.ui.menus.mystery}
 		onClose={() => (mysteryMenuOpen = false)}
 	>
 		<div class="flex flex-col gap-2">
@@ -233,14 +230,14 @@
 						initiatePrayer(m);
 					}}
 				>
-					{m} Mysteries
+					{t.mysteries[m].name}
 				</button>
 			{/each}
 		</div>
 	</BottomSheet>
 
 	<!-- Mode Menu -->
-	<BottomSheet isOpen={modeMenuOpen} title="Select Mode" onClose={() => (modeMenuOpen = false)}>
+	<BottomSheet isOpen={modeMenuOpen} title={t.ui.menus.mode} onClose={() => (modeMenuOpen = false)}>
 		<div class="flex flex-col gap-4">
 			<button
 				class="group flex w-full items-start gap-4 rounded-xl bg-white/5 p-4 text-left transition-colors hover:bg-white/10"
@@ -248,8 +245,8 @@
 			>
 				<div class="text-3xl grayscale transition-all group-hover:grayscale-0">📱</div>
 				<div>
-					<div class="text-lg font-bold text-white">Digital Beads</div>
-					<div class="text-sm text-white/60">Track your progress on screen using the app.</div>
+					<div class="text-lg font-bold text-white">{t.ui.modes.digital.title}</div>
+					<div class="text-sm text-white/60">{t.ui.modes.digital.desc}</div>
 				</div>
 			</button>
 
@@ -259,39 +256,44 @@
 			>
 				<div class="text-3xl grayscale transition-all group-hover:grayscale-0">📿</div>
 				<div>
-					<div class="text-lg font-bold text-white">Physical Beads</div>
-					<div class="text-sm text-white/60">I have my own Rosary. Just show me the prayers.</div>
+					<div class="text-lg font-bold text-white">{t.ui.modes.physical.title}</div>
+					<div class="text-sm text-white/60">{t.ui.modes.physical.desc}</div>
 				</div>
 			</button>
 		</div>
 	</BottomSheet>
 
 	<!-- Theme Menu -->
-	<BottomSheet isOpen={themeMenuOpen} title="Select Theme" onClose={() => (themeMenuOpen = false)}>
+	<BottomSheet
+		isOpen={themeMenuOpen}
+		title={t.ui.menus.theme}
+		onClose={() => (themeMenuOpen = false)}
+	>
 		<div class="grid grid-cols-2 gap-3">
 			<button
 				class="rounded-xl border border-white/10 bg-[#10b981]/80 p-4 font-medium text-white shadow-lg"
-				onclick={() => changeTheme('green', 'Ordinary Time')}>Ordinary Time</button
+				onclick={() => changeTheme('green', 'Ordinary Time')}>{t.ui.themes.ordinary}</button
 			>
 			<button
 				class="rounded-xl border border-white/10 bg-[#f3f4f6]/50 p-4 font-medium text-white shadow-lg"
-				onclick={() => changeTheme('white', 'Christmas / Easter')}>Christmas / Easter</button
+				onclick={() => changeTheme('white', 'Christmas / Easter')}
+				>{t.ui.themes.christmas_easter}</button
 			>
 			<button
 				class="rounded-xl border border-white/10 bg-[#8b5cf6]/80 p-4 font-medium text-white shadow-lg"
-				onclick={() => changeTheme('purple', 'Advent / Lent')}>Advent / Lent</button
+				onclick={() => changeTheme('purple', 'Advent / Lent')}>{t.ui.themes.advent_lent}</button
 			>
 			<button
 				class="rounded-xl border border-white/10 bg-[#ef4444]/80 p-4 font-medium text-white shadow-lg"
-				onclick={() => changeTheme('red', 'Pentecost')}>Pentecost</button
+				onclick={() => changeTheme('red', 'Pentecost')}>{t.ui.themes.pentecost}</button
 			>
 			<button
 				class="rounded-xl border border-white/10 bg-[#f43f5e]/80 p-4 font-medium text-white shadow-lg"
-				onclick={() => changeTheme('rose', 'Gaudete')}>Gaudete</button
+				onclick={() => changeTheme('rose', 'Gaudete')}>{t.ui.themes.gaudete}</button
 			>
 			<button
 				class="rounded-xl border border-white/10 bg-[#2e2e2e]/80 p-4 font-medium text-white shadow-lg"
-				onclick={() => changeTheme('black', 'Requiem')}>Requiem</button
+				onclick={() => changeTheme('black', 'Requiem')}>{t.ui.themes.requiem}</button
 			>
 		</div>
 	</BottomSheet>

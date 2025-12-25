@@ -8,8 +8,11 @@ export const pt_br: LocalizationData = {
     },
     ui: {
         start_button: 'Começar a Rezar',
-        pick_mystery: 'Escolher mistério',
+        pick_mystery: 'Mudar Mistério',
         made_by: 'Feito por guidrezza',
+        recommended_mystery: 'Mistério Recomendado',
+        pray_button_prefix: 'Rezar Recomendado',
+        change_theme: 'Mudar Tema',
         modes: {
             digital: {
                 title: 'Terço Digital',
@@ -21,9 +24,9 @@ export const pt_br: LocalizationData = {
             }
         },
         actions: {
-            next: 'Próximo',
-            back: 'Voltar',
-            exit: 'SAIR?'
+            next: 'Next',
+            back: 'Back',
+            exit: 'EXIT?'
         },
         announce: 'Anunciar Mistério',
         sections: {
@@ -31,7 +34,22 @@ export const pt_br: LocalizationData = {
             decade: 'Mistério',
             conclusion: 'Conclusão'
         },
-        ordinals: ['1º', '2º', '3º', '4º', '5º']
+        ordinals: ['1º', '2º', '3º', '4º', '5º'],
+        menus: {
+            language: 'Selecionar Idioma',
+            mystery: 'Selecionar Mistério',
+            mode: 'Selecionar Modo',
+            theme: 'Selecionar Tema',
+            jump_to_section: 'Ir para Seção'
+        },
+        themes: {
+            ordinary: 'Tempo Comum',
+            christmas_easter: 'Natal / Páscoa',
+            advent_lent: 'Advento / Quaresma',
+            pentecost: 'Pentecostes',
+            gaudete: 'Gaudete',
+            requiem: 'Réquiem'
+        }
     },
     prayers: {
         sign_of_cross: {

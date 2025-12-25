@@ -44,6 +44,9 @@ export interface LocalizationData {
         start_button: string;
         pick_mystery: string;
         made_by: string;
+        recommended_mystery: string;
+        pray_button_prefix: string;
+        change_theme: string;
         modes: {
             digital: { title: string; desc: string };
             physical: { title: string; desc: string };
@@ -60,5 +63,20 @@ export interface LocalizationData {
             conclusion: string;
         };
         ordinals: string[];
+        menus: {
+            language: string;
+            mystery: string;
+            mode: string;
+            theme: string;
+            jump_to_section: string;
+        };
+        themes: {
+            ordinary: string;
+            christmas_easter: string;
+            advent_lent: string;
+            pentecost: string;
+            gaudete: string;
+            requiem: string;
+        };
     };
 }
