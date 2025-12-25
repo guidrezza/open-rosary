@@ -1,0 +1,228 @@
+
+> open-rosary@0.0.1 build
+> vite build
+
+[36mvite v7.3.0 [32mbuilding ssr environment for production...[36m[39m
+transforming...
+7:15:38 PM [vite-plugin-svelte] src/routes/[lang]/+page.svelte:117:2 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+115:   <!-- Mode Selection Bottom Sheet -->
+116:   {#if showModeSelection}
+117:     <div class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end justify-center" onclick={() => showModeSelection = false}>
+               ^
+118:       <div class="w-full max-w-lg p-4" onclick={(e) => e.stopPropagation()}>
+119:         <GlassPanel class="space-y-4">
+7:15:38 PM [vite-plugin-svelte] src/routes/[lang]/+page.svelte:117:2 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+115:   <!-- Mode Selection Bottom Sheet -->
+116:   {#if showModeSelection}
+117:     <div class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end justify-center" onclick={() => showModeSelection = false}>
+               ^
+118:       <div class="w-full max-w-lg p-4" onclick={(e) => e.stopPropagation()}>
+119:         <GlassPanel class="space-y-4">
+7:15:38 PM [vite-plugin-svelte] src/routes/[lang]/+page.svelte:118:3 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+116:   {#if showModeSelection}
+117:     <div class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end justify-center" onclick={() => showModeSelection = false}>
+118:       <div class="w-full max-w-lg p-4" onclick={(e) => e.stopPropagation()}>
+                 ^
+119:         <GlassPanel class="space-y-4">
+120:           <div class="w-12 h-1 bg-white/20 rounded-full mx-auto mb-4"></div>
+7:15:38 PM [vite-plugin-svelte] src/routes/[lang]/+page.svelte:118:3 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+116:   {#if showModeSelection}
+117:     <div class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end justify-center" onclick={() => showModeSelection = false}>
+118:       <div class="w-full max-w-lg p-4" onclick={(e) => e.stopPropagation()}>
+                 ^
+119:         <GlassPanel class="space-y-4">
+120:           <div class="w-12 h-1 bg-white/20 rounded-full mx-auto mb-4"></div>
+7:15:38 PM [vite-plugin-svelte] src/lib/components/PrayerModal.svelte:9:1 Elements with the 'dialog' interactive role must have a tabindex value
+https://svelte.dev/e/a11y_interactive_supports_focus
+ 7: 
+ 8: {#if isOpen}
+ 9:   <div 
+            ^
+10:     class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" 
+11:     transition:fade={{ duration: 200 }}
+7:15:38 PM [vite-plugin-svelte] src/lib/components/PrayerModal.svelte:9:1 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+ 7: 
+ 8: {#if isOpen}
+ 9:   <div 
+            ^
+10:     class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" 
+11:     transition:fade={{ duration: 200 }}
+7:15:38 PM [vite-plugin-svelte] src/lib/components/PrayerModal.svelte:16:2 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+14:     aria-modal="true"
+15:   >
+16:     <div 
+              ^
+17:       class="w-full max-w-lg" 
+18:       onclick={(e) => e.stopPropagation()}
+7:15:38 PM [vite-plugin-svelte] src/lib/components/PrayerModal.svelte:16:2 Non-interactive element `<div>` should not be assigned mouse or keyboard event listeners
+https://svelte.dev/e/a11y_no_noninteractive_element_interactions
+14:     aria-modal="true"
+15:   >
+16:     <div 
+              ^
+17:       class="w-full max-w-lg" 
+18:       onclick={(e) => e.stopPropagation()}
+[32mΓ£ô[39m 203 modules transformed.
+rendering chunks...
+[36mvite v7.3.0 [32mbuilding client environment for production...[36m[39m
+transforming...
+7:15:40 PM [vite-plugin-svelte] src/routes/[lang]/+page.svelte:117:2 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+115:   <!-- Mode Selection Bottom Sheet -->
+116:   {#if showModeSelection}
+117:     <div class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end justify-center" onclick={() => showModeSelection = false}>
+               ^
+118:       <div class="w-full max-w-lg p-4" onclick={(e) => e.stopPropagation()}>
+119:         <GlassPanel class="space-y-4">
+7:15:40 PM [vite-plugin-svelte] src/routes/[lang]/+page.svelte:117:2 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+115:   <!-- Mode Selection Bottom Sheet -->
+116:   {#if showModeSelection}
+117:     <div class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end justify-center" onclick={() => showModeSelection = false}>
+               ^
+118:       <div class="w-full max-w-lg p-4" onclick={(e) => e.stopPropagation()}>
+119:         <GlassPanel class="space-y-4">
+7:15:40 PM [vite-plugin-svelte] src/routes/[lang]/+page.svelte:118:3 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+116:   {#if showModeSelection}
+117:     <div class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end justify-center" onclick={() => showModeSelection = false}>
+118:       <div class="w-full max-w-lg p-4" onclick={(e) => e.stopPropagation()}>
+                 ^
+119:         <GlassPanel class="space-y-4">
+120:           <div class="w-12 h-1 bg-white/20 rounded-full mx-auto mb-4"></div>
+7:15:40 PM [vite-plugin-svelte] src/routes/[lang]/+page.svelte:118:3 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+116:   {#if showModeSelection}
+117:     <div class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end justify-center" onclick={() => showModeSelection = false}>
+118:       <div class="w-full max-w-lg p-4" onclick={(e) => e.stopPropagation()}>
+                 ^
+119:         <GlassPanel class="space-y-4">
+120:           <div class="w-12 h-1 bg-white/20 rounded-full mx-auto mb-4"></div>
+7:15:40 PM [vite-plugin-svelte] src/lib/components/PrayerModal.svelte:9:1 Elements with the 'dialog' interactive role must have a tabindex value
+https://svelte.dev/e/a11y_interactive_supports_focus
+ 7: 
+ 8: {#if isOpen}
+ 9:   <div 
+            ^
+10:     class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" 
+11:     transition:fade={{ duration: 200 }}
+7:15:40 PM [vite-plugin-svelte] src/lib/components/PrayerModal.svelte:9:1 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+ 7: 
+ 8: {#if isOpen}
+ 9:   <div 
+            ^
+10:     class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" 
+11:     transition:fade={{ duration: 200 }}
+7:15:40 PM [vite-plugin-svelte] src/lib/components/PrayerModal.svelte:16:2 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+14:     aria-modal="true"
+15:   >
+16:     <div 
+              ^
+17:       class="w-full max-w-lg" 
+18:       onclick={(e) => e.stopPropagation()}
+7:15:40 PM [vite-plugin-svelte] src/lib/components/PrayerModal.svelte:16:2 Non-interactive element `<div>` should not be assigned mouse or keyboard event listeners
+https://svelte.dev/e/a11y_no_noninteractive_element_interactions
+14:     aria-modal="true"
+15:   >
+16:     <div 
+              ^
+17:       class="w-full max-w-lg" 
+18:       onclick={(e) => e.stopPropagation()}
+[32mΓ£ô[39m 166 modules transformed.
+rendering chunks...
+computing gzip size...
+[2m.svelte-kit/output/client/[22m[32m_app/version.json                       [39m[1m[2m 0.03 kB[22m[1m[22m[2m Γöé gzip:  0.05 kB[22m
+[2m.svelte-kit/output/client/[22m[32m.vite/manifest.json                     [39m[1m[2m 4.99 kB[22m[1m[22m[2m Γöé gzip:  0.82 kB[22m
+[2m.svelte-kit/output/client/[22m[35m_app/immutable/assets/0.nG85r6Ck.css    [39m[1m[2m26.49 kB[22m[1m[22m[2m Γöé gzip:  5.09 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/chunks/BGl01yLP.js       [39m[1m[2m 0.04 kB[22m[1m[22m[2m Γöé gzip:  0.06 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/entry/start.yquUSh6v.js  [39m[1m[2m 0.08 kB[22m[1m[22m[2m Γöé gzip:  0.09 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/chunks/5wPO6Qj2.js       [39m[1m[2m 0.36 kB[22m[1m[22m[2m Γöé gzip:  0.27 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/chunks/C1Ll10E_.js       [39m[1m[2m 0.52 kB[22m[1m[22m[2m Γöé gzip:  0.33 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/nodes/2.DChPJDQV.js      [39m[1m[2m 0.59 kB[22m[1m[22m[2m Γöé gzip:  0.39 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/nodes/1.DE-lCWLL.js      [39m[1m[2m 0.59 kB[22m[1m[22m[2m Γöé gzip:  0.36 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/chunks/DiZJ0QEU.js       [39m[1m[2m 0.84 kB[22m[1m[22m[2m Γöé gzip:  0.52 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/chunks/OUConES2.js       [39m[1m[2m 0.84 kB[22m[1m[22m[2m Γöé gzip:  0.49 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/chunks/gla7PCd5.js       [39m[1m[2m 1.06 kB[22m[1m[22m[2m Γöé gzip:  0.61 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/chunks/CA_uV2Ck.js       [39m[1m[2m 1.53 kB[22m[1m[22m[2m Γöé gzip:  0.67 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/chunks/Bvc1HZeA.js       [39m[1m[2m 1.84 kB[22m[1m[22m[2m Γöé gzip:  1.00 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/nodes/0.Tm575gOi.js      [39m[1m[2m 2.64 kB[22m[1m[22m[2m Γöé gzip:  1.14 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/chunks/WQu8z_46.js       [39m[1m[2m 5.39 kB[22m[1m[22m[2m Γöé gzip:  2.48 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/nodes/3.B5lL2B_k.js      [39m[1m[2m 5.88 kB[22m[1m[22m[2m Γöé gzip:  2.50 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/entry/app.DMDU3acS.js    [39m[1m[2m 6.11 kB[22m[1m[22m[2m Γöé gzip:  2.78 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/nodes/4.CQOpWbI-.js      [39m[1m[2m13.48 kB[22m[1m[22m[2m Γöé gzip:  6.07 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/chunks/v-AXfMaZ.js       [39m[1m[2m13.49 kB[22m[1m[22m[2m Γöé gzip:  6.04 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/chunks/DbxHIt7s.js       [39m[1m[2m22.07 kB[22m[1m[22m[2m Γöé gzip:  8.64 kB[22m
+[2m.svelte-kit/output/client/[22m[36m_app/immutable/chunks/2Xklr8fK.js       [39m[1m[2m25.85 kB[22m[1m[22m[2m Γöé gzip: 10.15 kB[22m
+[32mΓ£ô built in 892ms[39m
+
+[500] GET /en/pray/
+Error: Cannot access url.searchParams on a page with prerendering enabled
+    at URL.get (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/exports.js:86:15)
+    at file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/entries/pages/_lang_/pray/_page.svelte.js:43:70
+    at Renderer.child (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/index2.js:2095:20)
+    at Renderer.component (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/index2.js:2116:24)
+    at _page (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/entries/pages/_lang_/pray/_page.svelte.js:38:14)
+    at children (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/internal.js:844:11)
+    at _layout (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/entries/pages/_layout.svelte.js:8:3)
+    at file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/internal.js:838:7
+    at Renderer.child (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/index2.js:2095:20)
+    at Renderer.component (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/index2.js:2116:24)
+
+[500] GET /en-US/pray/
+Error: Cannot access url.searchParams on a page with prerendering enabled
+    at URL.get (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/exports.js:86:15)
+    at file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/entries/pages/_lang_/pray/_page.svelte.js:43:70
+    at Renderer.child (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/index2.js:2095:20)
+    at Renderer.component (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/index2.js:2116:24)
+    at _page (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/entries/pages/_lang_/pray/_page.svelte.js:38:14)
+    at children (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/internal.js:844:11)
+    at _layout (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/entries/pages/_layout.svelte.js:8:3)
+    at file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/internal.js:838:7
+    at Renderer.child (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/index2.js:2095:20)
+    at Renderer.component (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/index2.js:2116:24)
+
+[500] GET /pt/pray/
+Error: Cannot access url.searchParams on a page with prerendering enabled
+    at URL.get (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/exports.js:86:15)
+    at file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/entries/pages/_lang_/pray/_page.svelte.js:43:70
+    at Renderer.child (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/index2.js:2095:20)
+    at Renderer.component (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/index2.js:2116:24)
+    at _page (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/entries/pages/_lang_/pray/_page.svelte.js:38:14)
+    at children (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/internal.js:844:11)
+    at _layout (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/entries/pages/_layout.svelte.js:8:3)
+    at file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/internal.js:838:7
+    at Renderer.child (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/index2.js:2095:20)
+    at Renderer.component (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/index2.js:2116:24)
+
+[500] GET /pt-BR/pray/
+Error: Cannot access url.searchParams on a page with prerendering enabled
+    at URL.get (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/exports.js:86:15)
+    at file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/entries/pages/_lang_/pray/_page.svelte.js:43:70
+    at Renderer.child (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/index2.js:2095:20)
+    at Renderer.component (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/index2.js:2116:24)
+    at _page (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/entries/pages/_lang_/pray/_page.svelte.js:38:14)
+    at children (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/internal.js:844:11)
+    at _layout (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/entries/pages/_layout.svelte.js:8:3)
+    at file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/internal.js:838:7
+    at Renderer.child (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/index2.js:2095:20)
+    at Renderer.component (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/.svelte-kit/output/server/chunks/index2.js:2116:24)
+
+node:internal/event_target:1101
+  process.nextTick(() => { throw err; });
+                           ^
+Error: 500 /en/pray/ (linked from /en/pray)
+To suppress or handle this error, implement `handleHttpError` in https://svelte.dev/docs/kit/configuration#prerender
+    at file:///C:/Users/GuilhermeBusato/Dev/open-rosary/node_modules/@sveltejs/kit/src/core/config/options.js:220:13
+    at file:///C:/Users/GuilhermeBusato/Dev/open-rosary/node_modules/@sveltejs/kit/src/core/postbuild/prerender.js:75:25
+    at save (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/node_modules/@sveltejs/kit/src/core/postbuild/prerender.js:464:4)
+    at visit (file:///C:/Users/GuilhermeBusato/Dev/open-rosary/node_modules/@sveltejs/kit/src/core/postbuild/prerender.js:283:3)
+
+Node.js v22.20.0
