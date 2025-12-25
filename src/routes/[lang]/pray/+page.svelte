@@ -214,25 +214,100 @@
 
 	<!-- Main Content -->
 	<main
-		class="mx-auto flex w-full max-w-lg flex-1 flex-col items-center justify-start gap-6 overflow-hidden px-4"
+		class="mx-auto flex w-full flex-1 flex-col items-center justify-start gap-2 overflow-hidden px-0"
 	>
 		<!-- Top Visuals -->
-		<div class="flex w-full flex-none flex-col items-center gap-4">
-			<!-- Mystery Image -->
-			<div class="aspect-square w-[120px]">
-				<MysteryImage />
+		<div class="flex w-full flex-none flex-col items-center gap-2">
+			<!-- Mystery Image - FULL WIDTH WITH BEZEL -->
+			<div class="w-full px-2">
+				<div
+					class="relative z-0 aspect-[21/9] w-full sm:aspect-video sm:w-auto sm:max-w-lg sm:overflow-hidden sm:rounded-2xl"
+				>
+					<MysteryImage />
+				</div>
 			</div>
 
-			<!-- Context Text -->
+			<!-- Beads Container (Snake Layout) - NOW ABOVE TEXT -->
+			<div class="flex w-full flex-none items-center justify-center overflow-visible py-2">
+				<div class="flex flex-col items-center">
+					{#each [0, 1] as rowIndex}
+						{#if steps.length > rowIndex * 7}
+							{@const rowStart = rowIndex * 7}
+							{@const rowEnd = Math.min((rowIndex + 1) * 7, steps.length)}
+							{@const isReverse = rowIndex % 2 !== 0}
+							{@const rowSteps = steps.slice(rowStart, rowEnd)}
+
+							<!-- The Row -->
+							<div class="flex items-center {isReverse ? 'flex-row-reverse' : 'flex-row'}">
+								{#each rowSteps as step, i}
+									{@const absIndex = rowStart + i}
+
+									<!-- Connector within row -->
+									{#if i > 0}
+										<div
+											class="h-0.5 w-3 bg-white/20 transition-colors duration-300 {mode ===
+												'digital' && absIndex <= currentBeadIndex
+												? 'bg-white/60'
+												: ''}"
+										></div>
+									{/if}
+
+									<!-- Bead -->
+									<button
+										class="
+											relative z-10 flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300
+											{mode === 'physical'
+											? 'bg-white/10 text-white/50'
+											: absIndex <= currentBeadIndex
+												? 'bg-white text-black'
+												: 'bg-white/10 text-white/50'}
+										"
+										style="transform: scale({mode === 'digital' && absIndex === currentBeadIndex
+											? 1.25
+											: 1});"
+										onclick={() => {
+											if (mode === 'digital') currentBeadIndex = absIndex;
+											openPrayer(step);
+										}}
+									>
+										<span class="text-xs font-bold">{step.label}</span>
+
+										{#if mode === 'digital' && absIndex === currentBeadIndex}
+											<div
+												class="absolute inset-0 animate-ping rounded-full bg-white opacity-20"
+											></div>
+										{/if}
+									</button>
+								{/each}
+							</div>
+
+							<!-- Elbow Connector (between rows) -->
+							{#if rowIndex === 0 && steps.length > 7}
+								{@const lastOfRow1 = 6}
+								{@const isActive = mode === 'digital' && currentBeadIndex >= 7}
+								<div class="relative flex h-5 w-full justify-end pr-[15px]">
+									<!-- Vertical line dropping down from last bead -->
+									<div class="h-full w-0.5 bg-white/20 {isActive ? 'bg-white/60' : ''}"></div>
+								</div>
+							{/if}
+						{/if}
+					{/each}
+				</div>
+			</div>
+		</div>
+
+		<!-- Context Text & Prayer Area -->
+		<div class="flex w-full flex-none flex-col items-center px-4 text-center">
+			<!-- Context Text / Title -->
 			{#if mysteryMessage && mode === 'physical'}
-				<div class="px-2 text-center">
+				<!-- Physical: Show Mystery Name/Context -->
+				<h3 class="mb-1 text-xl font-bold">{sectionTitle}</h3>
+				<div class="mb-2">
 					<p class="text-sm leading-relaxed text-white/90 italic">{mysteryMessage}</p>
 				</div>
-			{/if}
-
-			<!-- Digital Mode Context (Current Prayer) -->
-			{#if mode === 'digital'}
-				<div class="flex h-16 items-center justify-center text-center">
+			{:else if mode === 'digital'}
+				<!-- Digital: Show Current Prayer Title -->
+				<div class="flex h-12 items-center justify-center text-center">
 					<h2 class="text-2xl leading-tight font-bold text-white">
 						{#if steps[currentBeadIndex].prayerId === 'announce'}
 							{t.ui.announce}
@@ -244,81 +319,11 @@
 			{/if}
 		</div>
 
-		<!-- Beads Container (Snake Layout) -->
-		<div class="flex w-full flex-none items-center justify-center overflow-visible py-2">
-			<div class="flex flex-col items-center">
-				{#each [0, 1] as rowIndex}
-					{#if steps.length > rowIndex * 7}
-						{@const rowStart = rowIndex * 7}
-						{@const rowEnd = Math.min((rowIndex + 1) * 7, steps.length)}
-						{@const isReverse = rowIndex % 2 !== 0}
-						{@const rowSteps = steps.slice(rowStart, rowEnd)}
-
-						<!-- The Row -->
-						<div class="flex items-center {isReverse ? 'flex-row-reverse' : 'flex-row'}">
-							{#each rowSteps as step, i}
-								{@const absIndex = rowStart + i}
-
-								<!-- Connector within row -->
-								{#if i > 0}
-									<div
-										class="h-0.5 w-3 bg-white/20 transition-colors duration-300 {mode ===
-											'digital' && absIndex <= currentBeadIndex
-											? 'bg-white/60'
-											: ''}"
-									></div>
-								{/if}
-
-								<!-- Bead -->
-								<button
-									class="
-                                        relative z-10 flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300
-                                        {mode === 'physical'
-										? 'bg-white/10 text-white/50'
-										: absIndex <= currentBeadIndex
-											? 'bg-white text-black'
-											: 'bg-white/10 text-white/50'}
-                                    "
-									style="transform: scale({mode === 'digital' && absIndex === currentBeadIndex
-										? 1.25
-										: 1});"
-									onclick={() => {
-										if (mode === 'digital') currentBeadIndex = absIndex;
-										openPrayer(step);
-									}}
-								>
-									<span class="text-xs font-bold">{step.label}</span>
-
-									{#if mode === 'digital' && absIndex === currentBeadIndex}
-										<div
-											class="absolute inset-0 animate-ping rounded-full bg-white opacity-20"
-										></div>
-									{/if}
-								</button>
-							{/each}
-						</div>
-
-						<!-- Elbow Connector (between rows) -->
-						{#if rowIndex === 0 && steps.length > 7}
-							{@const lastOfRow1 = 6}
-							{@const isActive = mode === 'digital' && currentBeadIndex >= 7}
-							<div class="relative flex h-5 w-full justify-end pr-[15px]">
-								<!-- Vertical line dropping down from last bead -->
-								<div class="h-full w-0.5 bg-white/20 {isActive ? 'bg-white/60' : ''}"></div>
-							</div>
-						{/if}
-					{/if}
-				{/each}
-			</div>
-		</div>
-
 		<!-- Prayer Text / List Area -->
-		<div class="min-h-0 w-full flex-1 overflow-y-auto pr-2 pl-1">
+		<div class="min-h-0 w-full flex-1 overflow-y-auto px-4 pb-24">
 			{#if mode === 'digital'}
 				<!-- Digital: Show FULL TEXT of current prayer -->
-				<div
-					class="h-full overflow-y-auto rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-sm"
-				>
+				<div class="rounded-2xl p-2">
 					{#if steps[currentBeadIndex].prayerId === 'announce'}
 						<p class="text-lg leading-relaxed text-white/90 italic">
 							{steps[currentBeadIndex].passage}
@@ -331,7 +336,7 @@
 				</div>
 			{:else}
 				<!-- Physical: List View (Deduplicated) -->
-				<div class="flex flex-col gap-1">
+				<div class="mx-auto flex w-full max-w-lg flex-col gap-1">
 					{#each Array.from(new Set(steps.map((s) => s.prayerId + (s.passage || '')))).map((key) => steps.find((s) => s.prayerId + (s.passage || '') === key)!) as step}
 						<button
 							class="group flex w-full items-center gap-3 rounded-lg p-3 text-left transition-colors hover:bg-white/5"
@@ -363,10 +368,10 @@
 
 	<!-- Navigation Controls -->
 	<div
-		class="pointer-events-none fixed right-0 bottom-0 left-0 z-40 mx-auto flex w-full max-w-lg justify-between p-6"
+		class="pointer-events-none fixed right-0 bottom-0 left-0 z-40 mx-auto flex w-full max-w-lg justify-between px-2 pb-4"
 	>
 		<button
-			class="pointer-events-auto flex h-14 items-center gap-2 rounded-full border border-white/10 bg-white/10 px-6 font-medium text-white shadow-lg backdrop-blur-md transition-all hover:bg-white/20 active:scale-95"
+			class="pointer-events-auto flex h-14 min-w-[140px] items-center justify-center gap-2 rounded-full border border-white/10 bg-white/10 px-6 font-medium text-white shadow-lg backdrop-blur-md transition-all hover:bg-white/20 active:scale-95"
 			onclick={goToPrev}
 			disabled={currentSection === 'intro' && (mode === 'physical' || currentBeadIndex === 0)}
 			title={t.ui.actions.back}
@@ -376,7 +381,7 @@
 		</button>
 
 		<button
-			class="pointer-events-auto flex h-14 items-center gap-2 rounded-full bg-white px-8 font-bold text-black shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all hover:scale-105 active:scale-95"
+			class="pointer-events-auto flex h-14 min-w-[140px] items-center justify-center gap-2 rounded-full bg-white px-6 font-bold text-black shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all hover:scale-105 active:scale-95"
 			onclick={goToNext}
 			title={t.ui.actions.next}
 		>
