@@ -188,6 +188,29 @@
 		items.push({ id: 'conclusion', label: t.ui.sections.conclusion });
 		return items;
 	});
+
+	// Bead Layout Config
+	const BEAD_SPACING = 20; // Even tighter
+	const BEAD_OFFSET_Y = 22; // Tighter vertical zigzag
+	const BEAD_SIZE = 22;
+	const CENTER_OFFSET = BEAD_SIZE / 2;
+
+	function getConnectorPath(i: number, active: boolean) {
+		const x1 = i * BEAD_SPACING + CENTER_OFFSET;
+		const y1 = i % 2 === 0 ? CENTER_OFFSET : CENTER_OFFSET + BEAD_OFFSET_Y;
+
+		const x2 = (i + 1) * BEAD_SPACING + CENTER_OFFSET;
+		const y2 = (i + 1) % 2 === 0 ? CENTER_OFFSET : CENTER_OFFSET + BEAD_OFFSET_Y;
+
+		// Squiggly S-curve
+		// Control points
+		const cp1x = x1 + BEAD_SPACING * 0.5;
+		const cp1y = y1;
+		const cp2x = x1 + BEAD_SPACING * 0.5;
+		const cp2y = y2;
+
+		return `M ${x1} ${y1} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${x2} ${y2}`;
+	}
 </script>
 
 <div class="relative flex h-screen flex-col pb-32">
@@ -228,87 +251,89 @@
 			</div>
 
 			<!-- Beads Container (Snake Layout) - NOW ABOVE TEXT -->
-			<div class="flex w-full flex-none items-center justify-center overflow-visible py-2">
-				<div class="flex flex-col items-center">
-					{#each [0, 1] as rowIndex}
-						{#if steps.length > rowIndex * 7}
-							{@const rowStart = rowIndex * 7}
-							{@const rowEnd = Math.min((rowIndex + 1) * 7, steps.length)}
-							{@const isReverse = rowIndex % 2 !== 0}
-							{@const rowSteps = steps.slice(rowStart, rowEnd)}
-
-							<!-- The Row -->
-							<div class="flex items-center {isReverse ? 'flex-row-reverse' : 'flex-row'}">
-								{#each rowSteps as step, i}
-									{@const absIndex = rowStart + i}
-
-									<!-- Connector within row -->
-									{#if i > 0}
-										<div
-											class="h-0.5 w-3 bg-white/20 transition-colors duration-300 {mode ===
-												'digital' && absIndex <= currentBeadIndex
-												? 'bg-white/60'
-												: ''}"
-										></div>
-									{/if}
-
-									<!-- Bead -->
-									<button
-										class="
-											relative z-10 flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300
-											{mode === 'physical'
-											? 'bg-white/10 text-white/50'
-											: absIndex <= currentBeadIndex
-												? 'bg-white text-black'
-												: 'bg-white/10 text-white/50'}
-										"
-										style="transform: scale({mode === 'digital' && absIndex === currentBeadIndex
-											? 1.25
-											: 1});"
-										onclick={() => {
-											if (mode === 'digital') currentBeadIndex = absIndex;
-											openPrayer(step);
-										}}
-									>
-										<span class="text-xs font-bold">{step.label}</span>
-
-										{#if mode === 'digital' && absIndex === currentBeadIndex}
-											<div
-												class="absolute inset-0 animate-ping rounded-full bg-white opacity-20"
-											></div>
-										{/if}
-									</button>
-								{/each}
-							</div>
-
-							<!-- Elbow Connector (between rows) -->
-							{#if rowIndex === 0 && steps.length > 7}
-								{@const lastOfRow1 = 6}
-								{@const isActive = mode === 'digital' && currentBeadIndex >= 7}
-								<div class="relative flex h-5 w-full justify-end pr-[15px]">
-									<!-- Vertical line dropping down from last bead -->
-									<div class="h-full w-0.5 bg-white/20 {isActive ? 'bg-white/60' : ''}"></div>
-								</div>
+			<div
+				class="no-scrollbar flex w-full flex-none items-center justify-center overflow-x-auto overflow-y-hidden py-1"
+			>
+				<!-- Zigzag Container -->
+				<div
+					class="relative mx-auto flex-none"
+					style="width: {steps.length * BEAD_SPACING + 10}px; height: {BEAD_OFFSET_Y + 50}px;"
+				>
+					<!-- SVG Connectors Layer -->
+					<svg class="pointer-events-none absolute inset-0 z-0 h-full w-full">
+						{#each steps as _, i}
+							{#if i < steps.length - 1}
+								<!-- Background Line -->
+								<path
+									d={getConnectorPath(i, false)}
+									fill="none"
+									stroke="rgba(255,255,255,0.2)"
+									stroke-width="2"
+									stroke-linecap="round"
+								/>
+								<!-- Active Progress Line -->
+								{#if mode === 'digital' && i < currentBeadIndex}
+									<path
+										d={getConnectorPath(i, true)}
+										fill="none"
+										stroke="white"
+										stroke-width="2"
+										stroke-linecap="round"
+										class="transition-all duration-500"
+									/>
+								{/if}
 							{/if}
-						{/if}
+						{/each}
+					</svg>
+
+					<!-- Beads Layer -->
+					{#each steps as step, i}
+						<button
+							class="
+                                absolute z-10 flex h-[25px] w-[25px] items-center justify-center rounded-full transition-all duration-300
+                                {mode === 'physical'
+								? 'bg-white text-black shadow-[0_0_15px_rgba(255,255,255,0.4)]'
+								: i <= currentBeadIndex
+									? 'bg-white text-black shadow-[0_0_15px_rgba(255,255,255,0.4)]'
+									: 'border border-white/5 bg-black/40 text-white/40'}
+                            "
+							style="
+                                left: {i * BEAD_SPACING}px; 
+                                top: {(i % 2 === 0 ? 0 : BEAD_OFFSET_Y) + VERTICAL_OFFSET}px;
+                                transform: scale({mode === 'digital' && i === currentBeadIndex
+								? 1.4
+								: 1});
+                            "
+							onclick={() => {
+								if (mode === 'digital') currentBeadIndex = i;
+								openPrayer(step);
+							}}
+						>
+							<span class="text-[10px] leading-none font-medium">{step.label}</span>
+
+							{#if mode === 'digital' && i === currentBeadIndex}
+								<div class="absolute inset-0 animate-ping rounded-full bg-white opacity-40"></div>
+							{/if}
+						</button>
 					{/each}
 				</div>
 			</div>
 		</div>
 
 		<!-- Context Text & Prayer Area -->
+		<!-- Context Text & Prayer Area -->
 		<div class="flex w-full flex-none flex-col items-center px-4 text-center">
 			<!-- Context Text / Title -->
 			{#if mysteryMessage && mode === 'physical'}
 				<!-- Physical: Show Mystery Name/Context -->
-				<h3 class="mb-1 text-xl font-bold">{sectionTitle}</h3>
-				<div class="mb-2">
-					<p class="text-sm leading-relaxed text-white/90 italic">{mysteryMessage}</p>
+				<h3 class="mb-0 text-lg font-bold">{sectionTitle}</h3>
+				<div class="mb-1">
+					<p class="text-xs leading-relaxed text-white/90 italic">{mysteryMessage}</p>
 				</div>
 			{:else if mode === 'digital'}
 				<!-- Digital: Show Current Prayer Title -->
-				<div class="flex h-12 items-center justify-center text-center">
-					<h2 class="text-2xl leading-tight font-bold text-white">
+				<div class="flex min-h-8 items-center justify-center text-center">
+					<h2 class="text-xl leading-tight font-bold text-white">
 						{#if steps[currentBeadIndex].prayerId === 'announce'}
 							{t.ui.announce}
 						{:else}
@@ -320,16 +345,16 @@
 		</div>
 
 		<!-- Prayer Text / List Area -->
-		<div class="min-h-0 w-full flex-1 overflow-y-auto px-4 pb-24">
+		<div class="min-h-0 w-full flex-1 overflow-y-auto px-4 pb-16">
 			{#if mode === 'digital'}
 				<!-- Digital: Show FULL TEXT of current prayer -->
-				<div class="rounded-2xl p-2">
+				<div class="rounded-2xl p-2 pt-0">
 					{#if steps[currentBeadIndex].prayerId === 'announce'}
-						<p class="text-lg leading-relaxed text-white/90 italic">
+						<p class="text-base leading-relaxed text-white/90 italic">
 							{steps[currentBeadIndex].passage}
 						</p>
 					{:else}
-						<p class="text-xl leading-relaxed whitespace-pre-wrap text-white/90">
+						<p class="text-lg leading-relaxed whitespace-pre-wrap text-white/90">
 							{t.prayers[steps[currentBeadIndex].prayerId].content}
 						</p>
 					{/if}
@@ -339,11 +364,11 @@
 				<div class="mx-auto flex w-full max-w-lg flex-col gap-1">
 					{#each Array.from(new Set(steps.map((s) => s.prayerId + (s.passage || '')))).map((key) => steps.find((s) => s.prayerId + (s.passage || '') === key)!) as step}
 						<button
-							class="group flex w-full items-center gap-3 rounded-lg p-3 text-left transition-colors hover:bg-white/5"
+							class="group flex w-full items-center gap-3 rounded-lg p-2 text-left transition-colors hover:bg-white/5"
 							onclick={() => openPrayer(step)}
 						>
 							<div
-								class="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-sm font-bold text-white/40 transition-colors group-hover:bg-white/10 group-hover:text-white"
+								class="flex h-[25px] w-[25px] items-center justify-center rounded-full bg-white text-[10px] font-medium text-black shadow-[0_0_10px_rgba(255,255,255,0.2)] transition-colors"
 							>
 								{step.label}
 							</div>
