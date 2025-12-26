@@ -200,9 +200,8 @@
 
 	// Header Title Logic
 	let headerTitle = $derived.by(() => {
-		if (currentSection.startsWith('decade')) {
-			return parsedMystery.title || sectionTitle; // Use Parsed Title if available
-		}
+		// ALWAYS show section title (e.g. "1st Decade") per request
+		// Truncate logic handles in template class
 		return sectionTitle;
 	});
 
@@ -362,21 +361,48 @@
 				<!-- Physical: Show Mystery Name/Context -->
 				<!-- REMOVED: Top Mystery Context per request -->
 				<!-- Just show section title if needed, or subtext -->
-				<h3 class="mb-0 text-lg font-bold">{sectionTitle}</h3>
+				<!-- Physical: Show Mystery Name/Context -->
+				<!-- REMOVED: Top Mystery Context per request -->
+				<!-- REMOVED: Section Title per request ("<nth> Decade") - It is in header now -->
 
 				<p class="mt-1 text-[10px] tracking-widest text-white/50 uppercase">
 					Click any prayer to expand
 				</p>
 			{:else if mode === 'digital'}
 				<!-- Digital: Show Current Prayer Title -->
-				<div class="flex min-h-8 items-center justify-center text-center">
-					<h2 class="text-xl leading-tight font-bold text-white">
-						{#if steps[currentBeadIndex].prayerId === 'announce'}
-							{parsedMystery.title || t.ui.announce}
-						{:else}
+
+				<!-- If Announce (M): Just the Prayer Title (which is hidden? No, user said "M prayer: Just the mystery text") -->
+				<!-- The Mystery Text is BELOW this block in the "Prayer Text" area. -->
+				<!-- This block is "Context Text / Title". -->
+				<!-- User request: "Any other prayers... Order should be image, beads, mystery, current prayer". -->
+				<!-- So Mystery goes HERE (above prayer) or separate? -->
+				<!-- "Top to bottom order should be image, beads, mystery, current prayer." -->
+				<!-- So Mystery Context should be inserted HERE for all prayers in decade. -->
+
+				<div class="flex min-h-8 flex-col items-center justify-center gap-2 text-center">
+					<!-- Persistent Mystery Context for Decades -->
+					{#if currentSection.startsWith('decade')}
+						<div class="mb-2 flex flex-col gap-1">
+							<span class="block text-base leading-tight font-bold text-white">
+								{parsedMystery.title || t.ui.announce}
+							</span>
+							<span class="text-sm leading-snug text-white/80 italic">
+								{parsedMystery.verse}
+							</span>
+							{#if parsedMystery.fruit}
+								<span class="mt-0.5 text-xs font-medium tracking-wider text-white/60">
+									{parsedMystery.fruit}
+								</span>
+							{/if}
+						</div>
+					{/if}
+
+					<!-- Current Prayer Title (Only if NOT 'announce', since announce shows mystery above) -->
+					{#if steps[currentBeadIndex].prayerId !== 'announce'}
+						<h2 class="text-xl leading-tight font-bold text-white">
 							{t.prayers[steps[currentBeadIndex].prayerId].title}
-						{/if}
-					</h2>
+						</h2>
+					{/if}
 				</div>
 			{/if}
 		</div>
@@ -387,17 +413,27 @@
 				<!-- Digital: Show FULL TEXT of current prayer -->
 				<div class="rounded-2xl p-2 pt-0">
 					{#if steps[currentBeadIndex].prayerId === 'announce'}
-						<!-- Mystery Content: Verse + Fruit (Title is in header above) -->
-						<div class="flex flex-col gap-4 text-center">
-							<p class="text-base leading-relaxed text-white/90 italic">
-								{parsedMystery.verse}
-							</p>
-							{#if parsedMystery.fruit}
-								<p class="text-sm font-medium tracking-wide text-white/80">
-									{parsedMystery.fruit}
-								</p>
-							{/if}
-						</div>
+						<!-- Mystery Content: Verse + Fruit (Title is in header above? No, user wants "Just the mystery text") -->
+						<!-- Actually, I put the mystery text in the "Context" area above. -->
+						<!-- So for 'M' bead, do we duplicate it or just clear this area? -->
+						<!-- Request: "M prayer: Just the mystery text". -->
+						<!-- If I put it in the "Context" area above, it shows up. -->
+						<!-- In the main text area (here), we should probably show nothing or just the verse again? -->
+						<!-- The "Context" area is small. The "M" prayer typically shows the full text. -->
+						<!-- Let's HIDE the "Context" area for M bead then? Or just let it duplicate? -->
+						<!-- Better: For 'M' bead, SHOW it here (large/readable) and HIDE in context? -->
+						<!-- User: "Any other prayers... mystery, current prayer." -->
+						<!-- "M prayer: Just the mystery text". -->
+						<!-- Let's just keep the Context area persistent and leave this area empty for M? -->
+						<!-- Or better, for M, show NOTHING here because it's all in the context? -->
+						<!-- But context is usually small. M bead is the "Announce" moment. It should be prominent. -->
+						<!-- Let's use the styles from Unguided List for the Context area (Base/Sm/Xs). -->
+						<!-- If that's readable enough, we don't need it repeated here. -->
+						<!-- But usually 'M' bead behaves like a prayer page. -->
+						<!-- I will leave this empty for 'announce' if the context above covers it. -->
+						<!-- Logic check: I added the context block above for ALL decade steps. -->
+						<!-- So for 'announce', it will show up there. -->
+						<!-- Is that enough? "Just the mystery text". -->
 					{:else}
 						<p class="text-lg leading-relaxed whitespace-pre-wrap text-white/90">
 							{t.prayers[steps[currentBeadIndex].prayerId].content}

@@ -165,14 +165,13 @@
 </div>
 
 <div class="relative z-10 flex min-h-screen flex-col items-center p-6">
-	<!-- Top Bar: Flag & Theme (Absolute Positioned) -->
 	<div class="absolute top-6 left-6 z-50">
 		<button
 			class="text-3xl drop-shadow-md transition-transform hover:scale-110 active:scale-95"
 			onclick={() => (themeMenuOpen = true)}
 			title={t.ui.menus.theme}
 		>
-			<!-- We will try to show the emoji that matches the current theme season name, or default to palette -->
+			<!-- Dynamic Emoji Matching -->
 			{Object.values(t.ui.themes).find((v) => v === theme.season)
 				? theme.season === t.ui.themes.ordinary
 					? '🌿'
@@ -299,17 +298,24 @@
 		<div class="grid grid-cols-3 gap-3">
 			{#each [{ c: 'green', l: t.ui.themes.ordinary, hex: '#10b981', emoji: '🌿' }, { c: 'purple', l: t.ui.themes.advent_lent, hex: '#8b5cf6', emoji: '🍇' }, { c: 'white', l: t.ui.themes.christmas_easter, hex: '#f3f4f6', emoji: '🕊️' }, { c: 'red', l: t.ui.themes.pentecost, hex: '#ef4444', emoji: '🔥' }, { c: 'rose', l: t.ui.themes.gaudete, hex: '#f43f5e', emoji: '🌸' }, { c: 'black', l: t.ui.themes.requiem, hex: '#2e2e2e', emoji: '🕯️' }] as item}
 				<button
-					class="flex aspect-square flex-col items-center justify-center gap-2 rounded-[32px] border border-white/10 p-2 shadow-lg transition-transform active:scale-95"
+					class="relative flex aspect-square flex-col items-center justify-center overflow-hidden rounded-[32px] border border-white/10 p-2 shadow-lg transition-transform active:scale-95"
 					style="background-color: {item.hex}CC;"
 					onclick={() => handleThemeSelect(item.c as LiturgicalColor)}
 				>
-					<!-- spacer -->
-					<div class="text-2xl drop-shadow-sm filter">{item.emoji}</div>
-					<div class="w-full flex-1"></div>
-					<span
-						class="text-center text-[10px] leading-tight font-bold tracking-wider text-white uppercase drop-shadow-md"
-						>{item.l}</span
+					<!-- Centered Large Emoji -->
+					<div
+						class="absolute inset-0 flex items-center justify-center pb-4 text-5xl drop-shadow-sm filter"
 					>
+						{item.emoji}
+					</div>
+					<!-- Text at Bottom, over emoji -->
+					<div class="absolute inset-x-0 bottom-3 flex justify-center">
+						<span
+							class="text-center text-[9px] leading-tight font-bold tracking-wider text-white uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
+						>
+							{item.l}
+						</span>
+					</div>
 				</button>
 			{/each}
 		</div>
