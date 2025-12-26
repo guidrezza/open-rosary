@@ -272,7 +272,7 @@
 
 	<!-- Main Content -->
 	<main
-		class="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-start gap-2 overflow-hidden px-0"
+		class="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-start gap-0 overflow-hidden px-0"
 	>
 		<!-- Top Visuals -->
 		<!-- Tightened gap from 2 to 0 to fix "Image <-> Beads too large" -->
@@ -368,9 +368,7 @@
 				<!-- REMOVED: Top Mystery Context per request -->
 				<!-- REMOVED: Section Title per request ("<nth> Decade") - It is in header now -->
 
-				<p class="mt-0 text-[10px] tracking-widest text-white/50 uppercase">
-					Click any prayer to expand
-				</p>
+				<!-- Removed subtext per request -->
 			{:else if mode === 'digital'}
 				<!-- Digital: Show Current Prayer Title -->
 
@@ -385,8 +383,8 @@
 				<div class="flex min-h-8 flex-col items-center justify-center gap-2 text-center">
 					<!-- Persistent Mystery Context for Decades -->
 					{#if currentSection.startsWith('decade')}
-						<!-- Reduced mb-6 to mb-4 for tighter spacing -->
-						<div class="mb-4 flex flex-col gap-1">
+						<!-- Reduced mb-4 to mb-2 to match Image->Beads tightness -->
+						<div class="mb-2 flex flex-col gap-1">
 							<span class="block text-base leading-tight font-bold text-white">
 								{parsedMystery.title || t.ui.announce}
 							</span>
