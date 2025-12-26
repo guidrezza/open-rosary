@@ -203,17 +203,7 @@
 	<main
 		class="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-start gap-6 overflow-y-auto px-6 py-6 pb-24"
 	>
-		<!-- 1. Language Flag (Top Center) -->
-		<button
-			class="glass-standard group relative flex overflow-hidden rounded-full !border-white/10 !bg-white/0 px-3 py-1.5 transition-all hover:!bg-white/10 active:scale-95"
-			onclick={() => (langMenuOpen = true)}
-		>
-			<span class="text-xl">{currentFlag}</span>
-			<span
-				class="absolute inset-0 flex items-center justify-center text-xs font-bold uppercase tracking-widest text-white/0 transition-all group-hover:text-white/80"
-				>{t.ui.menus.language}</span
-			>
-		</button>
+		<!-- Language button REMOVED - already exists in top right corner -->
 
 		<!-- 2. Date & 3. Liturgical Time -->
 		<div class="flex flex-col items-center gap-2">
@@ -261,7 +251,7 @@
 				{t.ui.pick_mystery}
 			</button>
 		</div>
-	</div>
+	</main>
 
 	<!-- Footer -->
 	<footer class="mt-4 py-4 text-center">

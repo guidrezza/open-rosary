@@ -288,9 +288,9 @@
 			</div>
 
 			<!-- Beads Container (Snake Layout) - NOW ABOVE TEXT -->
-			<!-- Highlight Clipping Fix: Increased py from 1 to 4 -->
+			<!-- Highlight Clipping Fix: py-2 (reduced from py-4 for tighter spacing) -->
 			<div
-				class="no-scrollbar flex w-full flex-none items-center justify-center overflow-x-auto overflow-y-hidden py-4"
+				class="no-scrollbar flex w-full flex-none items-center justify-center overflow-x-auto overflow-y-hidden py-2"
 			>
 				<!-- Zigzag Container -->
 				<div
@@ -382,11 +382,11 @@
 				<!-- "Top to bottom order should be image, beads, mystery, current prayer." -->
 				<!-- So Mystery Context should be inserted HERE for all prayers in decade. -->
 
-				<div class="flex min-h-8 flex-col items-center justify-center gap-4 text-center">
+				<div class="flex min-h-8 flex-col items-center justify-center gap-2 text-center">
 					<!-- Persistent Mystery Context for Decades -->
 					{#if currentSection.startsWith('decade')}
-						<!-- Increased mb-2 to mb-6 to fix "Mystery <-> Prayer too small" (Purple Rectangle) -->
-						<div class="mb-6 flex flex-col gap-1">
+						<!-- Reduced mb-6 to mb-4 for tighter spacing -->
+						<div class="mb-4 flex flex-col gap-1">
 							<span class="block text-base leading-tight font-bold text-white">
 								{parsedMystery.title || t.ui.announce}
 							</span>
