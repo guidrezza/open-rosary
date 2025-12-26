@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { slide } from 'svelte/transition';
 	import { getLocale } from '$lib/i18n';
 	import { rosary } from '$lib/stores';
 	import type { RosarySection, Mystery } from '$lib/types';
@@ -292,340 +293,330 @@
 			document.body.removeChild(a);
 		}
 	}
+
+	// Collapsible Mystery
+	let mysteryExpanded = $state(true);
 </script>
 
-<!-- Header -->
-<header class="z-30 flex-none p-6">
-	<GlassPanel class="flex items-center justify-between px-4 py-3">
-		<button
-			class="xs:max-w-none max-w-[150px] truncate text-sm font-medium transition-colors duration-200 {exitState
-				? 'font-bold text-red-400'
-				: 'text-white/60'}"
-			onclick={handleMysteryClick}
-		>
-			{exitState ? t.ui.actions.exit : mystery.name}
-		</button>
-
-		<button
-			class="font-bold text-white transition-colors hover:text-white/80"
-			onclick={() => (sectionMenuOpen = true)}
-		>
-			{headerTitle} ▾
-		</button>
-	</GlassPanel>
-</header>
-
-<!-- Main Content -->
-<main
-	class="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-start gap-0 overflow-hidden px-0"
->
-	<!-- Top Visuals -->
-	<!-- Tightened gap from 2 to 0 to fix "Image <-> Beads too large" -->
-	<div class="flex w-full flex-none flex-col items-center gap-0">
-		<!-- Mystery Image - FULL WIDTH WITH BEZEL -->
-		<div
-			class="w-full px-6 transition-all duration-500 {imageMode === 'minimized'
-				? 'h-4 opacity-50'
-				: ''}"
-		>
-			<!-- Wrapper handles the sizing/positioning states -->
+<!-- Main Layout Wrapper -->
+<div class="relative mx-auto flex h-screen w-full max-w-md flex-col overflow-hidden bg-transparent">
+	<!-- Header -->
+	<header class="z-30 flex-none p-6">
+		<GlassPanel class="flex items-center justify-between px-4 py-3">
 			<button
-				class="relative z-0 flex w-full items-center justify-center overflow-hidden rounded-[32px] transition-all duration-500 ease-in-out
+				class="xs:max-w-none max-w-[150px] truncate text-sm font-medium transition-colors duration-200 {exitState
+					? 'font-bold text-red-400'
+					: 'text-white/60'}"
+				onclick={handleMysteryClick}
+			>
+				{exitState ? t.ui.actions.exit : mystery.name}
+			</button>
+
+			<button
+				class="font-bold text-white transition-colors hover:text-white/80"
+				onclick={() => (sectionMenuOpen = true)}
+			>
+				{headerTitle} ▾
+			</button>
+		</GlassPanel>
+	</header>
+
+	<!-- Main Content -->
+	<main
+		class="flex min-h-0 w-full flex-1 flex-col items-center justify-start gap-0 overflow-hidden px-0"
+	>
+		<!-- Top Visuals -->
+		<!-- Tightened gap from 2 to 0 to fix "Image <-> Beads too large" -->
+		<div class="flex w-full flex-none flex-col items-center gap-0">
+			<!-- Mystery Image - FULL WIDTH WITH BEZEL -->
+			<div
+				class="w-full px-6 transition-all duration-500 {imageMode === 'minimized'
+					? 'h-4 opacity-50'
+					: ''}"
+			>
+				<!-- Wrapper handles the sizing/positioning states -->
+				<button
+					class="relative z-0 flex w-full items-center justify-center overflow-hidden rounded-[32px] transition-all duration-500 ease-in-out
 						{imageMode === 'minimized' ? 'h-2 w-full cursor-pointer bg-white/20' : 'aspect-video'}
 						{imageMode === 'normal' ? 'max-w-lg' : ''}
 					"
-				onclick={toggleImageControls}
-			>
-				{#if imageMode !== 'minimized'}
-					<MysteryImage mystery={mysteryId} decade={currentImageDecade} />
+					onclick={toggleImageControls}
+				>
+					{#if imageMode !== 'minimized'}
+						<MysteryImage mystery={mysteryId} decade={currentImageDecade} />
 
-					<!-- Overlay Controls (Normal Mode Only) -->
-					{#if showControls}
-						<div
-							class="absolute inset-x-0 top-0 z-20 flex justify-between p-4 transition-opacity duration-300"
-							role="none"
-							onclick={(e) => e.stopPropagation()}
-						>
-							<!-- Top Left: Minimize -->
-							<button
-								class="flex h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-md transition-all active:scale-95"
-								onclick={() => {
-									imageMode = 'minimized';
-									showControls = false;
-								}}
+						<!-- Overlay Controls (Normal Mode Only) -->
+						{#if showControls}
+							<div
+								class="absolute inset-x-0 top-0 z-20 flex justify-between p-4 transition-opacity duration-300"
+								role="none"
+								onclick={(e) => e.stopPropagation()}
 							>
-								<!-- Minimize Icon: Single Line -->
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="20"
-									height="20"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
+								<!-- Top Left: Minimize -->
+								<button
+									class="flex h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-md transition-all active:scale-95"
+									onclick={() => {
+										imageMode = 'minimized';
+										showControls = false;
+									}}
 								>
-									<line x1="5" y1="12" x2="19" y2="12"></line>
-								</svg>
-							</button>
+									<!-- Minimize Icon: Single Line -->
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="20"
+										height="20"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									>
+										<line x1="5" y1="12" x2="19" y2="12"></line>
+									</svg>
+								</button>
 
-							<!-- Top Right: Expand -->
-							<button
-								class="flex h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-md transition-all active:scale-95"
-								onclick={() => {
-									imageMode = 'fullscreen';
-									showControls = false;
-								}}
-							>
-								<!-- Expand Icon -->
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="20"
-									height="20"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"
-									></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line
-										x1="3"
-										y1="21"
-										x2="10"
-										y2="14"
-									></line></svg
+								<!-- Top Right: Expand -->
+								<button
+									class="flex h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-md transition-all active:scale-95"
+									onclick={() => {
+										imageMode = 'fullscreen';
+										showControls = false;
+									}}
 								>
-							</button>
-						</div>
-					{/if}
-				{/if}
-			</button>
-		</div>
-
-		<!-- Beads Container (Snake Layout) - NOW ABOVE TEXT -->
-		<!-- Highlight Clipping Fix: py-2 (reduced from py-4 for tighter spacing) -->
-		<div
-			class="no-scrollbar flex w-full flex-none items-center justify-center overflow-x-auto overflow-y-hidden py-2"
-		>
-			<!-- Zigzag Container -->
-			<div
-				class="relative mx-auto flex-none"
-				style="width: {steps.length * BEAD_SPACING + 10}px; height: {BEAD_OFFSET_Y + 50}px;"
-			>
-				<!-- SVG Connectors Layer -->
-				<svg class="pointer-events-none absolute inset-0 z-0 h-full w-full">
-					{#each steps as _, i}
-						{#if i < steps.length - 1}
-							<!-- Background Line -->
-							<path
-								d={getConnectorPath(i, false)}
-								fill="none"
-								stroke="rgba(255,255,255,0.2)"
-								stroke-width="2"
-								stroke-linecap="round"
-							/>
-							<!-- Active Progress Line -->
-							{#if mode === 'digital' && i < currentBeadIndex}
-								<path
-									d={getConnectorPath(i, true)}
-									fill="none"
-									stroke="white"
-									stroke-width="2"
-									stroke-linecap="round"
-									class="transition-all duration-500"
-								/>
-							{/if}
+									<!-- Expand Icon -->
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="20"
+										height="20"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"
+										></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line
+											x1="3"
+											y1="21"
+											x2="10"
+											y2="14"
+										></line></svg
+									>
+								</button>
+							</div>
 						{/if}
-					{/each}
-				</svg>
+					{/if}
+				</button>
+			</div>
 
-				<!-- Beads Layer -->
-				{#each steps as step, i}
-					<button
-						class="
+			<!-- Beads Container (Snake Layout) - NOW ABOVE TEXT -->
+			<!-- Highlight Clipping Fix: py-2 (reduced from py-4 for tighter spacing) -->
+			<div
+				class="no-scrollbar flex w-full flex-none items-center justify-center overflow-x-auto overflow-y-hidden py-2"
+			>
+				<!-- Zigzag Container -->
+				<div
+					class="relative mx-auto flex-none"
+					style="width: {steps.length * BEAD_SPACING + 10}px; height: {BEAD_OFFSET_Y + 50}px;"
+				>
+					<!-- SVG Connectors Layer -->
+					<svg class="pointer-events-none absolute inset-0 z-0 h-full w-full">
+						{#each steps as _, i}
+							{#if i < steps.length - 1}
+								<!-- Background Line -->
+								<path
+									d={getConnectorPath(i, false)}
+									fill="none"
+									stroke="rgba(255,255,255,0.2)"
+									stroke-width="2"
+									stroke-linecap="round"
+								/>
+								<!-- Active Progress Line -->
+								{#if mode === 'digital' && i < currentBeadIndex}
+									<path
+										d={getConnectorPath(i, true)}
+										fill="none"
+										stroke="white"
+										stroke-width="2"
+										stroke-linecap="round"
+										class="transition-all duration-500"
+									/>
+								{/if}
+							{/if}
+						{/each}
+					</svg>
+
+					<!-- Beads Layer -->
+					{#each steps as step, i}
+						<button
+							class="
                                 absolute z-10 flex h-[25px] w-[25px] items-center justify-center rounded-full transition-all duration-300
                                 {mode === 'physical'
-							? 'bg-white text-black shadow-[0_0_15px_rgba(255,255,255,0.4)]'
-							: i <= currentBeadIndex
 								? 'bg-white text-black shadow-[0_0_15px_rgba(255,255,255,0.4)]'
-								: 'border border-white/5 bg-black/40 text-white/40'}
+								: i <= currentBeadIndex
+									? 'bg-white text-black shadow-[0_0_15px_rgba(255,255,255,0.4)]'
+									: 'border border-white/5 bg-black/40 text-white/40'}
                             "
-						style="
+							style="
                                 left: {i * BEAD_SPACING}px; 
                                 top: {(i % 2 === 0 ? 0 : BEAD_OFFSET_Y) + VERTICAL_OFFSET}px;
                                 transform: scale({mode === 'digital' && i === currentBeadIndex
-							? 1.4
-							: 1});
+								? 1.4
+								: 1});
                             "
-						onclick={() => {
-							if (mode === 'digital') currentBeadIndex = i;
-						}}
-					>
-						<span class="text-[10px] leading-none font-medium">{step.label}</span>
+							onclick={() => {
+								if (mode === 'digital') currentBeadIndex = i;
+							}}
+						>
+							<span class="text-[10px] leading-none font-medium">{step.label}</span>
 
-						{#if mode === 'digital' && i === currentBeadIndex}
-							<div class="absolute inset-0 animate-ping rounded-full bg-white opacity-40"></div>
-						{/if}
-					</button>
-				{/each}
+							{#if mode === 'digital' && i === currentBeadIndex}
+								<div class="absolute inset-0 animate-ping rounded-full bg-white opacity-40"></div>
+							{/if}
+						</button>
+					{/each}
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<!-- Context Text & Prayer Area -->
-	<div class="flex w-full flex-none flex-col items-center px-6 text-center">
-		<!-- Context Text / Title -->
-		{#if mysteryMessage && mode === 'physical'}
-			<!-- Physical: Show Mystery Name/Context -->
-			<!-- REMOVED: Top Mystery Context per request -->
-			<!-- Just show section title if needed, or subtext -->
-			<!-- Physical: Show Mystery Name/Context -->
-			<!-- REMOVED: Top Mystery Context per request -->
-			<!-- REMOVED: Section Title per request ("<nth> Decade") - It is in header now -->
+		<!-- Context Text & Prayer Area -->
+		<div class="flex w-full flex-none flex-col items-center px-6 text-center">
+			{#if mode === 'digital'}
+				<div class="flex min-h-8 flex-col items-center justify-center gap-2 text-center">
+					<!-- Persistent Mystery Context for Decades -->
+					{#if currentSection.startsWith('decade')}
+						<!-- Collapsible Container -->
+						<div class="relative mb-2 flex w-full flex-col gap-1">
+							<button
+								class="flex w-full items-center justify-center gap-2 text-base leading-tight font-bold tracking-wide text-white uppercase transition-opacity hover:opacity-80"
+								onclick={() => (mysteryExpanded = !mysteryExpanded)}
+							>
+								<span>{parsedMystery.title || t.ui.announce}</span>
+								<span class="font-normal text-white/60">{mysteryExpanded ? '−' : '+'}</span>
+							</button>
 
-			<!-- Removed subtext per request -->
-		{:else if mode === 'digital'}
-			<!-- Digital: Show Current Prayer Title -->
-
-			<!-- If Announce (M): Just the Prayer Title (which is hidden? No, user said "M prayer: Just the mystery text") -->
-			<!-- The Mystery Text is BELOW this block in the "Prayer Text" area. -->
-			<!-- This block is "Context Text / Title". -->
-			<!-- User request: "Any other prayers... Order should be image, beads, mystery, current prayer". -->
-			<!-- So Mystery goes HERE (above prayer) or separate? -->
-			<!-- "Top to bottom order should be image, beads, mystery, current prayer." -->
-			<!-- So Mystery Context should be inserted HERE for all prayers in decade. -->
-
-			<div class="flex min-h-8 flex-col items-center justify-center gap-2 text-center">
-				<!-- Persistent Mystery Context for Decades -->
-				{#if currentSection.startsWith('decade')}
-					<!-- Reduced mb-4 to mb-2 to match Image->Beads tightness -->
-					<div class="mb-2 flex flex-col gap-1">
-						<span class="block text-base leading-tight font-bold text-white">
-							{parsedMystery.title || t.ui.announce}
-						</span>
-						<span class="text-sm leading-snug text-white/80 italic">
-							{parsedMystery.verse}
-						</span>
-						{#if parsedMystery.fruit}
-							<span class="mt-0.5 text-xs font-medium tracking-wider text-white/60">
-								{parsedMystery.fruit}
-							</span>
-						{/if}
-					</div>
-				{/if}
-
-				<!-- Current Prayer Title (Only if NOT 'announce', since announce shows mystery above) -->
-				{#if steps[currentBeadIndex].prayerId !== 'announce'}
-					<h2 class="text-xl leading-tight font-bold text-white">
-						{t.prayers[steps[currentBeadIndex].prayerId].title}
-					</h2>
-				{/if}
-			</div>
-		{/if}
-	</div>
-
-	<!-- Prayer Text / List Area -->
-	<div class="min-h-0 w-full flex-1 overflow-y-auto px-6 pb-32">
-		{#if mode === 'digital'}
-			<!-- Digital: Show FULL TEXT of current prayer -->
-			<div class="rounded-2xl p-2 pt-0">
-				{#if steps[currentBeadIndex].prayerId === 'announce'}
-					<!-- Mystery Content: Verse + Fruit (Title is in header above? No, user wants "Just the mystery text") -->
-					<!-- Actually, I put the mystery text in the "Context" area above. -->
-					<!-- So for 'M' bead, do we duplicate it or just clear this area? -->
-					<!-- Request: "M prayer: Just the mystery text". -->
-					<!-- If I put it in the "Context" area above, it shows up. -->
-					<!-- In the main text area (here), we should probably show nothing or just the verse again? -->
-					<!-- The "Context" area is small. The "M" prayer typically shows the full text. -->
-					<!-- Let's HIDE the "Context" area for M bead then? Or just let it duplicate? -->
-					<!-- Better: For 'M' bead, SHOW it here (large/readable) and HIDE in context? -->
-					<!-- User: "Any other prayers... mystery, current prayer." -->
-					<!-- "M prayer: Just the mystery text". -->
-					<!-- Let's just keep the Context area persistent and leave this area empty for M? -->
-					<!-- Or better, for M, show NOTHING here because it's all in the context? -->
-					<!-- But context is usually small. M bead is the "Announce" moment. It should be prominent. -->
-					<!-- Let's use the styles from Unguided List for the Context area (Base/Sm/Xs). -->
-					<!-- If that's readable enough, we don't need it repeated here. -->
-					<!-- But usually 'M' bead behaves like a prayer page. -->
-					<!-- I will leave this empty for 'announce' if the context above covers it. -->
-					<!-- Logic check: I added the context block above for ALL decade steps. -->
-					<!-- So for 'announce', it will show up there. -->
-					<!-- Is that enough? "Just the mystery text". -->
-				{:else}
-					<p class="text-lg leading-relaxed whitespace-pre-wrap text-white/90">
-						{t.prayers[steps[currentBeadIndex].prayerId].content}
-					</p>
-				{/if}
-			</div>
-		{:else}
-			<!-- Physical: List View (Deduplicated) -->
-			<div class="mx-auto flex w-full max-w-lg flex-col gap-1">
-				{#each Array.from(new Set(steps.map((s) => s.prayerId + (s.passage || '')))).map((key) => steps.find((s) => s.prayerId + (s.passage || '') === key)!) as step}
-					<button
-						class="group flex w-full items-center gap-3 rounded-lg p-2 text-left transition-colors hover:bg-white/5"
-						onclick={() => openPrayer(step)}
-					>
-						<div
-							class="flex h-[25px] w-[25px] items-center justify-center rounded-full bg-white text-[10px] font-medium text-black shadow-[0_0_10px_rgba(255,255,255,0.2)] transition-colors"
-						>
-							{step.label}
-						</div>
-						<div class="flex-1 leading-none">
-							{#if step.prayerId === 'announce'}
-								<!-- Mystery in list view -->
-								{@const parsed = parseMysteryPassage(step.passage || '')}
-								<div class="flex flex-col gap-1 py-1">
-									<span class="block text-base leading-tight font-bold text-white">
-										{parsed.title || t.ui.announce}
-									</span>
-									<span class="text-sm leading-snug text-white/80 italic">
-										{parsed.verse}
+							{#if mysteryExpanded}
+								<div transition:slide={{ duration: 200 }}>
+									<span class="block text-sm leading-snug text-white/80 italic">
+										{parsedMystery.verse}
 									</span>
 									{#if parsedMystery.fruit}
-										<span class="mt-0.5 text-xs font-medium tracking-wider text-white/60">
+										<span class="mt-0.5 block text-xs font-medium tracking-wider text-white/60">
 											{parsedMystery.fruit}
 										</span>
 									{/if}
 								</div>
-							{:else}
-								<span
-									class="text-base font-medium text-white/80 transition-colors group-hover:text-white"
-								>
-									{t.prayers[step.prayerId].title}
-								</span>
 							{/if}
 						</div>
-					</button>
-				{/each}
-			</div>
-		{/if}
-	</div>
-</main>
+					{/if}
 
-<!-- Navigation Controls -->
-<div
-	class="pointer-events-none fixed right-0 bottom-0 left-0 z-40 mx-auto flex w-full max-w-md justify-between px-6 pb-6"
->
-	<button
-		class="pointer-events-auto flex h-14 min-w-[140px] items-center justify-center gap-2 rounded-full border border-white/10 bg-white/10 px-6 font-medium text-white shadow-lg backdrop-blur-md transition-all hover:bg-white/20 active:scale-95"
-		onclick={goToPrev}
-		disabled={currentSection === 'intro' && (mode === 'physical' || currentBeadIndex === 0)}
-		title={t.ui.actions.back}
-	>
-		<span>←</span>
-		<span class="text-sm tracking-wider uppercase">{t.ui.actions.back}</span>
-	</button>
+					<!-- Current Prayer Title (Only if NOT 'announce', since announce shows mystery above) -->
+					{#if steps[currentBeadIndex].prayerId !== 'announce'}
+						<h2 class="text-xl leading-tight font-bold text-white">
+							{t.prayers[steps[currentBeadIndex].prayerId].title}
+						</h2>
+					{/if}
+				</div>
+			{/if}
+		</div>
 
-	<button
-		class="pointer-events-auto flex h-14 min-w-[140px] items-center justify-center gap-2 rounded-full bg-white px-6 font-bold text-black shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all hover:scale-105 active:scale-95"
-		onclick={goToNext}
-		title={t.ui.actions.next}
-	>
-		<span class="text-sm tracking-wider uppercase">{t.ui.actions.next}</span>
-		<span>→</span>
-	</button>
+		<!-- Prayer Text / List Area -->
+		<div class="min-h-0 w-full flex-1 overflow-y-auto px-6 pb-6">
+			{#if mode === 'digital'}
+				<!-- Digital: Show FULL TEXT of current prayer -->
+				<div class="rounded-2xl p-2 pt-0">
+					{#if steps[currentBeadIndex].prayerId === 'announce'}{/if}
+					{#if steps[currentBeadIndex].prayerId !== 'announce'}
+						<p class="text-lg leading-relaxed whitespace-pre-wrap text-white/90">
+							{t.prayers[steps[currentBeadIndex].prayerId].content}
+						</p>
+					{/if}
+				</div>
+			{:else}
+				<!-- Physical: List View (Deduplicated) -->
+				<div class="mx-auto flex w-full max-w-lg flex-col gap-1">
+					{#each Array.from(new Set(steps.map((s) => s.prayerId + (s.passage || '')))).map((key) => steps.find((s) => s.prayerId + (s.passage || '') === key)!) as step}
+						<button
+							class="group flex w-full items-center gap-3 rounded-lg p-2 text-left transition-colors hover:bg-white/5"
+							onclick={() => {
+								if (step.prayerId === 'announce') {
+									mysteryExpanded = !mysteryExpanded;
+								} else {
+									openPrayer(step);
+								}
+							}}
+						>
+							<div
+								class="flex h-[25px] w-[25px] items-center justify-center rounded-full bg-white text-[10px] font-medium text-black shadow-[0_0_10px_rgba(255,255,255,0.2)] transition-colors"
+							>
+								{step.label}
+							</div>
+							<div class="flex-1 leading-none">
+								{#if step.prayerId === 'announce'}
+									<!-- Mystery in list view -->
+									{@const parsed = parseMysteryPassage(step.passage || '')}
+									<div class="flex w-full flex-col gap-1 py-1">
+										<div class="flex w-full items-center justify-between">
+											<span class="block text-base leading-tight font-bold text-white">
+												{parsed.title || t.ui.announce}
+											</span>
+											<span class="px-2 text-lg font-bold text-white/60"
+												>{mysteryExpanded ? '−' : '+'}</span
+											>
+										</div>
+
+										{#if mysteryExpanded}
+											<div transition:slide={{ duration: 200 }}>
+												<span class="mt-1 block text-sm leading-snug text-white/80 italic">
+													{parsed.verse}
+												</span>
+												{#if parsedMystery.fruit}
+													<span
+														class="mt-0.5 block text-xs font-medium tracking-wider text-white/60"
+													>
+														{parsedMystery.fruit}
+													</span>
+												{/if}
+											</div>
+										{/if}
+									</div>
+								{:else}
+									<span
+										class="text-base font-medium text-white/80 transition-colors group-hover:text-white"
+									>
+										{t.prayers[step.prayerId].title}
+									</span>
+								{/if}
+							</div>
+						</button>
+					{/each}
+				</div>
+			{/if}
+		</div>
+
+		<!-- Navigation Controls (Now Flex Footer) -->
+		<div class="z-40 mx-auto flex w-full max-w-md flex-none justify-between px-6 pt-2 pb-6">
+			<button
+				class="pointer-events-auto flex h-14 min-w-[140px] items-center justify-center gap-2 rounded-full border border-white/10 bg-white/10 px-6 font-medium text-white shadow-lg backdrop-blur-md transition-all hover:bg-white/20 active:scale-95"
+				onclick={goToPrev}
+				disabled={currentSection === 'intro' && (mode === 'physical' || currentBeadIndex === 0)}
+				title={t.ui.actions.back}
+			>
+				<span>←</span>
+				<span class="text-sm tracking-wider uppercase">{t.ui.actions.back}</span>
+			</button>
+
+			<button
+				class="pointer-events-auto flex h-14 min-w-[140px] items-center justify-center gap-2 rounded-full bg-white px-6 font-bold text-black shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all hover:scale-105 active:scale-95"
+				onclick={goToNext}
+				title={t.ui.actions.next}
+			>
+				<span class="text-sm tracking-wider uppercase">{t.ui.actions.next}</span>
+				<span>→</span>
+			</button>
+		</div>
+	</main>
 </div>
 
 <!-- Modals -->

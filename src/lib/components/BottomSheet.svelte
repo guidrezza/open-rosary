@@ -27,7 +27,7 @@
 		<!-- Modal Content: Bottom Sheet Style (No bottom margin, slide from 100% height) -->
 		<div
 			class="w-full max-w-md touch-none"
-			transition:fly={{ y: 800, duration: 300, opacity: 1, easing: cubicOut }}
+			transition:fly={{ y: 800, duration: 150, opacity: 1, easing: cubicOut }}
 			onclick={(e) => e.stopPropagation()}
 			role="none"
 			ontouchstart={(e) => {
