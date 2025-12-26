@@ -12,7 +12,7 @@
     /* Glass Standardization (iOS 26 Style) */
     --glass-bg: rgba(30, 30, 30, 0.60); /* Translucent dark */
     --glass-border: rgba(255, 255, 255, 0.15); /* Thin crisp border */
-    --glass-blur: 25px; /* Heavy premium blur */
+    --glass-blur: 40px; /* Heavy premium blur (Increased from 25px) */
     --glass-radius: 32px; /* Super rounded (iOS style) */
     --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Soft deep shadow */
 }
@@ -38,18 +38,19 @@ h1, h2, h3, h4 {
 }
 
 @layer utilities {
-    .glass-standard {
+    .glass-standard, .glass-panel {
         background-color: var(--glass-bg);
         border: 1px solid var(--glass-border);
         backdrop-filter: blur(var(--glass-blur));
         -webkit-backdrop-filter: blur(var(--glass-blur));
         border-radius: var(--glass-radius);
         box-shadow: var(--glass-shadow);
-    }
-    
-    /* Legacy override or alias */
-    .glass-panel {
-        @apply glass-standard;
+        
+        /* Performance / Jitter Fix */
+        will-change: backdrop-filter, transform;
+        transform: translateZ(0); /* Force GPU layer */
+        backface-visibility: hidden;
+        perspective: 1000px;
     }
 
     .glass-text {
