@@ -275,7 +275,8 @@
 		class="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-start gap-2 overflow-hidden px-0"
 	>
 		<!-- Top Visuals -->
-		<div class="flex w-full flex-none flex-col items-center gap-2">
+		<!-- Tightened gap from 2 to 0 to fix "Image <-> Beads too large" -->
+		<div class="flex w-full flex-none flex-col items-center gap-0">
 			<!-- Mystery Image - FULL WIDTH WITH BEZEL -->
 			<!-- Mystery Image - FULL WIDTH WITH BEZEL -->
 			<div class="w-full px-6">
@@ -381,10 +382,11 @@
 				<!-- "Top to bottom order should be image, beads, mystery, current prayer." -->
 				<!-- So Mystery Context should be inserted HERE for all prayers in decade. -->
 
-				<div class="flex min-h-8 flex-col items-center justify-center gap-2 text-center">
+				<div class="flex min-h-8 flex-col items-center justify-center gap-4 text-center">
 					<!-- Persistent Mystery Context for Decades -->
 					{#if currentSection.startsWith('decade')}
-						<div class="mb-2 flex flex-col gap-1">
+						<!-- Increased mb-2 to mb-6 to fix "Mystery <-> Prayer too small" (Purple Rectangle) -->
+						<div class="mb-6 flex flex-col gap-1">
 							<span class="block text-base leading-tight font-bold text-white">
 								{parsedMystery.title || t.ui.announce}
 							</span>

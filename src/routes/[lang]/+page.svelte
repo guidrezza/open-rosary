@@ -200,8 +200,22 @@
 	</div>
 
 	<!-- Main Content Area: Centered Vertically and Horizontally -->
-	<div class="flex w-full max-w-md flex-1 flex-col items-center justify-center gap-8 text-center">
-		<!-- 1. Date & 2. Liturgical Time -->
+	<main
+		class="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-start gap-6 overflow-y-auto px-6 py-6 pb-24"
+	>
+		<!-- 1. Language Flag (Top Center) -->
+		<button
+			class="glass-standard group relative flex overflow-hidden rounded-full !border-white/10 !bg-white/0 px-3 py-1.5 transition-all hover:!bg-white/10 active:scale-95"
+			onclick={() => (langMenuOpen = true)}
+		>
+			<span class="text-xl">{currentFlag}</span>
+			<span
+				class="absolute inset-0 flex items-center justify-center text-xs font-bold uppercase tracking-widest text-white/0 transition-all group-hover:text-white/80"
+				>{t.ui.menus.language}</span
+			>
+		</button>
+
+		<!-- 2. Date & 3. Liturgical Time -->
 		<div class="flex flex-col items-center gap-2">
 			<h2 class="text-xs font-bold tracking-[0.2em] text-white/60 uppercase">{dateString}</h2>
 			<h1
@@ -250,7 +264,7 @@
 	</div>
 
 	<!-- Footer -->
-	<footer class="mt-8 py-4 text-center">
+	<footer class="mt-4 py-4 text-center">
 		<p class="text-[10px] tracking-wider text-white/20 uppercase">
 			OPEN ROSARY • 2025 • {t.ui.footer_made_by || 'MADE BY'}
 			<a
