@@ -10,9 +10,9 @@
     color-scheme: dark;
 
     /* Glass Standardization (iOS 26 Style) */
-    --glass-bg: rgba(30, 30, 30, 0.60); /* Translucent dark */
+    --glass-bg: rgba(30, 30, 30, 0.80); /* Less transparent (Increased from 0.60) */
     --glass-border: rgba(255, 255, 255, 0.15); /* Thin crisp border */
-    --glass-blur: 40px; /* Heavy premium blur (Increased from 25px) */
+    --glass-blur: 40px; /* Heavy premium blur */
     --glass-radius: 32px; /* Super rounded (iOS style) */
     --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Soft deep shadow */
 }
@@ -41,8 +41,8 @@ h1, h2, h3, h4 {
     .glass-standard, .glass-panel {
         background-color: var(--glass-bg);
         border: 1px solid var(--glass-border);
-        backdrop-filter: blur(var(--glass-blur));
-        -webkit-backdrop-filter: blur(var(--glass-blur));
+        backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+        -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
         border-radius: var(--glass-radius);
         box-shadow: var(--glass-shadow);
         
