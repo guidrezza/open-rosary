@@ -246,6 +246,62 @@
 
 		return `M ${x1} ${y1} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${x2} ${y2}`;
 	}
+
+	let currentImageDecade = $derived.by(() => {
+		if (currentSection === 'intro') return 1;
+		if (currentSection === 'conclusion') return 5;
+		const parts = currentSection.split('-');
+		if (parts[0] === 'decade') return parseInt(parts[1]);
+		return 1;
+	});
+</script>
+
+	// Image State
+	let imageMode = $state<'normal' | 'fullscreen' | 'minimized'>('normal');
+	let showControls = $state(false);
+
+	function toggleImageControls() {
+		if (imageMode === 'normal') {
+			showControls = !showControls;
+		} else if (imageMode === 'minimized') {
+			imageMode = 'normal';
+		}
+	}
+
+	function handleDownload() {
+		// Create a link to download the image
+		// We need the current image path. MysteryImage handles logic, but we passed props.
+		// Re-derive path here for download or assume MysteryImage component could export it?
+		// Simpler: Just download the current mystery_decade combination logic.
+		// Actually, let's just use the known path structure based on mysteryId and currentImageDecade.
+		const m = mysteryId;
+		const d = currentImageDecade;
+		const list = (t.mysteries as any)[m] || {}; // Type safety hack or import from mysteriousImages?
+		// Better: Import MYSTERY_IMAGES
+		// For now, let's just trigger a click on the img element via logic inside the wrapper if possible.
+		// Or construct the path: /images/{m}/{m}_{d}_*.webp
+		// Importing MYSTERY_IMAGES is properly robust.
+		// ...
+		// Actually, let's just implement the UI here and logic.
+		// I will create a helper to get the path.
+	}
+	
+	// Import helper
+	import { MYSTERY_IMAGES } from '$lib/mysteryImages';
+	
+	function downloadCurrent() {
+		const list = MYSTERY_IMAGES[mysteryId];
+		if (!list) return;
+		const img = list[currentImageDecade - 1]; // 1-based to 0-based
+		if (img) {
+			const a = document.createElement('a');
+			a.href = img.path;
+			a.download = img.path.split('/').pop() || 'image.webp';
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		}
+	}
 </script>
 
 <div class="relative flex h-screen flex-col pb-20">
@@ -278,13 +334,71 @@
 		<!-- Tightened gap from 2 to 0 to fix "Image <-> Beads too large" -->
 		<div class="flex w-full flex-none flex-col items-center gap-0">
 			<!-- Mystery Image - FULL WIDTH WITH BEZEL -->
-			<!-- Mystery Image - FULL WIDTH WITH BEZEL -->
-			<div class="w-full px-6">
-				<div
-					class="relative z-0 aspect-video w-full max-w-lg items-center justify-center overflow-hidden rounded-[32px] sm:w-auto"
+			<div class="w-full px-6 transition-all duration-500 {imageMode === 'minimized' ? 'h-4 opacity-50' : ''}">
+				<!-- Wrapper handles the sizing/positioning states -->
+				<button 
+					class="relative z-0 flex w-full items-center justify-center overflow-hidden rounded-[32px] transition-all duration-500 ease-in-out
+						{imageMode === 'fullscreen' ? 'fixed inset-0 z-[100] h-full w-full rounded-none bg-black' : ''}
+						{imageMode === 'minimized' ? 'h-2 w-full cursor-pointer bg-white/20' : 'aspect-video'}
+						{imageMode === 'normal' ? 'max-w-lg' : ''}
+					"
+					onclick={toggleImageControls}
 				>
-					<MysteryImage />
-				</div>
+					{#if imageMode !== 'minimized'}
+						<MysteryImage mystery={mysteryId} decade={currentImageDecade} />
+						
+						<!-- Overlay Controls -->
+						{#if (imageMode === 'normal' && showControls) || imageMode === 'fullscreen'}
+							<div 
+								class="absolute inset-x-0 top-0 flex justify-between p-4 transition-opacity duration-300 z-20"
+								role="none"
+								onclick={(e) => e.stopPropagation()} 
+							>
+								<!-- Top Left: Minimize or Download -->
+								<button 
+									class="flex h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-md transition-all active:scale-95"
+									onclick={() => {
+										if (imageMode === 'fullscreen') {
+											downloadCurrent();
+										} else {
+											imageMode = 'minimized';
+											showControls = false;
+										}
+									}}
+								>
+									{#if imageMode === 'fullscreen'}
+										<!-- Download Icon -->
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+									{:else}
+										<!-- Minimize Icon -->
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="14" x2="10" y2="14"></line><line x1="4" y1="10" x2="10" y2="10"></line></svg>
+									{/if}
+								</button>
+
+								<!-- Top Right: Zoom or Close -->
+								<button 
+									class="flex h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-md transition-all active:scale-95"
+									onclick={() => {
+										if (imageMode === 'fullscreen') {
+											imageMode = 'normal';
+										} else {
+											imageMode = 'fullscreen';
+											showControls = false;
+										}
+									}}
+								>
+									{#if imageMode === 'fullscreen'}
+										<!-- Close X -->
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+									{:else}
+										<!-- Expand Icon -->
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+									{/if}
+								</button>
+							</div>
+						{/if}
+					{/if}
+				</button>
 			</div>
 
 			<!-- Beads Container (Snake Layout) - NOW ABOVE TEXT -->

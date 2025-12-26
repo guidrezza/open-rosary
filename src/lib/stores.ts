@@ -65,9 +65,7 @@ function createRosaryStore() {
                     }
                 };
 
-                if (browser) {
-                    localStorage.setItem(STORAGE_KEY_THEME_COLOR, color);
-                }
+                // DATA PERSISTENCE REMOVED: Theme resets on reload.
                 return newState;
             });
         },
@@ -81,7 +79,7 @@ function createRosaryStore() {
 
                 // 2. Check Persistence
                 const savedMode = localStorage.getItem(STORAGE_KEY_MODE) as 'digital' | 'physical' | null;
-                const savedColor = localStorage.getItem(STORAGE_KEY_THEME_COLOR) as LiturgicalColor | null;
+                // Theme persistence removed
 
                 update(s => {
                     // Start with fresh liturgical Data
@@ -92,10 +90,7 @@ function createRosaryStore() {
                     };
 
                     // Apply Override if exists
-                    if (savedColor) {
-                        newTheme.color = savedColor;
-                        newTheme.cssVars = PALETTES[savedColor];
-                    }
+                    // (Theme override logic removed)
 
                     return {
                         ...s,

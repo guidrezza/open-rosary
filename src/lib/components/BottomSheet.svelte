@@ -11,6 +11,8 @@
 	}
 
 	let { isOpen, title, children, onClose }: Props = $props();
+
+	let touchStartY = 0;
 </script>
 
 {#if isOpen}
@@ -24,10 +26,21 @@
 	>
 		<!-- Modal Content: Bottom Sheet Style (No bottom margin, slide from 100% height) -->
 		<div
-			class="w-full max-w-md"
+			class="w-full max-w-md touch-none"
 			transition:fly={{ y: 800, duration: 300, opacity: 1, easing: cubicOut }}
 			onclick={(e) => e.stopPropagation()}
 			role="none"
+			ontouchstart={(e) => {
+				const touch = e.changedTouches[0];
+				touchStartY = touch.clientY;
+			}}
+			ontouchend={(e) => {
+				const touch = e.changedTouches[0];
+				if (touchStartY && touch.clientY - touchStartY > 75) {
+					onClose();
+				}
+				touchStartY = 0;
+			}}
 		>
 			<GlassPanel
 				class="flex max-h-[90vh] flex-col gap-2 overflow-y-auto rounded-t-[32px] !rounded-b-none !border-b-0 p-8 pb-12"

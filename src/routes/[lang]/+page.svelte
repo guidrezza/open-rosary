@@ -165,6 +165,12 @@
 		sorrowful: '🍷',
 		glorious: '🦋'
 	};
+	// Image Refresh
+	let mysteryImageComponent: any;
+
+	function handleImageClick() {
+		if (mysteryImageComponent) mysteryImageComponent.refresh();
+	}
 </script>
 
 <!-- Dynamic Background Orb -->
@@ -177,7 +183,7 @@
 	></div>
 </div>
 
-<div class="relative z-10 flex min-h-screen flex-col items-center p-6">
+<div class="relative z-10 flex min-h-screen flex-col items-center">
 	<div class="absolute top-6 left-6 z-50">
 		<button
 			class="text-3xl drop-shadow-md transition-transform hover:scale-110 active:scale-95"
@@ -201,7 +207,7 @@
 
 	<!-- Main Content Area: Centered Vertically and Horizontally -->
 	<main
-		class="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-start gap-6 overflow-y-auto px-6 py-6 pb-24"
+		class="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-center gap-6 overflow-y-auto px-6 py-6 pb-24"
 	>
 		<!-- Language button REMOVED - already exists in top right corner -->
 
@@ -221,11 +227,12 @@
 		<!-- 4. Image (Same size/ratio as prayer page) -->
 		<!-- Using w-full and consistent bevels/radius -->
 		<!-- 4. Image (Same size/ratio as prayer page) -->
-		<div
-			class="relative z-0 aspect-video w-full max-w-lg items-center justify-center overflow-hidden rounded-[32px] sm:w-auto"
+		<button
+			class="relative z-0 aspect-video w-full max-w-lg items-center justify-center overflow-hidden rounded-[32px] transition-transform active:scale-[0.98]"
+			onclick={handleImageClick}
 		>
-			<MysteryImage />
-		</div>
+			<MysteryImage bind:this={mysteryImageComponent} />
+		</button>
 
 		<!-- 5. Recommended Mystery Label & 6. Name -->
 		<div class="flex flex-col items-center gap-1">
