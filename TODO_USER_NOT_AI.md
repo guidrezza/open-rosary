@@ -9,3 +9,8 @@ Background update.
 Color palletes update.
 
 Standardize view across all display sizes. Mobile focused (iPhone 12 Pro is priority).
+
+--
+
+1. Increase menu opening speed of all menus. It should be extremely fast and responsive.
+2. 
