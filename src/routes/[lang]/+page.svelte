@@ -67,7 +67,7 @@
 	let modeMenuOpen = $state(false);
 
 	// Selection State for Navigation
-	let selectedMysteryForMode = $state(recommendedMystery);
+	let selectedMysteryForMode = $state('joyful'); // Default init, will be overwritten
 
 	// Helper Actions
 	function handleThemeSelect(color: LiturgicalColor) {
@@ -194,7 +194,14 @@
 
 	<!-- Footer -->
 	<footer class="mt-auto py-4 text-center">
-		<p class="text-[10px] tracking-wider text-white/20">OPEN ROSARY • {new Date().getFullYear()}</p>
+		<p class="text-[10px] tracking-wider text-white/20">
+			OPEN ROSARY • 2025 • made by <a
+				href="https://guidrezza.com"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="hover:text-white/60 hover:underline">guidrezza</a
+			>
+		</p>
 	</footer>
 
 	<!-- Bottom Sheets -->
