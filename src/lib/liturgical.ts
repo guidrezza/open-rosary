@@ -50,7 +50,7 @@ export const PALETTES: Record<LiturgicalColor, LiturgicalTheme['cssVars']> = {
     },
     black: {
         '--theme-color': '#404040', // Neutral 700 (Slightly lighter than pure black to show up)
-        '--glass-bg': 'rgba(0, 0, 0, 0.8)', // Increased opacity
+        '--glass-bg': 'rgba(0, 0, 0, 0.75)', // Increased opacity
         '--glass-border': 'rgba(100, 100, 100, 0.2)',
         '--text-highlight': '#e5e5e5'
     }

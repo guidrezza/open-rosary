@@ -27,7 +27,6 @@
 			transition:fly={{ y: 20, duration: 300, opacity: 0 }}
 			onclick={(e) => e.stopPropagation()}
 			role="none"
-			style="will-change: transform, opacity; transform: translateZ(0);"
 		>
 			<!-- 
                 Using GlassPanel with standard class overrides if needed, 

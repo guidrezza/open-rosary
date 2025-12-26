@@ -46,11 +46,7 @@ h1, h2, h3, h4 {
     border-radius: var(--glass-radius);
     box-shadow: var(--glass-shadow);
     
-    /* Performance / Jitter Fix */
-    will-change: backdrop-filter, transform;
-    transform: translateZ(0); /* Force GPU layer */
-    backface-visibility: hidden;
-    perspective: 1000px;
+    /* Note: Removed transform: translateZ(0) as it breaks backdrop-filter by creating isolated stacking context */
 }
 
 @layer utilities {
