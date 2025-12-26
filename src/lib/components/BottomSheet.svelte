@@ -16,22 +16,24 @@
 {#if isOpen}
 	<!-- Outer Container: Catches clicks outside (Backdrop), but NO visual style (dim/blur) per request -->
 	<div
-		class="fixed inset-0 z-50 flex items-end justify-center focus:outline-none sm:items-center"
+		class="fixed inset-0 z-50 flex items-end justify-center focus:outline-none"
 		onclick={onClose}
 		role="button"
 		tabindex="0"
 		onkeydown={(e) => e.key === 'Escape' && onClose()}
 	>
-		<!-- Modal Content: NO opacity animation to preserve backdrop-filter blur during slide -->
+		<!-- Modal Content: Bottom Sheet Style (No bottom margin, slide from 100% height) -->
 		<div
-			class="mb-4 w-full max-w-sm p-4 sm:mb-0"
-			transition:fly={{ y: 80, duration: 400, easing: cubicOut }}
+			class="w-full max-w-md"
+			transition:fly={{ y: 800, duration: 500, opacity: 1, easing: cubicOut }}
 			onclick={(e) => e.stopPropagation()}
 			role="none"
 		>
-			<GlassPanel class="flex max-h-[70vh] flex-col gap-2 overflow-y-auto p-6">
+			<GlassPanel
+				class="flex max-h-[85vh] flex-col gap-2 overflow-y-auto rounded-none rounded-t-[32px] p-6 pb-12"
+			>
 				<!-- Mobile Handle (Subtle) -->
-				<div class="mx-auto mb-6 h-1 w-10 rounded-full bg-white/20"></div>
+				<div class="mx-auto mb-6 h-1.5 w-12 rounded-full bg-white/20"></div>
 
 				{#if title}
 					<div class="mb-6 flex items-center justify-between">
