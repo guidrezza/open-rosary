@@ -14,43 +14,44 @@ export interface LiturgicalTheme {
 // Color Palettes (HSL for easy CSS variable usage if needed, but strings are fine)
 // We need "diffused theme color with a heavily blurred glassmorphism effect"
 // So --theme-color is the strong background connection, --glass-bg is the panel background.
+// UPDATED: Glass-bg opacity increased to 0.75 for visible frosted glass effect
 
 // Modern, Glass-Friendly Palettes
 export const PALETTES: Record<LiturgicalColor, LiturgicalTheme['cssVars']> = {
     green: {
         '--theme-color': '#059669', // Emerald 600 (Darker than 500)
-        '--glass-bg': 'rgba(6, 78, 59, 0.4)', // Slightly more opaque
-        '--glass-border': 'rgba(52, 211, 153, 0.15)',
+        '--glass-bg': 'rgba(6, 78, 59, 0.75)', // Increased opacity for visible glass
+        '--glass-border': 'rgba(52, 211, 153, 0.2)',
         '--text-highlight': '#6ee7b7'
     },
     white: {
         '--theme-color': '#64748b', // Slate 500 (Much darker than Gray 100 for visibility)
-        '--glass-bg': 'rgba(255, 255, 255, 0.08)', // Reduced white opacity
-        '--glass-border': 'rgba(255, 255, 255, 0.15)',
+        '--glass-bg': 'rgba(30, 41, 59, 0.75)', // Dark slate instead of white for visibility
+        '--glass-border': 'rgba(255, 255, 255, 0.2)',
         '--text-highlight': '#e2e8f0' // Slate 200
     },
     red: {
         '--theme-color': '#dc2626', // Red 600
-        '--glass-bg': 'rgba(127, 29, 29, 0.4)',
-        '--glass-border': 'rgba(248, 113, 113, 0.15)',
+        '--glass-bg': 'rgba(127, 29, 29, 0.75)', // Increased opacity
+        '--glass-border': 'rgba(248, 113, 113, 0.2)',
         '--text-highlight': '#fca5a5'
     },
     purple: {
         '--theme-color': '#7c3aed', // Violet 600
-        '--glass-bg': 'rgba(76, 29, 149, 0.4)',
-        '--glass-border': 'rgba(167, 139, 250, 0.15)',
+        '--glass-bg': 'rgba(76, 29, 149, 0.75)', // Increased opacity
+        '--glass-border': 'rgba(167, 139, 250, 0.2)',
         '--text-highlight': '#d8b4fe'
     },
     rose: {
         '--theme-color': '#e11d48', // Rose 600
-        '--glass-bg': 'rgba(136, 19, 55, 0.4)',
-        '--glass-border': 'rgba(251, 113, 133, 0.15)',
+        '--glass-bg': 'rgba(136, 19, 55, 0.75)', // Increased opacity
+        '--glass-border': 'rgba(251, 113, 133, 0.2)',
         '--text-highlight': '#fda4af'
     },
     black: {
         '--theme-color': '#404040', // Neutral 700 (Slightly lighter than pure black to show up)
-        '--glass-bg': 'rgba(0, 0, 0, 0.6)',
-        '--glass-border': 'rgba(100, 100, 100, 0.15)',
+        '--glass-bg': 'rgba(0, 0, 0, 0.8)', // Increased opacity
+        '--glass-border': 'rgba(100, 100, 100, 0.2)',
         '--text-highlight': '#e5e5e5'
     }
 };
