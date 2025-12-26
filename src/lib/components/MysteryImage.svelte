@@ -3,7 +3,7 @@
 </script>
 
 <div
-	class="relative flex h-full w-full items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+	class="relative flex h-full w-full items-center justify-center overflow-hidden rounded-[32px] border border-white/10 bg-white/5"
 >
 	<!-- Placeholder pattern or icon could go here -->
 	<div class="absolute inset-0 bg-gradient-to-tr from-purple-900/20 to-blue-900/20"></div>

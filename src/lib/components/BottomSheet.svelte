@@ -25,12 +25,12 @@
 		<!-- Modal Content: Bottom Sheet Style (No bottom margin, slide from 100% height) -->
 		<div
 			class="w-full max-w-md"
-			transition:fly={{ y: 800, duration: 500, opacity: 1, easing: cubicOut }}
+			transition:fly={{ y: 800, duration: 300, opacity: 1, easing: cubicOut }}
 			onclick={(e) => e.stopPropagation()}
 			role="none"
 		>
 			<GlassPanel
-				class="flex max-h-[85vh] flex-col gap-2 overflow-y-auto rounded-none rounded-t-[32px] p-6 pb-12"
+				class="flex max-h-[90vh] flex-col gap-2 overflow-y-auto rounded-t-[32px] !rounded-b-none !border-b-0 p-8 pb-32"
 			>
 				<!-- Mobile Handle (Subtle) -->
 				<div class="mx-auto mb-6 h-1.5 w-12 rounded-full bg-white/20"></div>
@@ -40,18 +40,18 @@
 						<h3 class="text-xl font-bold tracking-tight text-white">{title}</h3>
 						<!-- Close Button (Subtle, large touch target) -->
 						<button
-							class="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-white/60 transition-colors hover:bg-white/10 hover:text-white"
+							class="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-white/60 transition-colors hover:bg-white/10 hover:text-white"
 							onclick={onClose}
 							aria-label="Close"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
-								width="12"
-								height="12"
+								width="18"
+								height="18"
 								viewBox="0 0 24 24"
 								fill="none"
 								stroke="currentColor"
-								stroke-width="3"
+								stroke-width="4"
 								stroke-linecap="round"
 								stroke-linejoin="round"
 							>

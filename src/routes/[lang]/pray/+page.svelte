@@ -217,7 +217,7 @@
 
 <div class="relative flex h-screen flex-col pb-20">
 	<!-- Header -->
-	<header class="z-30 flex-none p-4">
+	<header class="z-30 flex-none p-6">
 		<GlassPanel class="flex items-center justify-between px-4 py-3">
 			<button
 				class="text-sm font-medium transition-colors duration-200 {exitState
@@ -239,14 +239,14 @@
 
 	<!-- Main Content -->
 	<main
-		class="mx-auto flex w-full flex-1 flex-col items-center justify-start gap-2 overflow-hidden px-0"
+		class="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-start gap-2 overflow-hidden px-0"
 	>
 		<!-- Top Visuals -->
 		<div class="flex w-full flex-none flex-col items-center gap-2">
 			<!-- Mystery Image - FULL WIDTH WITH BEZEL -->
-			<div class="w-full px-2">
+			<div class="w-full px-6">
 				<div
-					class="relative z-0 aspect-[21/9] w-full sm:aspect-video sm:w-auto sm:max-w-lg sm:overflow-hidden sm:rounded-2xl"
+					class="relative z-0 aspect-[21/9] w-full sm:aspect-video sm:w-auto sm:max-w-lg sm:overflow-hidden sm:rounded-[32px]"
 				>
 					<MysteryImage />
 				</div>
@@ -323,8 +323,7 @@
 		</div>
 
 		<!-- Context Text & Prayer Area -->
-		<!-- Context Text & Prayer Area -->
-		<div class="flex w-full flex-none flex-col items-center px-4 text-center">
+		<div class="flex w-full flex-none flex-col items-center px-6 text-center">
 			<!-- Context Text / Title -->
 			{#if mysteryMessage && mode === 'physical'}
 				<!-- Physical: Show Mystery Name/Context -->
@@ -347,7 +346,7 @@
 		</div>
 
 		<!-- Prayer Text / List Area -->
-		<div class="min-h-0 w-full flex-1 overflow-y-auto px-4 pb-4">
+		<div class="min-h-0 w-full flex-1 overflow-y-auto px-6 pb-6">
 			{#if mode === 'digital'}
 				<!-- Digital: Show FULL TEXT of current prayer -->
 				<div class="rounded-2xl p-2 pt-0">
@@ -395,7 +394,7 @@
 
 	<!-- Navigation Controls -->
 	<div
-		class="pointer-events-none fixed right-0 bottom-0 left-0 z-40 mx-auto flex w-full max-w-lg justify-between px-2 pb-4"
+		class="pointer-events-none fixed right-0 bottom-0 left-0 z-40 mx-auto flex w-full max-w-md justify-between px-6 pb-6"
 	>
 		<button
 			class="pointer-events-auto flex h-14 min-w-[140px] items-center justify-center gap-2 rounded-full border border-white/10 bg-white/10 px-6 font-medium text-white shadow-lg backdrop-blur-md transition-all hover:bg-white/20 active:scale-95"

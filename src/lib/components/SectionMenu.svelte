@@ -31,7 +31,7 @@
 	<div class="flex flex-col gap-2">
 		{#each sections as section}
 			<button
-				class="w-full rounded-xl p-4 text-left transition-all duration-200
+				class="w-full rounded-[32px] p-4 text-left transition-all duration-200
                 {currentSection === section.id
 					? 'border border-white/20 bg-white/20 font-bold text-white'
 					: 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white'}"

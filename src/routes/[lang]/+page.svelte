@@ -7,6 +7,7 @@
 	import type { LiturgicalColor } from '$lib/liturgical';
 	import GlassPanel from '$lib/components/GlassPanel.svelte';
 	import BottomSheet from '$lib/components/BottomSheet.svelte';
+	import MysteryImage from '$lib/components/MysteryImage.svelte';
 	import { getLocale } from '$lib/i18n';
 
 	// Get language from route params
@@ -115,10 +116,10 @@
 </div>
 
 <div class="relative z-10 flex min-h-screen flex-col items-center p-6">
-	<!-- Top Bar -->
-	<div class="mb-8 flex w-full justify-end">
+	<!-- Top Bar: Flag (Absolute Positioned for consistent corner spacing) -->
+	<div class="absolute top-6 right-6 z-50">
 		<button
-			class="text-2xl drop-shadow-md transition-transform hover:scale-110 active:scale-95"
+			class="text-3xl drop-shadow-md transition-transform hover:scale-110 active:scale-95"
 			onclick={() => (langMenuOpen = true)}
 			title={t.ui.menus.language}
 		>
@@ -126,23 +127,21 @@
 		</button>
 	</div>
 
-	<!-- Hero Section -->
-	<header class="mb-12 flex flex-1 flex-col items-center justify-center space-y-4 text-center">
-		<!-- Date -->
-		<h2 class="text-sm font-bold tracking-[0.2em] text-white/60 uppercase">{dateString}</h2>
+	<!-- Main Content Area: Centered Vertically and Horizontally -->
+	<div class="flex w-full max-w-md flex-1 flex-col items-center justify-center gap-8 text-center">
+		<!-- 1. Date & 2. Liturgical Time -->
+		<div class="flex flex-col items-center gap-2">
+			<h2 class="text-xs font-bold tracking-[0.2em] text-white/60 uppercase">{dateString}</h2>
+			<h1
+				class="text-4xl leading-tight font-black tracking-wider uppercase drop-shadow-lg md:text-5xl"
+			>
+				{theme.season}
+			</h1>
+		</div>
 
-		<!-- Liturgical Season (Text stays accurate even if color changed) -->
-		<!-- Use a text-gradient or glow based on theme color -->
-		<h1
-			class="text-4xl leading-tight font-black tracking-wider uppercase drop-shadow-lg md:text-5xl"
-		>
-			<!-- If the current Season is "Ordinary Time", maybe split lines. -->
-			{theme.season}
-		</h1>
-
-		<!-- Theme Indicator / Picker Trigger -->
+		<!-- 3. Change Theme -->
 		<button
-			class="mt-4 flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 transition-colors hover:bg-white/10"
+			class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2 transition-colors hover:bg-white/10"
 			onclick={() => (themeMenuOpen = true)}
 		>
 			<div
@@ -153,53 +152,51 @@
 			></div>
 			<span class="text-[10px] tracking-widest text-white/50 uppercase">{t.ui.change_theme}</span>
 		</button>
-	</header>
 
-	<!-- Main Actions -->
-	<div class="animate-fade-in-up mb-12 w-full max-w-sm space-y-4">
-		<!-- Primary Action: Pray Today's Mystery -->
-		<div class="group relative">
+		<!-- 4. Image (Same size/ratio as prayer page) -->
+		<!-- Using w-full and consistent bevels/radius -->
+		<div class="w-full px-6">
 			<div
-				class="absolute inset-0 rounded-2xl bg-white/20 opacity-0 blur-xl transition-opacity group-hover:opacity-30"
-			></div>
-			<GlassPanel
-				class="relative flex flex-col items-center overflow-hidden !rounded-2xl border-white/20 p-1"
+				class="relative z-0 aspect-[21/9] w-full items-center justify-center overflow-hidden sm:aspect-video sm:rounded-[32px]"
 			>
-				<button
-					class="flex w-full flex-col items-center rounded-xl px-6 py-8 text-center transition-colors hover:bg-white/5"
-					onclick={() => initiatePrayer(recommendedMystery)}
-				>
-					<span class="mb-2 text-xs tracking-widest text-white/50 uppercase"
-						>{t.ui.recommended_mystery}</span
-					>
-					<h2 class="mb-6 text-3xl font-bold text-white drop-shadow-md">{mysteryName}</h2>
-
-					<div
-						class="transform rounded-full bg-white px-8 py-3 text-sm font-bold text-black shadow-lg transition-transform group-hover:scale-105"
-					>
-						{t.ui.pray_button_prefix}
-					</div>
-				</button>
-			</GlassPanel>
+				<MysteryImage />
+			</div>
 		</div>
 
-		<!-- Secondary: Manual Select -->
-		<button
-			class="w-full rounded-xl border border-white/10 bg-white/5 py-4 font-medium text-white/70 backdrop-blur-md transition-all hover:bg-white/10 hover:text-white active:scale-[0.98]"
-			onclick={() => (mysteryMenuOpen = true)}
-		>
-			{t.ui.pick_mystery}
-		</button>
+		<!-- 5. Recommended Mystery Label & 6. Name -->
+		<div class="flex flex-col items-center gap-1">
+			<span class="text-[10px] tracking-widest text-white/40 uppercase"
+				>{t.ui.recommended_mystery}</span
+			>
+			<h2 class="text-2xl font-bold text-white drop-shadow-md">{mysteryName}</h2>
+		</div>
+
+		<!-- 7. Pray Recommended Button & 8. Change Mystery Button -->
+		<div class="flex w-full flex-col gap-4">
+			<button
+				class="w-full rounded-[32px] border border-white/10 bg-white/5 py-4 font-bold text-white shadow-lg backdrop-blur-md transition-all hover:bg-white/10 active:scale-[0.98]"
+				onclick={() => initiatePrayer(recommendedMystery)}
+			>
+				{t.ui.pray_button_prefix || 'Pray Recommended'}
+			</button>
+
+			<button
+				class="w-full rounded-[32px] border border-white/10 bg-white/5 py-4 font-medium text-white/70 backdrop-blur-md transition-all hover:bg-white/10 hover:text-white active:scale-[0.98]"
+				onclick={() => (mysteryMenuOpen = true)}
+			>
+				{t.ui.pick_mystery}
+			</button>
+		</div>
 	</div>
 
 	<!-- Footer -->
-	<footer class="mt-auto py-4 text-center">
-		<p class="text-[10px] tracking-wider text-white/20">
-			OPEN ROSARY • 2025 • made by <a
+	<footer class="mt-8 py-4 text-center">
+		<p class="text-[10px] tracking-wider text-white/20 uppercase">
+			OPEN ROSARY • 2025 • MADE BY <a
 				href="https://guidrezza.com"
 				target="_blank"
 				rel="noopener noreferrer"
-				class="hover:text-white/60 hover:underline">guidrezza</a
+				class="hover:text-white/60 hover:underline">GUIDREZZA</a
 			>
 		</p>
 	</footer>
@@ -215,7 +212,7 @@
 		<div class="flex flex-col gap-2">
 			{#each Object.entries( { 'en-us': 'English (US)', 'es-mx': 'Español (MX)', 'la-va': 'Lingua Latina', 'pt-br': 'Português (BR)' } ) as [code, label]}
 				<button
-					class="flex w-full items-center rounded-xl bg-white/5 p-4 text-left text-lg font-medium transition-colors hover:bg-white/10"
+					class="flex w-full items-center rounded-[32px] bg-white/5 p-4 text-left text-lg font-medium transition-colors hover:bg-white/10"
 					onclick={() => switchLang(code)}
 				>
 					<span class="mr-3 text-2xl">{flags[code]}</span>
@@ -238,7 +235,7 @@
 		<div class="grid grid-cols-3 gap-3">
 			{#each [{ c: 'green', l: t.ui.themes.ordinary, hex: '#10b981' }, { c: 'purple', l: t.ui.themes.advent_lent, hex: '#8b5cf6' }, { c: 'white', l: t.ui.themes.christmas_easter, hex: '#f3f4f6' }, { c: 'red', l: t.ui.themes.pentecost, hex: '#ef4444' }, { c: 'rose', l: t.ui.themes.gaudete, hex: '#f43f5e' }, { c: 'black', l: t.ui.themes.requiem, hex: '#2e2e2e' }] as item}
 				<button
-					class="flex aspect-square flex-col items-center justify-center gap-2 rounded-2xl border border-white/10 p-2 shadow-lg transition-transform active:scale-95"
+					class="flex aspect-square flex-col items-center justify-center gap-2 rounded-[32px] border border-white/10 p-2 shadow-lg transition-transform active:scale-95"
 					style="background-color: {item.hex}CC;"
 					onclick={() => handleThemeSelect(item.c as LiturgicalColor)}
 				>
@@ -262,7 +259,7 @@
 		<div class="flex flex-col gap-2">
 			{#each ['joyful', 'luminous', 'sorrowful', 'glorious'] as m}
 				<button
-					class="flex w-full items-center rounded-xl bg-white/5 p-4 text-left text-lg font-medium capitalize transition-colors hover:bg-white/10"
+					class="flex w-full items-center rounded-[32px] bg-white/5 p-4 text-left text-lg font-medium capitalize transition-colors hover:bg-white/10"
 					onclick={() => {
 						mysteryMenuOpen = false;
 						initiatePrayer(m);
@@ -278,7 +275,7 @@
 	<BottomSheet isOpen={modeMenuOpen} title={t.ui.menus.mode} onClose={() => (modeMenuOpen = false)}>
 		<div class="flex flex-col gap-4">
 			<button
-				class="group flex w-full items-start gap-4 rounded-xl bg-white/5 p-4 text-left transition-colors hover:bg-white/10"
+				class="group flex w-full items-start gap-4 rounded-[32px] bg-white/5 p-4 text-left transition-colors hover:bg-white/10"
 				onclick={() => selectMode('digital')}
 			>
 				<div class="text-3xl grayscale transition-all group-hover:grayscale-0">📱</div>
@@ -288,7 +285,7 @@
 				</div>
 			</button>
 			<button
-				class="group flex w-full items-start gap-4 rounded-xl bg-white/5 p-4 text-left transition-colors hover:bg-white/10"
+				class="group flex w-full items-start gap-4 rounded-[32px] bg-white/5 p-4 text-left transition-colors hover:bg-white/10"
 				onclick={() => selectMode('physical')}
 			>
 				<div class="text-3xl grayscale transition-all group-hover:grayscale-0">📿</div>
@@ -302,17 +299,4 @@
 </div>
 
 <style>
-	.animate-fade-in-up {
-		animation: fadeInUp 0.8s ease-out;
-	}
-	@keyframes fadeInUp {
-		from {
-			opacity: 0;
-			transform: translateY(20px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
 </style>
