@@ -26,31 +26,31 @@ export const PALETTES: Record<LiturgicalColor, LiturgicalTheme['cssVars']> = {
     },
     white: {
         '--theme-color': '#64748b', // Slate 500 (Much darker than Gray 100 for visibility)
-        '--glass-bg': 'rgba(30, 41, 59, 0.75)', // Dark slate instead of white for visibility
+        '--glass-bg': 'rgba(30, 41, 59, 0.0)', // Dark slate instead of white for visibility
         '--glass-border': 'rgba(255, 255, 255, 0.2)',
         '--text-highlight': '#e2e8f0' // Slate 200
     },
     red: {
         '--theme-color': '#dc2626', // Red 600
-        '--glass-bg': 'rgba(127, 29, 29, 0.75)', // Increased opacity
+        '--glass-bg': 'rgba(127, 29, 29, 0.0)', // Increased opacity
         '--glass-border': 'rgba(248, 113, 113, 0.2)',
         '--text-highlight': '#fca5a5'
     },
     purple: {
         '--theme-color': '#7c3aed', // Violet 600
-        '--glass-bg': 'rgba(76, 29, 149, 0.75)', // Increased opacity
+        '--glass-bg': 'rgba(76, 29, 149, 0.0)', // Increased opacity
         '--glass-border': 'rgba(167, 139, 250, 0.2)',
         '--text-highlight': '#d8b4fe'
     },
     rose: {
         '--theme-color': '#e11d48', // Rose 600
-        '--glass-bg': 'rgba(136, 19, 55, 0.75)', // Increased opacity
+        '--glass-bg': 'rgba(136, 19, 55, 0.0)', // Increased opacity
         '--glass-border': 'rgba(251, 113, 133, 0.2)',
         '--text-highlight': '#fda4af'
     },
     black: {
         '--theme-color': '#404040', // Neutral 700 (Slightly lighter than pure black to show up)
-        '--glass-bg': 'rgba(0, 0, 0, 0.75)', // Increased opacity
+        '--glass-bg': 'rgba(0, 0, 0, 0.0)', // Increased opacity
         '--glass-border': 'rgba(100, 100, 100, 0.2)',
         '--text-highlight': '#e5e5e5'
     }

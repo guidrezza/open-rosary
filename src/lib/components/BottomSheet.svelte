@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { fade, fly } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
+	import { cubicOut } from 'svelte/easing';
 	import GlassPanel from './GlassPanel.svelte';
 
 	interface Props {
@@ -21,18 +22,13 @@
 		tabindex="0"
 		onkeydown={(e) => e.key === 'Escape' && onClose()}
 	>
-		<!-- Modal Content -->
+		<!-- Modal Content: NO opacity animation to preserve backdrop-filter blur during slide -->
 		<div
 			class="mb-4 w-full max-w-sm p-4 sm:mb-0"
-			transition:fly={{ y: 20, duration: 300, opacity: 0 }}
+			transition:fly={{ y: 80, duration: 400, easing: cubicOut }}
 			onclick={(e) => e.stopPropagation()}
 			role="none"
 		>
-			<!-- 
-                Using GlassPanel with standard class overrides if needed, 
-                but layout.css now enforces .glass-panel to use --glass-radius (32px) etc.
-                We ensure explicit class mapping here just in case.
-            -->
 			<GlassPanel class="flex max-h-[70vh] flex-col gap-2 overflow-y-auto p-6">
 				<!-- Mobile Handle (Subtle) -->
 				<div class="mx-auto mb-6 h-1 w-10 rounded-full bg-white/20"></div>
