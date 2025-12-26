@@ -18,6 +18,12 @@ body {
     font-size: 16px; /* Base size */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    touch-action: pan-x pan-y; /* Prevent double-tap zoom globally but allow scroll */
+}
+
+/* Prevent double-tap zoom on interactive elements */
+a, button, input, select, textarea, label {
+    touch-action: manipulation;
 }
 
 h1, h2, h3, h4 {

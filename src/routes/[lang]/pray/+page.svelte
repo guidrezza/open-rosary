@@ -67,7 +67,7 @@
 			exitState = true;
 			setTimeout(() => (exitState = false), 3000); // Reset after 3s
 		} else {
-			goto(`${base}/`);
+			goto(`${base}/${lang}`);
 		}
 	}
 
@@ -215,7 +215,7 @@
 	}
 </script>
 
-<div class="relative flex h-screen flex-col pb-32">
+<div class="relative flex h-screen flex-col pb-20">
 	<!-- Header -->
 	<header class="z-30 flex-none p-4">
 		<GlassPanel class="flex items-center justify-between px-4 py-3">
@@ -347,7 +347,7 @@
 		</div>
 
 		<!-- Prayer Text / List Area -->
-		<div class="min-h-0 w-full flex-1 overflow-y-auto px-4 pb-16">
+		<div class="min-h-0 w-full flex-1 overflow-y-auto px-4 pb-4">
 			{#if mode === 'digital'}
 				<!-- Digital: Show FULL TEXT of current prayer -->
 				<div class="rounded-2xl p-2 pt-0">
