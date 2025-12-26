@@ -85,7 +85,7 @@ export const pt_br: LocalizationData = {
         hail_holy_queen: {
             id: 'hail_holy_queen',
             title: 'Salve Rainha',
-            content: 'Salve, Rainha, Mãe de misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos os degredados filhos de Eva. A vós suspiramos, gemendo e chorando neste vale de lágrimas. Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei, e depois deste desterro mostrai-nos Jesus, bendito fruto do vosso ventre, ó clemente, ó piedosa, ó doce sempre Virgem Maria.\n\nV. Rogai por nós, Santa Mãe de Deus.\nR. Para que sejamos dignos das promessas de Cristo.'
+            content: 'Salve, Rainha, Mãe de misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos os degredados filhos de Eva. A vós suspiramos, gemendo e chorando neste vale de lágrimas. Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei, e depois deste desterro mostrai-nos Jesus, bendito fruto do vosso ventre, ó clemente, ó piedosa, ó doce sempre Virgem Maria.'
         },
         closing_prayer: {
             id: 'closing_prayer',
@@ -99,11 +99,11 @@ export const pt_br: LocalizationData = {
             name: 'Mistérios Gozosos',
             days: [1, 6],
             passages: [
-                "A Anunciação: \"Disse Maria: 'Eis aqui a serva do Senhor; faça-se em mim segundo a tua palavra!'\" (Lucas 1, 38)",
-                "A Visitação: \"Bendita és tu entre as mulheres e bendito é o fruto do teu ventre!\" (Lucas 1, 42)",
-                "O Nascimento de Jesus: \"Ela deu à luz o seu filho primogênito, enfaixou-o e o deitou numa manjedoura.\" (Lucas 2, 7)",
-                "A Apresentação no Templo: \"Meus olhos viram a tua salvação, que preparaste em face de todos os povos.\" (Lucas 2, 30-31)",
-                "A Perda e o Encontro no Templo: \"Três dias depois o acharam no templo, sentado no meio dos doutores, ouvindo-os e interrogando-os.\" (Lucas 2, 46)"
+                "A Anunciação: \"Disse Maria: 'Eis aqui a serva do Senhor; faça-se em mim segundo a tua palavra!'\" (Lucas 1, 38)\n\nFruto do Mistério: Humildade",
+                "A Visitação: \"Bendita és tu entre as mulheres e bendito é o fruto do teu ventre!\" (Lucas 1, 42)\n\nFruto do Mistério: Amor ao Próximo",
+                "O Nascimento de Jesus: \"Ela deu à luz o seu filho primogênito, enfaixou-o e o deitou numa manjedoura.\" (Lucas 2, 7)\n\nFruto do Mistério: Pobreza de Espírito",
+                "A Apresentação no Templo: \"Meus olhos viram a tua salvação, que preparaste em face de todos os povos.\" (Lucas 2, 30-31)\n\nFruto do Mistério: Obediência",
+                "A Perda e o Encontro no Templo: \"Três dias depois o acharam no templo, sentado no meio dos doutores, ouvindo-os e interrogando-os.\" (Lucas 2, 46)\n\nFruto do Mistério: Piedade"
             ]
         },
         luminous: {
@@ -111,11 +111,11 @@ export const pt_br: LocalizationData = {
             name: 'Mistérios Luminosos',
             days: [4],
             passages: [
-                "O Batismo no Jordão: \"E uma voz vinda dos céus dizia: 'Este é o meu Filho amado, no qual eu pus o meu agrado'.\" (Mateus 3, 17)",
-                "As Bodas de Caná: \"Sua mãe disse aos que estavam servindo: 'Fazei tudo o que ele vos disser'.\" (João 2, 5)",
-                "O Anúncio do Reino de Deus: \"O tempo já se completou e o Reino de Deus está próximo. Convertei-vos e crede no Evangelho!\" (Marcos 1, 15)",
-                "A Transfiguração: \"Transfigurou-se diante deles: seu rosto brilhou como o sol, e suas roupas ficaram brancas como a luz.\" (Mateus 17, 2)",
-                "A Instituição da Eucaristia: \"Tomai e comei, isto é o meu corpo.\" (Mateus 26, 26)"
+                "O Batismo no Jordão: \"E uma voz vinda dos céus dizia: 'Este é o meu Filho amado, no qual eu pus o meu agrado'.\" (Mateus 3, 17)\n\nFruto do Mistério: Abertura ao Espírito Santo",
+                "As Bodas de Caná: \"Sua mãe disse aos que estavam servindo: 'Fazei tudo o que ele vos disser'.\" (João 2, 5)\n\nFruto do Mistério: A Jesus por Maria",
+                "O Anúncio do Reino de Deus: \"O tempo já se completou e o Reino de Deus está próximo. Convertei-vos e crede no Evangelho!\" (Marcos 1, 15)\n\nFruto do Mistério: Arrependimento e Confiança em Deus",
+                "A Transfiguração: \"Transfigurou-se diante deles: seu rosto brilhou como o sol, e suas roupas ficaram brancas como a luz.\" (Mateus 17, 2)\n\nFruto do Mistério: Desejo de Santidade",
+                "A Instituição da Eucaristia: \"Tomai e comei, isto é o meu corpo.\" (Mateus 26, 26)\n\nFruto do Mistério: Adoração"
             ]
         },
         sorrowful: {
@@ -123,11 +123,11 @@ export const pt_br: LocalizationData = {
             name: 'Mistérios Dolorosos',
             days: [2, 5],
             passages: [
-                "A Agonia no Horto: \"Entrando em agonia, Jesus orava com mais insistência. Seu suor tornou-se como gotas de sangue que caíam no chão.\" (Lucas 22, 44)",
-                "A Flagelação do Senhor: \"Então Pilatos mandou flagelar Jesus.\" (João 19, 1)",
-                "A Coroação de Espinhos: \"Teceram uma coroa de espinhos, puseram-na em sua cabeça.\" (Marcos 15, 17)",
-                "O Caminho da Cruz: \"Jesus tomou a cruz sobre si e saiu para o lugar chamado Calvário.\" (João 19, 17)",
-                "A Crucificação e Morte: \"Jesus deu um forte grito: 'Pai, em tuas mãos entrego o meu espírito'. Dizendo isso, expirou.\" (Lucas 23, 46)"
+                "A Agonia no Horto: \"Entrando em agonia, Jesus orava com mais insistência. Seu suor tornou-se como gotas de sangue que caíam no chão.\" (Lucas 22, 44)\n\nFruto do Mistério: Arrependimento dos Pecados",
+                "A Flagelação do Senhor: \"Então Pilatos mandou flagelar Jesus.\" (João 19, 1)\n\nFruto do Mistério: Pureza",
+                "A Coroação de Espinhos: \"Teceram uma coroa de espinhos, puseram-na em sua cabeça.\" (Marcos 15, 17)\n\nFruto do Mistério: Coragem Moral",
+                "O Caminho da Cruz: \"Jesus tomou a cruz sobre si e saiu para o lugar chamado Calvário.\" (João 19, 17)\n\nFruto do Mistério: Paciência",
+                "A Crucificação e Morte: \"Jesus deu um forte grito: 'Pai, em tuas mãos entrego o meu espírito'. Dizendo isso, expirou.\" (Lucas 23, 46)\n\nFruto do Mistério: Perseverança"
             ]
         },
         glorious: {
@@ -135,11 +135,11 @@ export const pt_br: LocalizationData = {
             name: 'Mistérios Gloriosos',
             days: [0, 3],
             passages: [
-                "A Ressurreição: \"Ele ressuscitou, não está aqui. Vede o lugar onde o puseram.\" (Marcos 16, 6)",
-                "A Ascensão: \"O Senhor Jesus, depois de lhes ter falado, foi elevado ao céu e sentou-se à direita de Deus.\" (Marcos 16, 19)",
-                "A Vinda do Espírito Santo: \"Ficaram todos cheios do Espírito Santo e começaram a falar em outras línguas.\" (Atos 2, 4)",
-                "A Assunção de Maria: \"Tu és bendita, ó filha, pelo Deus Altíssimo, mais que todas as mulheres da terra.\" (Judite 13, 18)",
-                "A Coroação de Maria: \"Apareceu no céu um grande sinal: uma mulher vestida do sol, tendo a lua debaixo dos pés e sobre a cabeça uma coroa de doze estrelas.\" (Apocalipse 12, 1)"
+                "A Ressurreição: \"Ele ressuscitou, não está aqui. Vede o lugar onde o puseram.\" (Marcos 16, 6)\n\nFruto do Mistério: Fé",
+                "A Ascensão: \"O Senhor Jesus, depois de lhes ter falado, foi elevado ao céu e sentou-se à direita de Deus.\" (Marcos 16, 19)\n\nFruto do Mistério: Esperança",
+                "A Vinda do Espírito Santo: \"Ficaram todos cheios do Espírito Santo e começaram a falar em outras línguas.\" (Atos 2, 4)\n\nFruto do Mistério: Sabedoria",
+                "A Assunção de Maria: \"Tu és bendita, ó filha, pelo Deus Altíssimo, mais que todas as mulheres da terra.\" (Judite 13, 18)\n\nFruto do Mistério: Graça de uma Boa Morte",
+                "A Coroação de Maria: \"Apareceu no céu um grande sinal: uma mulher vestida do sol, tendo a lua debaixo dos pés e sobre a cabeça uma coroa de doze estrelas.\" (Apocalipse 12, 1)\n\nFruto do Mistério: Confiança na Intercessão de Maria"
             ]
         }
     }

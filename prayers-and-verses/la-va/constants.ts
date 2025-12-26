@@ -85,7 +85,7 @@ export const la_va: LocalizationData = {
         hail_holy_queen: {
             id: 'hail_holy_queen',
             title: 'Salve Regina',
-            content: 'Salve, Regína, mater misericórdiæ; vita, dulcédo et spes nostra, salve. Ad te clamámus éxsules fílii Hevæ. Ad te suspirámus geméntes et flentes in hac lacrimárum valle. Eia ergo, advocáta nostra, illos tuos misericórdes óculos ad nos convérte. Et Iesum, benedíctum fructum ventris tui, nobis post hoc exsílium osténde. O clemens, o pia, o dulcis Virgo María.\n\nV. Ora pro nobis, sancta Dei Génitrix.\nR. Ut digni efficiámur promissiónibus Christi.'
+            content: 'Salve, Regína, mater misericórdiæ; vita, dulcédo et spes nostra, salve. Ad te clamámus éxsules fílii Hevæ. Ad te suspiramos, geméntes et flentes in hac lacrimárum valle. Eia ergo, advocáta nostra, illos tuos misericórdes óculos ad nos convérte. Et Iesum, benedíctum fructum ventris tui, nobis post hoc exsílium osténde. O clemens, o pia, o dulcis Virgo María.'
         },
         closing_prayer: {
             id: 'closing_prayer',
@@ -99,11 +99,11 @@ export const la_va: LocalizationData = {
             name: 'Mystéria Gaudiósa',
             days: [1, 6],
             passages: [
-                "Annuntiátio: \"Dixit autem María: «Ecce ancílla Dómini; fiat mihi secúndum verbum tuum».\" (Lc 1, 38)",
-                "Visitatio: \"Benedícta tu inter muliéres, et benedíctus fructus ventris tui.\" (Lc 1, 42)",
-                "Natívitas: \"Péperit fílium suum primogénitum; et pannis eum invólvit et reclinávit eum in præsépio.\" (Lc 2, 7)",
-                "Praesentátio: \"Vidérunt óculi mei salutáre tuum, quod parásti ante fáciem ómnium populórum.\" (Lc 2, 30-31)",
-                "Invéntio in Templo: \"Post tríduum invenérunt illum in templo sedéntem in médio magistrórum, audiéntem illos et interrogántem eos.\" (Lc 2, 46)"
+                "Annuntiátio: \"Dixit autem María: «Ecce ancílla Dómini; fiat mihi secúndum verbum tuum».\" (Lc 1, 38)\n\nFructus Mysterii: Humílitas",
+                "Visitatio: \"Benedícta tu inter muliéres, et benedíctus fructus ventris tui.\" (Lc 1, 42)\n\nFructus Mysterii: Cáritas in Próximum",
+                "Natívitas: \"Péperit fílium suum primogénitum; et pannis eum invólvit et reclinávit eum in præsépio.\" (Lc 2, 7)\n\nFructus Mysterii: Paupértas Spíritus",
+                "Praesentátio: \"Vidérunt óculi mei salutáre tuum, quod parásti ante fáciem ómnium populórum.\" (Lc 2, 30-31)\n\nFructus Mysterii: Oboediéntia",
+                "Invéntio in Templo: \"Post tríduum invenérunt illum in templo sedéntem in médio magistrórum, audiéntem illos et interrogántem eos.\" (Lc 2, 46)\n\nFructus Mysterii: Píetas"
             ]
         },
         luminous: {
@@ -111,11 +111,11 @@ export const la_va: LocalizationData = {
             name: 'Mystéria Luminósa',
             days: [4],
             passages: [
-                "Baptísma in Iordáne: \"Et ecce vox de cælis dicens: «Hic est Fílius meus diléctus, in quo mihi complácui».\" (Mt 3, 17)",
-                "Nuptiae in Cana: \"Dicit mater eius minístris: «Quodcúmque díxerit vobis, fácite».\" (Io 2, 5)",
-                "Proclamátio Regni: \"Implétum est tempus, et appropinquávit regnum Dei; paenitémini et crédite Evangélio.\" (Mc 1, 15)",
-                "Transfigurátio: \"Et transfigurátus est ante eos. Et resplénduit fácies eius sicut sol, vestiménta autem eius facta sunt alba sicut lux.\" (Mt 17, 2)",
-                "Institútio Eucharistíæ: \"Accípite et comédite: hoc est corpus meum.\" (Mt 26, 26)"
+                "Baptísma in Iordáne: \"Et ecce vox de cælis dicens: «Hic est Fílius meus diléctus, in quo mihi complácui».\" (Mt 3, 17)\n\nFructus Mysterii: Apértio ad Spíritum Sanctum",
+                "Nuptiae in Cana: \"Dicit mater eius minístris: «Quodcúmque díxerit vobis, fácite».\" (Io 2, 5)\n\nFructus Mysterii: Ad Iesum per Maríam",
+                "Proclamátio Regni: \"Implétum est tempus, et appropinquávit regnum Dei; paenitémini et crédite Evangélio.\" (Mc 1, 15)\n\nFructus Mysterii: Paeniténtia et Fidúcia in Deo",
+                "Transfigurátio: \"Et transfigurátus est ante eos. Et resplénduit fácies eius sicut sol, vestiménta autem eius facta sunt alba sicut lux.\" (Mt 17, 2)\n\nFructus Mysterii: Desidérium Sanctitátis",
+                "Institútio Eucharistíæ: \"Accípite et comédite: hoc est corpus meum.\" (Mt 26, 26)\n\nFructus Mysterii: Adorátio"
             ]
         },
         sorrowful: {
@@ -123,11 +123,11 @@ export const la_va: LocalizationData = {
             name: 'Mystéria Dolorósa',
             days: [2, 5],
             passages: [
-                "Agonía in Horto: \"Et factus in agonía prolíxius orábat. Et factus est sudor eius sicut guttæ sánguinis decurréntis in terram.\" (Lc 22, 43-44)",
-                "Flagellátio: \"Tunc ergo apprehéndit Pilátus Iesum et flagellávit.\" (Io 19, 1)",
-                "Coronátio Spinis: \"Et induérunt eum púrpura et impónunt ei plecténtes spíneam corónam.\" (Mc 15, 17)",
-                "Baiulátio Crucis: \"Et báiulans sibi crucem exívit in eum, qui dícitur Calváriæ locum.\" (Io 19, 17)",
-                "Crucifíxio: \"Clamans voce magna Iesus ait: «Pater, in manus tuas comméndo spíritum meum».\" (Lc 23, 46)"
+                "Agonía in Horto: \"Et factus in agonía prolíxius orábat. Et factus est sudor eius sicut guttæ sánguinis decurréntis in terram.\" (Lc 22, 43-44)\n\nFructus Mysterii: Dolor de Peccátis",
+                "Flagellátio: \"Tunc ergo apprehéndit Pilátus Iesum et flagellávit.\" (Io 19, 1)\n\nFructus Mysterii: Púritas",
+                "Coronátio Spinis: \"Et induérunt eum púrpura et impónunt ei plecténtes spíneam corónam.\" (Mc 15, 17)\n\nFructus Mysterii: Fortitúdo Morális",
+                "Baiulátio Crucis: \"Et báiulans sibi crucem exívit in eum, qui dícitur Calváriæ locum.\" (Io 19, 17)\n\nFructus Mysterii: Patiéntia",
+                "Crucifíxio: \"Clamans voce magna Iesus ait: «Pater, in manus tuas comméndo spíritum meum».\" (Lc 23, 46)\n\nFructus Mysterii: Perseverántia"
             ]
         },
         glorious: {
@@ -135,11 +135,11 @@ export const la_va: LocalizationData = {
             name: 'Mystéria Gloriósa',
             days: [0, 3],
             passages: [
-                "Resurréctio: \"Surréxit, non est hic; ecce locus ubi posuérunt eum.\" (Mc 16, 6)",
-                "Ascénsio: \"Et Dóminus quidem Iesus, postquam locútus est eis, assúmptus est in cælum et sedit a dextris Dei.\" (Mc 16, 19)",
-                "Descénsus Spíritus Sancti: \"Et repléti sunt omnes Spíritu Sancto et cœpérunt loqui áliis linguis.\" (Act 2, 4)",
-                "Assúmptio: \"Benedícta es tu, fília, a Dómino Deo excélso, præ ómnibus muliéribus super terram.\" (Idt 13, 18)",
-                "Coronátio: \"Et signum magnum appáruit in cælo: múlier amícta sole, et luna sub pédibus eius, et super caput eius coróna stellárum duódecim.\" (Ap 12, 1)"
+                "Resurréctio: \"Surréxit, non est hic; ecce locus ubi posuérunt eum.\" (Mc 16, 6)\n\nFructus Mysterii: Fides",
+                "Ascénsio: \"Et Dóminus quidem Iesus, postquam locútus est eis, assúmptus est in cælum et sedit a dextris Dei.\" (Mc 16, 19)\n\nFructus Mysterii: Spes",
+                "Descénsus Spíritus Sancti: \"Et repléti sunt omnes Spíritu Sancto et cœpérunt loqui áliis linguis.\" (Act 2, 4)\n\nFructus Mysterii: Sapiéntia",
+                "Assúmptio: \"Benedícta es tu, fília, a Dómino Deo excélso, præ ómnibus muliéribus super terram.\" (Idt 13, 18)\n\nFructus Mysterii: Grátia Bonae Mortis",
+                "Coronátio: \"Et signum magnum appáruit in cælo: múlier amícta sole, et luna sub pédibus eius, et super caput eius coróna stellárum duódecim.\" (Ap 12, 1)\n\nFructus Mysterii: Fidúcia in Intercessióne Maríae"
             ]
         }
     }
