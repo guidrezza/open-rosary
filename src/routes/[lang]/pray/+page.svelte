@@ -295,7 +295,13 @@
 	}
 
 	// Collapsible Mystery
-	let mysteryExpanded = $state(true);
+	let userMysteryExpanded = $state(true);
+	let isAnnounce = $derived(
+		steps[currentBeadIndex] && steps[currentBeadIndex].prayerId === 'announce'
+	);
+	// In digital mode: force expand on 'announce', otherwise respect user preference.
+	// In physical mode: always respect user preference (since isAnnounce relies on bead index).
+	let mysteryExpanded = $derived(mode === 'digital' && isAnnounce ? true : userMysteryExpanded);
 </script>
 
 <!-- Main Layout Wrapper -->
@@ -489,11 +495,20 @@
 						<!-- Collapsible Container -->
 						<div class="relative mb-2 flex w-full flex-col gap-1">
 							<button
-								class="flex w-full items-center justify-center gap-2 text-base leading-tight font-bold tracking-wide text-white uppercase transition-opacity hover:opacity-80"
-								onclick={() => (mysteryExpanded = !mysteryExpanded)}
+								class="flex w-full items-center justify-center gap-2 text-base leading-tight font-bold tracking-wide text-white uppercase transition-opacity {mode ===
+									'digital' && isAnnounce
+									? 'cursor-default opacity-100'
+									: 'cursor-pointer hover:opacity-80'}"
+								onclick={() => {
+									if (!(mode === 'digital' && isAnnounce)) {
+										userMysteryExpanded = !userMysteryExpanded;
+									}
+								}}
 							>
 								<span>{parsedMystery.title || t.ui.announce}</span>
-								<span class="font-normal text-white/60">{mysteryExpanded ? '−' : '+'}</span>
+								<span class="flex w-6 items-center justify-center font-normal text-white/60">
+									{mysteryExpanded ? '−' : '+'}
+								</span>
 							</button>
 
 							{#if mysteryExpanded}
@@ -541,7 +556,7 @@
 							class="group flex w-full items-center gap-3 rounded-lg p-2 text-left transition-colors hover:bg-white/5"
 							onclick={() => {
 								if (step.prayerId === 'announce') {
-									mysteryExpanded = !mysteryExpanded;
+									userMysteryExpanded = !userMysteryExpanded;
 								} else {
 									openPrayer(step);
 								}
@@ -561,9 +576,9 @@
 											<span class="block text-base leading-tight font-bold text-white">
 												{parsed.title || t.ui.announce}
 											</span>
-											<span class="px-2 text-lg font-bold text-white/60"
-												>{mysteryExpanded ? '−' : '+'}</span
-											>
+											<span class="flex w-8 justify-center text-lg font-bold text-white/60">
+												{mysteryExpanded ? '−' : '+'}
+											</span>
 										</div>
 
 										{#if mysteryExpanded}

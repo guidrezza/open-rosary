@@ -183,7 +183,9 @@
 	></div>
 </div>
 
-<div class="relative z-10 flex min-h-screen flex-col items-center">
+<div
+	class="relative z-10 flex h-dvh w-full flex-col items-center overflow-x-hidden overflow-y-auto"
+>
 	<div class="absolute top-6 left-6 z-50">
 		<button
 			class="text-3xl drop-shadow-md transition-transform hover:scale-110 active:scale-95"
@@ -207,7 +209,7 @@
 
 	<!-- Main Content Area: Centered Vertically and Horizontally -->
 	<main
-		class="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-center gap-6 overflow-y-auto px-6 py-6 pb-24"
+		class="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-center gap-6 px-6 py-6 pb-10"
 	>
 		<!-- Language button REMOVED - already exists in top right corner -->
 
