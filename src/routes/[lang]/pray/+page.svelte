@@ -5,6 +5,7 @@
 	import type { RosarySection, Mystery } from '$lib/types';
 	import GlassPanel from '$lib/components/GlassPanel.svelte';
 	import PrayerModal from '$lib/components/PrayerModal.svelte';
+	import BottomSheet from '$lib/components/BottomSheet.svelte';
 	import MysteryImage from '$lib/components/MysteryImage.svelte';
 	import SectionMenu from '$lib/components/SectionMenu.svelte';
 	import { goto } from '$app/navigation';
@@ -33,7 +34,8 @@
 				{ prayerId: 'hail_mary', label: 'A' },
 				{ prayerId: 'hail_mary', label: 'A' },
 				{ prayerId: 'hail_mary', label: 'A' },
-				{ prayerId: 'glory_be', label: 'G' }
+				{ prayerId: 'glory_be', label: 'G' },
+				{ prayerId: 'fatima', label: 'J' }
 			];
 		} else if (sec === 'conclusion') {
 			return [
@@ -77,10 +79,10 @@
 
 	function openPrayer(step: any) {
 		if (step.prayerId === 'announce') {
-			const decadeNum = parseInt(currentSection.split('-')[1]);
+			const parsed = parseMysteryPassage(step.passage || '');
 			modalContent = {
-				title: `${mystery.name} - ${decadeNum}`,
-				content: step.passage || ''
+				title: parsed.title || t.ui.announce, // Fallback if parsing fails
+				content: `${parsed.verse}\n\n${parsed.fruit}`
 			};
 		} else {
 			const prayer = t.prayers[step.prayerId];
@@ -172,6 +174,38 @@
 		return '';
 	});
 
+	function parseMysteryPassage(text: string) {
+		if (!text) return { title: '', verse: '', fruit: '' };
+		const parts = text.split('\n\n');
+		const firstLine = parts[0] || '';
+		const titleEndIndex = firstLine.indexOf(':');
+
+		let title = '';
+		let verse = firstLine;
+
+		if (titleEndIndex !== -1) {
+			title = firstLine.substring(0, titleEndIndex).trim();
+			verse = firstLine.substring(titleEndIndex + 1).trim();
+			// Remove quotes from verse if present (usually formatted as Title: "Verse")
+			if (verse.startsWith('"') && verse.lastIndexOf('"') > 0) {
+				// keep as is, it's already formatted nicely
+			}
+		}
+
+		const fruit = parts[1] || '';
+		return { title, verse, fruit };
+	}
+
+	let parsedMystery = $derived(parseMysteryPassage(mysteryMessage));
+
+	// Header Title Logic
+	let headerTitle = $derived.by(() => {
+		if (currentSection.startsWith('decade')) {
+			return parsedMystery.title || sectionTitle; // Use Parsed Title if available
+		}
+		return sectionTitle;
+	});
+
 	let menuSections = $derived.by(() => {
 		const items: { id: RosarySection; label: string }[] = [
 			{ id: 'intro', label: t.ui.sections.intro }
@@ -220,7 +254,7 @@
 	<header class="z-30 flex-none p-6">
 		<GlassPanel class="flex items-center justify-between px-4 py-3">
 			<button
-				class="text-sm font-medium transition-colors duration-200 {exitState
+				class="xs:max-w-none max-w-[150px] truncate text-sm font-medium transition-colors duration-200 {exitState
 					? 'font-bold text-red-400'
 					: 'text-white/60'}"
 				onclick={handleMysteryClick}
@@ -232,7 +266,7 @@
 				class="font-bold text-white transition-colors hover:text-white/80"
 				onclick={() => (sectionMenuOpen = true)}
 			>
-				{sectionTitle} ▾
+				{headerTitle} ▾
 			</button>
 		</GlassPanel>
 	</header>
@@ -308,7 +342,6 @@
                             "
 							onclick={() => {
 								if (mode === 'digital') currentBeadIndex = i;
-								openPrayer(step);
 							}}
 						>
 							<span class="text-[10px] leading-none font-medium">{step.label}</span>
@@ -327,16 +360,19 @@
 			<!-- Context Text / Title -->
 			{#if mysteryMessage && mode === 'physical'}
 				<!-- Physical: Show Mystery Name/Context -->
+				<!-- REMOVED: Top Mystery Context per request -->
+				<!-- Just show section title if needed, or subtext -->
 				<h3 class="mb-0 text-lg font-bold">{sectionTitle}</h3>
-				<div class="mb-1">
-					<p class="text-xs leading-relaxed text-white/90 italic">{mysteryMessage}</p>
-				</div>
+
+				<p class="mt-1 text-[10px] tracking-widest text-white/50 uppercase">
+					Click any prayer to expand
+				</p>
 			{:else if mode === 'digital'}
 				<!-- Digital: Show Current Prayer Title -->
 				<div class="flex min-h-8 items-center justify-center text-center">
 					<h2 class="text-xl leading-tight font-bold text-white">
 						{#if steps[currentBeadIndex].prayerId === 'announce'}
-							{t.ui.announce}
+							{parsedMystery.title || t.ui.announce}
 						{:else}
 							{t.prayers[steps[currentBeadIndex].prayerId].title}
 						{/if}
@@ -351,9 +387,17 @@
 				<!-- Digital: Show FULL TEXT of current prayer -->
 				<div class="rounded-2xl p-2 pt-0">
 					{#if steps[currentBeadIndex].prayerId === 'announce'}
-						<p class="text-base leading-relaxed text-white/90 italic">
-							{steps[currentBeadIndex].passage}
-						</p>
+						<!-- Mystery Content: Verse + Fruit (Title is in header above) -->
+						<div class="flex flex-col gap-4 text-center">
+							<p class="text-base leading-relaxed text-white/90 italic">
+								{parsedMystery.verse}
+							</p>
+							{#if parsedMystery.fruit}
+								<p class="text-sm font-medium tracking-wide text-white/80">
+									{parsedMystery.fruit}
+								</p>
+							{/if}
+						</div>
 					{:else}
 						<p class="text-lg leading-relaxed whitespace-pre-wrap text-white/90">
 							{t.prayers[steps[currentBeadIndex].prayerId].content}
@@ -375,8 +419,21 @@
 							</div>
 							<div class="flex-1 leading-none">
 								{#if step.prayerId === 'announce'}
-									<span class="block text-base font-normal text-white">{t.ui.announce}</span>
-									<!-- Unbolded as requested -->
+									<!-- Mystery in list view -->
+									{@const parsed = parseMysteryPassage(step.passage || '')}
+									<div class="flex flex-col gap-1 py-1">
+										<span class="block text-base leading-tight font-bold text-white">
+											{parsed.title || t.ui.announce}
+										</span>
+										<span class="text-sm leading-snug text-white/80 italic">
+											{parsed.verse}
+										</span>
+										{#if parsedMystery.fruit}
+											<span class="mt-0.5 text-xs font-medium tracking-wider text-white/60">
+												{parsedMystery.fruit}
+											</span>
+										{/if}
+									</div>
 								{:else}
 									<span
 										class="text-base font-medium text-white/80 transition-colors group-hover:text-white"
@@ -417,12 +474,21 @@
 	</div>
 
 	<!-- Modals -->
-	<PrayerModal
-		isOpen={modalOpen}
-		title={modalContent.title}
-		content={modalContent.content}
-		onClose={() => (modalOpen = false)}
-	/>
+	{#if mode === 'digital'}
+		<PrayerModal
+			isOpen={modalOpen}
+			title={modalContent.title}
+			content={modalContent.content}
+			onClose={() => (modalOpen = false)}
+		/>
+	{:else}
+		<!-- Unguided: Use BottomSheet -->
+		<BottomSheet isOpen={modalOpen} title={modalContent.title} onClose={() => (modalOpen = false)}>
+			<div class="px-1 pb-4 text-lg leading-relaxed whitespace-pre-wrap text-white/90">
+				{modalContent.content}
+			</div>
+		</BottomSheet>
+	{/if}
 
 	<SectionMenu
 		isOpen={sectionMenuOpen}

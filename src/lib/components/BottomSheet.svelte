@@ -30,7 +30,7 @@
 			role="none"
 		>
 			<GlassPanel
-				class="flex max-h-[90vh] flex-col gap-2 overflow-y-auto rounded-t-[32px] !rounded-b-none !border-b-0 p-8 pb-32"
+				class="flex max-h-[90vh] flex-col gap-2 overflow-y-auto rounded-t-[32px] !rounded-b-none !border-b-0 p-8 pb-12"
 			>
 				<!-- Mobile Handle (Subtle) -->
 				<div class="mx-auto mb-6 h-1.5 w-12 rounded-full bg-white/20"></div>

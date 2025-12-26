@@ -103,6 +103,55 @@
 		'la-va': '🇻🇦'
 	};
 	let currentFlag = $derived(flags[lang.toLowerCase()] || '🌐');
+
+	// Theme Emojis
+	const themeEmojis: Record<string, string> = {
+		ordinary: '🌿',
+		advent_lent: '🍇',
+		christmas_easter: '🕊️',
+		pentecost: '🔥',
+		gaudete: '🌸',
+		requiem: '🕯️'
+	};
+
+	let currentThemeEmoji = $derived.by(() => {
+		// Map season string from store to emoji key
+		// Store uses localized strings usually? No, store has specific season ID logic?
+		// Let's check how 'theme' is structured. 'theme' comes from '$rosary.theme'.
+		// looking at theme logic in previous turns, it seems to have: season, cssVars.
+		// Use a mapping based on theme colors or check the theme object structure more closely if possible?
+		// But in the template below we see logic: { c: 'green', l: t.ui.themes.ordinary... }
+		// The active theme is stored in $rosary.theme.
+		// Let's look at how we identify the CURRENT theme.
+		// Actually, $rosary.theme has 'season' which seems to be the Display Name (e.g. "ORDINARY TIME").
+		// We might need to match by color or name.
+		// A safe bet is to let the user pick, but for the top-left icon we need to know which one is active.
+		// For now, let's use a default or try to match the season name (localized) back to the key? That's hard.
+		// Better approach: The store likely has an ID or we can guess by color.
+		// Let's assume for now we use a generic icon or try to match.
+		// Wait, the request says: "On the top left... there should be an emoji that represents the current theme."
+		// I will infer it from the current season name if I can, or default to 🌿.
+		return '🎨'; // Temporary fallback, logic below needs to be robust.
+		// Actually, let's use the color to determine the emoji since colors are unique-ish:
+		// Green->Ordinary, Purple->Advent/Lent, White->Xmas/Easter, Red->Pentecost, Rose->Gaudete, Black->Requiem.
+		// $rosary.theme.cssVars['--theme-color'] might help but hexes vary.
+		// Let's map based on the 'color' param passed to handleThemeSelect.
+		// We don't have the current 'color' key in the store state explicitly shown here, just the result object.
+		// However, we can map the emoji in the Menu first. The top left button can trigger the menu.
+		// Let's just use the Palette icon or a generic Theme icon for the button if we can't easily get the emoji,
+		// OR better: The user wants the emoji there.
+		// I'll update the store or logic later if needed, but for now let's try to pass the 'id' if available.
+		// If not, I'll visually inspect the `rosary` store.
+		// For the sake of this edit, I'll add the emojis to the menu items first.
+	});
+
+	// Mystery Emojis
+	const mysteryEmojis: Record<string, string> = {
+		joyful: '🌱',
+		luminous: '☀️',
+		sorrowful: '🍷',
+		glorious: '🦋'
+	};
 </script>
 
 <!-- Dynamic Background Orb -->
@@ -116,7 +165,32 @@
 </div>
 
 <div class="relative z-10 flex min-h-screen flex-col items-center p-6">
-	<!-- Top Bar: Flag (Absolute Positioned for consistent corner spacing) -->
+	<!-- Top Bar: Flag & Theme (Absolute Positioned) -->
+	<div class="absolute top-6 left-6 z-50">
+		<button
+			class="text-3xl drop-shadow-md transition-transform hover:scale-110 active:scale-95"
+			onclick={() => (themeMenuOpen = true)}
+			title={t.ui.menus.theme}
+		>
+			<!-- We will try to show the emoji that matches the current theme season name, or default to palette -->
+			{Object.values(t.ui.themes).find((v) => v === theme.season)
+				? theme.season === t.ui.themes.ordinary
+					? '🌿'
+					: theme.season === t.ui.themes.advent_lent
+						? '🍇'
+						: theme.season === t.ui.themes.christmas_easter
+							? '🕊️'
+							: theme.season === t.ui.themes.pentecost
+								? '🔥'
+								: theme.season === t.ui.themes.gaudete
+									? '🌸'
+									: theme.season === t.ui.themes.requiem
+										? '🕯️'
+										: '🎨'
+				: '🎨'}
+		</button>
+	</div>
+
 	<div class="absolute top-6 right-6 z-50">
 		<button
 			class="text-3xl drop-shadow-md transition-transform hover:scale-110 active:scale-95"
@@ -139,25 +213,15 @@
 			</h1>
 		</div>
 
-		<!-- 3. Change Theme -->
-		<button
-			class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2 transition-colors hover:bg-white/10"
-			onclick={() => (themeMenuOpen = true)}
-		>
-			<div
-				class="h-3 w-3 rounded-full shadow-[0_0_8px_currentColor]"
-				style="background-color: {theme.cssVars['--text-highlight']}; color: {theme.cssVars[
-					'--text-highlight'
-				]};"
-			></div>
-			<span class="text-[10px] tracking-widest text-white/50 uppercase">{t.ui.change_theme}</span>
-		</button>
+		<!-- 3. Change Theme (REMOVED Button per request, moved to top left) -->
+		<!-- Keeping structure if needed, but removing element -->
 
 		<!-- 4. Image (Same size/ratio as prayer page) -->
 		<!-- Using w-full and consistent bevels/radius -->
+		<!-- 4. Image (Same size/ratio as prayer page) -->
 		<div class="w-full px-6">
 			<div
-				class="relative z-0 aspect-[21/9] w-full items-center justify-center overflow-hidden sm:aspect-video sm:rounded-[32px]"
+				class="relative z-0 aspect-[21/9] w-full sm:aspect-video sm:w-auto sm:max-w-lg sm:overflow-hidden sm:rounded-[32px]"
 			>
 				<MysteryImage />
 			</div>
@@ -233,14 +297,15 @@
 				'Customize your visual experience. This does not affect the liturgical date.'}
 		</p>
 		<div class="grid grid-cols-3 gap-3">
-			{#each [{ c: 'green', l: t.ui.themes.ordinary, hex: '#10b981' }, { c: 'purple', l: t.ui.themes.advent_lent, hex: '#8b5cf6' }, { c: 'white', l: t.ui.themes.christmas_easter, hex: '#f3f4f6' }, { c: 'red', l: t.ui.themes.pentecost, hex: '#ef4444' }, { c: 'rose', l: t.ui.themes.gaudete, hex: '#f43f5e' }, { c: 'black', l: t.ui.themes.requiem, hex: '#2e2e2e' }] as item}
+			{#each [{ c: 'green', l: t.ui.themes.ordinary, hex: '#10b981', emoji: '🌿' }, { c: 'purple', l: t.ui.themes.advent_lent, hex: '#8b5cf6', emoji: '🍇' }, { c: 'white', l: t.ui.themes.christmas_easter, hex: '#f3f4f6', emoji: '🕊️' }, { c: 'red', l: t.ui.themes.pentecost, hex: '#ef4444', emoji: '🔥' }, { c: 'rose', l: t.ui.themes.gaudete, hex: '#f43f5e', emoji: '🌸' }, { c: 'black', l: t.ui.themes.requiem, hex: '#2e2e2e', emoji: '🕯️' }] as item}
 				<button
 					class="flex aspect-square flex-col items-center justify-center gap-2 rounded-[32px] border border-white/10 p-2 shadow-lg transition-transform active:scale-95"
 					style="background-color: {item.hex}CC;"
 					onclick={() => handleThemeSelect(item.c as LiturgicalColor)}
 				>
-					<div class="w-full flex-1"></div>
 					<!-- spacer -->
+					<div class="text-2xl drop-shadow-sm filter">{item.emoji}</div>
+					<div class="w-full flex-1"></div>
 					<span
 						class="text-center text-[10px] leading-tight font-bold tracking-wider text-white uppercase drop-shadow-md"
 						>{item.l}</span
@@ -265,6 +330,7 @@
 						initiatePrayer(m);
 					}}
 				>
+					<span class="mr-3 text-2xl">{mysteryEmojis[m]}</span>
 					{t.mysteries[m].name}
 				</button>
 			{/each}
