@@ -13,29 +13,43 @@
 </script>
 
 {#if isOpen}
+    <!-- Outer Container: Catches clicks outside (Backdrop), but NO visual style (dim/blur) per request -->
     <div 
         class="fixed inset-0 z-50 flex items-end justify-center sm:items-center focus:outline-none"
         onclick={onClose}
-        transition:fade={{ duration: 150 }}
         role="button"
         tabindex="0"
         onkeydown={(e) => e.key === 'Escape' && onClose()}
     >
+        <!-- Modal Content -->
         <div 
-            class="w-full max-w-md p-4"
-            transition:fly={{ y: 0, duration: 250, opacity: 0, start: 50 }}
+            class="w-full max-w-sm p-4 mb-4 sm:mb-0"
+            transition:fly={{ y: 20, duration: 300, opacity: 0 }}
             onclick={(e) => e.stopPropagation()}
             role="none"
         >
-            <GlassPanel class="flex flex-col gap-2 p-6 max-h-[70vh] overflow-y-auto rounded-3xl">
-                <!-- Handle Bar for mobile feel -->
-                <div class="w-12 h-1.5 bg-white/20 rounded-full mx-auto mb-4"></div>
+            <!-- 
+                Using GlassPanel with standard class overrides if needed, 
+                but layout.css now enforces .glass-panel to use --glass-radius (32px) etc.
+                We ensure explicit class mapping here just in case.
+            -->
+            <GlassPanel class="flex flex-col gap-2 p-6 max-h-[70vh] overflow-y-auto">
+                <!-- Mobile Handle (Subtle) -->
+                <div class="w-10 h-1 bg-white/20 rounded-full mx-auto mb-6"></div>
                 
                 {#if title}
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-white font-bold text-xl">{title}</h3>
-                        <button class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/50 hover:bg-white/20 hover:text-white transition-colors" onclick={onClose}>
-                            ✕
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-white font-bold text-xl tracking-tight">{title}</h3>
+                        <!-- Close Button (Subtle, large touch target) -->
+                        <button 
+                            class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:bg-white/10 hover:text-white transition-colors" 
+                            onclick={onClose}
+                            aria-label="Close"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
                         </button>
                     </div>
                 {/if}
