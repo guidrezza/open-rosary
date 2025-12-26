@@ -17,6 +17,3 @@ Standardize view across all display sizes. Mobile focused (iPhone 12 Pro is prio
 Add and commit changes but do not push.
 
 There are a lot of changes in this request. Take your time, do not spare reasoning or tokens, ensure your work is accurate and free of mistakes.
-
---
-

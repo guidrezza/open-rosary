@@ -40,6 +40,34 @@
 	// Formatting Date: "MONDAY, OCTOBER 24"
 	let dateString = $derived.by(() => {
 		const d = currentDate;
+
+		if (lang === 'la' || lang === 'la-va') {
+			const days = [
+				'DOMINICA',
+				'FERIA SECUNDA',
+				'FERIA TERTIA',
+				'FERIA QUARTA',
+				'FERIA QUINTA',
+				'FERIA SEXTA',
+				'SABBATO'
+			];
+			const months = [
+				'IANUARII',
+				'FEBRUARII',
+				'MARTII',
+				'APRILIS',
+				'MAII',
+				'IUNII',
+				'IULII',
+				'AUGUSTI',
+				'SEPTEMBRIS',
+				'OCTOBRIS',
+				'NOVEMBRIS',
+				'DECEMBRIS'
+			];
+			return `${days[d.getDay()]}, ${months[d.getMonth()]} ${d.getDate()}`;
+		}
+
 		const locale = lang === 'en' ? 'en-US' : lang;
 		const weekday = d.toLocaleDateString(locale, { weekday: 'long' }).toUpperCase();
 		const month = d.toLocaleDateString(locale, { month: 'long' }).toUpperCase();
@@ -115,34 +143,19 @@
 	};
 
 	let currentThemeEmoji = $derived.by(() => {
-		// Map season string from store to emoji key
-		// Store uses localized strings usually? No, store has specific season ID logic?
-		// Let's check how 'theme' is structured. 'theme' comes from '$rosary.theme'.
-		// looking at theme logic in previous turns, it seems to have: season, cssVars.
-		// Use a mapping based on theme colors or check the theme object structure more closely if possible?
-		// But in the template below we see logic: { c: 'green', l: t.ui.themes.ordinary... }
-		// The active theme is stored in $rosary.theme.
-		// Let's look at how we identify the CURRENT theme.
-		// Actually, $rosary.theme has 'season' which seems to be the Display Name (e.g. "ORDINARY TIME").
-		// We might need to match by color or name.
-		// A safe bet is to let the user pick, but for the top-left icon we need to know which one is active.
-		// For now, let's use a default or try to match the season name (localized) back to the key? That's hard.
-		// Better approach: The store likely has an ID or we can guess by color.
-		// Let's assume for now we use a generic icon or try to match.
-		// Wait, the request says: "On the top left... there should be an emoji that represents the current theme."
-		// I will infer it from the current season name if I can, or default to 🌿.
-		return '🎨'; // Temporary fallback, logic below needs to be robust.
-		// Actually, let's use the color to determine the emoji since colors are unique-ish:
-		// Green->Ordinary, Purple->Advent/Lent, White->Xmas/Easter, Red->Pentecost, Rose->Gaudete, Black->Requiem.
-		// $rosary.theme.cssVars['--theme-color'] might help but hexes vary.
-		// Let's map based on the 'color' param passed to handleThemeSelect.
-		// We don't have the current 'color' key in the store state explicitly shown here, just the result object.
-		// However, we can map the emoji in the Menu first. The top left button can trigger the menu.
-		// Let's just use the Palette icon or a generic Theme icon for the button if we can't easily get the emoji,
-		// OR better: The user wants the emoji there.
-		// I'll update the store or logic later if needed, but for now let's try to pass the 'id' if available.
-		// If not, I'll visually inspect the `rosary` store.
-		// For the sake of this edit, I'll add the emojis to the menu items first.
+		// Robust matching based on COLOR if available, or fallback to season string
+		// Using color is safer because strings are localized and might vary
+		// Green->Ordinary, Purple->Advent/Lent, White->Xmas/Easter, Red->Pentecost, Rose->Gaudete, Black->Requiem
+
+		const c = theme.color;
+		if (c === 'green') return themeEmojis.ordinary;
+		if (c === 'purple') return themeEmojis.advent_lent;
+		if (c === 'white') return themeEmojis.christmas_easter;
+		if (c === 'red') return themeEmojis.pentecost;
+		if (c === 'rose') return themeEmojis.gaudete;
+		if (c === 'black') return themeEmojis.requiem;
+
+		return '🎨';
 	});
 
 	// Mystery Emojis
@@ -172,21 +185,7 @@
 			title={t.ui.menus.theme}
 		>
 			<!-- Dynamic Emoji Matching -->
-			{Object.values(t.ui.themes).find((v) => v === theme.season)
-				? theme.season === t.ui.themes.ordinary
-					? '🌿'
-					: theme.season === t.ui.themes.advent_lent
-						? '🍇'
-						: theme.season === t.ui.themes.christmas_easter
-							? '🕊️'
-							: theme.season === t.ui.themes.pentecost
-								? '🔥'
-								: theme.season === t.ui.themes.gaudete
-									? '🌸'
-									: theme.season === t.ui.themes.requiem
-										? '🕯️'
-										: '🎨'
-				: '🎨'}
+			{currentThemeEmoji}
 		</button>
 	</div>
 
@@ -218,12 +217,10 @@
 		<!-- 4. Image (Same size/ratio as prayer page) -->
 		<!-- Using w-full and consistent bevels/radius -->
 		<!-- 4. Image (Same size/ratio as prayer page) -->
-		<div class="w-full px-6">
-			<div
-				class="relative z-0 aspect-[21/9] w-full sm:aspect-video sm:w-auto sm:max-w-lg sm:overflow-hidden sm:rounded-[32px]"
-			>
-				<MysteryImage />
-			</div>
+		<div
+			class="relative z-0 aspect-video w-full max-w-lg items-center justify-center overflow-hidden rounded-[32px] sm:w-auto"
+		>
+			<MysteryImage />
 		</div>
 
 		<!-- 5. Recommended Mystery Label & 6. Name -->
@@ -255,7 +252,8 @@
 	<!-- Footer -->
 	<footer class="mt-8 py-4 text-center">
 		<p class="text-[10px] tracking-wider text-white/20 uppercase">
-			OPEN ROSARY • 2025 • MADE BY <a
+			OPEN ROSARY • 2025 • {t.ui.footer_made_by || 'MADE BY'}
+			<a
 				href="https://guidrezza.com"
 				target="_blank"
 				rel="noopener noreferrer"

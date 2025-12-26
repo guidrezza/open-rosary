@@ -277,17 +277,19 @@
 		<!-- Top Visuals -->
 		<div class="flex w-full flex-none flex-col items-center gap-2">
 			<!-- Mystery Image - FULL WIDTH WITH BEZEL -->
+			<!-- Mystery Image - FULL WIDTH WITH BEZEL -->
 			<div class="w-full px-6">
 				<div
-					class="relative z-0 aspect-[21/9] w-full sm:aspect-video sm:w-auto sm:max-w-lg sm:overflow-hidden sm:rounded-[32px]"
+					class="relative z-0 aspect-video w-full max-w-lg items-center justify-center overflow-hidden rounded-[32px] sm:w-auto"
 				>
 					<MysteryImage />
 				</div>
 			</div>
 
 			<!-- Beads Container (Snake Layout) - NOW ABOVE TEXT -->
+			<!-- Highlight Clipping Fix: Increased py from 1 to 4 -->
 			<div
-				class="no-scrollbar flex w-full flex-none items-center justify-center overflow-x-auto overflow-y-hidden py-1"
+				class="no-scrollbar flex w-full flex-none items-center justify-center overflow-x-auto overflow-y-hidden py-4"
 			>
 				<!-- Zigzag Container -->
 				<div
@@ -365,7 +367,7 @@
 				<!-- REMOVED: Top Mystery Context per request -->
 				<!-- REMOVED: Section Title per request ("<nth> Decade") - It is in header now -->
 
-				<p class="mt-1 text-[10px] tracking-widest text-white/50 uppercase">
+				<p class="mt-0 text-[10px] tracking-widest text-white/50 uppercase">
 					Click any prayer to expand
 				</p>
 			{:else if mode === 'digital'}

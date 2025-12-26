@@ -10,6 +10,7 @@ export const es_mx: LocalizationData = {
         start_button: 'Comenzar a Rezar',
         pick_mystery: 'Cambiar Misterio',
         made_by: 'Hecho por guidrezza',
+        footer_made_by: 'HECHO POR',
         recommended_mystery: 'Misterio Recomendado',
         pray_button_prefix: 'Rezar Recomendado',
         change_theme: 'Cambiar Tema',

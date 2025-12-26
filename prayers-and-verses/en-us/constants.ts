@@ -9,7 +9,8 @@ export const en: LocalizationData = {
     ui: {
         start_button: 'Start Praying',
         pick_mystery: 'Change Mystery',
-        made_by: 'Made by guidrezza',
+        made_by: 'Made by guidrezza', // Keep existing if used elsewhere
+        footer_made_by: 'MADE BY', // New key for footer
         recommended_mystery: 'Recommended Mystery',
         pray_button_prefix: 'Pray Recommended',
         change_theme: 'Change Theme',

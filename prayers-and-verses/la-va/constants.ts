@@ -10,6 +10,7 @@ export const la_va: LocalizationData = {
         start_button: 'Incipe Orare',
         pick_mystery: 'Mysterium Mutare',
         made_by: 'Factum a guidrezza',
+        footer_made_by: 'FACTUM A',
         recommended_mystery: 'Mysterium Commendatum',
         pray_button_prefix: 'Orare Commendatum',
         change_theme: 'Thema Mutare',

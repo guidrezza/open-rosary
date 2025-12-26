@@ -8,7 +8,7 @@
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <div
-	class="glass-standard {className}"
+	class="glass-standard !bg-white/0 {className}"
 	style="backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%);"
 	role="button"
 	tabindex={onclick ? 0 : -1}
