@@ -435,9 +435,9 @@
 			</div>
 
 			<!-- Beads Container (Snake Layout) - NOW ABOVE TEXT -->
-			<!-- Highlight Clipping Fix: py-1 (reduced from py-2 for tighter spacing) -->
+			<!-- Highlight Clipping Fix: py-8 -my-6 to provide vertical breathing room without moving layout -->
 			<div
-				class="no-scrollbar flex w-full flex-none items-center justify-center overflow-x-auto overflow-y-hidden py-1"
+				class="no-scrollbar -my-6 flex w-full flex-none items-center justify-center overflow-x-auto py-8"
 			>
 				<!-- Zigzag Container -->
 				<div
@@ -475,11 +475,12 @@
 					{#each steps as step, i}
 						<button
 							class="
-                                absolute z-10 flex h-[25px] w-[25px] items-center justify-center rounded-full transition-all duration-500 ease-out
+                                absolute z-10 flex h-[25px] w-[25px] items-center justify-center rounded-full transition-all duration-500 ease-out focus:ring-0 focus:outline-none
                                 {mode === 'physical'
-								? 'bg-white text-black shadow-[0_0_10px_2px_rgba(255,255,255,0.3)]'
+								? 'border border-transparent bg-white text-black shadow-[0_0_10px_2px_rgba(255,255,255,0.3)]'
 								: i <= currentBeadIndex
-									? 'bg-white text-black shadow-[0_0_10px_2px_rgba(255,255,255,0.3)]'
+									? 'border border-transparent bg-white text-black shadow-[0_0_10px_2px_rgba(255,255,255,0.3)] ' +
+										(mode === 'digital' && i === currentBeadIndex ? 'animate-pulse-scale' : '')
 									: 'border border-white/5 bg-black/40 text-white/40'}
                             "
 							style="
@@ -762,5 +763,18 @@
 	.no-scrollbar {
 		-ms-overflow-style: none;
 		scrollbar-width: none;
+	}
+
+	@keyframes pulse-scale {
+		0%,
+		100% {
+			transform: scale(1.5);
+		}
+		50% {
+			transform: scale(1.6);
+		}
+	}
+	.animate-pulse-scale {
+		animation: pulse-scale 3s ease-in-out infinite;
 	}
 </style>
