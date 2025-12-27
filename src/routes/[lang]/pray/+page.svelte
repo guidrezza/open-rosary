@@ -290,18 +290,29 @@
 			a.download = img.path.split('/').pop() || 'image.webp';
 			document.body.appendChild(a);
 			a.click();
-			document.body.removeChild(a);
-		}
-	}
-
 	// Collapsible Mystery
-	let userMysteryExpanded = $state(true);
+	let userMysteryExpanded = $state(false);
 	let isAnnounce = $derived(
 		steps[currentBeadIndex] && steps[currentBeadIndex].prayerId === 'announce'
 	);
 	// In digital mode: force expand on 'announce', otherwise respect user preference.
 	// In physical mode: always respect user preference (since isAnnounce relies on bead index).
 	let mysteryExpanded = $derived(mode === 'digital' && isAnnounce ? true : userMysteryExpanded);
+
+	// Guided Mode UI Overrides (Creed Visibility)
+	$effect(() => {
+		if (mode === 'digital') {
+			const isCreed = steps[currentBeadIndex]?.prayerId === 'creed';
+			// Creed: Collapse Image. Others: Ensure Expanded (Normal).
+			if (isCreed) {
+				imageMode = 'minimized';
+			} else if (imageMode === 'minimized') {
+				// Restore to normal if we are NOT on Creed and currently minimized.
+				// This enforces the "Default Expanded" rule.
+				imageMode = 'normal';
+			}
+		}
+	});
 </script>
 
 <!-- Main Layout Wrapper -->
@@ -417,9 +428,9 @@
 			</div>
 
 			<!-- Beads Container (Snake Layout) - NOW ABOVE TEXT -->
-			<!-- Highlight Clipping Fix: py-2 (reduced from py-4 for tighter spacing) -->
+			<!-- Highlight Clipping Fix: py-1 (reduced from py-2 for tighter spacing) -->
 			<div
-				class="no-scrollbar flex w-full flex-none items-center justify-center overflow-x-auto overflow-y-hidden py-2"
+				class="no-scrollbar flex w-full flex-none items-center justify-center overflow-x-auto overflow-y-hidden py-1"
 			>
 				<!-- Zigzag Container -->
 				<div
@@ -571,7 +582,7 @@
 								{#if step.prayerId === 'announce'}
 									<!-- Mystery in list view -->
 									{@const parsed = parseMysteryPassage(step.passage || '')}
-									<div class="flex w-full flex-col gap-1 py-1">
+									<div class="flex w-full flex-col gap-1">
 										<div class="flex w-full items-center justify-between">
 											<span class="block text-base leading-tight font-bold text-white">
 												{parsed.title || t.ui.announce}

@@ -10,8 +10,5 @@ Standardize view across all display sizes. Mobile focused (iPhone 12 Pro is prio
 
 --
 
-UX improvement: In guided mode, when user encouters an "M" bead, the mystery block should auto expand, during that bead, user input (minimize/maximize) should be disabled, then restore to user setting in the next bead.
-
-Bug fix: There is a slight positional twitch to the mystery title when collapsing the mystery in the guided prayer "M" beads specifically.
-
-Bug fix: Home page is cut off in small screens (iPhone SE). See screenshot.
+There is a known, very hard to fix issue where glass menus are fully transparent mid animation until they are fully risen.
+Let's fake a fix. When a menu is rizen, the screen should go through 3 stages of blur: When the menu is requested to be opened, 1/3 of the length of the menu should be blurred (ahead of the menu). When the menu passes 1/3 of its final rise animation length, 2/3 of the length of the menu should be blurred (ahead of the menu). When the menu is fully risen, the screen behind the menu should be fully blurred (as it is now).
