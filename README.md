@@ -7,8 +7,10 @@ A beautiful, modern, and open-source web application for praying the Rosary. Des
 -   **Modes**:
     -   **Digital**: Track your progress bead-by-bead on screen.
     -   **Physical**: A simple list view for those who have their own physical Rosary.
--   **Liturgical Support**: Automatically selects the correct Mystery for the day and adjusts the color theme based on the Liturgical Season.
+-   **Liturgical Intelligence**: Automatically calculates the correct Liturgical Season and major Feast Days (e.g., Ash Wednesday, Easter, All Saints) according to Catholic doctrine.
+-   **Dynamic Themes**: Features 8 liturgical themes (Green, Purple, White, Red, Rose, Gold, Silver, Black) that dynamically warp the background "lights".
 -   **Multi-Language**: Support for English (US), Spanish (MX), Portuguese (BR), and Latin (VA).
+-   **Glassmorphism UI**: A modern, premium aesthetic with blurred glass panels and smooth animations.
 -   **PWA**: Installable on mobile devices and works offline.
 -   **Responsive**: Optimized for both mobile and desktop experiences.
 
@@ -29,25 +31,37 @@ A beautiful, modern, and open-source web application for praying the Rosary. Des
 ## 🚀 Getting Started
 
 1.  **Clone the repository**:
+
     ```bash
     git clone https://github.com/guidrezza/open-rosary.git
     cd open-rosary
     ```
 
 2.  **Install dependencies**:
+
     ```bash
     npm install
     ```
 
 3.  **Run the development server**:
+
     ```bash
     npm run dev
     ```
 
 4.  **Build for production**:
+
     ```bash
     npm run build
     ```
+
+5.  **Run Tests**:
+
+    ```bash
+    npm test
+    ```
+
+    See [themes-and-dates.md](./themes-and-dates.md) for detailed liturgical logic documentation.
 
 ## 🤝 Contributing
 

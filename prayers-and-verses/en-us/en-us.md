@@ -1,21 +1,24 @@
 # American English Rosary Guide
+
 **Translation:** USCCB / ICEL (Official Liturgical Text)
 **Scripture:** NABRE (New American Bible Revised Edition)
 
 ## I. Mystery Schedule
-*Disclaimer: The following schedule is the standard recommendation by the Catholic Church (specifically Pope St. John Paul II). However, the Rosary is a private devotion, and you are free to pray any set of mysteries on any day according to your personal devotion or schedule.*
 
-* **Monday:** Joyful Mysteries
-* **Tuesday:** Sorrowful Mysteries
-* **Wednesday:** Glorious Mysteries
-* **Thursday:** Luminous Mysteries
-* **Friday:** Sorrowful Mysteries
-* **Saturday:** Joyful Mysteries
-* **Sunday:** Glorious Mysteries
+_Disclaimer: The following schedule is the standard recommendation by the Catholic Church (specifically Pope St. John Paul II). However, the Rosary is a private devotion, and you are free to pray any set of mysteries on any day according to your personal devotion or schedule._
+
+- **Monday:** Joyful Mysteries
+- **Tuesday:** Sorrowful Mysteries
+- **Wednesday:** Glorious Mysteries
+- **Thursday:** Luminous Mysteries
+- **Friday:** Sorrowful Mysteries
+- **Saturday:** Joyful Mysteries
+- **Sunday:** Glorious Mysteries
 
 ---
 
 ## II. Sequence Guide (The Numbers)
+
 **Introductory Prayers:**
 S -> C -> P -> A -> A -> A -> G
 
@@ -28,6 +31,7 @@ R -> O -> S
 ---
 
 ## III. Text Guide
+
 **Introductory Prayers:**
 S. Sign of the Cross
 C. Apostles' Creed
@@ -83,47 +87,83 @@ Let us pray. O God, whose only begotten Son, by his life, death, and resurrectio
 **M. The Mysteries**
 
 **Joyful Mysteries**
+
 1. **The Annunciation:** "Mary said, 'Behold, I am the handmaid of the Lord. May it be done to me according to your word.'" (Luke 1:38)
+
 - **Fruit of the Mystery:** Humility
+
 2. **The Visitation:** "Most blessed are you among women, and blessed is the fruit of your womb." (Luke 1:42)
 3. **The Nativity:** "She gave birth to her firstborn son. She wrapped him in swaddling clothes and laid him in a manger." (Luke 2:7)
+
 - **Fruit of the Mystery:** Poverty of Spirit (Detachment from the world)
+
 4. **The Presentation:** "My eyes have seen your salvation, which you prepared in sight of all the peoples." (Luke 2:30-31)
+
 - **Fruit of the Mystery:** Obedience
+
 5. **The Finding in the Temple:** "After three days they found him in the temple, sitting in the midst of the teachers, listening to them and asking them questions." (Luke 2:46)
+
 - **Fruit of the Mystery:** Piety (Joy in finding Jesus)
 
 **Luminous Mysteries**
+
 1. **The Baptism in the Jordan:** "And a voice came from the heavens, saying, 'This is my beloved Son, with whom I am well pleased.'" (Matthew 3:17)
+
 - **Fruit of the Mystery:** Openness to the Holy Spirit
+
 2. **The Wedding at Cana:** "His mother said to the servers, 'Do whatever he tells you.'" (John 2:5)
+
 - **Fruit of the Mystery:** To Jesus through Mary
+
 3. **The Proclamation of the Kingdom:** "This is the time of fulfillment. The kingdom of God is at hand. Repent, and believe in the gospel." (Mark 1:15)
 4. **The Transfiguration:** "And he was transfigured before them; his face shone like the sun and his clothes became white as light." (Matthew 17:2)
+
 - **Fruit of the Mystery:** Desire for Holiness
+
 5. **The Institution of the Eucharist:** "Take and eat; this is my body." (Matthew 26:26)
+
 - **Fruit of the Mystery:** Adoration (Active Participation in the Mass)
 
 **Sorrowful Mysteries**
+
 1. **The Agony in the Garden:** "He was in such agony and he prayed so fervently that his sweat became like drops of blood falling on the ground." (Luke 22:44)
+
 - **Fruit of the Mystery:** Sorrow for Sin (Conformity to God's Will)
+
 2. **The Scourging at the Pillar:** "Then Pilate took Jesus and had him scourged." (John 19:1)
+
 - **Fruit of the Mystery:** Purity (Mortification of the Senses)
+
 3. **The Crowning with Thorns:** "They clothed him in purple and, weaving a crown of thorns, placed it on him." (Mark 15:17)
+
 - **Fruit of the Mystery:** Moral Courage
+
 4. **The Carrying of the Cross:** "And carrying the cross himself he went out to what is called the Place of the Skull." (John 19:17)
+
 - **Fruit of the Mystery:** Patience
+
 5. **The Crucifixion:** "Jesus cried out in a loud voice, 'Father, into your hands I commend my spirit'; and when he had said this he breathed his last." (Luke 23:46)
+
 - **Fruit of the Mystery:** Perseverance (Self-Denial)
 
 **Glorious Mysteries**
+
 1. **The Resurrection:** "He has been raised; he is not here. Behold the place where they laid him." (Mark 16:6)
+
 - **Fruit of the Mystery:** Faith
+
 2. **The Ascension:** "So then the Lord Jesus, after he spoke to them, was taken up into heaven and took his seat at the right hand of God." (Mark 16:19)
+
 - **Fruit of the Mystery:** Hope (Desire for Heaven)
+
 3. **The Descent of the Holy Spirit:** "And they were all filled with the holy Spirit and began to speak in different tongues, as the Spirit enabled them to proclaim." (Acts 2:4)
+
 - **Fruit of the Mystery:** Wisdom (Love of God)
+
 4. **The Assumption:** "Blessed are you, daughter, by the Most High God, above all the women on earth." (Judith 13:18)
+
 - **Fruit of the Mystery:** Grace of a Happy Death (Devotion to Mary)
+
 5. **The Coronation:** "A great sign appeared in the sky, a woman clothed with the sun, with the moon under her feet, and on her head a crown of twelve stars." (Revelation 12:1)
+
 - **Fruit of the Mystery:** Trust in Mary's Intercession (Eternal Happiness)

@@ -1,21 +1,24 @@
 # Brazilian Portuguese Rosary Guide
+
 **Translation:** CNBB (Conferência Nacional dos Bispos do Brasil)
 **Scripture:** Bíblia Sagrada (Tradução da CNBB)
 
 ## I. Calendário dos Mistérios
-*Aviso: O calendário a seguir é a recomendação padrão da Igreja Católica. No entanto, o Rosário é uma devoção privada, e você é livre para rezar qualquer conjunto de mistérios em qualquer dia, conforme sua devoção pessoal.*
 
-* **Segunda-feira:** Mistérios Gozosos
-* **Terça-feira:** Mistérios Dolorosos
-* **Quarta-feira:** Mistérios Gloriosos
-* **Quinta-feira:** Mistérios Luminosos
-* **Sexta-feira:** Mistérios Dolorosos
-* **Sábado:** Mistérios Gozosos
-* **Domingo:** Mistérios Gloriosos
+_Aviso: O calendário a seguir é a recomendação padrão da Igreja Católica. No entanto, o Rosário é uma devoção privada, e você é livre para rezar qualquer conjunto de mistérios em qualquer dia, conforme sua devoção pessoal._
+
+- **Segunda-feira:** Mistérios Gozosos
+- **Terça-feira:** Mistérios Dolorosos
+- **Quarta-feira:** Mistérios Gloriosos
+- **Quinta-feira:** Mistérios Luminosos
+- **Sexta-feira:** Mistérios Dolorosos
+- **Sábado:** Mistérios Gozosos
+- **Domingo:** Mistérios Gloriosos
 
 ---
 
 ## II. Guia de Sequência (Os Números)
+
 **Orações Introdutórias:**
 S -> C -> P -> A -> A -> A -> G
 
@@ -28,6 +31,7 @@ R -> O -> S
 ---
 
 ## III. Guia de Texto
+
 **Orações Introdutórias:**
 S. Sinal da Cruz
 C. Creio (Símbolo dos Apóstolos)
@@ -83,6 +87,7 @@ Oremos. Ó Deus, cujo Unigênito Filho, por sua vida, morte e ressurreição, no
 **M. Os Mistérios**
 
 **Mistérios Gozosos**
+
 1. **A Anunciação:** "Disse Maria: 'Eis aqui a serva do Senhor; faça-se em mim segundo a tua palavra!'" (Lucas 1, 38)
 2. **A Visitação:** "Bendita és tu entre as mulheres e bendito é o fruto do teu ventre!" (Lucas 1, 42)
 3. **O Nascimento de Jesus:** "Ela deu à luz o seu filho primogênito, enfaixou-o e o deitou numa manjedoura." (Lucas 2, 7)
@@ -90,6 +95,7 @@ Oremos. Ó Deus, cujo Unigênito Filho, por sua vida, morte e ressurreição, no
 5. **A Perda e o Encontro no Templo:** "Três dias depois o acharam no templo, sentado no meio dos doutores, ouvindo-os e interrogando-os." (Lucas 2, 46)
 
 **Mistérios Luminosos**
+
 1. **O Batismo no Jordão:** "E uma voz vinda dos céus dizia: 'Este é o meu Filho amado, no qual eu pus o meu agrado'." (Mateus 3, 17)
 2. **As Bodas de Caná:** "Sua mãe disse aos que estavam servindo: 'Fazei tudo o que ele vos disser'." (João 2, 5)
 3. **O Anúncio do Reino de Deus:** "O tempo já se completou e o Reino de Deus está próximo. Convertei-vos e crede no Evangelho!" (Marcos 1, 15)
@@ -97,6 +103,7 @@ Oremos. Ó Deus, cujo Unigênito Filho, por sua vida, morte e ressurreição, no
 5. **A Instituição da Eucaristia:** "Tomai e comei, isto é o meu corpo." (Mateus 26, 26)
 
 **Mistérios Dolorosos**
+
 1. **A Agonia no Horto:** "Entrando em agonia, Jesus orava com mais insistência. Seu suor tornou-se como gotas de sangue que caíam no chão." (Lucas 22, 44)
 2. **A Flagelação do Senhor:** "Então Pilatos mandou flagelar Jesus." (João 19, 1)
 3. **A Coroação de Espinhos:** "Teceram uma coroa de espinhos, puseram-na em sua cabeça." (Marcos 15, 17)
@@ -104,6 +111,7 @@ Oremos. Ó Deus, cujo Unigênito Filho, por sua vida, morte e ressurreição, no
 5. **A Crucificação e Morte:** "Jesus deu um forte grito: 'Pai, em tuas mãos entrego o meu espírito'. Dizendo isso, expirou." (Lucas 23, 46)
 
 **Mistérios Gloriosos**
+
 1. **A Ressurreição:** "Ele ressuscitou, não está aqui. Vede o lugar onde o puseram." (Marcos 16, 6)
 2. **A Ascensão:** "O Senhor Jesus, depois de lhes ter falado, foi elevado ao céu e sentou-se à direita de Deus." (Marcos 16, 19)
 3. **A Vinda do Espírito Santo:** "Ficaram todos cheios do Espírito Santo e começaram a falar em outras línguas." (Atos 2, 4)

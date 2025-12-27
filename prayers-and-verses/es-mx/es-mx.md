@@ -1,21 +1,24 @@
 # Mexican Spanish Rosary Guide
+
 **Translation:** CEM (Conferencia del Episcopado Mexicano) - Litúrgico
 **Scripture:** Biblia de América / Leccionario Mexicano
 
 ## I. Calendario de Misterios
-*Nota: El siguiente calendario es la recomendación estándar de la Iglesia Católica. Sin embargo, el Rosario es una devoción privada, y usted es libre de rezar cualquier conjunto de misterios en cualquier día según su devoción personal.*
 
-* **Lunes:** Misterios Gozosos
-* **Martes:** Misterios Dolorosos
-* **Miércoles:** Misterios Gloriosos
-* **Jueves:** Misterios Luminosos
-* **Viernes:** Misterios Dolorosos
-* **Sábado:** Misterios Gozosos
-* **Domingo:** Misterios Gloriosos
+_Nota: El siguiente calendario es la recomendación estándar de la Iglesia Católica. Sin embargo, el Rosario es una devoción privada, y usted es libre de rezar cualquier conjunto de misterios en cualquier día según su devoción personal._
+
+- **Lunes:** Misterios Gozosos
+- **Martes:** Misterios Dolorosos
+- **Miércoles:** Misterios Gloriosos
+- **Jueves:** Misterios Luminosos
+- **Viernes:** Misterios Dolorosos
+- **Sábado:** Misterios Gozosos
+- **Domingo:** Misterios Gloriosos
 
 ---
 
 ## II. Guía de Secuencia (Los Números)
+
 **Oraciones Introductorias:**
 S -> C -> P -> A -> A -> A -> G
 
@@ -28,6 +31,7 @@ R -> O -> S
 ---
 
 ## III. Guía de Texto
+
 **Oraciones Introductorias:**
 S. Señal de la Cruz
 C. Credo de los Apóstoles
@@ -83,6 +87,7 @@ Oremos. Oh Dios, cuyo Unigénito Hijo, con su vida, muerte y resurrección, nos 
 **M. Los Misterios**
 
 **Misterios Gozosos**
+
 1. **La Encarnación del Hijo de Dios:** "Dijo María: «He aquí la esclava del Señor; hágase en mí según tu palabra»." (Lucas 1, 38)
 2. **La Visitación de Nuestra Señora:** "¡Bendita tú eres entre todas las mujeres, y bendito es el fruto de tu vientre!" (Lucas 1, 42)
 3. **El Nacimiento del Hijo de Dios:** "Dio a luz a su hijo primogénito, lo envolvió en pañales y lo recostó en un pesebre." (Lucas 2, 7)
@@ -90,6 +95,7 @@ Oremos. Oh Dios, cuyo Unigénito Hijo, con su vida, muerte y resurrección, nos 
 5. **El Niño Perdido y Hallado en el Templo:** "Al cabo de tres días lo encontraron en el Templo, sentado en medio de los maestros, escuchándoles y haciéndoles preguntas." (Lucas 2, 46)
 
 **Misterios Luminosos**
+
 1. **El Bautismo en el Jordán:** "Una voz que salía de los cielos decía: «Este es mi Hijo amado, en quien me complazco»." (Mateo 3, 17)
 2. **Las Bodas de Caná:** "Su madre dijo a los sirvientes: «Hagan lo que él les diga»." (Juan 2, 5)
 3. **El Anuncio del Reino de Dios:** "El tiempo se ha cumplido y el Reino de Dios está cerca; conviértanse y crean en la Buena Nueva." (Marcos 1, 15)
@@ -97,6 +103,7 @@ Oremos. Oh Dios, cuyo Unigénito Hijo, con su vida, muerte y resurrección, nos 
 5. **La Institución de la Eucaristía:** "Tomen y coman; esto es mi cuerpo." (Mateo 26, 26)
 
 **Misterios Dolorosos**
+
 1. **La Oración en el Huerto:** "Lleno de angustia, oraba con más insistencia; y su sudor se hizo como gotas espesas de sangre que caían en tierra." (Lucas 22, 44)
 2. **La Flagelación del Señor:** "Entonces Pilato tomó a Jesús y mandó azotarle." (Juan 19, 1)
 3. **La Coronación de Espinas:** "Le vistieron de púrpura y, trenzando una corona de espinas, se la ciñeron." (Marcos 15, 17)
@@ -104,6 +111,7 @@ Oremos. Oh Dios, cuyo Unigénito Hijo, con su vida, muerte y resurrección, nos 
 5. **La Crucifixión y Muerte:** "Jesús, dando un fuerte grito, dijo: «Padre, en tus manos encomiendo mi espíritu» y, dicho esto, expiró." (Lucas 23, 46)
 
 **Misterios Gloriosos**
+
 1. **La Resurrección del Hijo de Dios:** "Ha resucitado, no está aquí. Vean el lugar donde le pusieron." (Marcos 16, 6)
 2. **La Ascensión del Señor:** "El Señor Jesús, después de hablarles, fue elevado al cielo y se sentó a la diestra de Dios." (Marcos 16, 19)
 3. **La Venida del Espíritu Santo:** "Quedaron todos llenos del Espíritu Santo y se pusieron a hablar en otras lenguas." (Hechos 2, 4)

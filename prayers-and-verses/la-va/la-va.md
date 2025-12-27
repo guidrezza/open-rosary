@@ -1,21 +1,24 @@
 # Latin Rosary Guide
+
 **Translation:** Traditional / Ecclesiastical (Vatican Standard)
 **Scripture:** Nova Vulgata (Bibliorum Sacrorum Editio)
 
 ## I. Mystery Schedule
-*Disclaimer: The following schedule is the standard recommendation by the Catholic Church. However, the Rosary is a private devotion, and you are free to pray any set of mysteries on any day according to your personal devotion or schedule.*
 
-* **Feria secunda (Mon):** Mystéria Gaudiósa
-* **Feria tertia (Tue):** Mystéria Dolorósa
-* **Feria quarta (Wed):** Mystéria Gloriósa
-* **Feria quinta (Thu):** Mystéria Luminósa
-* **Feria sexta (Fri):** Mystéria Dolorósa
-* **Sabbato (Sat):** Mystéria Gaudiósa
-* **Dominica (Sun):** Mystéria Gloriósa
+_Disclaimer: The following schedule is the standard recommendation by the Catholic Church. However, the Rosary is a private devotion, and you are free to pray any set of mysteries on any day according to your personal devotion or schedule._
+
+- **Feria secunda (Mon):** Mystéria Gaudiósa
+- **Feria tertia (Tue):** Mystéria Dolorósa
+- **Feria quarta (Wed):** Mystéria Gloriósa
+- **Feria quinta (Thu):** Mystéria Luminósa
+- **Feria sexta (Fri):** Mystéria Dolorósa
+- **Sabbato (Sat):** Mystéria Gaudiósa
+- **Dominica (Sun):** Mystéria Gloriósa
 
 ---
 
 ## II. Sequence Guide (The Numbers)
+
 **Introductory Prayers:**
 S -> C -> P -> A -> A -> A -> G
 
@@ -28,6 +31,7 @@ R -> O -> S
 ---
 
 ## III. Text Guide
+
 **Introductory Prayers:**
 S. Signum Crucis
 C. Symbolum Apostolorum (Credo)
@@ -83,6 +87,7 @@ Orémus. Deus, cuius Unigénitus per vitam, mortem et resurrectiónem suam nobis
 **M. The Mysteries**
 
 **Mystéria Gaudiósa**
+
 1. **Annuntiátio:** "Dixit autem María: «Ecce ancílla Dómini; fiat mihi secúndum verbum tuum»." (Lc 1, 38)
 2. **Visitatio:** "Benedícta tu inter muliéres, et benedíctus fructus ventris tui." (Lc 1, 42)
 3. **Natívitas:** "Péperit fílium suum primogénitum; et pannis eum invólvit et reclinávit eum in præsépio." (Lc 2, 7)
@@ -90,6 +95,7 @@ Orémus. Deus, cuius Unigénitus per vitam, mortem et resurrectiónem suam nobis
 5. **Invéntio in Templo:** "Post tríduum invenérunt illum in templo sedéntem in médio magistrórum, audiéntem illos et interrogántem eos." (Lc 2, 46)
 
 **Mystéria Luminósa**
+
 1. **Baptísma in Iordáne:** "Et ecce vox de cælis dicens: «Hic est Fílius meus diléctus, in quo mihi complácui»." (Mt 3, 17)
 2. **Nuptiae in Cana:** "Dicit mater eius minístris: «Quodcúmque díxerit vobis, fácite»." (Io 2, 5)
 3. **Proclamátio Regni:** "Implétum est tempus, et appropinquávit regnum Dei; paenitémini et crédite Evangélio." (Mc 1, 15)
@@ -97,6 +103,7 @@ Orémus. Deus, cuius Unigénitus per vitam, mortem et resurrectiónem suam nobis
 5. **Institútio Eucharistíæ:** "Accípite et comédite: hoc est corpus meum." (Mt 26, 26)
 
 **Mystéria Dolorósa**
+
 1. **Agonía in Horto:** "Et factus in agonía prolíxius orábat. Et factus est sudor eius sicut guttæ sánguinis decurréntis in terram." (Lc 22, 43-44)
 2. **Flagellátio:** "Tunc ergo apprehéndit Pilátus Iesum et flagellávit." (Io 19, 1)
 3. **Coronátio Spinis:** "Et induérunt eum púrpura et impónunt ei plecténtes spíneam corónam." (Mc 15, 17)
@@ -104,6 +111,7 @@ Orémus. Deus, cuius Unigénitus per vitam, mortem et resurrectiónem suam nobis
 5. **Crucifíxio:** "Clamans voce magna Iesus ait: «Pater, in manus tuas comméndo spíritum meum»." (Lc 23, 46)
 
 **Mystéria Gloriósa**
+
 1. **Resurréctio:** "Surréxit, non est hic; ecce locus ubi posuérunt eum." (Mc 16, 6)
 2. **Ascénsio:** "Et Dóminus quidem Iesus, postquam locútus est eis, assúmptus est in cælum et sedit a dextris Dei." (Mc 16, 19)
 3. **Descénsus Spíritus Sancti:** "Et repléti sunt omnes Spíritu Sancto et cœpérunt loqui áliis linguis." (Act 2, 4)

@@ -1,56 +1,67 @@
 @import 'tailwindcss';
 
 @theme {
-    --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
-    --font-mono: "SF Mono", "Roboto Mono", monospace;
+	--font-main:
+		-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell',
+		'Helvetica Neue', sans-serif;
+	--font-mono: 'SF Mono', 'Roboto Mono', monospace;
 }
 
 :root {
-    font-family: var(--font-main);
-    color-scheme: dark;
+	font-family: var(--font-main);
+	color-scheme: dark;
 
-    /* Glass Standardization (iOS 26 Style) */
-    --glass-bg: #1a1a1a; /* Opaque Dark Hex (Was rgba) */
-    --glass-border: rgba(255, 255, 255, 0.15); /* Thin crisp border */
-    --glass-blur: 40px; /* Heavy premium blur */
-    --glass-radius: 32px; /* Super rounded (iOS style) */
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Soft deep shadow */
+	/* Glass Standardization (iOS 26 Style) */
+	--glass-bg: #1a1a1a; /* Opaque Dark Hex (Was rgba) */
+	--glass-border: rgba(255, 255, 255, 0.15); /* Thin crisp border */
+	--glass-blur: 40px; /* Heavy premium blur */
+	--glass-radius: 32px; /* Super rounded (iOS style) */
+	--glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Soft deep shadow */
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    background-color: var(--theme-color, #2d4a3e);
-    color: white;
-    font-size: 16px; /* Base size */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    touch-action: pan-x pan-y; /* Prevent double-tap zoom globally but allow scroll */
+	margin: 0;
+	padding: 0;
+	background-color: var(--theme-color, #2d4a3e);
+	color: white;
+	font-size: 16px; /* Base size */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	touch-action: pan-x pan-y; /* Prevent double-tap zoom globally but allow scroll */
 }
 
 /* Prevent double-tap zoom on interactive elements */
-a, button, input, select, textarea, label {
-    touch-action: manipulation;
+a,
+button,
+input,
+select,
+textarea,
+label {
+	touch-action: manipulation;
 }
 
-h1, h2, h3, h4 {
-    letter-spacing: -0.02em;
+h1,
+h2,
+h3,
+h4 {
+	letter-spacing: -0.02em;
 }
 
 /* Global Glass Styles (Moved out of @layer utilities to ensure application) */
-.glass-standard, .glass-panel {
-    background-color: var(--glass-bg, #1a1a1a) !important;
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(var(--glass-blur)) saturate(180%);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
-    border-radius: var(--glass-radius);
-    box-shadow: var(--glass-shadow);
-    
-    /* Note: Removed transform: translateZ(0) as it breaks backdrop-filter by creating isolated stacking context */
+.glass-standard,
+.glass-panel {
+	background-color: var(--glass-bg, #1a1a1a) !important;
+	border: 1px solid var(--glass-border);
+	backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+	-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+	border-radius: var(--glass-radius);
+	box-shadow: var(--glass-shadow);
+
+	/* Note: Removed transform: translateZ(0) as it breaks backdrop-filter by creating isolated stacking context */
 }
 
 @layer utilities {
-    .glass-text {
-        @apply text-white/90 font-light;
-    }
+	.glass-text {
+		@apply font-light text-white/90;
+	}
 }

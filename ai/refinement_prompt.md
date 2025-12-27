@@ -19,6 +19,7 @@ Be very detailed in each prompt. Leave little to interpretation.
 I will provide one file (set of mystery) per code block.
 
 Response format:
+
 1. A summary of the stylistic choices for the set of mysteries.
 2. The updated file.
 

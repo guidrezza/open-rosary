@@ -5,6 +5,8 @@ node_modules
 .vercel
 .netlify
 .wrangler
+test_output.txt
+build_log*.txt
 /.svelte-kit
 /build
 

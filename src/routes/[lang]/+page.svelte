@@ -217,9 +217,9 @@
 		<div class="flex flex-col items-center gap-2">
 			<h2 class="text-xs font-bold tracking-[0.2em] text-white/60 uppercase">{dateString}</h2>
 			<h1
-				class="text-4xl leading-tight font-black tracking-wider uppercase drop-shadow-lg md:text-5xl"
+				class="text-center text-4xl leading-tight font-black tracking-wider uppercase drop-shadow-lg md:text-5xl"
 			>
-				{theme.season}
+				{(theme?.key && t.ui.liturgical?.[theme.key]) || theme?.season}
 			</h1>
 		</div>
 
@@ -283,14 +283,14 @@
 		title={t.ui.menus.language}
 		onClose={() => (langMenuOpen = false)}
 	>
-		<div class="flex flex-col gap-2">
-			{#each Object.entries( { 'en-us': 'English (US)', 'es-mx': 'Español (MX)', 'la-va': 'Lingua Latina', 'pt-br': 'Português (BR)' } ) as [code, label]}
+		<div class="flex max-h-[60vh] flex-col gap-2 overflow-y-auto">
+			{#each [{ code: 'en-us', label: 'English (US)' }, { code: 'es-mx', label: 'Español (MX)' }, { code: 'la-va', label: 'Lingua Latina' }, { code: 'pt-br', label: 'Português (BR)' }].sort( (a, b) => a.label.localeCompare(b.label) ) as langItem}
 				<button
 					class="flex w-full items-center rounded-[32px] bg-white/5 p-4 text-left text-lg font-medium transition-colors hover:bg-white/10"
-					onclick={() => switchLang(code)}
+					onclick={() => switchLang(langItem.code)}
 				>
-					<span class="mr-3 text-2xl">{flags[code]}</span>
-					<span class="text-lg font-medium">{label}</span>
+					<span class="mr-3 text-2xl">{flags[langItem.code] || '🌐'}</span>
+					<span class="text-lg font-medium">{langItem.label}</span>
 				</button>
 			{/each}
 		</div>
@@ -307,7 +307,7 @@
 				'Customize your visual experience. This does not affect the liturgical date.'}
 		</p>
 		<div class="grid grid-cols-4 gap-3">
-			{#each [{ c: 'green', l: t.ui.themes.ordinary, hex: '#10b981', emoji: '🌿' }, { c: 'purple', l: t.ui.themes.advent_lent, hex: '#8b5cf6', emoji: '✝️' }, { c: 'white', l: t.ui.themes.christmas_easter, hex: '#e2e8f0', emoji: '🕊️' }, { c: 'red', l: t.ui.themes.pentecost, hex: '#ef4444', emoji: '🔥' }, { c: 'rose', l: t.ui.themes.gaudete, hex: '#e11d48', emoji: '🌸' }, { c: 'gold', l: 'Gold', hex: '#f59e0b', emoji: '✨' }, { c: 'silver', l: 'Silver', hex: '#94a3b8', emoji: '🩶' }, { c: 'black', l: t.ui.themes.requiem, hex: '#404040', emoji: '🕯️' }] as item}
+			{#each [{ c: 'green', l: t.ui.themes.ordinary, hex: '#10b981', emoji: '🌿' }, { c: 'purple', l: t.ui.themes.advent_lent, hex: '#8b5cf6', emoji: '✝️' }, { c: 'white', l: t.ui.themes.christmas_easter, hex: '#e2e8f0', emoji: '🕊️' }, { c: 'red', l: t.ui.themes.pentecost, hex: '#ef4444', emoji: '🔥' }, { c: 'rose', l: t.ui.themes.gaudete, hex: '#e11d48', emoji: '🌸' }, { c: 'gold', l: t.ui.themes.gold, hex: '#f59e0b', emoji: '✨' }, { c: 'silver', l: t.ui.themes.silver, hex: '#94a3b8', emoji: '🩶' }, { c: 'black', l: t.ui.themes.requiem, hex: '#404040', emoji: '🕯️' }] as item}
 				<button
 					class="relative flex aspect-square flex-col items-center justify-center overflow-hidden rounded-[24px] border border-white/10 p-2 shadow-lg transition-transform active:scale-95"
 					style="background-color: {item.hex}CC;"
