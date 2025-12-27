@@ -87,6 +87,7 @@ export const pt_br: LocalizationData = {
 			jump_to_section: 'Ir para Seção'
 		},
 		themes: {
+			description: 'Personalize sua experiência visual. Isso não afeta a data litúrgica.',
 			ordinary: 'Tempo Comum',
 			christmas_easter: 'Natal / Páscoa',
 			advent_lent: 'Advento / Quaresma',

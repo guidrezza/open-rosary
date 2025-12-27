@@ -1,13 +1,9 @@
 import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
-import type { RosaryState, LiturgicalColor } from './types';
-import { getLiturgicalTheme, PALETTES } from './liturgical';
+import type { RosaryState } from './types';
+import { getLiturgicalTheme, PALETTES, type LiturgicalColor, type LiturgicalTheme } from './liturgical';
 
-const STORAGE_KEY_MODE = 'open-rosary-mode';
-const STORAGE_KEY_THEME_COLOR = 'open-rosary-theme-color';
-const STORAGE_KEY_THEME_SEASON = 'open-rosary-theme-season-override'; // If user wants to override text? No, user only overrides color. Text should stay accurate.
-
-// Initial calculation (safe for server, but client will re-calc on mount)
+// Initial calculation
 const initialDate = new Date();
 const liturgical = getLiturgicalTheme(initialDate);
 
@@ -29,67 +25,36 @@ function createRosaryStore() {
 
 		// Change Mode
 		setMode: (mode: 'digital' | 'physical') => {
-			update((s) => {
-				const newState = { ...s, mode };
-				if (browser) {
-					localStorage.setItem(STORAGE_KEY_MODE, mode);
-				}
-				return newState;
-			});
+			update((s) => ({ ...s, mode }));
 		},
 
 		// Change Theme (Color Override)
 		setTheme: (color: LiturgicalColor, seasonName?: string) => {
 			update((s) => {
-				// If the user manually sets a theme, we update the color.
-				// WE DO NOT CHANGE THE SEASON NAME if it's a manual color override,
-				// UNLESS the user explicitly wants to "Change Season" (which isn't really a feature, they just pick a color).
-				// The requirement: "Updating it via the change theme button should change the color layout without changing the lithurgical time text"
-
-				// However, the `changeTheme` action in UI might pass a season name currently. We should ignore it for the TEXT,
-				// but we need to ensure the palette updates.
-
 				const palette = PALETTES[color];
-				const newState = {
+				// Ensure we have a base theme to spread, fallback to current assumption if missing
+				const baseTheme = s.theme || getLiturgicalTheme(new Date());
+
+				return {
 					...s,
 					theme: {
-						...s.theme,
+						...baseTheme,
 						color: color,
 						cssVars: palette
-						// season: s.theme.season // KEEP existing season text (e.g. "Advent") even if changed to "Green"
 					}
 				};
-
-				// DATA PERSISTENCE REMOVED: Theme resets on reload.
-				return newState;
 			});
 		},
 
-		// Initialize on Client Mount
+		// Initialize / Reset (Clean Slate or Recalc)
 		init: () => {
-			if (browser) {
-				// 1. Recalculate true liturgical date (since server time != user time)
-				const now = new Date();
-				const freshLiturgical = getLiturgicalTheme(now);
-
-				// 2. Check Persistence
-				const savedMode = localStorage.getItem(STORAGE_KEY_MODE) as 'digital' | 'physical' | null;
-				// Theme persistence removed
-
-				update((s) => {
-					// Start with fresh liturgical Data
-					let newTheme = freshLiturgical;
-
-					// Apply Override if exists
-					// (Theme override logic removed)
-
-					return {
-						...s,
-						mode: savedMode || s.mode,
-						theme: newTheme
-					};
-				});
-			}
+			// Recalculate true liturgical date on mount
+			const now = new Date();
+			const freshLiturgical = getLiturgicalTheme(now);
+			update((s) => ({
+				...s,
+				theme: freshLiturgical // Always reset to correct liturgical day. URL params (layout) will override if needed.
+			}));
 		},
 
 		reset: () => set(defaultState)

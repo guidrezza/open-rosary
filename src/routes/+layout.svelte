@@ -2,7 +2,8 @@
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
 	import { onMount } from 'svelte';
-	import { getLiturgicalTheme } from '$lib/liturgical';
+	import { page } from '$app/stores';
+	import { getLiturgicalTheme, type LiturgicalColor } from '$lib/liturgical';
 	import { rosary } from '$lib/stores';
 	import Background from '$lib/components/Background.svelte';
 
@@ -12,9 +13,26 @@
 	let theme = $derived($rosary.theme || getLiturgicalTheme(new Date()));
 
 	onMount(() => {
-		// Initialize if empty, but respect existing override logic if we want persistence
-		if (!$rosary.theme) {
-			rosary.update((s) => ({ ...s, theme: getLiturgicalTheme(new Date()) }));
+		// Initialize Store (Recalc date)
+		rosary.init();
+	});
+
+	// Sync URL Params -> Store
+	$effect(() => {
+		const p = $page.url.searchParams;
+		const urlTheme = p.get('theme');
+		const urlMode = p.get('mode');
+
+		// Sync Mode
+		if (urlMode && (urlMode === 'digital' || urlMode === 'physical') && urlMode !== $rosary.mode) {
+			rosary.setMode(urlMode);
+		}
+
+		// Sync Theme
+		// Validate against known colors to prevent junk
+		const validColors = ['green', 'purple', 'white', 'red', 'rose', 'gold', 'silver', 'black'];
+		if (urlTheme && validColors.includes(urlTheme) && $rosary.theme?.color !== urlTheme) {
+			rosary.setTheme(urlTheme as LiturgicalColor);
 		}
 	});
 </script>

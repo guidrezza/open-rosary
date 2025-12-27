@@ -17,58 +17,76 @@ export interface LiturgicalTheme {
 		'--glass-bg': string;
 		'--glass-border': string;
 		'--text-highlight': string;
+		colorBottom?: string;
+		colorTop?: string;
 	};
 }
 
 // Modern, Glass-Friendly Palettes (Refined for "Lights on Gray" aesthetic)
-export const PALETTES: Record<LiturgicalColor, LiturgicalTheme['cssVars']> = {
+export const PALETTES: Record<LiturgicalColor, LiturgicalTheme['cssVars'] & { colorBottom: string; colorTop: string }> = {
 	green: {
-		'--theme-color': '#059669', // Emerald 600
-		'--glass-bg': 'rgba(6, 78, 59, 0.6)',
-		'--glass-border': 'rgba(52, 211, 153, 0.2)',
-		'--text-highlight': '#6ee7b7'
+		'--theme-color': '#064e3b', // Emerald 900
+		'--glass-bg': 'rgba(2, 44, 34, 0.6)', // Very dark green glass
+		'--glass-border': 'rgba(16, 185, 129, 0.2)',
+		'--text-highlight': '#34d399',
+		colorBottom: '#064e3b', // Deep Emerald
+		colorTop: '#34d399' // Bright Teal
 	},
 	white: {
-		'--theme-color': '#e2e8f0', // Slate 200 (Bright White/Grey)
-		'--glass-bg': 'rgba(255, 255, 255, 0.1)',
+		'--theme-color': '#cbd5e1', // Slate 300
+		'--glass-bg': 'rgba(148, 163, 184, 0.2)',
 		'--glass-border': 'rgba(255, 255, 255, 0.3)',
-		'--text-highlight': '#f8fafc'
+		'--text-highlight': '#f8fafc',
+		colorBottom: '#475569', // Slate 600
+		colorTop: '#f1f5f9' // Slate 100
 	},
 	red: {
 		'--theme-color': '#dc2626', // Red 600
-		'--glass-bg': 'rgba(127, 29, 29, 0.6)',
+		'--glass-bg': 'rgba(127, 29, 29, 0.4)',
 		'--glass-border': 'rgba(248, 113, 113, 0.3)',
-		'--text-highlight': '#fca5a5'
+		'--text-highlight': '#fca5a5',
+		colorBottom: '#991b1b', // Red 800
+		colorTop: '#fb923c' // Orange 400
 	},
 	purple: {
 		'--theme-color': '#7c3aed', // Violet 600
-		'--glass-bg': 'rgba(76, 29, 149, 0.6)',
+		'--glass-bg': 'rgba(76, 29, 149, 0.4)',
 		'--glass-border': 'rgba(167, 139, 250, 0.3)',
-		'--text-highlight': '#d8b4fe'
+		'--text-highlight': '#d8b4fe',
+		colorBottom: '#5b21b6', // Violet 800
+		colorTop: '#e879f9' // Fuchsia 400
 	},
 	rose: {
 		'--theme-color': '#e11d48', // Rose 600
-		'--glass-bg': 'rgba(136, 19, 55, 0.5)',
+		'--glass-bg': 'rgba(136, 19, 55, 0.3)',
 		'--glass-border': 'rgba(251, 113, 133, 0.3)',
-		'--text-highlight': '#fda4af'
+		'--text-highlight': '#fda4af',
+		colorBottom: '#be123c', // Rose 700
+		colorTop: '#fca5a5' // Rose 300
 	},
 	gold: {
-		'--theme-color': '#f59e0b', // Amber 500 (Gold)
-		'--glass-bg': 'rgba(180, 83, 9, 0.5)',
+		'--theme-color': '#f59e0b', // Amber 500
+		'--glass-bg': 'rgba(180, 83, 9, 0.3)',
 		'--glass-border': 'rgba(251, 191, 36, 0.4)',
-		'--text-highlight': '#fde68a'
+		'--text-highlight': '#fde68a',
+		colorBottom: '#b45309', // Amber 700
+		colorTop: '#fcd34d' // Amber 300
 	},
 	silver: {
-		'--theme-color': '#94a3b8', // Slate 400 (Silver/Blueish)
-		'--glass-bg': 'rgba(51, 65, 85, 0.5)',
-		'--glass-border': 'rgba(148, 163, 184, 0.3)',
-		'--text-highlight': '#e2e8f0'
+		'--theme-color': '#7c93b8', // Steel Blue
+		'--glass-bg': 'rgba(51, 65, 95, 0.4)',
+		'--glass-border': 'rgba(124, 147, 184, 0.3)',
+		'--text-highlight': '#c8d6e8',
+		colorBottom: '#3d4f6f', // Dark Steel Blue
+		colorTop: '#9fb3d1' // Light Steel Blue
 	},
 	black: {
 		'--theme-color': '#404040', // Neutral 700
-		'--glass-bg': 'rgba(23, 23, 23, 0.7)',
+		'--glass-bg': 'rgba(0, 0, 0, 0.5)',
 		'--glass-border': 'rgba(82, 82, 82, 0.3)',
-		'--text-highlight': '#d4d4d4'
+		'--text-highlight': '#d4d4d4',
+		colorBottom: '#171717', // Neutral 900
+		colorTop: '#525252' // Neutral 600
 	}
 };
 

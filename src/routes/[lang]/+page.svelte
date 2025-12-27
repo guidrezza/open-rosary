@@ -11,7 +11,7 @@
 	import { getLocale } from '$lib/i18n';
 
 	// Get language from route params
-	let lang = $derived($page.params.lang);
+	let lang = $derived($page.params.lang ?? 'en');
 	let t = $derived(getLocale(lang));
 
 	// State
@@ -19,8 +19,7 @@
 	let timeInterval: any;
 
 	onMount(() => {
-		// Initialize Store (Liturgical Calc + Persistence)
-		rosary.init();
+		// Store init moved to layout
 
 		// Keep date live (optional, but good for midnight rollover)
 		currentDate = new Date();
@@ -34,7 +33,9 @@
 	});
 
 	// Derived from Store
-	let theme = $derived($rosary.theme);
+	import { getLiturgicalTheme } from '$lib/liturgical';
+	// Fallback to current date calculation if store is empty (rare but possible during init)
+	let theme = $derived($rosary.theme || getLiturgicalTheme(currentDate));
 	let mode = $derived($rosary.mode);
 
 	// Formatting Date: "MONDAY, OCTOBER 24"
@@ -100,24 +101,33 @@
 
 	// Helper Actions
 	function handleThemeSelect(color: LiturgicalColor) {
-		rosary.setTheme(color);
+		const url = new URL($page.url);
+		url.searchParams.set('theme', color);
+		goto(url.toString(), { replaceState: true, noScroll: true });
 		themeMenuOpen = false;
 	}
 
 	function switchLang(newLang: string) {
-		goto(`${base}/${newLang}`, { replaceState: true });
+		const url = new URL($page.url);
+		url.pathname = `${base}/${newLang}`;
+		// params preserved automatically
+		goto(url.toString(), { replaceState: true });
 		langMenuOpen = false;
 	}
 
 	function initiatePrayer(mysteryKey: string) {
 		selectedMysteryForMode = mysteryKey;
-		modeMenuOpen = true;
+		modeMenuOpen = true; // Open mode select
 	}
 
 	function selectMode(m: 'digital' | 'physical') {
-		rosary.setMode(m);
+		const url = new URL($page.url);
+		url.pathname = `${base}/${lang}/pray`;
+		url.searchParams.set('mystery', selectedMysteryForMode);
+		url.searchParams.set('mode', m);
+		// Theme param preserved from current URL
+		goto(url.toString());
 		modeMenuOpen = false;
-		goto(`${base}/${lang}/pray?mystery=${selectedMysteryForMode}`);
 	}
 
 	const flags: Record<string, string> = {
@@ -135,10 +145,12 @@
 	// Theme Emojis
 	const themeEmojis: Record<string, string> = {
 		ordinary: '🌿',
-		advent_lent: '🍇',
+		advent_lent: '✝️',
 		christmas_easter: '🕊️',
 		pentecost: '🔥',
 		gaudete: '🌸',
+		gold: '✨',
+		silver: '🩶',
 		requiem: '🕯️'
 	};
 
@@ -153,6 +165,8 @@
 		if (c === 'white') return themeEmojis.christmas_easter;
 		if (c === 'red') return themeEmojis.pentecost;
 		if (c === 'rose') return themeEmojis.gaudete;
+		if (c === 'gold') return themeEmojis.gold;
+		if (c === 'silver') return themeEmojis.silver;
 		if (c === 'black') return themeEmojis.requiem;
 
 		return '🎨';
@@ -171,17 +185,12 @@
 	function handleImageClick() {
 		if (mysteryImageComponent) mysteryImageComponent.refresh();
 	}
-</script>
 
-<!-- Dynamic Background Orb -->
-<div class="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-	<div
-		class="absolute top-[-20%] left-[-20%] h-[140%] w-[140%] rounded-full opacity-40 blur-[100px] transition-colors duration-1000 ease-in-out"
-		style="background: radial-gradient(circle at center, {theme.cssVars[
-			'--theme-color'
-		]}, transparent 70%);"
-	></div>
-</div>
+	function formatThemeLabel(s: string) {
+		if (s.includes(' / ')) return s.replace(' / ', ' /<br>');
+		return s.replace(' ', '<br>');
+	}
+</script>
 
 <div
 	class="relative z-10 flex h-dvh w-full flex-col items-center overflow-x-hidden overflow-y-auto"
@@ -324,7 +333,7 @@
 						<span
 							class="text-center text-[8px] leading-tight font-bold tracking-wider text-white uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
 						>
-							{item.l}
+							{@html formatThemeLabel(item.l)}
 						</span>
 					</div>
 				</button>

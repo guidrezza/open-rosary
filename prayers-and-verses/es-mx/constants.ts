@@ -87,6 +87,7 @@ export const es_mx: LocalizationData = {
 			jump_to_section: 'Ir a la Sección'
 		},
 		themes: {
+			description: 'Personaliza tu experiencia visual. Esto no afecta la fecha litúrgica.',
 			ordinary: 'Tiempo Ordinario',
 			christmas_easter: 'Navidad / Pascua',
 			advent_lent: 'Adviento / Cuaresma',

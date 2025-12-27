@@ -43,7 +43,7 @@ export interface LocalizationData {
 	ui: {
 		start_button: string;
 		pick_mystery: string;
-		made_by: string;
+		footer_made_by: string; // Added missing key
 		recommended_mystery: string;
 		pray_button_prefix: string;
 		change_theme: string;
@@ -71,6 +71,7 @@ export interface LocalizationData {
 			jump_to_section: string;
 		};
 		themes: {
+			description: string; // Added missing key
 			ordinary: string;
 			christmas_easter: string;
 			advent_lent: string;

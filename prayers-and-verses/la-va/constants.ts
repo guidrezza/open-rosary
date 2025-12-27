@@ -87,6 +87,7 @@ export const la_va: LocalizationData = {
 			jump_to_section: 'Ad Sectionem'
 		},
 		themes: {
+			description: 'Mos experientiam visualem tuam. Haec datam liturgicam non afficit.',
 			ordinary: 'Tempus Ordinarium',
 			christmas_easter: 'Nativitatis / Pascha',
 			advent_lent: 'Adventus / Quadragesima',

@@ -13,13 +13,86 @@
 	import { base } from '$app/paths';
 	import { browser } from '$app/environment';
 
-	let lang = $derived($page.params.lang);
+	let lang = $derived($page.params.lang ?? 'en');
 	let t = $derived(getLocale(lang));
 	let mode = $derived($rosary.mode);
 
 	// Initialize state
 	let currentSection = $state<RosarySection>('intro');
 	let currentBeadIndex = $state(0); // For Digital Mode
+
+	// Navigation Constants
+	const SECTIONS: RosarySection[] = [
+		'intro',
+		'decade-1',
+		'decade-2',
+		'decade-3',
+		'decade-4',
+		'decade-5',
+		'conclusion'
+	];
+
+	// Sync URL Params <-> State
+	$effect(() => {
+		// 1. Read from URL on mount (or external change) - ONLY ONCE/INIT ideally or if we want deep linking navigation support
+		const p = $page.url.searchParams;
+		const secParam = p.get('section');
+		const prayParam = p.get('prayer');
+
+		if (secParam !== null) {
+			const sIdx = parseInt(secParam);
+			if (!isNaN(sIdx) && sIdx >= 0 && sIdx < SECTIONS.length) {
+				const targetSec = SECTIONS[sIdx];
+				// Only update if different to avoid loops, though $effect dependency tracking should handle it naturally
+				// But we need to be careful about the WRITE effect below.
+				// Actually, best pattern: Init from URL in onMount or separate effect, then Write in another.
+				// However, Svelte 5 $effect runs on changes.
+				// Let's use untracked or a simple init flag for the first load.
+			}
+		}
+	});
+
+	// Better strategy: Init logic separate from Sync logic
+	let initialized = false;
+	$effect(() => {
+		if (!initialized && browser) {
+			const p = $page.url.searchParams;
+			const secParam = p.get('section');
+			const prayParam = p.get('prayer');
+
+			if (secParam) {
+				const sIdx = parseInt(secParam);
+				if (!isNaN(sIdx) && sIdx >= 0 && sIdx < SECTIONS.length) {
+					currentSection = SECTIONS[sIdx];
+				}
+			}
+			if (prayParam) {
+				const pIdx = parseInt(prayParam);
+				if (!isNaN(pIdx) && pIdx >= 0) {
+					currentBeadIndex = pIdx;
+				}
+			}
+			initialized = true;
+		}
+	});
+
+	// Sync State -> URL
+	$effect(() => {
+		if (initialized && browser) {
+			const sIdx = SECTIONS.indexOf(currentSection);
+			const pIdx = currentBeadIndex;
+
+			const url = new URL($page.url);
+			const currentSecParam = url.searchParams.get('section');
+			const currentPrayParam = url.searchParams.get('prayer');
+
+			if (currentSecParam !== String(sIdx) || currentPrayParam !== String(pIdx)) {
+				url.searchParams.set('section', String(sIdx));
+				url.searchParams.set('prayer', String(pIdx));
+				goto(url.toString(), { replaceState: true, noScroll: true, keepFocus: true });
+			}
+		}
+	});
 
 	// Get mystery from query param
 	let mysteryId = $derived(browser ? $page.url.searchParams.get('mystery') || 'joyful' : 'joyful');
@@ -65,12 +138,22 @@
 	let exitState = $state(false);
 	let sectionMenuOpen = $state(false);
 
+	function gotoHome() {
+		const url = new URL($page.url);
+		url.pathname = `${base}/${lang}`;
+		url.searchParams.delete('mystery');
+		url.searchParams.delete('section');
+		url.searchParams.delete('prayer');
+		// preserve theme, mode
+		goto(url.toString());
+	}
+
 	function handleMysteryClick() {
 		if (!exitState) {
 			exitState = true;
 			setTimeout(() => (exitState = false), 3000); // Reset after 3s
 		} else {
-			goto(`${base}/${lang}`);
+			gotoHome();
 		}
 	}
 
@@ -95,17 +178,6 @@
 		modalOpen = true;
 	}
 
-	// Navigation Logic
-	const SECTIONS: RosarySection[] = [
-		'intro',
-		'decade-1',
-		'decade-2',
-		'decade-3',
-		'decade-4',
-		'decade-5',
-		'conclusion'
-	];
-
 	function goToNext() {
 		if (mode === 'digital') {
 			// Move bead by bead
@@ -118,7 +190,7 @@
 					currentSection = SECTIONS[idx + 1];
 					currentBeadIndex = 0;
 				} else {
-					goto(`${base}/${lang}`);
+					gotoHome();
 				}
 			}
 		} else {
@@ -127,7 +199,7 @@
 			if (idx < SECTIONS.length - 1) {
 				currentSection = SECTIONS[idx + 1];
 			} else {
-				goto(`${base}/${lang}`);
+				gotoHome();
 			}
 		}
 	}
@@ -359,11 +431,14 @@
 					: ''}"
 			>
 				<!-- Wrapper handles the sizing/positioning states -->
-				<button
+				<div
 					class="relative z-0 flex w-full items-center justify-center overflow-hidden rounded-[32px] transition-all duration-500 ease-in-out
 						{imageMode === 'minimized' ? 'h-2 w-full cursor-pointer bg-white/20' : 'aspect-video'}
 						{imageMode === 'normal' ? 'max-w-lg' : ''}
 					"
+					role="button"
+					tabindex="0"
+					onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && toggleImageControls()}
 					onclick={toggleImageControls}
 				>
 					{#if imageMode !== 'minimized'}
@@ -431,7 +506,7 @@
 							</div>
 						{/if}
 					{/if}
-				</button>
+				</div>
 			</div>
 
 			<!-- Beads Container (Snake Layout) - NOW ABOVE TEXT -->

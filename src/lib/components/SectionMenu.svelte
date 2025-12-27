@@ -2,14 +2,6 @@
 	import BottomSheet from './BottomSheet.svelte';
 	import type { RosarySection } from '../types';
 
-	interface Props {
-		isOpen: boolean;
-		currentSection: RosarySection;
-		title: string;
-		onSelect: (section: RosarySection) => void;
-		onClose: () => void;
-	}
-
 	interface SectionItem {
 		id: RosarySection;
 		label: string;

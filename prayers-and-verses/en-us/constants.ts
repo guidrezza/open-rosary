@@ -87,6 +87,7 @@ export const en: LocalizationData = {
 			jump_to_section: 'Jump to Section'
 		},
 		themes: {
+			description: 'Customize your visual experience. This does not affect the liturgical date.',
 			ordinary: 'Ordinary Time',
 			christmas_easter: 'Christmas / Easter',
 			advent_lent: 'Advent / Lent',
