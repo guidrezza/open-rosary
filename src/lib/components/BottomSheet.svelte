@@ -45,13 +45,13 @@
 			<div
 				class="absolute right-0 bottom-0 left-0 z-0 rounded-t-[32px]"
 				style="height: 100%; backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);"
-				transition:steppedRise={{ duration: 150, steps: 5, easing: cubicOut }}
+				transition:steppedRise={{ duration: 100, steps: 15, easing: cubicOut }}
 			></div>
 
 			<!-- Modal Content: Bottom Sheet Style (No bottom margin, slide from 100% height) -->
 			<div
 				class="relative z-10 w-full touch-none"
-				transition:fly={{ y: 800, duration: 150, opacity: 1, easing: cubicOut }}
+				transition:fly={{ y: 800, duration: 100, opacity: 1, easing: cubicOut }}
 				ontouchstart={(e) => {
 					const touch = e.changedTouches[0];
 					touchStartY = touch.clientY;

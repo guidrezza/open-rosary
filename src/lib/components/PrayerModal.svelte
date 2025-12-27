@@ -15,13 +15,13 @@
 		<!-- Backdrop (Fades in/out) -->
 		<button
 			class="absolute inset-0 h-full w-full cursor-default bg-black/80 backdrop-blur-sm"
-			transition:fade={{ duration: 300 }}
+			transition:fade={{ duration: 100 }}
 			onclick={onClose}
 			aria-label="Close Modal"
 		></button>
 
 		<!-- Content (Flies in/out) -->
-		<div class="relative z-10 w-full max-w-lg" transition:fly={{ y: 20, duration: 300 }}>
+		<div class="relative z-10 w-full max-w-lg" transition:fly={{ y: 20, duration: 100 }}>
 			<div
 				class="w-full cursor-default"
 				onclick={(e) => e.stopPropagation()}
