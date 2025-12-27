@@ -20,10 +20,10 @@
 			duration,
 			easing,
 			css: (t: number) => {
-				// Calculate quantized height step (1 to steps)
-				// t goes 0 -> 1. We want t > 0 to immediately jump to step 1.
-				const s = Math.ceil(t * steps);
-				const p = (s / steps) * 100; // e.g. 20%, 40%, ... 100%
+				// Calculate quantized height step (0 to steps) based on PASSED thresholds
+				// uses floor to ensure we only show blur for the portion already covered
+				const s = Math.floor(t * steps);
+				const p = (s / steps) * 100; // e.g. 0%, 20%, ... 100%
 				return `height: ${p}%;`;
 			}
 		};
