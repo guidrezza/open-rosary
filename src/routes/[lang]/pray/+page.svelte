@@ -303,17 +303,21 @@
 	let mysteryExpanded = $derived(mode === 'digital' && isAnnounce ? true : userMysteryExpanded);
 
 	// Guided Mode UI Overrides (Creed Visibility)
+	// Guided Mode UI Overrides (Creed Visibility)
+	let previousPrayerId = $state('');
+
 	$effect(() => {
-		if (mode === 'digital') {
-			const isCreed = steps[currentBeadIndex]?.prayerId === 'creed';
-			// Creed: Collapse Image. Others: Ensure Expanded (Normal).
-			if (isCreed) {
+		const currentPrayerId = steps[currentBeadIndex]?.prayerId;
+
+		if (mode === 'digital' && currentPrayerId !== previousPrayerId) {
+			if (currentPrayerId === 'creed') {
+				// Enter Creed -> Minimize
 				imageMode = 'minimized';
-			} else if (imageMode === 'minimized') {
-				// Restore to normal if we are NOT on Creed and currently minimized.
-				// This enforces the "Default Expanded" rule.
+			} else if (previousPrayerId === 'creed') {
+				// Leave Creed -> Restore Normal (Expanded)
 				imageMode = 'normal';
 			}
+			previousPrayerId = currentPrayerId;
 		}
 	});
 </script>
@@ -471,18 +475,18 @@
 					{#each steps as step, i}
 						<button
 							class="
-                                absolute z-10 flex h-[25px] w-[25px] items-center justify-center rounded-full transition-all duration-300
+                                absolute z-10 flex h-[25px] w-[25px] items-center justify-center rounded-full transition-all duration-500 ease-out
                                 {mode === 'physical'
-								? 'bg-white text-black shadow-[0_0_15px_rgba(255,255,255,0.4)]'
+								? 'bg-white text-black shadow-[0_0_10px_2px_rgba(255,255,255,0.3)]'
 								: i <= currentBeadIndex
-									? 'bg-white text-black shadow-[0_0_15px_rgba(255,255,255,0.4)]'
+									? 'bg-white text-black shadow-[0_0_10px_2px_rgba(255,255,255,0.3)]'
 									: 'border border-white/5 bg-black/40 text-white/40'}
                             "
 							style="
                                 left: {i * BEAD_SPACING}px; 
                                 top: {(i % 2 === 0 ? 0 : BEAD_OFFSET_Y) + VERTICAL_OFFSET}px;
                                 transform: scale({mode === 'digital' && i === currentBeadIndex
-								? 1.4
+								? 1.5
 								: 1});
                             "
 							onclick={() => {
@@ -492,7 +496,11 @@
 							<span class="text-[10px] leading-none font-medium">{step.label}</span>
 
 							{#if mode === 'digital' && i === currentBeadIndex}
-								<div class="absolute inset-0 animate-ping rounded-full bg-white opacity-40"></div>
+								<!-- Corona Glow -->
+								<div
+									class="absolute inset-0 -z-10 rounded-full bg-white blur-md"
+									style="opacity: 0.6; transform: scale(1.2);"
+								></div>
 							{/if}
 						</button>
 					{/each}
