@@ -90,6 +90,32 @@ export function getLiturgicalTheme(date: Date = new Date()): LiturgicalTheme {
     // Reset time for accurate comparison
     const current = new Date(year, month, day);
 
+    // Major Fixed Feasts (Month is 0-indexed)
+    // Jan 1: Mary, Mother of God (White)
+    // Jan 6: Epiphany (White) - Traditional date
+    // Mar 19: St. Joseph (White)
+    // Mar 25: Annunciation (White) - Note: Moved if during Holy Week, ignoring for simplicity
+    // Jun 29: Sts. Peter and Paul (Red)
+    // Aug 6: Transfiguration (White)
+    // Aug 15: Assumption (White)
+    // Sep 14: Exaltation of the Cross (Red)
+    // Nov 1: All Saints (White)
+    // Nov 2: All Souls (Black/Violet)
+    // Dec 8: Immaculate Conception (White)
+
+    const feastKey = `${month}-${day}`;
+    if (feastKey === '0-1') return { color: 'white', season: 'Mary, Mother of God', cssVars: PALETTES.white };
+    if (feastKey === '0-6') return { color: 'white', season: 'Epiphany', cssVars: PALETTES.white };
+    if (feastKey === '2-19') return { color: 'white', season: 'St. Joseph', cssVars: PALETTES.white };
+    if (feastKey === '2-25') return { color: 'white', season: 'Annunciation', cssVars: PALETTES.white };
+    if (feastKey === '5-29') return { color: 'red', season: 'Sts. Peter and Paul', cssVars: PALETTES.red };
+    if (feastKey === '7-6') return { color: 'white', season: 'Transfiguration', cssVars: PALETTES.white };
+    if (feastKey === '7-15') return { color: 'white', season: 'Assumption', cssVars: PALETTES.white };
+    if (feastKey === '8-14') return { color: 'red', season: 'Exaltation of the Cross', cssVars: PALETTES.red };
+    if (feastKey === '10-1') return { color: 'white', season: 'All Saints', cssVars: PALETTES.white };
+    if (feastKey === '10-2') return { color: 'black', season: 'All Souls', cssVars: PALETTES.black };
+    if (feastKey === '11-8') return { color: 'white', season: 'Immaculate Conception', cssVars: PALETTES.white };
+
     // Fixed Dates
     // Christmas: Dec 25 - Jan 10 (approx)
     // Actually Christmas season ends on Baptism of the Lord (Sunday after Jan 6).
