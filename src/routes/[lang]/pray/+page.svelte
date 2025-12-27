@@ -290,6 +290,9 @@
 			a.download = img.path.split('/').pop() || 'image.webp';
 			document.body.appendChild(a);
 			a.click();
+			document.body.removeChild(a);
+		}
+	}
 	// Collapsible Mystery
 	let userMysteryExpanded = $state(false);
 	let isAnnounce = $derived(

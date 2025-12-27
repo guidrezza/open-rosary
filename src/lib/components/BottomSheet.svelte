@@ -13,6 +13,21 @@
 	let { isOpen, title, children, onClose }: Props = $props();
 
 	let touchStartY = 0;
+
+	// Custom transition for "Stepped Blur" effect
+	function steppedRise(node: Element, { duration, steps = 5, easing = cubicOut }: any) {
+		return {
+			duration,
+			easing,
+			css: (t: number) => {
+				// Calculate quantized height step (1 to steps)
+				// t goes 0 -> 1. We want t > 0 to immediately jump to step 1.
+				const s = Math.ceil(t * steps);
+				const p = (s / steps) * 100; // e.g. 20%, 40%, ... 100%
+				return `height: ${p}%;`;
+			}
+		};
+	}
 </script>
 
 {#if isOpen}
@@ -30,7 +45,7 @@
 			<div
 				class="absolute right-0 bottom-0 left-0 z-0 rounded-t-[32px]"
 				style="height: 100%; backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);"
-				transition:slide={{ duration: 150, easing: cubicOut }}
+				transition:steppedRise={{ duration: 150, steps: 5, easing: cubicOut }}
 			></div>
 
 			<!-- Modal Content: Bottom Sheet Style (No bottom margin, slide from 100% height) -->
