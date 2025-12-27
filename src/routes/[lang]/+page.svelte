@@ -306,23 +306,23 @@
 			{t.ui.themes.description ||
 				'Customize your visual experience. This does not affect the liturgical date.'}
 		</p>
-		<div class="grid grid-cols-3 gap-3">
-			{#each [{ c: 'green', l: t.ui.themes.ordinary, hex: '#10b981', emoji: '🌿' }, { c: 'purple', l: t.ui.themes.advent_lent, hex: '#8b5cf6', emoji: '🍇' }, { c: 'white', l: t.ui.themes.christmas_easter, hex: '#f3f4f6', emoji: '🕊️' }, { c: 'red', l: t.ui.themes.pentecost, hex: '#ef4444', emoji: '🔥' }, { c: 'rose', l: t.ui.themes.gaudete, hex: '#f43f5e', emoji: '🌸' }, { c: 'black', l: t.ui.themes.requiem, hex: '#2e2e2e', emoji: '🕯️' }] as item}
+		<div class="grid grid-cols-4 gap-3">
+			{#each [{ c: 'green', l: t.ui.themes.ordinary, hex: '#10b981', emoji: '🌿' }, { c: 'purple', l: t.ui.themes.advent_lent, hex: '#8b5cf6', emoji: '✝️' }, { c: 'white', l: t.ui.themes.christmas_easter, hex: '#e2e8f0', emoji: '🕊️' }, { c: 'red', l: t.ui.themes.pentecost, hex: '#ef4444', emoji: '🔥' }, { c: 'rose', l: t.ui.themes.gaudete, hex: '#e11d48', emoji: '🌸' }, { c: 'gold', l: 'Gold', hex: '#f59e0b', emoji: '✨' }, { c: 'silver', l: 'Silver', hex: '#94a3b8', emoji: '🩶' }, { c: 'black', l: t.ui.themes.requiem, hex: '#404040', emoji: '🕯️' }] as item}
 				<button
-					class="relative flex aspect-square flex-col items-center justify-center overflow-hidden rounded-[32px] border border-white/10 p-2 shadow-lg transition-transform active:scale-95"
+					class="relative flex aspect-square flex-col items-center justify-center overflow-hidden rounded-[24px] border border-white/10 p-2 shadow-lg transition-transform active:scale-95"
 					style="background-color: {item.hex}CC;"
 					onclick={() => handleThemeSelect(item.c as LiturgicalColor)}
 				>
 					<!-- Centered Large Emoji -->
 					<div
-						class="absolute inset-0 flex items-center justify-center pb-4 text-5xl drop-shadow-sm filter"
+						class="absolute inset-0 flex items-center justify-center pb-4 text-4xl drop-shadow-sm filter"
 					>
 						{item.emoji}
 					</div>
 					<!-- Text at Bottom, over emoji -->
-					<div class="absolute inset-x-0 bottom-3 flex justify-center">
+					<div class="absolute inset-x-0 bottom-2 flex justify-center">
 						<span
-							class="text-center text-[9px] leading-tight font-bold tracking-wider text-white uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
+							class="text-center text-[8px] leading-tight font-bold tracking-wider text-white uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
 						>
 							{item.l}
 						</span>

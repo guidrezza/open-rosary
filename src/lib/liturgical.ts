@@ -1,4 +1,12 @@
-export type LiturgicalColor = 'green' | 'white' | 'red' | 'purple' | 'rose' | 'black';
+export type LiturgicalColor =
+    | 'green'
+    | 'white'
+    | 'red'
+    | 'purple'
+    | 'rose'
+    | 'gold'
+    | 'silver'
+    | 'black';
 
 export interface LiturgicalTheme {
     color: LiturgicalColor;
@@ -11,52 +19,60 @@ export interface LiturgicalTheme {
     };
 }
 
-// Color Palettes (HSL for easy CSS variable usage if needed, but strings are fine)
-// We need "diffused theme color with a heavily blurred glassmorphism effect"
-// So --theme-color is the strong background connection, --glass-bg is the panel background.
-// UPDATED: Glass-bg opacity increased to 0.75 for visible frosted glass effect
-
-// Modern, Glass-Friendly Palettes
+// Modern, Glass-Friendly Palettes (Refined for "Lights on Gray" aesthetic)
 export const PALETTES: Record<LiturgicalColor, LiturgicalTheme['cssVars']> = {
     green: {
-        '--theme-color': '#059669', // Emerald 600 (Darker than 500)
-        '--glass-bg': 'rgba(6, 78, 59, 0.75)', // Increased opacity for visible glass
+        '--theme-color': '#059669', // Emerald 600
+        '--glass-bg': 'rgba(6, 78, 59, 0.6)',
         '--glass-border': 'rgba(52, 211, 153, 0.2)',
         '--text-highlight': '#6ee7b7'
     },
     white: {
-        '--theme-color': '#64748b', // Slate 500 (Much darker than Gray 100 for visibility)
-        '--glass-bg': 'rgba(30, 41, 59, 0.0)', // Dark slate instead of white for visibility
-        '--glass-border': 'rgba(255, 255, 255, 0.2)',
-        '--text-highlight': '#e2e8f0' // Slate 200
+        '--theme-color': '#e2e8f0', // Slate 200 (Bright White/Grey)
+        '--glass-bg': 'rgba(255, 255, 255, 0.1)',
+        '--glass-border': 'rgba(255, 255, 255, 0.3)',
+        '--text-highlight': '#f8fafc'
     },
     red: {
         '--theme-color': '#dc2626', // Red 600
-        '--glass-bg': 'rgba(127, 29, 29, 0.0)', // Increased opacity
-        '--glass-border': 'rgba(248, 113, 113, 0.2)',
+        '--glass-bg': 'rgba(127, 29, 29, 0.6)',
+        '--glass-border': 'rgba(248, 113, 113, 0.3)',
         '--text-highlight': '#fca5a5'
     },
     purple: {
         '--theme-color': '#7c3aed', // Violet 600
-        '--glass-bg': 'rgba(76, 29, 149, 0.0)', // Increased opacity
-        '--glass-border': 'rgba(167, 139, 250, 0.2)',
+        '--glass-bg': 'rgba(76, 29, 149, 0.6)',
+        '--glass-border': 'rgba(167, 139, 250, 0.3)',
         '--text-highlight': '#d8b4fe'
     },
     rose: {
         '--theme-color': '#e11d48', // Rose 600
-        '--glass-bg': 'rgba(136, 19, 55, 0.0)', // Increased opacity
-        '--glass-border': 'rgba(251, 113, 133, 0.2)',
+        '--glass-bg': 'rgba(136, 19, 55, 0.5)',
+        '--glass-border': 'rgba(251, 113, 133, 0.3)',
         '--text-highlight': '#fda4af'
     },
+    gold: {
+        '--theme-color': '#f59e0b', // Amber 500 (Gold)
+        '--glass-bg': 'rgba(180, 83, 9, 0.5)',
+        '--glass-border': 'rgba(251, 191, 36, 0.4)',
+        '--text-highlight': '#fde68a'
+    },
+    silver: {
+        '--theme-color': '#94a3b8', // Slate 400 (Silver/Blueish)
+        '--glass-bg': 'rgba(51, 65, 85, 0.5)',
+        '--glass-border': 'rgba(148, 163, 184, 0.3)',
+        '--text-highlight': '#e2e8f0'
+    },
     black: {
-        '--theme-color': '#404040', // Neutral 700 (Slightly lighter than pure black to show up)
-        '--glass-bg': 'rgba(0, 0, 0, 0.0)', // Increased opacity
-        '--glass-border': 'rgba(100, 100, 100, 0.2)',
-        '--text-highlight': '#e5e5e5'
+        '--theme-color': '#404040', // Neutral 700
+        '--glass-bg': 'rgba(23, 23, 23, 0.7)',
+        '--glass-border': 'rgba(82, 82, 82, 0.3)',
+        '--text-highlight': '#d4d4d4'
     }
 };
 
-// Helper: Get Easter Date for a year (Anonymous algorithm)
+// --- Helper Functions ---
+
 function getEasterDate(year: number): Date {
     const a = year % 19;
     const b = Math.floor(year / 100);
@@ -75,119 +91,130 @@ function getEasterDate(year: number): Date {
     return new Date(year, month, day);
 }
 
-// Helper: Add days to date
 function addDays(date: Date, days: number): Date {
     const result = new Date(date);
     result.setDate(result.getDate() + days);
     return result;
 }
 
+function isSameDate(d1: Date, d2: Date): boolean {
+    return d1.getMonth() === d2.getMonth() && d1.getDate() === d2.getDate();
+}
+
+// --- Main Logic ---
+
 export function getLiturgicalTheme(date: Date = new Date()): LiturgicalTheme {
     const year = date.getFullYear();
     const month = date.getMonth(); // 0-11
     const day = date.getDate();
-
-    // Reset time for accurate comparison
     const current = new Date(year, month, day);
 
-    // Major Fixed Feasts (Month is 0-indexed)
-    // Jan 1: Mary, Mother of God (White)
-    // Jan 6: Epiphany (White) - Traditional date
-    // Mar 19: St. Joseph (White)
-    // Mar 25: Annunciation (White) - Note: Moved if during Holy Week, ignoring for simplicity
-    // Jun 29: Sts. Peter and Paul (Red)
-    // Aug 6: Transfiguration (White)
-    // Aug 15: Assumption (White)
-    // Sep 14: Exaltation of the Cross (Red)
-    // Nov 1: All Saints (White)
-    // Nov 2: All Souls (Black/Violet)
-    // Dec 8: Immaculate Conception (White)
-
+    // 1. FIXED FEASTS (High Priority)
     const feastKey = `${month}-${day}`;
-    if (feastKey === '0-1') return { color: 'white', season: 'Mary, Mother of God', cssVars: PALETTES.white };
-    if (feastKey === '0-6') return { color: 'white', season: 'Epiphany', cssVars: PALETTES.white };
-    if (feastKey === '2-19') return { color: 'white', season: 'St. Joseph', cssVars: PALETTES.white };
-    if (feastKey === '2-25') return { color: 'white', season: 'Annunciation', cssVars: PALETTES.white };
-    if (feastKey === '5-29') return { color: 'red', season: 'Sts. Peter and Paul', cssVars: PALETTES.red };
-    if (feastKey === '7-6') return { color: 'white', season: 'Transfiguration', cssVars: PALETTES.white };
-    if (feastKey === '7-15') return { color: 'white', season: 'Assumption', cssVars: PALETTES.white };
-    if (feastKey === '8-14') return { color: 'red', season: 'Exaltation of the Cross', cssVars: PALETTES.red };
-    if (feastKey === '10-1') return { color: 'white', season: 'All Saints', cssVars: PALETTES.white };
-    if (feastKey === '10-2') return { color: 'black', season: 'All Souls', cssVars: PALETTES.black };
-    if (feastKey === '11-8') return { color: 'white', season: 'Immaculate Conception', cssVars: PALETTES.white };
 
-    // Fixed Dates
-    // Christmas: Dec 25 - Jan 10 (approx)
-    // Actually Christmas season ends on Baptism of the Lord (Sunday after Jan 6).
-    // Simplify: Dec 25 - Jan 12.
-    if ((month === 11 && day >= 25) || (month === 0 && day <= 12)) {
+    const fixedFeasts: Record<string, { color: LiturgicalColor; season: string }> = {
+        '0-1': { color: 'gold', season: 'Mary, Mother of God' },
+        '0-6': { color: 'gold', season: 'Epiphany' },
+        '1-2': { color: 'white', season: 'Presentation of the Lord' },
+        '2-19': { color: 'silver', season: 'St. Joseph' },
+        '2-25': { color: 'silver', season: 'Annunciation' }, // (Note: Can be moved if Holy Week)
+        '5-24': { color: 'white', season: 'Nativity of St. John Baptist' },
+        '5-29': { color: 'red', season: 'Sts. Peter and Paul' },
+        '7-6': { color: 'white', season: 'Transfiguration' },
+        '7-15': { color: 'gold', season: 'Assumption' },
+        '8-14': { color: 'red', season: 'Exaltation of the Holy Cross' },
+        '8-29': { color: 'white', season: 'Archangels' },
+        '10-1': { color: 'gold', season: 'All Saints' },
+        '10-2': { color: 'black', season: 'All Souls' }, // Actually Violet/Black
+        '10-9': { color: 'white', season: 'Dedication of Lateran Basilica' },
+        '11-8': { color: 'gold', season: 'Immaculate Conception' },
+        '11-12': { color: 'white', season: 'Our Lady of Guadalupe' },
+        '11-25': { color: 'gold', season: 'Christmas' },
+        '11-30': { color: 'white', season: 'Holy Family' }, // Simplified fixed date for now or calc logic below
+    };
+
+    if (fixedFeasts[feastKey]) {
+        const f = fixedFeasts[feastKey];
+        return { color: f.color, season: f.season, cssVars: PALETTES[f.color] };
+    }
+
+    // 2. CALCULATED DATES & SEASONS
+
+    // Anchors
+    const easter = getEasterDate(year);
+    const ashWed = addDays(easter, -46);
+    const pentecost = addDays(easter, 49);
+    const adventStart = new Date(year, 11, 25);
+    adventStart.setDate(25 - (adventStart.getDay() || 7) - (3 * 7)); // 4th Sunday before Christmas
+
+    // Christmas Cycle (Logic for calculated feasts/periods)
+    const christmas = new Date(year, 11, 25);
+
+    // Baptism of the Lord (Current Year Jan Logic)
+    const epiphanyThisYear = new Date(year, 0, 6);
+    const baptismOfLordThisYear = addDays(epiphanyThisYear, (7 - epiphanyThisYear.getDay()) % 7 || 7);
+
+    // General Christmas Season
+    if ((month === 11 && day >= 25) || (month === 0 && day <= baptismOfLordThisYear.getDate())) {
         return { color: 'white', season: 'Christmas', cssVars: PALETTES.white };
     }
 
-    // Advent: Starts 4 Sundays before Dec 25. Ends Dec 24.
-    // Earliest Nov 27, Latest Dec 3.
-    // Simplify: Dec 1 - Dec 24 is safe bet for logic, or calculate specifically.
-    // Let's do simple check: Month 11 (Dec) before 25th -> Purple.
-    // Also late Nov? Just sticking to Dec < 25 for "Advent" approximation or check weeks.
-    const xmas = new Date(year, 11, 25);
-    const adventStart = new Date(xmas);
-    adventStart.setDate(xmas.getDate() - (xmas.getDay() || 7) - (3 * 7)); // 4th Sunday before
-
-    if (current >= adventStart && current < xmas) {
-        // Gaudete Sunday (3rd Sunday of Advent)
-        // Check if Sunday and roughly 2 weeks into Advent
-        // For simplicity, let's stick to Purple unless strict requirements.
-        // Prompt says "Rose... Gaudete Sunday".
-        // Let's calculate:
-        // 3rd Sunday is adventStart + 14 days.
-        const gaudete = addDays(adventStart, 14);
-        if (current.getTime() === gaudete.getTime()) {
-            return { color: 'rose', season: 'Advent (Gaudete)', cssVars: PALETTES.rose };
-        }
-        return { color: 'purple', season: 'Advent', cssVars: PALETTES.purple };
-    }
-
-    // Easter Cycle
-    const easter = getEasterDate(year);
-    const ashWed = addDays(easter, -46); // 40 days + Sundays? Lent is 46 days before Easter.
-    const pentecost = addDays(easter, 49);
-
     // Lent
     if (current >= ashWed && current < easter) {
-        // Laetare Sunday (4th Sunday of Lent)
-        // Lent Start + ~24 days?
-        // 4th Sunday of Lent is 21 days before Easter.
-        const laetare = addDays(easter, -21);
-        if (current.getTime() === laetare.getTime()) {
-            return { color: 'rose', season: 'Lent (Laetare)', cssVars: PALETTES.rose };
-        }
+        const daysSinceAsh = Math.floor((current.getTime() - ashWed.getTime()) / (1000 * 60 * 60 * 24));
 
         // Palm Sunday (Sunday before Easter)
-        const palmSun = addDays(easter, -7);
-        if (current.getTime() === palmSun.getTime()) {
-            return { color: 'red', season: 'Palm Sunday', cssVars: PALETTES.red };
-        }
+        if (isSameDate(current, addDays(easter, -7))) return { color: 'red', season: 'Palm Sunday', cssVars: PALETTES.red };
 
-        // Good Friday (Friday before Easter)
-        const goodFri = addDays(easter, -2);
-        if (current.getTime() === goodFri.getTime()) {
-            return { color: 'red', season: 'Good Friday', cssVars: PALETTES.red };
-        }
+        // Triduum
+        if (isSameDate(current, addDays(easter, -3))) return { color: 'red', season: 'Holy Thursday', cssVars: PALETTES.red }; // White/Red -> Red for simplicity or custom Triduum logic
+        if (isSameDate(current, addDays(easter, -2))) return { color: 'red', season: 'Good Friday', cssVars: PALETTES.red };
+        if (isSameDate(current, addDays(easter, -1))) return { color: 'gold', season: 'Easter Vigil', cssVars: PALETTES.gold };
+
+        // Laetare (4th Sunday) -> approx day 25?
+        // Ash Wed is Day 0. 1st Sun ~Day 4. 4th Sun ~Day 25.
+        // Precise: Ash Wed -> +3 Sundays is 4th Sunday? No.
+        // Let's just calculate Laetare: easter - 21 days
+        if (isSameDate(current, addDays(easter, -21))) return { color: 'rose', season: 'Lent (Laetare)', cssVars: PALETTES.rose };
 
         return { color: 'purple', season: 'Lent', cssVars: PALETTES.purple };
     }
 
     // Easter Season
-    if (current >= easter && current < pentecost) {
+    if (current >= easter && current <= pentecost) {
+        if (isSameDate(current, easter)) return { color: 'gold', season: 'Easter Sunday', cssVars: PALETTES.gold };
+        if (isSameDate(current, addDays(easter, 7))) return { color: 'white', season: 'Divine Mercy', cssVars: PALETTES.white };
+        if (isSameDate(current, addDays(easter, 39))) return { color: 'gold', season: 'Ascension', cssVars: PALETTES.gold }; // Ascension Thursday
+        if (isSameDate(current, pentecost)) return { color: 'red', season: 'Pentecost', cssVars: PALETTES.red };
+
         return { color: 'white', season: 'Easter', cssVars: PALETTES.white };
     }
 
-    // Pentecost
-    if (current.getTime() === pentecost.getTime()) {
-        return { color: 'red', season: 'Pentecost', cssVars: PALETTES.red };
+    // Advent
+    if (current >= adventStart && current < christmas) {
+        // Gaudete: 3rd Sunday. Start + 14 days.
+        if (isSameDate(current, addDays(adventStart, 14))) return { color: 'rose', season: 'Advent (Gaudete)', cssVars: PALETTES.rose };
+        return { color: 'purple', season: 'Advent', cssVars: PALETTES.purple };
     }
 
-    // Ordinary Time / Other
-    // Default to Green
+    // Ordinary Time / Calculated Solemnities
+    // Trinity Sunday: Pentecost + 7
+    const trinity = addDays(pentecost, 7);
+    if (isSameDate(current, trinity)) return { color: 'gold', season: 'Holy Trinity', cssVars: PALETTES.gold };
+
+    // Corpus Christi: Trinity + 4(Thu) or +7(Sun)
+    // Usually Thursday.
+    const corpus = addDays(trinity, 4);
+    if (isSameDate(current, corpus)) return { color: 'gold', season: 'Corpus Christi', cssVars: PALETTES.gold };
+
+    // Sacred Heart: Pentecost + 19 (Friday after Corpus Christi oct)
+    const sacredHeart = addDays(pentecost, 19);
+    if (isSameDate(current, sacredHeart)) return { color: 'white', season: 'Sacred Heart', cssVars: PALETTES.white };
+
+    // Christ the King: Sunday before Advent Start
+    const christKing = addDays(adventStart, -7);
+    if (isSameDate(current, christKing)) return { color: 'gold', season: 'Christ the King', cssVars: PALETTES.gold };
+
+    // Default
     return { color: 'green', season: 'Ordinary Time', cssVars: PALETTES.green };
 }
