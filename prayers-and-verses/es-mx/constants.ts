@@ -65,6 +65,10 @@ export const es_mx: LocalizationData = {
 			physical: {
 				title: 'Cuentas Físicas',
 				desc: 'Tengo mi propio Rosario. Solo muéstrame las oraciones.'
+			},
+			mysteries: {
+				title: 'Solo los Misterios',
+				desc: 'Una lista simple de los 5 misterios'
 			}
 		},
 		actions: {

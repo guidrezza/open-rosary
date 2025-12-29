@@ -65,6 +65,10 @@ export const pt_br: LocalizationData = {
 			physical: {
 				title: 'Terço Físico',
 				desc: 'Tenho meu próprio terço. Apenas mostre as orações.'
+			},
+			mysteries: {
+				title: 'Apenas os Mistérios',
+				desc: 'Uma lista simples dos 5 mistérios'
 			}
 		},
 		actions: {

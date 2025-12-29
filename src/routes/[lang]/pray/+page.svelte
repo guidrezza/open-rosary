@@ -98,8 +98,34 @@
 	let mysteryId = $derived(browser ? $page.url.searchParams.get('mystery') || 'joyful' : 'joyful');
 	let mystery = $derived(t.mysteries[mysteryId] || t.mysteries['joyful']);
 
+	// Get submode
+	let submode = $derived(browser ? $page.url.searchParams.get('submode') : null);
+	
+	// Image Rotation Logic
+	let rotateImage = $derived.by(() => {
+		if (submode === 'mysteries') return true;
+		if (currentSection === 'intro' || currentSection === 'conclusion') return true;
+		return false;
+	});
+	
+	let imagePool = $derived.by(() => {
+		if (submode === 'mysteries' || currentSection === 'intro' || currentSection === 'conclusion') return 'mystery';
+		return 'random'; // Or explicit decade logic takes precedence in comp
+	});
+
 	// Computed Steps
 	function getStepsForSection(sec: RosarySection, mys: Mystery) {
+		if (submode === 'mysteries') {
+			// Special Mode: Just the 5 mysteries
+			// We return 5 steps, each corresponding to a mystery passage
+			return mys.passages.map((passage, i) => ({
+				prayerId: 'announce',
+				label: 'M',
+				passage,
+				decade: i + 1 // Add decade info for tracking
+			}));
+		}
+
 		if (sec === 'intro') {
 			return [
 				{ prayerId: 'sign_of_cross', label: 'S' },
@@ -144,9 +170,11 @@
 		url.searchParams.delete('mystery');
 		url.searchParams.delete('section');
 		url.searchParams.delete('prayer');
+		url.searchParams.delete('submode'); // Clear submode
 		// preserve theme, mode
 		goto(url.toString());
 	}
+
 
 	function handleMysteryClick() {
 		if (!exitState) {
@@ -232,6 +260,7 @@
 
 	// UI Text
 	let sectionTitle = $derived.by(() => {
+		if (submode === 'mysteries') return 'Mysteries'; // Or localized
 		if (currentSection === 'intro') return t.ui.sections.intro;
 		if (currentSection === 'conclusion') return t.ui.sections.conclusion;
 		const num = currentSection.split('-')[1];
@@ -367,6 +396,20 @@
 	}
 	// Collapsible Mystery
 	let userMysteryExpanded = $state(false);
+	// For "Just the Mysteries" mode (or multi-mystery lists), track individual expansion
+	// We use a simple string key: "prayerId-passage"
+	let expandedKeys = $state(new Set<string>());
+
+	function toggleExpansion(key: string) {
+		const newSet = new Set(expandedKeys);
+		if (newSet.has(key)) {
+			newSet.delete(key);
+		} else {
+			newSet.add(key);
+		}
+		expandedKeys = newSet;
+	}
+
 	let isAnnounce = $derived(
 		steps[currentBeadIndex] && steps[currentBeadIndex].prayerId === 'announce'
 	);
@@ -408,12 +451,18 @@
 				{exitState ? t.ui.actions.exit : mystery.name}
 			</button>
 
-			<button
-				class="font-bold text-white transition-colors hover:text-white/80"
-				onclick={() => (sectionMenuOpen = true)}
-			>
-				{headerTitle} ▾
-			</button>
+			{#if submode === 'mysteries'}
+				<div class="font-bold text-white">
+					{headerTitle}
+				</div>
+			{:else}
+				<button
+					class="font-bold text-white transition-colors hover:text-white/80"
+					onclick={() => (sectionMenuOpen = true)}
+				>
+					{headerTitle} ▾
+				</button>
+			{/if}
 		</GlassPanel>
 	</header>
 
@@ -442,7 +491,12 @@
 					onclick={toggleImageControls}
 				>
 					{#if imageMode !== 'minimized'}
-						<MysteryImage mystery={mysteryId} decade={currentImageDecade} />
+						<MysteryImage 
+							mystery={mysteryId} 
+							decade={currentImageDecade} 
+							rotate={rotateImage}
+							pool="mystery"
+						/>
 
 						<!-- Overlay Controls (Normal Mode Only) -->
 						{#if showControls}
@@ -650,18 +704,19 @@
 				<!-- Physical: List View (Deduplicated) -->
 				<div class="mx-auto flex w-full max-w-lg flex-col gap-1">
 					{#each Array.from(new Set(steps.map((s) => s.prayerId + (s.passage || '')))).map((key) => steps.find((s) => s.prayerId + (s.passage || '') === key)!) as step}
+						{@const stepKey = step.prayerId + (step.passage || '')}
 						<button
-							class="group flex w-full items-center gap-3 rounded-lg p-2 text-left transition-colors hover:bg-white/5"
+							class="group flex w-full items-start gap-3 rounded-lg p-2 text-left transition-colors hover:bg-white/5"
 							onclick={() => {
 								if (step.prayerId === 'announce') {
-									userMysteryExpanded = !userMysteryExpanded;
+									toggleExpansion(stepKey);
 								} else {
 									openPrayer(step);
 								}
 							}}
 						>
 							<div
-								class="flex h-[25px] w-[25px] items-center justify-center rounded-full bg-white text-[10px] font-medium text-black shadow-[0_0_10px_rgba(255,255,255,0.2)] transition-colors"
+								class="flex h-[25px] w-[25px] shrink-0 items-center justify-center rounded-full bg-white text-[10px] font-medium text-black shadow-[0_0_10px_rgba(255,255,255,0.2)] transition-colors"
 							>
 								{step.label}
 							</div>
@@ -675,20 +730,20 @@
 												{parsed.title || t.ui.announce}
 											</span>
 											<span class="flex w-8 justify-center text-lg font-bold text-white/60">
-												{mysteryExpanded ? '−' : '+'}
+												{expandedKeys.has(stepKey) ? '−' : '+'}
 											</span>
 										</div>
 
-										{#if mysteryExpanded}
+										{#if expandedKeys.has(stepKey)}
 											<div transition:slide={{ duration: 200 }}>
 												<span class="mt-1 block text-sm leading-snug text-white/80 italic">
 													{parsed.verse}
 												</span>
-												{#if parsedMystery.fruit}
+												{#if parsed.fruit}
 													<span
 														class="mt-0.5 block text-xs font-medium tracking-wider text-white/60"
 													>
-														{parsedMystery.fruit}
+														{parsed.fruit}
 													</span>
 												{/if}
 											</div>
@@ -709,6 +764,7 @@
 		</div>
 
 		<!-- Navigation Controls (Now Flex Footer) -->
+		{#if submode !== 'mysteries'}
 		<div class="z-40 mx-auto flex w-full max-w-md flex-none justify-between px-6 pt-2 pb-6">
 			<button
 				class="pointer-events-auto flex h-14 min-w-[140px] items-center justify-center gap-2 rounded-full border border-white/10 bg-white/10 px-6 font-medium text-white shadow-lg backdrop-blur-md transition-all hover:bg-white/20 active:scale-95"
@@ -729,6 +785,7 @@
 				<span>→</span>
 			</button>
 		</div>
+		{/if}
 	</main>
 </div>
 

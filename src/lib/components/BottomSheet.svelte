@@ -82,6 +82,7 @@
 				}}
 			>
 				<GlassPanel
+					style="backdrop-filter: none; -webkit-backdrop-filter: none;"
 					class="flex max-h-[90vh] flex-col gap-2 overflow-y-auto rounded-t-[32px] !rounded-b-none !border-b-0 p-8 pb-12"
 				>
 					<!-- Mobile Handle -->

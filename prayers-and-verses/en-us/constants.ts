@@ -65,6 +65,10 @@ export const en: LocalizationData = {
 			physical: {
 				title: 'Physical Beads',
 				desc: 'I have my own Rosary. Just show me the prayers.'
+			},
+			mysteries: {
+				title: 'Just the Mysteries',
+				desc: 'A simple list of the 5 mysteries'
 			}
 		},
 		actions: {

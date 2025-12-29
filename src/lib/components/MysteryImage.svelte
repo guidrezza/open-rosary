@@ -1,38 +1,103 @@
 <script lang="ts">
-	import { MYSTERY_IMAGES, getRandomImage, type MysteryImageDef } from '$lib/mysteryImages';
+	import { onDestroy } from 'svelte';
+	import { 
+		MYSTERY_IMAGES, 
+		getRandomImage, 
+		getNextRandomFromDeck, 
+		getNextSequentialImage, 
+		createDeck,
+		type MysteryImageDef 
+	} from '$lib/mysteryImages';
 
-	let { mystery, decade }: { mystery?: string; decade?: number } = $props();
+	let {
+		mystery,
+		decade,
+		rotate = false,
+		pool = 'random', // 'random' | 'mystery'
+		speed = 5000
+	}: {
+		mystery?: string;
+		decade?: number;
+		rotate?: boolean;
+		pool?: 'random' | 'mystery';
+		speed?: number;
+	} = $props();
 
 	let image = $state<MysteryImageDef | null>(null);
+	let interval: any;
+	
+	// Deck for random pool
+	let deck: MysteryImageDef[] = [];
 
-	$effect(() => {
+	function setNewImage() {
 		if (mystery && decade) {
-			// Specific: 1-based decade index
 			const list = MYSTERY_IMAGES[mystery];
 			if (list && list[decade - 1]) {
 				image = list[decade - 1];
 			}
 		} else if (!image) {
-			// Random (Home Page or Fallback) - Only set once to avoid jitter if props are missing
-			// But for Home Page, we want it random on mount.
-			image = getRandomImage();
+			// Init if nothing set
+			if (pool === 'mystery' && mystery) {
+				const list = MYSTERY_IMAGES[mystery];
+				if (list && list.length > 0) image = list[0];
+			} else {
+				// Random deck
+				const result = getNextRandomFromDeck(deck);
+				image = result.image;
+				deck = result.deck;
+			}
 		}
-	});
 
-	// React to prop changes specifically for navigation
+		if (rotate) {
+			if (interval) clearInterval(interval);
+			interval = setInterval(() => {
+				rotateImage();
+			}, speed);
+		}
+	}
+
+	function rotateImage() {
+		if (pool === 'mystery' && mystery) {
+			// Sequential
+			if (image) {
+				image = getNextSequentialImage(image, mystery) || image;
+			} else {
+				// Fallback start
+				const list = MYSTERY_IMAGES[mystery];
+				if (list && list.length > 0) image = list[0];
+			}
+		} else {
+			// Random Deck
+			const result = getNextRandomFromDeck(deck);
+			image = result.image;
+			deck = result.deck;
+		}
+	}
+
 	$effect(() => {
-		// If mystery/decade CHANGE, update.
-		if (mystery && decade) {
+		// React to props
+		if (mystery && decade && !rotate) {
+			// Static Mode (Decades)
 			const list = MYSTERY_IMAGES[mystery];
 			if (list && list[decade - 1]) {
 				image = list[decade - 1];
 			}
+			if (interval) clearInterval(interval);
+		} else {
+			// Rotating Mode
+			setNewImage();
 		}
 	});
+
+	onDestroy(() => {
+		if (interval) clearInterval(interval);
+	});
+
 	export function refresh() {
-		// Only works if NOT driven by props
-		if (!mystery && !decade) {
-			image = getRandomImage();
+		rotateImage();
+		if (rotate) {
+			if (interval) clearInterval(interval);
+			interval = setInterval(rotateImage, speed);
 		}
 	}
 </script>

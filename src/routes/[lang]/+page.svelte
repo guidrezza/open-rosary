@@ -120,11 +120,19 @@
 		modeMenuOpen = true; // Open mode select
 	}
 
-	function selectMode(m: 'digital' | 'physical') {
+	function selectMode(m: 'digital' | 'physical' | 'mysteries') {
 		const url = new URL($page.url);
 		url.pathname = `${base}/${lang}/pray`;
 		url.searchParams.set('mystery', selectedMysteryForMode);
-		url.searchParams.set('mode', m);
+		
+		if (m === 'mysteries') {
+			url.searchParams.set('mode', 'physical');
+			url.searchParams.set('submode', 'mysteries');
+		} else {
+			url.searchParams.set('mode', m);
+			url.searchParams.delete('submode');
+		}
+		
 		// Theme param preserved from current URL
 		goto(url.toString());
 		modeMenuOpen = false;
@@ -242,7 +250,7 @@
 			class="relative z-0 aspect-video w-full max-w-lg items-center justify-center overflow-hidden rounded-[32px] transition-transform active:scale-[0.98]"
 			onclick={handleImageClick}
 		>
-			<MysteryImage bind:this={mysteryImageComponent} />
+			<MysteryImage bind:this={mysteryImageComponent} rotate={true} pool="random" />
 		</button>
 
 		<!-- 5. Recommended Mystery Label & 6. Name -->
@@ -370,7 +378,7 @@
 				class="group flex w-full items-start gap-4 rounded-[32px] bg-white/5 p-4 text-left transition-colors hover:bg-white/10"
 				onclick={() => selectMode('digital')}
 			>
-				<div class="text-3xl grayscale transition-all group-hover:grayscale-0">📱</div>
+				<div class="text-3xl grayscale transition-all group-hover:grayscale-0">📲</div>
 				<div>
 					<div class="font-bold text-white">{t.ui.modes.digital.title}</div>
 					<div class="text-sm text-white/60">{t.ui.modes.digital.desc}</div>
@@ -380,10 +388,22 @@
 				class="group flex w-full items-start gap-4 rounded-[32px] bg-white/5 p-4 text-left transition-colors hover:bg-white/10"
 				onclick={() => selectMode('physical')}
 			>
-				<div class="text-3xl grayscale transition-all group-hover:grayscale-0">📿</div>
+				<div class="text-3xl grayscale transition-all group-hover:grayscale-0">🙏</div>
 				<div>
 					<div class="font-bold text-white">{t.ui.modes.physical.title}</div>
 					<div class="text-sm text-white/60">{t.ui.modes.physical.desc}</div>
+				</div>
+			</button>
+			
+			<!-- Just the Mysteries Sub-option -->
+			<button
+				class="group flex w-full items-start gap-4 rounded-[32px] bg-white/5 p-4 text-left transition-colors hover:bg-white/10"
+				onclick={() => selectMode('mysteries')}
+			>
+				<div class="text-3xl grayscale transition-all group-hover:grayscale-0">📿</div>
+				<div>
+					<div class="font-bold text-white">{t.ui.modes.mysteries.title}</div>
+					<div class="text-sm text-white/60">{t.ui.modes.mysteries.desc}</div>
 				</div>
 			</button>
 		</div>

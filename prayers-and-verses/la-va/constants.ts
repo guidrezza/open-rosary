@@ -65,6 +65,10 @@ export const la_va: LocalizationData = {
 			physical: {
 				title: 'Grana Physica',
 				desc: 'Habeo Rosarium meum. Tantum orationes ostende.'
+			},
+			mysteries: {
+				title: 'Solum Mysteria',
+				desc: 'Index simplex 5 mysteriorum'
 			}
 		},
 		actions: {

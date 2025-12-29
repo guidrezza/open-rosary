@@ -50,6 +50,7 @@ export interface LocalizationData {
 		modes: {
 			digital: { title: string; desc: string };
 			physical: { title: string; desc: string };
+			mysteries: { title: string; desc: string };
 		};
 		actions: {
 			next: string;
