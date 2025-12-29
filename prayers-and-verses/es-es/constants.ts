@@ -72,9 +72,9 @@ export const es_es: LocalizationData = {
             }
         },
         actions: {
-            next: 'Siguiente',
-            back: 'Atrás',
-            exit: 'SALIR'
+            next: 'Next',
+            back: 'Back',
+            exit: 'EXIT?'
         },
         announce: 'Anunciar Misterio',
         sections: {

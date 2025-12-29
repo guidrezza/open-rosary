@@ -72,9 +72,9 @@ export const sw_tz: LocalizationData = {
             }
         },
         actions: {
-            next: 'Mbele',
-            back: 'Nyuma',
-            exit: 'TOKA?'
+            next: 'Next',
+            back: 'Back',
+            exit: 'EXIT?'
         },
         announce: 'Taja Tendo',
         sections: {

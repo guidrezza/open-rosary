@@ -72,9 +72,9 @@ export const pl: LocalizationData = {
             }
         },
         actions: {
-            next: 'Dalej',
-            back: 'Wróć',
-            exit: 'WYJŚCIE?'
+            next: 'Next',
+            back: 'Back',
+            exit: 'EXIT?'
         },
         announce: 'Zapowiedź Tajemnicy',
         sections: {

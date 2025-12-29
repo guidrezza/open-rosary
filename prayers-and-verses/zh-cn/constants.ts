@@ -72,9 +72,9 @@ export const zh_cn: LocalizationData = {
             }
         },
         actions: {
-            next: '下一步',
-            back: '返回',
-            exit: '退出？'
+            next: 'Next',
+            back: 'Back',
+            exit: 'EXIT?'
         },
         announce: '宣读奥迹',
         sections: {

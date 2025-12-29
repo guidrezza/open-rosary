@@ -139,57 +139,134 @@
 	}
 
 	const flags: Record<string, string> = {
+		'am-et': '🇪🇹',
+		'ar-sa': '🇸🇦',
+		'cs-cz': '🇨🇿',
+		'de-de': '🇩🇪',
 		en: '🇺🇸',
 		'en-us': '🇺🇸',
-		de: '🇩🇪',
-		'de-de': '🇩🇪',
-		pt: '🇧🇷',
-		'pt-br': '🇧🇷',
-		'pt-pt': '🇵🇹',
 		es: '🇲🇽',
 		'es-mx': '🇲🇽',
 		'es-es': '🇪🇸',
-		la: '🇻🇦',
-		'la-va': '🇻🇦',
-		it: '🇮🇹',
-		'it-it': '🇮🇹',
-		fr: '🇫🇷',
-		'fr-fr': '🇫🇷',
-		pl: '🇵🇱',
-		'pl-pl': '🇵🇱',
 		fil: '🇵🇭',
 		'fil-ph': '🇵🇭',
+		fr: '🇫🇷',
+		'fr-fr': '🇫🇷',
+		'gom-in': '🇮🇳',
+		'hi-in': '🇮🇳',
+		'hr-hr': '🇭🇷',
+		'ht-ht': '🇭🇹',
+		'hu-hu': '🇭🇺',
+		'id-id': '🇮🇩',
+		'ig-ng': '🇳🇬',
+		it: '🇮🇹',
+		'it-it': '🇮🇹',
+		'ja-jp': '🇯🇵',
+		'km-kh': '🇰🇭',
+		'kn-in': '🇮🇳',
+		'ko-kr': '🇰🇷',
+		la: '🇻🇦',
+		'la-va': '🇻🇦',
+		'lt-lt': '🇱🇹',
+		'mg-mg': '🇲🇬',
+		'ml-in': '🇮🇳',
+		'my-mm': '🇲🇲',
+		pl: '🇵🇱',
+		'pl-pl': '🇵🇱',
+		pt: '🇧🇷',
+		'pt-br': '🇧🇷',
+		'pt-pt': '🇵🇹',
+		'ru-ru': '🇷🇺',
+		'rw-rw': '🇷🇼',
+		'si-lk': '🇱🇰',
+		'sk-sk': '🇸🇰',
+		'sl-si': '🇸🇮',
+		'sw-ke': '🇰🇪',
+		'sw-tz': '🇹🇿',
+		'ta-in': '🇮🇳',
+		'te-in': '🇮🇳',
+		'tet-tl': '🇹🇱',
+		'th-th': '🇹🇭',
+		'tpi-pg': '🇵🇬',
+		'uk-ua': '🇺🇦',
 		vi: '🇻🇳',
 		'vi-vn': '🇻🇳',
-		ko: '🇰🇷',
-		'ko-kr': '🇰🇷',
-		zh: '🇨🇳',
 		'zh-cn': '🇨🇳',
-		'zh-tw': '🇹🇼',
-		'sw-ke': '🇰🇪',
-		'sw-tz': '🇹🇿'
+		'zh-tw': '🇹🇼'
 	};
 	let currentFlag = $derived(flags[lang.toLowerCase()] || '🌐');
 
-	const languages = [
-		{ code: 'zh-cn', label: '中文 (简体)' },
-		{ code: 'zh-tw', label: '中文 (繁體)' },
+	const rawLanguages = [
+		{ code: 'am-et', label: 'አማርኛ' },
+		{ code: 'ar-sa', label: 'العربية' },
+		{ code: 'cs-cz', label: 'Čeština' },
 		{ code: 'de-de', label: 'Deutsch' },
 		{ code: 'en', label: 'English' },
 		{ code: 'es-es', label: 'Español (España)' },
 		{ code: 'es', label: 'Español (México)' },
 		{ code: 'fil', label: 'Filipino' },
 		{ code: 'fr', label: 'Français' },
+		{ code: 'gom-in', label: 'Kōṅkaṇī' },
+		{ code: 'hi-in', label: 'हिन्दी' },
+		{ code: 'hr-hr', label: 'Hrvatski' },
+		{ code: 'ht-ht', label: 'Kreyòl Ayisyen' },
+		{ code: 'hu-hu', label: 'Magyar' },
+		{ code: 'id-id', label: 'Bahasa Indonesia' },
+		{ code: 'ig-ng', label: 'Igbo' },
 		{ code: 'it', label: 'Italiano' },
-		{ code: 'sw-ke', label: 'Kiswahili (Kenya)' },
-		{ code: 'sw-tz', label: 'Kiswahili (Tanzania)' },
+		{ code: 'ja-jp', label: '日本語' },
+		{ code: 'km-kh', label: 'ភាសាខ្មែរ' },
+		{ code: 'kn-in', label: 'ಕನ್ನಡ' },
 		{ code: 'ko-kr', label: '한국어' },
-		{ code: 'la', label: 'Latina' },
+		{ code: 'la', label: 'Lingua Latina' },
+		{ code: 'lt-lt', label: 'Lietuvių' },
+		{ code: 'mg-mg', label: 'Malagasy' },
+		{ code: 'ml-in', label: 'മലയാളം' },
+		{ code: 'my-mm', label: 'ဗမာစာ' },
 		{ code: 'pl', label: 'Polski' },
 		{ code: 'pt', label: 'Português (Brasil)' },
 		{ code: 'pt-pt', label: 'Português (Portugal)' },
-		{ code: 'vi', label: 'Tiếng Việt' }
-	].sort((a, b) => a.label.localeCompare(b.label));
+		{ code: 'ru-ru', label: 'Русский' },
+		{ code: 'rw-rw', label: 'Kinyarwanda' },
+		{ code: 'si-lk', label: 'සිංහල' },
+		{ code: 'sk-sk', label: 'Slovenčina' },
+		{ code: 'sl-si', label: 'Slovenščina' },
+		{ code: 'sw-ke', label: 'Kiswahili (Kenya)' },
+		{ code: 'sw-tz', label: 'Kiswahili (Tanzania)' },
+		{ code: 'ta-in', label: 'தமிழ்' },
+		{ code: 'te-in', label: 'తెలుగు' },
+		{ code: 'tet-tl', label: 'Tetun' },
+		{ code: 'th-th', label: 'ไทย' },
+		{ code: 'tpi-pg', label: 'Tok Pisin' },
+		{ code: 'uk-ua', label: 'Українська' },
+		{ code: 'vi', label: 'Tiếng Việt' },
+		{ code: 'zh-cn', label: '简体中文' },
+		{ code: 'zh-tw', label: '繁體中文' }
+	];
+
+	const languages = (() => {
+		const groups: Record<string, typeof rawLanguages> = {};
+		rawLanguages.forEach((l) => {
+			let country = 'global';
+			const parts = l.code.split('-');
+			if (parts.length > 1) {
+				country = parts[parts.length - 1].toUpperCase();
+			} else if (l.code === 'en') country = 'US';
+			else if (l.code === 'es') country = 'MX';
+
+			if (!groups[country]) groups[country] = [];
+			groups[country].push(l);
+		});
+
+		Object.keys(groups).forEach((k) => {
+			groups[k].sort((a, b) => a.label.localeCompare(b.label));
+		});
+
+		const blocks = Object.values(groups);
+		blocks.sort((a, b) => a[0].label.localeCompare(b[0].label));
+
+		return blocks.flat();
+	})();
 
 	// Theme Emojis
 	const themeEmojis: Record<string, string> = {
@@ -347,7 +424,7 @@
 					class="flex w-full items-center rounded-[32px] bg-white/5 p-4 text-left text-lg font-medium transition-colors hover:bg-white/10"
 					onclick={() => switchLang(langItem.code)}
 				>
-					<span class="mr-3 text-2xl">{flags[langItem.code] || '🌐'}</span>
+					<span class="mr-3 w-10 shrink-0 text-center text-2xl">{flags[langItem.code] || '🌐'}</span>
 					<span class="text-lg font-medium">{langItem.label}</span>
 				</button>
 			{/each}

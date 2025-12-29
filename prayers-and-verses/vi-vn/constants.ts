@@ -72,9 +72,9 @@ export const vi: LocalizationData = {
             }
         },
         actions: {
-            next: 'Tiếp',
-            back: 'Lùi',
-            exit: 'THOÁT?'
+            next: 'Next',
+            back: 'Back',
+            exit: 'EXIT?'
         },
         announce: 'Ngắm Mầu Nhiệm',
         sections: {

@@ -72,9 +72,9 @@ export const fil: LocalizationData = {
             }
         },
         actions: {
-            next: 'Susunod',
-            back: 'Bumalik',
-            exit: 'UMALIS?'
+            next: 'Next',
+            back: 'Back',
+            exit: 'EXIT?'
         },
         announce: 'Ipahayag ang Misteryo',
         sections: {

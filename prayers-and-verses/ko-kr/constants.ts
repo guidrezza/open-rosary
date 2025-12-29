@@ -72,9 +72,9 @@ export const ko: LocalizationData = {
             }
         },
         actions: {
-            next: '다음',
-            back: '이전',
-            exit: '종료?'
+            next: 'Next',
+            back: 'Back',
+            exit: 'EXIT?'
         },
         announce: '신비 선포',
         sections: {

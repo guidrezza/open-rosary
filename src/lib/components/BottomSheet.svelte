@@ -61,48 +61,53 @@
 				role="dialog"
 			>
 				<!-- Touch handling for swipe-to-close -->
-				<div
-					ontouchstart={(e) => {
-						const touch = e.changedTouches[0];
-						touchStartY = touch.clientY;
-					}}
-					ontouchend={(e) => {
-						const touch = e.changedTouches[0];
-						if (touchStartY && touch.clientY - touchStartY > 75) {
-							onClose();
-						}
-						touchStartY = 0;
-					}}
-				>
-					<!-- Mobile Handle -->
-					<div class="mx-auto mb-6 h-1.5 w-12 rounded-full bg-white/20"></div>
+				<div>
+					<!-- Draggable Header Area -->
+					<div
+						class="pb-2"
+						ontouchstart={(e) => {
+							const touch = e.changedTouches[0];
+							touchStartY = touch.clientY;
+						}}
+						ontouchend={(e) => {
+							const touch = e.changedTouches[0];
+							if (touchStartY && touch.clientY - touchStartY > 75) {
+								onClose();
+							}
+							touchStartY = 0;
+						}}
+					>
+						<!-- Mobile Handle -->
+						<div class="mx-auto mb-6 h-1.5 w-12 rounded-full bg-white/20"></div>
 
-					{#if title}
-						<div class="mb-6 flex items-center justify-between">
-							<h3 class="text-xl font-bold tracking-tight text-white">{title}</h3>
-							<button
-								class="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-white/60 transition-colors hover:bg-white/10 hover:text-white"
-								onclick={onClose}
-								aria-label="Close"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="18"
-									height="18"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="4"
-									stroke-linecap="round"
-									stroke-linejoin="round"
+						{#if title}
+							<div class="mb-6 flex items-center justify-between">
+								<h3 class="text-xl font-bold tracking-tight text-white">{title}</h3>
+								<button
+									class="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-white/60 transition-colors hover:bg-white/10 hover:text-white"
+									onclick={onClose}
+									aria-label="Close"
 								>
-									<line x1="18" y1="6" x2="6" y2="18"></line>
-									<line x1="6" y1="6" x2="18" y2="18"></line>
-								</svg>
-							</button>
-						</div>
-					{/if}
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="18"
+										height="18"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="4"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									>
+										<line x1="18" y1="6" x2="6" y2="18"></line>
+										<line x1="6" y1="6" x2="18" y2="18"></line>
+									</svg>
+								</button>
+							</div>
+						{/if}
+					</div>
 
+					<!-- Content Area (Not draggable) -->
 					{@render children()}
 				</div>
 			</div>

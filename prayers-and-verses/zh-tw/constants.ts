@@ -72,9 +72,9 @@ export const zh_tw: LocalizationData = {
             }
         },
         actions: {
-            next: '下一步',
-            back: '返回',
-            exit: '離開？'
+            next: 'Next',
+            back: 'Back',
+            exit: 'EXIT?'
         },
         announce: '宣讀奧蹟',
         sections: {
