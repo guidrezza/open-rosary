@@ -72,9 +72,9 @@ export const la_va: LocalizationData = {
 			}
 		},
 		actions: {
-			next: 'Sequens',
-			back: 'Retro',
-			exit: 'Exire?'
+			next: 'Next',
+			back: 'Back',
+			exit: 'EXIT?'
 		},
 		announce: 'Annuntiare Mysterium',
 		sections: {

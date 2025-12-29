@@ -9,7 +9,8 @@ A beautiful, modern, and open-source web application for praying the Rosary. Des
     -   **Physical**: A simple list view for those who have their own physical Rosary.
 -   **Liturgical Intelligence**: Automatically calculates the correct Liturgical Season and major Feast Days (e.g., Ash Wednesday, Easter, All Saints) according to Catholic doctrine.
 -   **Dynamic Themes**: Features 8 liturgical themes (Green, Purple, White, Red, Rose, Gold, Silver, Black) that dynamically warp the background "lights".
--   **Multi-Language**: Support for English (US), Spanish (MX), Portuguese (BR), and Latin (VA).
+-   **Multi-Language**: Support for 15+ locales including English, Spanish (ES/MX), Portuguese (PT/BR), French, Italian, German, Polish, Chinese (Simplified/Traditional), Korean, Vietnamese, Filipino, and Latin.
+    -   *Measurements of accuracy are paramount. We strictly use approved Catholic translations for each specific language and region.*
 -   **Glassmorphism UI**: A modern, premium aesthetic with blurred glass panels and smooth animations.
 -   **PWA**: Installable on mobile devices and works offline.
 -   **Responsive**: Optimized for both mobile and desktop experiences.

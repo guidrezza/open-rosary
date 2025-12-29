@@ -76,6 +76,7 @@ Glória ao Pai e ao Filho e ao Espírito Santo. Como era no princípio, agora e 
 
 **R. Salve Rainha**
 Salve, Rainha, Mãe de misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos os degredados filhos de Eva. A vós suspiramos, gemendo e chorando neste vale de lágrimas. Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei, e depois deste desterro mostrai-nos Jesus, bendito fruto do vosso ventre, ó clemente, ó piedosa, ó doce sempre Virgem Maria.
+
 V. Rogai por nós, Santa Mãe de Deus.
 R. Para que sejamos dignos das promessas de Cristo.
 
@@ -89,31 +90,51 @@ Oremos. Ó Deus, cujo Unigênito Filho, por sua vida, morte e ressurreição, no
 **Mistérios Gozosos**
 
 1. **A Anunciação:** "Disse Maria: 'Eis aqui a serva do Senhor; faça-se em mim segundo a tua palavra!'" (Lucas 1, 38)
+   - **Fruto do Mistério:** Humildade
 2. **A Visitação:** "Bendita és tu entre as mulheres e bendito é o fruto do teu ventre!" (Lucas 1, 42)
+   - **Fruto do Mistério:** Amor ao Próximo
 3. **O Nascimento de Jesus:** "Ela deu à luz o seu filho primogênito, enfaixou-o e o deitou numa manjedoura." (Lucas 2, 7)
+   - **Fruto do Mistério:** Pobreza de Espírito
 4. **A Apresentação no Templo:** "Meus olhos viram a tua salvação, que preparaste em face de todos os povos." (Lucas 2, 30-31)
+   - **Fruto do Mistério:** Obediência
 5. **A Perda e o Encontro no Templo:** "Três dias depois o acharam no templo, sentado no meio dos doutores, ouvindo-os e interrogando-os." (Lucas 2, 46)
+   - **Fruto do Mistério:** Piedade
 
 **Mistérios Luminosos**
 
 1. **O Batismo no Jordão:** "E uma voz vinda dos céus dizia: 'Este é o meu Filho amado, no qual eu pus o meu agrado'." (Mateus 3, 17)
+   - **Fruto do Mistério:** Abertura ao Espírito Santo
 2. **As Bodas de Caná:** "Sua mãe disse aos que estavam servindo: 'Fazei tudo o que ele vos disser'." (João 2, 5)
+   - **Fruto do Mistério:** A Jesus por Maria
 3. **O Anúncio do Reino de Deus:** "O tempo já se completou e o Reino de Deus está próximo. Convertei-vos e crede no Evangelho!" (Marcos 1, 15)
+   - **Fruto do Mistério:** Arrependimento e Confiança em Deus
 4. **A Transfiguração:** "Transfigurou-se diante deles: seu rosto brilhou como o sol, e suas roupas ficaram brancas como a luz." (Mateus 17, 2)
+   - **Fruto do Mistério:** Desejo de Santidade
 5. **A Instituição da Eucaristia:** "Tomai e comei, isto é o meu corpo." (Mateus 26, 26)
+   - **Fruto do Mistério:** Adoração
 
 **Mistérios Dolorosos**
 
 1. **A Agonia no Horto:** "Entrando em agonia, Jesus orava com mais insistência. Seu suor tornou-se como gotas de sangue que caíam no chão." (Lucas 22, 44)
+   - **Fruto do Mistério:** Arrependimento dos Pecados
 2. **A Flagelação do Senhor:** "Então Pilatos mandou flagelar Jesus." (João 19, 1)
+   - **Fruto do Mistério:** Pureza
 3. **A Coroação de Espinhos:** "Teceram uma coroa de espinhos, puseram-na em sua cabeça." (Marcos 15, 17)
+   - **Fruto do Mistério:** Coragem Moral
 4. **O Caminho da Cruz:** "Jesus tomou a cruz sobre si e saiu para o lugar chamado Calvário." (João 19, 17)
+   - **Fruto do Mistério:** Paciência
 5. **A Crucificação e Morte:** "Jesus deu um forte grito: 'Pai, em tuas mãos entrego o meu espírito'. Dizendo isso, expirou." (Lucas 23, 46)
+   - **Fruto do Mistério:** Perseverança
 
 **Mistérios Gloriosos**
 
 1. **A Ressurreição:** "Ele ressuscitou, não está aqui. Vede o lugar onde o puseram." (Marcos 16, 6)
+   - **Fruto do Mistério:** Fé
 2. **A Ascensão:** "O Senhor Jesus, depois de lhes ter falado, foi elevado ao céu e sentou-se à direita de Deus." (Marcos 16, 19)
+   - **Fruto do Mistério:** Esperança
 3. **A Vinda do Espírito Santo:** "Ficaram todos cheios do Espírito Santo e começaram a falar em outras línguas." (Atos 2, 4)
+   - **Fruto do Mistério:** Sabedoria
 4. **A Assunção de Maria:** "Tu és bendita, ó filha, pelo Deus Altíssimo, mais que todas as mulheres da terra." (Judite 13, 18)
+   - **Fruto do Mistério:** Graça de uma Boa Morte
 5. **A Coroação de Maria:** "Apareceu no céu um grande sinal: uma mulher vestida do sol, tendo a lua debaixo dos pés e sobre a cabeça uma coroa de doze estrelas." (Apocalipse 12, 1)
+   - **Fruto do Mistério:** Confiança na Intercessão de Maria

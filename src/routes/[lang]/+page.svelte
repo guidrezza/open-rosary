@@ -141,14 +141,55 @@
 	const flags: Record<string, string> = {
 		en: '🇺🇸',
 		'en-us': '🇺🇸',
+		de: '🇩🇪',
+		'de-de': '🇩🇪',
 		pt: '🇧🇷',
 		'pt-br': '🇧🇷',
+		'pt-pt': '🇵🇹',
 		es: '🇲🇽',
 		'es-mx': '🇲🇽',
+		'es-es': '🇪🇸',
 		la: '🇻🇦',
-		'la-va': '🇻🇦'
+		'la-va': '🇻🇦',
+		it: '🇮🇹',
+		'it-it': '🇮🇹',
+		fr: '🇫🇷',
+		'fr-fr': '🇫🇷',
+		pl: '🇵🇱',
+		'pl-pl': '🇵🇱',
+		fil: '🇵🇭',
+		'fil-ph': '🇵🇭',
+		vi: '🇻🇳',
+		'vi-vn': '🇻🇳',
+		ko: '🇰🇷',
+		'ko-kr': '🇰🇷',
+		zh: '🇨🇳',
+		'zh-cn': '🇨🇳',
+		'zh-tw': '🇹🇼',
+		'sw-ke': '🇰🇪',
+		'sw-tz': '🇹🇿'
 	};
 	let currentFlag = $derived(flags[lang.toLowerCase()] || '🌐');
+
+	const languages = [
+		{ code: 'zh-cn', label: '中文 (简体)' },
+		{ code: 'zh-tw', label: '中文 (繁體)' },
+		{ code: 'de-de', label: 'Deutsch' },
+		{ code: 'en', label: 'English' },
+		{ code: 'es-es', label: 'Español (España)' },
+		{ code: 'es', label: 'Español (México)' },
+		{ code: 'fil', label: 'Filipino' },
+		{ code: 'fr', label: 'Français' },
+		{ code: 'it', label: 'Italiano' },
+		{ code: 'sw-ke', label: 'Kiswahili (Kenya)' },
+		{ code: 'sw-tz', label: 'Kiswahili (Tanzania)' },
+		{ code: 'ko-kr', label: '한국어' },
+		{ code: 'la', label: 'Latina' },
+		{ code: 'pl', label: 'Polski' },
+		{ code: 'pt', label: 'Português (Brasil)' },
+		{ code: 'pt-pt', label: 'Português (Portugal)' },
+		{ code: 'vi', label: 'Tiếng Việt' }
+	].sort((a, b) => a.label.localeCompare(b.label));
 
 	// Theme Emojis
 	const themeEmojis: Record<string, string> = {
@@ -301,7 +342,7 @@
 		onClose={() => (langMenuOpen = false)}
 	>
 		<div class="flex max-h-[60vh] flex-col gap-2 overflow-y-auto">
-			{#each [{ code: 'en-us', label: 'English (US)' }, { code: 'es-mx', label: 'Español (MX)' }, { code: 'la-va', label: 'Lingua Latina' }, { code: 'pt-br', label: 'Português (BR)' }].sort( (a, b) => a.label.localeCompare(b.label) ) as langItem}
+			{#each languages as langItem}
 				<button
 					class="flex w-full items-center rounded-[32px] bg-white/5 p-4 text-left text-lg font-medium transition-colors hover:bg-white/10"
 					onclick={() => switchLang(langItem.code)}
