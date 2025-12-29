@@ -76,6 +76,7 @@ Gloria al Padre y al Hijo y al Espíritu Santo. Como era en el principio, ahora 
 
 **R. La Salve (Salve Regina)**
 Dios te salve, Reina y Madre de misericordia, vida, dulzura y esperanza nuestra; Dios te salve. A ti llamamos los desterrados hijos de Eva; a ti suspiramos, gimiendo y llorando, en este valle de lágrimas. Ea, pues, Señora, abogada nuestra, vuelve a nosotros esos tus ojos misericordiosos; y después de este destierro muéstranos a Jesús, fruto bendito de tu vientre. ¡Oh clementísima, oh piadosa, oh dulce Virgen María!
+
 V. Ruega por nosotros, Santa Madre de Dios.
 R. Para que seamos dignos de alcanzar las promesas de Nuestro Señor Jesucristo.
 
@@ -89,31 +90,51 @@ Oremos. Oh Dios, cuyo Unigénito Hijo, con su vida, muerte y resurrección, nos 
 **Misterios Gozosos**
 
 1. **La Encarnación del Hijo de Dios:** "Dijo María: «He aquí la esclava del Señor; hágase en mí según tu palabra»." (Lucas 1, 38)
+   - **Fruto del Misterio:** Humildad
 2. **La Visitación de Nuestra Señora:** "¡Bendita tú eres entre todas las mujeres, y bendito es el fruto de tu vientre!" (Lucas 1, 42)
+   - **Fruto del Misterio:** Amor al Prójimo
 3. **El Nacimiento del Hijo de Dios:** "Dio a luz a su hijo primogénito, lo envolvió en pañales y lo recostó en un pesebre." (Lucas 2, 7)
+   - **Fruto del Misterio:** Pobreza de Espíritu
 4. **La Presentación en el Templo:** "Han visto mis ojos tu salvación, la que has preparado a la vista de todos los pueblos." (Lucas 2, 30-31)
+   - **Fruto del Misterio:** Obediencia
 5. **El Niño Perdido y Hallado en el Templo:** "Al cabo de tres días lo encontraron en el Templo, sentado en medio de los maestros, escuchándoles y haciéndoles preguntas." (Lucas 2, 46)
+   - **Fruto del Misterio:** Piedad
 
 **Misterios Luminosos**
 
 1. **El Bautismo en el Jordán:** "Una voz que salía de los cielos decía: «Este es mi Hijo amado, en quien me complazco»." (Mateo 3, 17)
+   - **Fruto del Misterio:** Apertura al Espíritu Santo
 2. **Las Bodas de Caná:** "Su madre dijo a los sirvientes: «Hagan lo que él les diga»." (Juan 2, 5)
+   - **Fruto del Misterio:** A Jesús por María
 3. **El Anuncio del Reino de Dios:** "El tiempo se ha cumplido y el Reino de Dios está cerca; conviértanse y crean en la Buena Nueva." (Marcos 1, 15)
+   - **Fruto del Misterio:** Arrepentimiento y Confianza en Dios
 4. **La Transfiguración:** "Se transfiguró delante de ellos: su rostro se puso brillante como el sol y sus vestidos se volvieron blancos como la luz." (Mateo 17, 2)
+   - **Fruto del Misterio:** Deseo de Santidad
 5. **La Institución de la Eucaristía:** "Tomen y coman; esto es mi cuerpo." (Mateo 26, 26)
+   - **Fruto del Misterio:** Adoración
 
 **Misterios Dolorosos**
 
 1. **La Oración en el Huerto:** "Lleno de angustia, oraba con más insistencia; y su sudor se hizo como gotas espesas de sangre que caían en tierra." (Lucas 22, 44)
+   - **Fruto del Misterio:** Arrepentimiento por los Pecados
 2. **La Flagelación del Señor:** "Entonces Pilato tomó a Jesús y mandó azotarle." (Juan 19, 1)
+   - **Fruto del Misterio:** Pureza
 3. **La Coronación de Espinas:** "Le vistieron de púrpura y, trenzando una corona de espinas, se la ciñeron." (Marcos 15, 17)
+   - **Fruto del Misterio:** Valor Moral
 4. **Jesús con la Cruz a Cuestas:** "Tomaron, pues, a Jesús, y él cargando con su cruz, salió hacia el lugar llamado Calvario." (Juan 19, 17)
+   - **Fruto del Misterio:** Paciencia
 5. **La Crucifixión y Muerte:** "Jesús, dando un fuerte grito, dijo: «Padre, en tus manos encomiendo mi espíritu» y, dicho esto, expiró." (Lucas 23, 46)
+   - **Fruto del Misterio:** Perseverancia
 
 **Misterios Gloriosos**
 
 1. **La Resurrección del Hijo de Dios:** "Ha resucitado, no está aquí. Vean el lugar donde le pusieron." (Marcos 16, 6)
+   - **Fruto del Misterio:** Fe
 2. **La Ascensión del Señor:** "El Señor Jesús, después de hablarles, fue elevado al cielo y se sentó a la diestra de Dios." (Marcos 16, 19)
+   - **Fruto del Misterio:** Esperanza
 3. **La Venida del Espíritu Santo:** "Quedaron todos llenos del Espíritu Santo y se pusieron a hablar en otras lenguas." (Hechos 2, 4)
+   - **Fruto del Misterio:** Sabiduría
 4. **La Asunción de María:** "Bendita eres tú, hija, del Dios Altísimo, más que todas las mujeres de la tierra." (Judit 13, 18)
+   - **Fruto del Misterio:** Gracia de una Buena Muerte
 5. **La Coronación de María:** "Una gran señal apareció en el cielo: una Mujer, vestida del sol, con la luna bajo sus pies, y una corona de doce estrellas sobre su cabeza." (Apocalipsis 12, 1)
+   - **Fruto del Misterio:** Confianza en la Intercesión de María

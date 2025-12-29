@@ -72,9 +72,9 @@ export const es_mx: LocalizationData = {
 			}
 		},
 		actions: {
-			next: 'Next',
-			back: 'Back',
-			exit: 'EXIT?'
+			next: 'Siguiente',
+			back: 'Atrás',
+			exit: 'SALIR'
 		},
 		announce: 'Anunciar Misterio',
 		sections: {
@@ -148,7 +148,7 @@ export const es_mx: LocalizationData = {
 			id: 'hail_holy_queen',
 			title: 'La Salve',
 			content:
-				'Dios te salve, Reina y Madre de misericordia, vida, dulzura y esperanza nuestra; Dios te salve. A ti llamamos los desterrados hijos de Eva; a ti suspiramos, gimiendo y llorando, en este valle de lágrimas. Ea, pues, Señora, abogada nuestra, vuelve a nosotros esos tus ojos misericordiosos; y después de este destierro muéstranos a Jesús, fruto bendito de tu vientre. ¡Oh clementísima, oh piadosa, oh dulce Virgen María!'
+				'Dios te salve, Reina y Madre de misericordia, vida, dulzura y esperanza nuestra; Dios te salve. A ti llamamos los desterrados hijos de Eva; a ti suspiramos, gimiendo y llorando, en este valle de lágrimas. Ea, pues, Señora, abogada nuestra, vuelve a nosotros esos tus ojos misericordiosos; y después de este destierro muéstranos a Jesús, fruto bendito de tu vientre. ¡Oh clementísima, oh piadosa, oh dulce Virgen María!\n\nV. Ruega por nosotros, Santa Madre de Dios.\nR. Para que seamos dignos de alcanzar las promesas de Nuestro Señor Jesucristo.'
 		},
 		closing_prayer: {
 			id: 'closing_prayer',

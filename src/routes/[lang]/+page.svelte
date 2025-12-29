@@ -409,6 +409,3 @@
 		</div>
 	</BottomSheet>
 </div>
-
-<style>
-</style>

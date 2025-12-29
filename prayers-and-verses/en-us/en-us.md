@@ -76,11 +76,12 @@ O my Jesus, forgive us our sins, save us from the fires of hell; lead all souls 
 
 **R. Hail, Holy Queen (Salve Regina)**
 Hail, holy Queen, Mother of mercy, our life, our sweetness and our hope. To thee do we cry, poor banished children of Eve. To thee do we send up our sighs, mourning and weeping in this valley of tears. Turn, then, most gracious advocate, thine eyes of mercy toward us, and after this our exile, show unto us the blessed fruit of thy womb, Jesus. O clement, O loving, O sweet Virgin Mary.
+
 V. Pray for us, O holy Mother of God.
 R. That we may be made worthy of the promises of Christ.
 
 **O. Closing Prayer**
-Let us pray. O God, whose only begotten Son, by his life, death, and resurrection, has purchased for us the rewards of eternal life, grant, we beseech thee, that meditating upon these mysteries of the most holy Rosary of the Blessed Virgin Mary, we may imitate what they contain and obtain what they promise, through the same Christ our Lord. Amen.
+Let us pray. O God, whose only begotten Son, by his life, death, and resurrection, has purchased for us the rewards of eternal salvation, grant, we beseech thee, that meditating upon these mysteries of the most holy Rosary of the Blessed Virgin Mary, we may imitate what they contain and obtain what they promise, through the same Christ our Lord. Amen.
 
 ---
 
@@ -93,6 +94,9 @@ Let us pray. O God, whose only begotten Son, by his life, death, and resurrectio
 - **Fruit of the Mystery:** Humility
 
 2. **The Visitation:** "Most blessed are you among women, and blessed is the fruit of your womb." (Luke 1:42)
+
+- **Fruit of the Mystery:** Love of Neighbor
+
 3. **The Nativity:** "She gave birth to her firstborn son. She wrapped him in swaddling clothes and laid him in a manger." (Luke 2:7)
 
 - **Fruit of the Mystery:** Poverty of Spirit (Detachment from the world)
@@ -116,6 +120,9 @@ Let us pray. O God, whose only begotten Son, by his life, death, and resurrectio
 - **Fruit of the Mystery:** To Jesus through Mary
 
 3. **The Proclamation of the Kingdom:** "This is the time of fulfillment. The kingdom of God is at hand. Repent, and believe in the gospel." (Mark 1:15)
+
+- **Fruit of the Mystery:** Repentance and Trust in God
+
 4. **The Transfiguration:** "And he was transfigured before them; his face shone like the sun and his clothes became white as light." (Matthew 17:2)
 
 - **Fruit of the Mystery:** Desire for Holiness

@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { fly } from 'svelte/transition';
+	import { fly, fade } from 'svelte/transition';
 	import { quartOut } from 'svelte/easing';
-	import GlassPanel from './GlassPanel.svelte';
 
 	interface Props {
 		isOpen: boolean;
@@ -13,77 +12,67 @@
 	let { isOpen, title, children, onClose }: Props = $props();
 
 	let touchStartY = 0;
+	let animationComplete = $state(false);
 
-	// IOS-like duration
-	const ANIM_DURATION = 550;
+	// iOS-like duration
+	const ANIM_DURATION = 450;
 	// Use quartOut for that "heavy" friction feel common in iOS
 	const ANIM_EASING = quartOut;
 
-	// Custom transition for "Stepped Blur" effect
-	function steppedRise(node: Element, { duration, steps = 30, easing = quartOut }: any) {
-		return {
-			duration,
-			easing,
-			css: (t: number) => {
-				// SAFE/RETROACTIVE: floor() ensures we never exceed the current progress.
-				// On open (0->1): t=0.15 -> floor(4.5)=4 -> 13.3%. (Safe)
-				// On close (1->0): t=0.95 -> floor(28.5)=28 -> 93.3%. (Safe/Proactive)
-				// 30 checkpoints/frames as requested.
-				const s = Math.floor(t * steps);
-				const p = (s / steps) * 100;
-				return `height: ${p}%;`;
-			}
-		};
+	// Handle animation end to enable blur
+	function onIntroEnd() {
+		animationComplete = true;
+	}
+
+	function onOutroStart() {
+		animationComplete = false;
 	}
 </script>
 
 {#if isOpen}
-	<!-- Outer Container: Catches clicks outside (Backdrop) -->
+	<!-- Backdrop overlay with fade -->
 	<div
-		class="fixed inset-0 z-50 flex items-end justify-center focus:outline-none"
+		class="fixed inset-0 z-50 bg-black/40"
+		transition:fade={{ duration: ANIM_DURATION / 2 }}
 		onclick={onClose}
 		role="button"
 		tabindex="0"
 		onkeydown={(e) => e.key === 'Escape' && onClose()}
-	>
-		<!-- Wrapper for alignment -->
-		<div class="relative w-full max-w-md" onclick={(e) => e.stopPropagation()} role="none">
-			<!-- FAKE BLUR LAYER: Synchronized with content Rise/Fall -->
-			<!-- We separate in/out to ensure we can tune them if needed, but using same steppedRise is symmetrical and robust -->
-			<div
-				class="absolute right-0 bottom-0 left-0 z-0 rounded-t-[32px]"
-				style="height: 100%; backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);"
-				transition:steppedRise={{
-					duration: ANIM_DURATION,
-					steps: 30,
-					easing: ANIM_EASING
-				}}
-			></div>
+	></div>
 
-			<!-- Modal Content -->
+	<!-- Sheet Container - positioned at bottom, clips content -->
+	<div class="fixed right-0 bottom-0 left-0 z-50 flex justify-center overflow-hidden">
+		<div
+			class="w-full max-w-md"
+			transition:fly={{
+				y: '100%',
+				duration: ANIM_DURATION,
+				opacity: 1,
+				easing: ANIM_EASING
+			}}
+			onintroend={onIntroEnd}
+			onoutrostart={onOutroStart}
+		>
+			<!-- Glass panel with themed border -->
 			<div
-				class="relative z-10 w-full touch-none"
-				transition:fly={{
-					y: 800,
-					duration: ANIM_DURATION,
-					opacity: 1,
-					easing: ANIM_EASING
-				}}
-				ontouchstart={(e) => {
-					const touch = e.changedTouches[0];
-					touchStartY = touch.clientY;
-				}}
-				ontouchend={(e) => {
-					const touch = e.changedTouches[0];
-					if (touchStartY && touch.clientY - touchStartY > 75) {
-						onClose();
-					}
-					touchStartY = 0;
-				}}
+				class="sheet-panel"
+				class:sheet-panel-ready={animationComplete}
+				onclick={(e) => e.stopPropagation()}
+				role="dialog"
 			>
-				<GlassPanel
-					style="backdrop-filter: none; -webkit-backdrop-filter: none;"
-					class="flex max-h-[90vh] flex-col gap-2 overflow-y-auto rounded-t-[32px] !rounded-b-none !border-b-0 p-8 pb-12"
+				<!-- Touch handling for swipe-to-close -->
+				<div
+					ontouchstart={(e) => {
+						const touch = e.changedTouches[0];
+						touchStartY = touch.clientY;
+					}}
+					ontouchend={(e) => {
+						const touch = e.changedTouches[0];
+						if (touchStartY && touch.clientY - touchStartY > 75) {
+							onClose();
+						}
+						touchStartY = 0;
+					}}
 				>
 					<!-- Mobile Handle -->
 					<div class="mx-auto mb-6 h-1.5 w-12 rounded-full bg-white/20"></div>
@@ -115,8 +104,48 @@
 					{/if}
 
 					{@render children()}
-				</GlassPanel>
+				</div>
 			</div>
 		</div>
 	</div>
 {/if}
+
+<style>
+	.sheet-panel {
+		/* Semi-opaque during animation - visible but not solid */
+		background-color: rgba(20, 20, 20, 0.7) !important;
+		
+		/* Themed border with low opacity variation */
+		border: 1px solid color-mix(in srgb, var(--theme-color, #2d4a3e) 60%, transparent);
+		border-top: 2px solid color-mix(in srgb, var(--theme-color, #2d4a3e) 40%, rgba(255,255,255,0.2));
+		border-bottom: none;
+		
+		border-radius: 32px 32px 0 0;
+		box-shadow: 
+			0 8px 32px 0 rgba(0, 0, 0, 0.4),
+			inset 0 1px 0 0 color-mix(in srgb, var(--theme-color, #2d4a3e) 20%, transparent);
+		
+		/* No blur during animation */
+		backdrop-filter: none;
+		-webkit-backdrop-filter: none;
+		
+		max-height: 90vh;
+		overflow-y: auto;
+		padding: 2rem;
+		padding-bottom: 3rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		touch-action: none;
+		
+		/* Smooth transition for blur activation */
+		transition: backdrop-filter 0.2s ease, -webkit-backdrop-filter 0.2s ease, background-color 0.3s ease;
+	}
+	
+	/* After animation completes: very transparent + blur */
+	.sheet-panel-ready {
+		background-color: rgba(15, 15, 15, 0.25) !important;
+		backdrop-filter: blur(40px) saturate(180%);
+		-webkit-backdrop-filter: blur(40px) saturate(180%);
+	}
+</style>

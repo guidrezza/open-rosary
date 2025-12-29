@@ -5,7 +5,7 @@ export const la_va: LocalizationData = {
 	seo: {
 		title: 'Sanctum Rosarium',
 		description:
-			'Rosarium b.m.v. Velociter, gratis, et pro telephoniis. Applicatio fontis aperti, munda et facilis ad utendum ubique.'
+			'Rosarium B.M.V. Velociter, gratis, et pro telephoniis. Applicatio fontis aperti, munda et facilis ad utendum ubique.'
 	},
 	ui: {
 		start_button: 'Incipe Orare',
@@ -72,9 +72,9 @@ export const la_va: LocalizationData = {
 			}
 		},
 		actions: {
-			next: 'Next',
-			back: 'Back',
-			exit: 'EXIT?'
+			next: 'Sequens',
+			back: 'Retro',
+			exit: 'Exire?'
 		},
 		announce: 'Annuntiare Mysterium',
 		sections: {
@@ -148,7 +148,7 @@ export const la_va: LocalizationData = {
 			id: 'hail_holy_queen',
 			title: 'Salve Regina',
 			content:
-				'Salve, Regína, mater misericórdiæ; vita, dulcédo et spes nostra, salve. Ad te clamámus éxsules fílii Hevæ. Ad te suspiramos, geméntes et flentes in hac lacrimárum valle. Eia ergo, advocáta nostra, illos tuos misericórdes óculos ad nos convérte. Et Iesum, benedíctum fructum ventris tui, nobis post hoc exsílium osténde. O clemens, o pia, o dulcis Virgo María.'
+				'Salve, Regína, mater misericórdiæ; vita, dulcédo et spes nostra, salve. Ad te clamámus éxsules fílii Evæ. Ad te suspirámus, geméntes et flentes in hac lacrimárum valle. Eia ergo, advocáta nostra, illos tuos misericórdes óculos ad nos convérte. Et Iesum, benedíctum fructum ventris tui, nobis post hoc exsílium osténde. O clemens, o pia, o dulcis Virgo María.\n\nV. Ora pro nobis, sancta Dei Génitrix.\nR. Ut digni efficiámur promissiónibus Christi.'
 		},
 		closing_prayer: {
 			id: 'closing_prayer',

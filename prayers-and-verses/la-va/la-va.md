@@ -75,7 +75,8 @@ Glória Patri, et Fílio, et Spirítui Sancto. Sicut erat in princípio, et nunc
 Dómine Iesu, dimítte nobis débita nostra, salva nos ab igne inférni, pérduc in cælum omnes ánimas, præsértim illas quæ máxime índigent misericórdia tua.
 
 **R. Salve Regina**
-Salve, Regína, mater misericórdiæ; vita, dulcédo et spes nostra, salve. Ad te clamámus éxsules fílii Hevæ. Ad te suspirámus geméntes et flentes in hac lacrimárum valle. Eia ergo, advocáta nostra, illos tuos misericórdes óculos ad nos convérte. Et Iesum, benedíctum fructum ventris tui, nobis post hoc exsílium osténde. O clemens, o pia, o dulcis Virgo María.
+Salve, Regína, mater misericórdiæ; vita, dulcédo et spes nostra, salve. Ad te clamámus éxsules fílii Evæ. Ad te suspirámus geméntes et flentes in hac lacrimárum valle. Eia ergo, advocáta nostra, illos tuos misericórdes óculos ad nos convérte. Et Iesum, benedíctum fructum ventris tui, nobis post hoc exsílium osténde. O clemens, o pia, o dulcis Virgo María.
+
 V. Ora pro nobis, sancta Dei Génitrix.
 R. Ut digni efficiámur promissiónibus Christi.
 
@@ -89,31 +90,51 @@ Orémus. Deus, cuius Unigénitus per vitam, mortem et resurrectiónem suam nobis
 **Mystéria Gaudiósa**
 
 1. **Annuntiátio:** "Dixit autem María: «Ecce ancílla Dómini; fiat mihi secúndum verbum tuum»." (Lc 1, 38)
+   - **Fructus Mysterii:** Humílitas
 2. **Visitatio:** "Benedícta tu inter muliéres, et benedíctus fructus ventris tui." (Lc 1, 42)
+   - **Fructus Mysterii:** Cáritas in Próximum
 3. **Natívitas:** "Péperit fílium suum primogénitum; et pannis eum invólvit et reclinávit eum in præsépio." (Lc 2, 7)
+   - **Fructus Mysterii:** Paupértas Spíritus
 4. **Praesentátio:** "Vidérunt óculi mei salutáre tuum, quod parásti ante fáciem ómnium populórum." (Lc 2, 30-31)
+   - **Fructus Mysterii:** Oboediéntia
 5. **Invéntio in Templo:** "Post tríduum invenérunt illum in templo sedéntem in médio magistrórum, audiéntem illos et interrogántem eos." (Lc 2, 46)
+   - **Fructus Mysterii:** Píetas
 
 **Mystéria Luminósa**
 
 1. **Baptísma in Iordáne:** "Et ecce vox de cælis dicens: «Hic est Fílius meus diléctus, in quo mihi complácui»." (Mt 3, 17)
+   - **Fructus Mysterii:** Apértio ad Spíritum Sanctum
 2. **Nuptiae in Cana:** "Dicit mater eius minístris: «Quodcúmque díxerit vobis, fácite»." (Io 2, 5)
+   - **Fructus Mysterii:** Ad Iesum per Maríam
 3. **Proclamátio Regni:** "Implétum est tempus, et appropinquávit regnum Dei; paenitémini et crédite Evangélio." (Mc 1, 15)
+   - **Fructus Mysterii:** Paeniténtia et Fidúcia in Deo
 4. **Transfigurátio:** "Et transfigurátus est ante eos. Et resplénduit fácies eius sicut sol, vestiménta autem eius facta sunt alba sicut lux." (Mt 17, 2)
+   - **Fructus Mysterii:** Desidérium Sanctitátis
 5. **Institútio Eucharistíæ:** "Accípite et comédite: hoc est corpus meum." (Mt 26, 26)
+   - **Fructus Mysterii:** Adorátio
 
 **Mystéria Dolorósa**
 
 1. **Agonía in Horto:** "Et factus in agonía prolíxius orábat. Et factus est sudor eius sicut guttæ sánguinis decurréntis in terram." (Lc 22, 43-44)
+   - **Fructus Mysterii:** Dolor de Peccátis
 2. **Flagellátio:** "Tunc ergo apprehéndit Pilátus Iesum et flagellávit." (Io 19, 1)
+   - **Fructus Mysterii:** Púritas
 3. **Coronátio Spinis:** "Et induérunt eum púrpura et impónunt ei plecténtes spíneam corónam." (Mc 15, 17)
+   - **Fructus Mysterii:** Fortitúdo Morális
 4. **Baiulátio Crucis:** "Et báiulans sibi crucem exívit in eum, qui dícitur Calváriæ locum." (Io 19, 17)
+   - **Fructus Mysterii:** Patiéntia
 5. **Crucifíxio:** "Clamans voce magna Iesus ait: «Pater, in manus tuas comméndo spíritum meum»." (Lc 23, 46)
+   - **Fructus Mysterii:** Perseverántia
 
 **Mystéria Gloriósa**
 
 1. **Resurréctio:** "Surréxit, non est hic; ecce locus ubi posuérunt eum." (Mc 16, 6)
+   - **Fructus Mysterii:** Fides
 2. **Ascénsio:** "Et Dóminus quidem Iesus, postquam locútus est eis, assúmptus est in cælum et sedit a dextris Dei." (Mc 16, 19)
+   - **Fructus Mysterii:** Spes
 3. **Descénsus Spíritus Sancti:** "Et repléti sunt omnes Spíritu Sancto et cœpérunt loqui áliis linguis." (Act 2, 4)
+   - **Fructus Mysterii:** Sapiéntia
 4. **Assúmptio:** "Benedícta es tu, fília, a Dómino Deo excélso, præ ómnibus muliéribus super terram." (Idt 13, 18)
+   - **Fructus Mysterii:** Grátia Bonae Mortis
 5. **Coronátio:** "Et signum magnum appáruit in cælo: múlier amícta sole, et luna sub pédibus eius, et super caput eius coróna stellárum duódecim." (Ap 12, 1)
+   - **Fructus Mysterii:** Fidúcia in Intercessióne Maríae

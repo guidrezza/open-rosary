@@ -31,24 +31,16 @@
 	let orbs: LightOrb[] = $state([]);
 
 	onMount(() => {
-		// Create many orbs of varying sizes for ambient effect
-		const orbCount = 40;
+		// Reduced from 40 to 15 orbs for efficiency (62% reduction)
+		const orbCount = 15;
 		orbs = Array.from({ length: orbCount }, (_, i) => {
-			const startX = Math.random() * 120 - 10; // Allow some to start off-screen
+			const startX = Math.random() * 120 - 10;
 			const startY = Math.random() * 120 - 10;
 			const endX = Math.random() * 120 - 10;
 			const endY = Math.random() * 120 - 10;
 
-			// Varied sizes: small ambient (40-100), medium glow (100-200), large soft (200-400)
-			const sizeCategory = Math.random();
-			let size: number;
-			if (sizeCategory < 0.5) {
-				size = Math.random() * 60 + 40; // Small: 40-100px
-			} else if (sizeCategory < 0.85) {
-				size = Math.random() * 100 + 100; // Medium: 100-200px
-			} else {
-				size = Math.random() * 200 + 200; // Large: 200-400px
-			}
+			// Simplified size distribution: 60-300px range
+			const size = Math.random() * 240 + 60;
 
 			return {
 				id: i,
@@ -59,22 +51,18 @@
 				size: size,
 				moveDuration: Math.random() * 40 + 30, // 30s - 70s (very slow)
 				moveDelay: Math.random() * -60,
-				baseOpacity: Math.random() * 0.27 + 0.18, // 0.18 - 0.45 (brighter)
-				flickerDuration: Math.random() * 6 + 6, // 6s - 12s (much slower flicker)
+				baseOpacity: Math.random() * 0.27 + 0.18, // 0.18 - 0.45
+				flickerDuration: Math.random() * 6 + 6, // 6s - 12s
 				flickerDelay: Math.random() * -12,
-				blurAmount: size < 100 ? 30 : size < 200 ? 50 : 70, // More blur for larger orbs
-				colorMix: Math.random() // Mix between primary and secondary colors
+				blurAmount: size < 100 ? 30 : size < 200 ? 50 : 70,
+				colorMix: Math.random()
 			};
 		});
 	});
 
 	// Generate the orb color based on colorMix value
 	function getOrbColor(mix: number): string {
-		if (mix < 0.6) {
-			return colorPrimary;
-		} else {
-			return colorSecondary;
-		}
+		return mix < 0.6 ? colorPrimary : colorSecondary;
 	}
 </script>
 
@@ -127,6 +115,15 @@
 			orbFloat var(--move-duration) var(--move-delay) infinite alternate ease-in-out,
 			orbFlicker var(--flicker-duration) var(--flicker-delay) infinite ease-in-out;
 		will-change: transform, opacity;
+	}
+
+	/* Respect user motion preferences for battery savings */
+	@media (prefers-reduced-motion: reduce) {
+		.orb {
+			animation: none;
+			opacity: var(--opacity-max);
+			transform: translate(var(--x-start), var(--y-start));
+		}
 	}
 
 	@keyframes orbFloat {
