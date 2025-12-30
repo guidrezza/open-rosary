@@ -65,3 +65,15 @@ h4 {
 		@apply font-light text-white/90;
 	}
 }
+
+/* Default Root Font Size */
+html {
+	font-size: 100%;
+}
+
+/* Accessibility: Tiny Screens (e.g. iPhone SE at 375px) */
+@media (max-width: 380px) {
+	html {
+		font-size: 85%;
+	}
+}

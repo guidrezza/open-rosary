@@ -100,16 +100,17 @@
 
 	// Get submode
 	let submode = $derived(browser ? $page.url.searchParams.get('submode') : null);
-	
+
 	// Image Rotation Logic
 	let rotateImage = $derived.by(() => {
 		if (submode === 'mysteries') return true;
 		if (currentSection === 'intro' || currentSection === 'conclusion') return true;
 		return false;
 	});
-	
+
 	let imagePool = $derived.by(() => {
-		if (submode === 'mysteries' || currentSection === 'intro' || currentSection === 'conclusion') return 'mystery';
+		if (submode === 'mysteries' || currentSection === 'intro' || currentSection === 'conclusion')
+			return 'mystery';
 		return 'random'; // Or explicit decade logic takes precedence in comp
 	});
 
@@ -174,7 +175,6 @@
 		// preserve theme, mode
 		goto(url.toString());
 	}
-
 
 	function handleMysteryClick() {
 		if (!exitState) {
@@ -491,9 +491,9 @@
 					onclick={toggleImageControls}
 				>
 					{#if imageMode !== 'minimized'}
-						<MysteryImage 
-							mystery={mysteryId} 
-							decade={currentImageDecade} 
+						<MysteryImage
+							mystery={mysteryId}
+							decade={currentImageDecade}
 							rotate={rotateImage}
 							pool="mystery"
 						/>
@@ -765,26 +765,29 @@
 
 		<!-- Navigation Controls (Now Flex Footer) -->
 		{#if submode !== 'mysteries'}
-		<div class="z-40 mx-auto flex w-full max-w-md flex-none justify-between px-6 pt-2 pb-6">
-			<button
-				class="pointer-events-auto flex h-14 min-w-[140px] items-center justify-center gap-2 rounded-full border border-white/10 bg-white/10 px-6 font-medium text-white shadow-lg backdrop-blur-md transition-all hover:bg-white/20 active:scale-95"
-				onclick={goToPrev}
-				disabled={currentSection === 'intro' && (mode === 'physical' || currentBeadIndex === 0)}
-				title={t.ui.actions.back}
+			<div
+				class="z-40 mx-auto flex w-full flex-none items-stretch justify-between overflow-hidden rounded-t-[32px] px-0 pt-0 pb-0"
+				style="border-top: 1px solid var(--glass-border);"
 			>
-				<span>←</span>
-				<span class="text-sm tracking-wider uppercase">{t.ui.actions.back}</span>
-			</button>
+				<button
+					class="pointer-events-auto flex aspect-square h-[92px] w-[92px] items-center justify-center bg-white/5 text-white backdrop-blur-md transition-colors hover:bg-white/10 active:bg-white/20"
+					style="border-right: 1px solid var(--glass-border);"
+					onclick={goToPrev}
+					disabled={currentSection === 'intro' && (mode === 'physical' || currentBeadIndex === 0)}
+					title={t.ui.actions.back}
+				>
+					<span class="text-2xl">←</span>
+				</button>
 
-			<button
-				class="pointer-events-auto flex h-14 min-w-[140px] items-center justify-center gap-2 rounded-full bg-white px-6 font-bold text-black shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all hover:scale-105 active:scale-95"
-				onclick={goToNext}
-				title={t.ui.actions.next}
-			>
-				<span class="text-sm tracking-wider uppercase">{t.ui.actions.next}</span>
-				<span>→</span>
-			</button>
-		</div>
+				<button
+					class="pointer-events-auto flex h-[92px] flex-1 items-center justify-center gap-2 bg-white/5 px-6 text-lg font-bold text-white backdrop-blur-md transition-colors hover:bg-white/10 active:bg-white/20"
+					onclick={goToNext}
+					title={t.ui.actions.next}
+				>
+					<span class="tracking-widest uppercase">{t.ui.actions.next}</span>
+					<span class="text-xl">→</span>
+				</button>
+			</div>
 		{/if}
 	</main>
 </div>
