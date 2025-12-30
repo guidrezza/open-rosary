@@ -1,8 +1,10 @@
-# Open Rosary
-
-## https://rosary.guidrezza.com/en-us/
+# [Open Rosary](https://rosary.guidrezza.com)
 
 A beautiful, modern, and open-source web application for praying the Rosary. Designed with a focus on aesthetics, simplicity, and accessibility.
+
+hosted here: https://rosary.guidrezza.com
+
+My personal website: https://guidrezza.com
 
 ## ✨ Features
 
