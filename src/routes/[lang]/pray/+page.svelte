@@ -4,7 +4,7 @@
 	import { getLocale } from '$lib/i18n';
 	import { rosary } from '$lib/stores';
 	import type { RosarySection, Mystery } from '$lib/types';
-	import GlassPanel from '$lib/components/GlassPanel.svelte';
+
 	import PrayerModal from '$lib/components/PrayerModal.svelte';
 	import BottomSheet from '$lib/components/BottomSheet.svelte';
 	import MysteryImage from '$lib/components/MysteryImage.svelte';
@@ -440,8 +440,12 @@
 <!-- Main Layout Wrapper -->
 <div class="relative mx-auto flex h-screen w-full max-w-md flex-col overflow-hidden bg-transparent">
 	<!-- Header -->
-	<header class="z-30 flex-none p-6">
-		<GlassPanel class="flex items-center justify-between px-4 py-3">
+	<!-- Header -->
+	<header class="z-30 w-full flex-none">
+		<div
+			class="flex w-full items-center justify-between bg-white/5 px-6 py-4 backdrop-blur-md"
+			style="border-radius: 0 0 32px 32px; border-bottom: 1px solid var(--glass-border);"
+		>
 			<button
 				class="xs:max-w-none max-w-[150px] truncate text-sm font-medium transition-colors duration-200 {exitState
 					? 'font-bold text-red-400'
@@ -463,12 +467,12 @@
 					{headerTitle} ▾
 				</button>
 			{/if}
-		</GlassPanel>
+		</div>
 	</header>
 
 	<!-- Main Content -->
 	<main
-		class="flex min-h-0 w-full flex-1 flex-col items-center justify-start gap-0 overflow-hidden px-0"
+		class="flex min-h-0 w-full flex-1 flex-col items-center justify-start gap-0 overflow-hidden px-0 pt-3"
 	>
 		<!-- Top Visuals -->
 		<!-- Tightened gap from 2 to 0 to fix "Image <-> Beads too large" -->

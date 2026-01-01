@@ -124,7 +124,7 @@
 		const url = new URL($page.url);
 		url.pathname = `${base}/${lang}/pray`;
 		url.searchParams.set('mystery', selectedMysteryForMode);
-		
+
 		if (m === 'mysteries') {
 			url.searchParams.set('mode', 'physical');
 			url.searchParams.set('submode', 'mysteries');
@@ -132,7 +132,7 @@
 			url.searchParams.set('mode', m);
 			url.searchParams.delete('submode');
 		}
-		
+
 		// Theme param preserved from current URL
 		goto(url.toString());
 		modeMenuOpen = false;
@@ -382,14 +382,16 @@
 		<!-- 7. Pray Recommended Button & 8. Change Mystery Button -->
 		<div class="flex w-full flex-col gap-4">
 			<button
-				class="w-full rounded-[32px] border border-white/10 bg-white/5 py-4 font-bold text-white shadow-lg backdrop-blur-md transition-all hover:bg-white/10 active:scale-[0.98]"
+				class="w-full rounded-[32px] bg-white/5 py-4 font-bold text-white shadow-lg backdrop-blur-md transition-all hover:bg-white/10 active:scale-[0.98]"
+				style="border: 1px solid var(--glass-border);"
 				onclick={() => initiatePrayer(recommendedMystery)}
 			>
 				{t.ui.pray_button_prefix || 'Pray Recommended'}
 			</button>
 
 			<button
-				class="w-full rounded-[32px] border border-white/10 bg-white/5 py-4 font-medium text-white/70 backdrop-blur-md transition-all hover:bg-white/10 hover:text-white active:scale-[0.98]"
+				class="w-full rounded-[32px] bg-white/5 py-4 font-medium text-white/70 backdrop-blur-md transition-all hover:bg-white/10 hover:text-white active:scale-[0.98]"
+				style="border: 1px solid var(--glass-border);"
 				onclick={() => (mysteryMenuOpen = true)}
 			>
 				{t.ui.pick_mystery}
@@ -424,7 +426,8 @@
 					class="flex w-full items-center rounded-[32px] bg-white/5 p-4 text-left text-lg font-medium transition-colors hover:bg-white/10"
 					onclick={() => switchLang(langItem.code)}
 				>
-					<span class="mr-3 w-10 shrink-0 text-center text-2xl">{flags[langItem.code] || '🌐'}</span>
+					<span class="mr-3 w-10 shrink-0 text-center text-2xl">{flags[langItem.code] || '🌐'}</span
+					>
 					<span class="text-lg font-medium">{langItem.label}</span>
 				</button>
 			{/each}
@@ -512,7 +515,7 @@
 					<div class="text-sm text-white/60">{t.ui.modes.physical.desc}</div>
 				</div>
 			</button>
-			
+
 			<!-- Just the Mysteries Sub-option -->
 			<button
 				class="group flex w-full items-start gap-4 rounded-[32px] bg-white/5 p-4 text-left transition-colors hover:bg-white/10"
