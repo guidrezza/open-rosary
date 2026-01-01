@@ -643,7 +643,7 @@
 		</div>
 
 		<!-- Context Text & Prayer Area -->
-		<div class="flex w-full flex-none flex-col items-center px-6 text-center -mt-8">
+		<div class="relative z-20 flex w-full flex-none flex-col items-center px-6 text-center -mt-8">
 			{#if mode === 'digital'}
 				<div class="flex min-h-8 flex-col items-center justify-center gap-2 text-center">
 					<!-- Persistent Mystery Context for Decades -->
@@ -693,7 +693,7 @@
 		</div>
 
 		<!-- Prayer Text / List Area -->
-		<div class="min-h-0 w-full flex-1 overflow-y-auto px-6 pb-6">
+		<div class="relative z-20 min-h-0 w-full flex-1 overflow-y-auto px-6 pb-6">
 			{#if mode === 'digital'}
 				<!-- Digital: Show FULL TEXT of current prayer -->
 				<div class="rounded-2xl p-2 pt-0">
