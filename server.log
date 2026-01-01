@@ -1,0 +1,18 @@
+
+> open-rosary@2.1.0 dev
+> vite dev
+
+5:48:46 AM [vite] (client) Forced re-optimization of dependencies
+
+  VITE v7.3.0  ready in 3234 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+5:49:23 AM [vite-plugin-svelte] src/lib/components/BottomSheet.svelte:57:3 Elements with the 'dialog' interactive role must have a tabindex value
+https://svelte.dev/e/a11y_interactive_supports_focus
+5:49:23 AM [vite-plugin-svelte] src/lib/components/BottomSheet.svelte:57:3 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+5:49:25 AM [vite-plugin-svelte] src/lib/components/BottomSheet.svelte:57:3 Elements with the 'dialog' interactive role must have a tabindex value
+https://svelte.dev/e/a11y_interactive_supports_focus
+5:49:25 AM [vite-plugin-svelte] src/lib/components/BottomSheet.svelte:57:3 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events

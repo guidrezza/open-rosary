@@ -485,7 +485,7 @@
 			>
 				<!-- Wrapper handles the sizing/positioning states -->
 				<div
-					class="relative z-0 flex w-full items-center justify-center overflow-hidden rounded-[32px] transition-all duration-500 ease-in-out
+					class="relative z-0 flex w-[90%] items-center justify-center overflow-hidden rounded-[32px] transition-all duration-500 ease-in-out
 						{imageMode === 'minimized' ? 'h-2 w-full cursor-pointer bg-white/20' : 'aspect-video'}
 						{imageMode === 'normal' ? 'max-w-lg' : ''}
 					"
@@ -570,12 +570,12 @@
 			<!-- Beads Container (Snake Layout) - NOW ABOVE TEXT -->
 			<!-- Highlight Clipping Fix: py-8 -my-6 to provide vertical breathing room without moving layout -->
 			<div
-				class="no-scrollbar -my-6 flex w-full flex-none items-center justify-center overflow-x-auto py-8"
+				class="no-scrollbar -my-8 flex w-full flex-none items-center justify-center overflow-x-auto py-8"
 			>
 				<!-- Zigzag Container -->
 				<div
 					class="relative mx-auto flex-none"
-					style="width: {steps.length * BEAD_SPACING + 10}px; height: {BEAD_OFFSET_Y + 50}px;"
+					style="width: {steps.length * BEAD_SPACING + 10}px; height: {BEAD_OFFSET_Y + 80}px;"
 				>
 					<!-- SVG Connectors Layer -->
 					<svg class="pointer-events-none absolute inset-0 z-0 h-full w-full">
@@ -643,7 +643,7 @@
 		</div>
 
 		<!-- Context Text & Prayer Area -->
-		<div class="flex w-full flex-none flex-col items-center px-6 text-center">
+		<div class="flex w-full flex-none flex-col items-center px-6 text-center -mt-8">
 			{#if mode === 'digital'}
 				<div class="flex min-h-8 flex-col items-center justify-center gap-2 text-center">
 					<!-- Persistent Mystery Context for Decades -->
@@ -774,7 +774,7 @@
 				style="border-top: 1px solid var(--glass-border);"
 			>
 				<button
-					class="pointer-events-auto flex aspect-square h-[92px] w-[92px] items-center justify-center bg-white/5 text-white backdrop-blur-md transition-colors hover:bg-white/10 active:bg-white/20"
+					class="pointer-events-auto flex aspect-square h-[110px] w-[110px] items-center justify-center bg-white/5 text-white backdrop-blur-md transition-colors hover:bg-white/10 active:bg-white/20"
 					style="border-right: 1px solid var(--glass-border);"
 					onclick={goToPrev}
 					disabled={currentSection === 'intro' && (mode === 'physical' || currentBeadIndex === 0)}
@@ -784,7 +784,7 @@
 				</button>
 
 				<button
-					class="pointer-events-auto flex h-[92px] flex-1 items-center justify-center gap-2 bg-white/5 px-6 text-lg font-bold text-white backdrop-blur-md transition-colors hover:bg-white/10 active:bg-white/20"
+					class="pointer-events-auto flex h-[110px] flex-1 items-center justify-center gap-2 bg-white/5 px-6 text-lg font-bold text-white backdrop-blur-md transition-colors hover:bg-white/10 active:bg-white/20"
 					onclick={goToNext}
 					title={t.ui.actions.next}
 				>
