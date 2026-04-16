@@ -76,20 +76,20 @@
 		}
 	});
 
-	// Sync State -> URL
+	// Sync State -> URL (without triggering route navigation on every bead advance)
 	$effect(() => {
 		if (initialized && browser) {
 			const sIdx = SECTIONS.indexOf(currentSection);
 			const pIdx = currentBeadIndex;
 
-			const url = new URL($page.url);
-			const currentSecParam = url.searchParams.get('section');
-			const currentPrayParam = url.searchParams.get('prayer');
+			const currentUrl = new URL(window.location.href);
+			const currentSecParam = currentUrl.searchParams.get('section');
+			const currentPrayParam = currentUrl.searchParams.get('prayer');
 
 			if (currentSecParam !== String(sIdx) || currentPrayParam !== String(pIdx)) {
-				url.searchParams.set('section', String(sIdx));
-				url.searchParams.set('prayer', String(pIdx));
-				goto(url.toString(), { replaceState: true, noScroll: true, keepFocus: true });
+				currentUrl.searchParams.set('section', String(sIdx));
+				currentUrl.searchParams.set('prayer', String(pIdx));
+				history.replaceState(history.state, '', currentUrl);
 			}
 		}
 	});
