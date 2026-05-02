@@ -21,14 +21,15 @@ My personal website: https://guidrezza.com
 
 ## 🛠️ Tech Stack
 
--   **Framework**: [SvelteKit](https://kit.svelte.dev/) (Svelte 5)
+-   **Framework**: [Astro](https://astro.build/) with hydrated Svelte 5 islands
 -   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 -   **Language**: TypeScript
--   **Build Tool**: Vite
+-   **Build Tool**: Astro/Vite
 
 ## 📂 Project Structure
 
--   `src/routes`: Application pages and routing logic.
+-   `src/pages`: Astro pages and static route generation.
+-   `src/lib/pages`: Hydrated Svelte page islands used by the Astro routes.
 -   `src/lib`: Shared components (`components/`), stores (`stores.ts`), and utilities (`liturgical.ts`, `i18n/`).
 -   `prayers-and-verses`: Centralized repository for all prayer text and scripture translations.
     -   Each language has its own folder (e.g., `en-us/`, `es-mx/`) containing a `constants.ts` file which feeds the UI.

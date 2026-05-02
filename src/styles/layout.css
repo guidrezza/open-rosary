@@ -14,7 +14,7 @@
 	/* Glass Standardization (iOS 26 Style) */
 	--glass-bg: #1a1a1a; /* Opaque Dark Hex (Was rgba) */
 	--glass-border: rgba(255, 255, 255, 0.15); /* Thin crisp border */
-	--glass-blur: 40px; /* Heavy premium blur */
+	--glass-blur: 24px; /* Premium blur without overwhelming mobile GPUs */
 	--glass-radius: 32px; /* Super rounded (iOS style) */
 	--glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Soft deep shadow */
 }
@@ -75,5 +75,31 @@ html {
 @media (max-width: 380px) {
 	html {
 		font-size: 85%;
+	}
+}
+
+@media (pointer: coarse), (max-width: 768px) {
+	:root {
+		--glass-blur: 0px;
+		--glass-bg: rgba(12, 12, 12, 0.74);
+		--glass-shadow: 0 6px 20px rgba(0, 0, 0, 0.24);
+	}
+
+	.glass-standard,
+	.glass-panel,
+	.backdrop-blur-sm,
+	.backdrop-blur-md,
+	.backdrop-blur-lg,
+	.backdrop-blur-xl,
+	.backdrop-blur-2xl,
+	.backdrop-blur-3xl {
+		backdrop-filter: none !important;
+		-webkit-backdrop-filter: none !important;
+	}
+
+	.transition-all,
+	.transition-transform,
+	.transition-colors {
+		transition-duration: 120ms;
 	}
 }

@@ -1,13 +1,14 @@
 node_modules
 
 # Output
+.astro
+dist
 .output
 .vercel
 .netlify
 .wrangler
 test_output.txt
 build_log*.txt
-/.svelte-kit
 /build
 
 # OS

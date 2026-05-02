@@ -1,7 +1,6 @@
 import { writable } from 'svelte/store';
-import { browser } from '$app/environment';
 import type { RosaryState } from './types';
-import { getLiturgicalTheme, PALETTES, type LiturgicalColor, type LiturgicalTheme } from './liturgical';
+import { getLiturgicalTheme, PALETTES, type LiturgicalColor } from './liturgical';
 
 // Initial calculation
 const initialDate = new Date();
@@ -29,7 +28,7 @@ function createRosaryStore() {
 		},
 
 		// Change Theme (Color Override)
-		setTheme: (color: LiturgicalColor, seasonName?: string) => {
+		setTheme: (color: LiturgicalColor) => {
 			update((s) => {
 				const palette = PALETTES[color];
 				// Ensure we have a base theme to spread, fallback to current assumption if missing

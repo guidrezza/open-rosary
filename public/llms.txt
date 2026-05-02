@@ -2,10 +2,10 @@
 A beautiful, modern, and open-source web application for praying the Rosary. Designed with a focus on aesthetics, simplicity, and accessibility.
 
 ## Tech Stack
-- SvelteKit (Svelte 5)
+- Astro with hydrated Svelte 5 islands
 - Tailwind CSS
 - TypeScript
-- Vite
+- Astro/Vite
 
 ## Key Features
 - **Liturgical Engine**: src/lib/liturgical.ts (Calculates Seasons, Feasts, Colors)
@@ -22,7 +22,7 @@ A beautiful, modern, and open-source web application for praying the Rosary. Des
 
 ## Routes
 - `/`: Home Page (Mode/Mystery Selection)
-- `/pray`: Main Prayer Interface
+- `/[lang]/pray/`: Main Prayer Interface
 - `/[lang]/`: Locale-specific prefixes
 
 ## Theming

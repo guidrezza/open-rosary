@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { 
 		MYSTERY_IMAGES, 
-		getRandomImage, 
 		getNextRandomFromDeck, 
 		getNextSequentialImage, 
-		createDeck,
 		type MysteryImageDef 
 	} from '$lib/mysteryImages';
 
@@ -24,12 +22,13 @@
 	} = $props();
 
 	let image = $state<MysteryImageDef | null>(null);
-	let interval: any;
+	let interval: ReturnType<typeof setInterval> | undefined;
+	let canAutoRotate = $state(false);
 	
 	// Deck for random pool
 	let deck: MysteryImageDef[] = [];
 
-	function setNewImage() {
+	function selectInitialImage() {
 		if (mystery && decade) {
 			const list = MYSTERY_IMAGES[mystery];
 			if (list && list[decade - 1]) {
@@ -46,13 +45,6 @@
 				image = result.image;
 				deck = result.deck;
 			}
-		}
-
-		if (rotate) {
-			if (interval) clearInterval(interval);
-			interval = setInterval(() => {
-				rotateImage();
-			}, speed);
 		}
 	}
 
@@ -75,17 +67,23 @@
 	}
 
 	$effect(() => {
-		// React to props
-		if (mystery && decade && !rotate) {
-			// Static Mode (Decades)
-			const list = MYSTERY_IMAGES[mystery];
-			if (list && list[decade - 1]) {
-				image = list[decade - 1];
-			}
-			if (interval) clearInterval(interval);
-		} else {
-			// Rotating Mode
-			setNewImage();
+		selectInitialImage();
+	});
+
+	onMount(() => {
+		const shouldReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const isTouch = window.matchMedia('(pointer: coarse)').matches;
+		canAutoRotate = rotate && !shouldReduceMotion && !isTouch;
+	});
+
+	$effect(() => {
+		if (interval) {
+			clearInterval(interval);
+			interval = undefined;
+		}
+
+		if (canAutoRotate) {
+			interval = setInterval(rotateImage, speed);
 		}
 	});
 
@@ -95,7 +93,7 @@
 
 	export function refresh() {
 		rotateImage();
-		if (rotate) {
+		if (canAutoRotate) {
 			if (interval) clearInterval(interval);
 			interval = setInterval(rotateImage, speed);
 		}
@@ -109,6 +107,8 @@
 		<img
 			src={image.path}
 			alt={image.alt}
+			loading="eager"
+			decoding="async"
 			class="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
 		/>
 		<div class="absolute inset-0 bg-black/20"></div>

@@ -58,7 +58,9 @@
 				class="sheet-panel"
 				class:sheet-panel-ready={animationComplete}
 				onclick={(e) => e.stopPropagation()}
+				onkeydown={(e) => e.key === 'Escape' && onClose()}
 				role="dialog"
+				tabindex="-1"
 			>
 				<!-- Touch handling for swipe-to-close -->
 				<div>
@@ -152,5 +154,15 @@
 		background-color: rgba(15, 15, 15, 0.25) !important;
 		backdrop-filter: blur(40px) saturate(180%);
 		-webkit-backdrop-filter: blur(40px) saturate(180%);
+	}
+
+	@media (pointer: coarse), (max-width: 768px) {
+		.sheet-panel,
+		.sheet-panel-ready {
+			background-color: rgba(15, 15, 15, 0.88) !important;
+			backdrop-filter: none;
+			-webkit-backdrop-filter: none;
+			transition: background-color 0.15s ease;
+		}
 	}
 </style>

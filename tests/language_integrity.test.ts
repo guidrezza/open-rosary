@@ -18,7 +18,8 @@ describe('Language Integrity', () => {
                 expect(data.prayers.our_father).toBeTruthy();
                 expect(data.prayers.glory_be).toBeTruthy();
             } catch (e) {
-                throw new Error(`Missing prayer keys in ${code}: ${e.message}`);
+                const message = e instanceof Error ? e.message : String(e);
+                throw new Error(`Missing prayer keys in ${code}: ${message}`);
             }
 
             // Check Mysteries

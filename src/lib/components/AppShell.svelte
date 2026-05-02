@@ -1,50 +1,45 @@
 <script lang="ts">
-	import './layout.css';
-	import favicon from '$lib/assets/favicon.svg';
+	import '../../styles/layout.css';
 	import { onMount } from 'svelte';
-	import { page } from '$app/stores';
 	import { getLiturgicalTheme, type LiturgicalColor } from '$lib/liturgical';
 	import { rosary } from '$lib/stores';
 	import Background from '$lib/components/Background.svelte';
 
-	let { children } = $props();
+	interface Props {
+		children: any;
+	}
 
-	// We want to trigger reactivity when $rosary.theme changes
+	let { children }: Props = $props();
+
 	let theme = $derived($rosary.theme || getLiturgicalTheme(new Date()));
 
 	onMount(() => {
-		// Initialize Store (Recalc date)
 		rosary.init();
+		syncStoreFromUrl();
+
+		const onPopState = () => syncStoreFromUrl();
+		window.addEventListener('popstate', onPopState);
+
+		return () => {
+			window.removeEventListener('popstate', onPopState);
+		};
 	});
 
-	// Sync URL Params -> Store
-	$effect(() => {
-		const p = $page.url.searchParams;
+	function syncStoreFromUrl() {
+		const p = new URL(window.location.href).searchParams;
 		const urlTheme = p.get('theme');
 		const urlMode = p.get('mode');
 
-		// Sync Mode
 		if (urlMode && (urlMode === 'digital' || urlMode === 'physical') && urlMode !== $rosary.mode) {
 			rosary.setMode(urlMode);
 		}
 
-		// Sync Theme
-		// Validate against known colors to prevent junk
 		const validColors = ['green', 'purple', 'white', 'red', 'rose', 'gold', 'silver', 'black'];
 		if (urlTheme && validColors.includes(urlTheme) && $rosary.theme?.color !== urlTheme) {
 			rosary.setTheme(urlTheme as LiturgicalColor);
 		}
-	});
+	}
 </script>
-
-<svelte:head>
-	<link rel="icon" href={favicon} />
-	<title>Open Rosary</title>
-	<meta
-		name="description"
-		content="A beautiful, modern, and open-source web application for praying the Rosary. Designed with a focus on aesthetics, simplicity, and accessibility."
-	/>
-</svelte:head>
 
 <div
 	class="relative min-h-screen overflow-hidden transition-colors duration-1000 ease-in-out"
@@ -55,7 +50,6 @@
         --text-highlight: {theme.cssVars['--text-highlight']};
     "
 >
-	<!-- Global Background -->
 	<Background />
 
 	<div class="relative z-10 h-full w-full overflow-hidden">

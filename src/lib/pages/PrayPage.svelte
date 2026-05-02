@@ -1,20 +1,29 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 	import { slide } from 'svelte/transition';
-	import { getLocale } from '$lib/i18n';
 	import { rosary } from '$lib/stores';
-	import type { RosarySection, Mystery } from '$lib/types';
+	import type { RosarySection, Mystery, LocalizationData } from '$lib/types';
 
+	import AppShell from '$lib/components/AppShell.svelte';
 	import PrayerModal from '$lib/components/PrayerModal.svelte';
 	import BottomSheet from '$lib/components/BottomSheet.svelte';
 	import MysteryImage from '$lib/components/MysteryImage.svelte';
 	import SectionMenu from '$lib/components/SectionMenu.svelte';
-	import { goto } from '$app/navigation';
-	import { base } from '$app/paths';
-	import { browser } from '$app/environment';
 
-	let lang = $derived($page.params.lang ?? 'en');
-	let t = $derived(getLocale(lang));
+	interface Props {
+		lang?: string;
+		basePath?: string;
+		initialSearch?: string;
+		locale: LocalizationData;
+	}
+
+	let { lang = 'en', basePath = '', initialSearch = '', locale }: Props = $props();
+	let appBase = $derived(basePath === '/' ? '' : basePath.replace(/\/$/, ''));
+	let searchParams = $state(new URLSearchParams());
+	$effect(() => {
+		searchParams = new URLSearchParams(initialSearch);
+	});
+	let t = $derived(locale);
 	let mode = $derived($rosary.mode);
 
 	// Initialize state
@@ -32,31 +41,12 @@
 		'conclusion'
 	];
 
-	// Sync URL Params <-> State
-	$effect(() => {
-		// 1. Read from URL on mount (or external change) - ONLY ONCE/INIT ideally or if we want deep linking navigation support
-		const p = $page.url.searchParams;
-		const secParam = p.get('section');
-		const prayParam = p.get('prayer');
-
-		if (secParam !== null) {
-			const sIdx = parseInt(secParam);
-			if (!isNaN(sIdx) && sIdx >= 0 && sIdx < SECTIONS.length) {
-				const targetSec = SECTIONS[sIdx];
-				// Only update if different to avoid loops, though $effect dependency tracking should handle it naturally
-				// But we need to be careful about the WRITE effect below.
-				// Actually, best pattern: Init from URL in onMount or separate effect, then Write in another.
-				// However, Svelte 5 $effect runs on changes.
-				// Let's use untracked or a simple init flag for the first load.
-			}
-		}
-	});
-
 	// Better strategy: Init logic separate from Sync logic
 	let initialized = false;
-	$effect(() => {
-		if (!initialized && browser) {
-			const p = $page.url.searchParams;
+	onMount(() => {
+		if (!initialized) {
+			const p = new URL(window.location.href).searchParams;
+			searchParams = new URLSearchParams(p);
 			const secParam = p.get('section');
 			const prayParam = p.get('prayer');
 
@@ -78,7 +68,7 @@
 
 	// Sync State -> URL (without triggering route navigation on every bead advance)
 	$effect(() => {
-		if (initialized && browser) {
+		if (initialized && typeof window !== 'undefined') {
 			const sIdx = SECTIONS.indexOf(currentSection);
 			const pIdx = currentBeadIndex;
 
@@ -95,11 +85,11 @@
 	});
 
 	// Get mystery from query param
-	let mysteryId = $derived(browser ? $page.url.searchParams.get('mystery') || 'joyful' : 'joyful');
+	let mysteryId = $derived(searchParams.get('mystery') || 'joyful');
 	let mystery = $derived(t.mysteries[mysteryId] || t.mysteries['joyful']);
 
 	// Get submode
-	let submode = $derived(browser ? $page.url.searchParams.get('submode') : null);
+	let submode = $derived(searchParams.get('submode'));
 
 	// Image Rotation Logic
 	let rotateImage = $derived.by(() => {
@@ -166,14 +156,14 @@
 	let sectionMenuOpen = $state(false);
 
 	function gotoHome() {
-		const url = new URL($page.url);
-		url.pathname = `${base}/${lang}`;
+		const url = new URL(window.location.href);
+		url.pathname = `${appBase}/${lang}/`;
 		url.searchParams.delete('mystery');
 		url.searchParams.delete('section');
 		url.searchParams.delete('prayer');
 		url.searchParams.delete('submode'); // Clear submode
 		// preserve theme, mode
-		goto(url.toString());
+		window.location.assign(url.toString());
 	}
 
 	function handleMysteryClick() {
@@ -438,6 +428,7 @@
 </script>
 
 <!-- Main Layout Wrapper -->
+<AppShell>
 <div class="relative mx-auto flex h-screen w-full max-w-md flex-col overflow-hidden bg-transparent">
 	<!-- Header -->
 	<!-- Header -->
@@ -812,6 +803,7 @@
 		</div>
 	</BottomSheet>
 {/if}
+</AppShell>
 
 <SectionMenu
 	isOpen={sectionMenuOpen}

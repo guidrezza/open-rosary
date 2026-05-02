@@ -1,0 +1,21 @@
+---
+import PrayPage from '$lib/pages/PrayPage.svelte';
+import { getLocale, locales } from '$lib/i18n';
+
+export const prerender = true;
+
+export function getStaticPaths() {
+	return Object.keys(locales).map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const locale = getLocale(lang ?? 'en');
+---
+
+<PrayPage
+	lang={lang}
+	basePath={import.meta.env.BASE_URL}
+	initialSearch={Astro.url.search}
+	locale={locale}
+	client:load
+/>

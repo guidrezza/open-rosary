@@ -1,18 +1,21 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
-	import { goto } from '$app/navigation';
-	import { base } from '$app/paths';
-	import { page } from '$app/stores';
 	import { rosary } from '$lib/stores';
 	import type { LiturgicalColor } from '$lib/liturgical';
-	import GlassPanel from '$lib/components/GlassPanel.svelte';
+	import AppShell from '$lib/components/AppShell.svelte';
 	import BottomSheet from '$lib/components/BottomSheet.svelte';
 	import MysteryImage from '$lib/components/MysteryImage.svelte';
-	import { getLocale } from '$lib/i18n';
+	import type { LocalizationData } from '$lib/types';
 
-	// Get language from route params
-	let lang = $derived($page.params.lang ?? 'en');
-	let t = $derived(getLocale(lang));
+	interface Props {
+		lang?: string;
+		basePath?: string;
+		locale: LocalizationData;
+	}
+
+	let { lang = 'en', basePath = '', locale }: Props = $props();
+	let appBase = $derived(basePath === '/' ? '' : basePath.replace(/\/$/, ''));
+	let t = $derived(locale);
 
 	// State
 	let currentDate = $state(new Date());
@@ -101,17 +104,18 @@
 
 	// Helper Actions
 	function handleThemeSelect(color: LiturgicalColor) {
-		const url = new URL($page.url);
+		const url = new URL(window.location.href);
 		url.searchParams.set('theme', color);
-		goto(url.toString(), { replaceState: true, noScroll: true });
+		history.replaceState(history.state, '', url);
+		rosary.setTheme(color);
 		themeMenuOpen = false;
 	}
 
 	function switchLang(newLang: string) {
-		const url = new URL($page.url);
-		url.pathname = `${base}/${newLang}`;
+		const url = new URL(window.location.href);
+		url.pathname = `${appBase}/${newLang}/`;
 		// params preserved automatically
-		goto(url.toString(), { replaceState: true });
+		window.location.assign(url.toString());
 		langMenuOpen = false;
 	}
 
@@ -121,8 +125,8 @@
 	}
 
 	function selectMode(m: 'digital' | 'physical' | 'mysteries') {
-		const url = new URL($page.url);
-		url.pathname = `${base}/${lang}/pray`;
+		const url = new URL(window.location.href);
+		url.pathname = `${appBase}/${lang}/pray/`;
 		url.searchParams.set('mystery', selectedMysteryForMode);
 
 		if (m === 'mysteries') {
@@ -134,7 +138,7 @@
 		}
 
 		// Theme param preserved from current URL
-		goto(url.toString());
+		window.location.assign(url.toString());
 		modeMenuOpen = false;
 	}
 
@@ -318,9 +322,8 @@
 	}
 </script>
 
-<div
-	class="relative z-10 flex h-dvh w-full flex-col items-center overflow-x-hidden overflow-y-auto"
->
+<AppShell>
+<div class="relative z-10 flex h-dvh w-full flex-col items-center overflow-x-hidden overflow-y-auto">
 	<div class="absolute top-6 left-6 z-50">
 		<button
 			class="text-3xl drop-shadow-md transition-transform hover:scale-110 active:scale-95"
@@ -530,3 +533,4 @@
 		</div>
 	</BottomSheet>
 </div>
+</AppShell>

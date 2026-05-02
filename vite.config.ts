@@ -1,12 +1,9 @@
-import tailwindcss from '@tailwindcss/vite';
-import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-	plugins: [tailwindcss(), sveltekit()],
-	server: {
-		fs: {
-			allow: ['prayers-and-verses']
+	resolve: {
+		alias: {
+			$lib: new URL('./src/lib', import.meta.url).pathname
 		}
 	}
 });

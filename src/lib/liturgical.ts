@@ -183,8 +183,6 @@ export function getLiturgicalTheme(date: Date = new Date()): LiturgicalTheme {
 
 	// Lent
 	if (current >= ashWed && current < easter) {
-		const daysSinceAsh = Math.floor((current.getTime() - ashWed.getTime()) / (1000 * 60 * 60 * 24));
-
 		// Palm Sunday (Sunday before Easter)
 		if (isSameDate(current, addDays(easter, -7)))
 			return { color: 'red', season: 'Palm Sunday', key: 'palm_sunday', cssVars: PALETTES.red };

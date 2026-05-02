@@ -10,6 +10,7 @@
 	let colorSecondary = $derived(
 		theme?.cssVars?.colorBottom || PALETTES.green.colorBottom || '#064e3b'
 	);
+	let animateOrbs = $state(false);
 
 	// Orb configuration for soft, ambient lighting effect
 	interface LightOrb {
@@ -31,16 +32,20 @@
 	let orbs: LightOrb[] = $state([]);
 
 	onMount(() => {
-		// Reduced from 40 to 15 orbs for efficiency (62% reduction)
-		const orbCount = 15;
+		const shouldReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const isTouchSized = window.matchMedia('(pointer: coarse), (max-width: 768px)').matches;
+		animateOrbs = !shouldReduceMotion && !isTouchSized;
+
+		if (!animateOrbs) return;
+
+		const orbCount = 6;
 		orbs = Array.from({ length: orbCount }, (_, i) => {
 			const startX = Math.random() * 120 - 10;
 			const startY = Math.random() * 120 - 10;
 			const endX = Math.random() * 120 - 10;
 			const endY = Math.random() * 120 - 10;
 
-			// Simplified size distribution: 60-300px range
-			const size = Math.random() * 240 + 60;
+			const size = Math.random() * 160 + 60;
 
 			return {
 				id: i,
@@ -54,7 +59,7 @@
 				baseOpacity: Math.random() * 0.27 + 0.18, // 0.18 - 0.45
 				flickerDuration: Math.random() * 6 + 6, // 6s - 12s
 				flickerDelay: Math.random() * -12,
-				blurAmount: size < 100 ? 30 : size < 200 ? 50 : 70,
+				blurAmount: size < 100 ? 20 : size < 180 ? 32 : 44,
 				colorMix: Math.random()
 			};
 		});
@@ -75,30 +80,32 @@
 		"
 	></div>
 
-	<!-- Ambient light orbs -->
-	{#each orbs as orb (orb.id)}
-		<div
-			class="orb absolute rounded-full transition-colors duration-1000"
-			style="
-				width: {orb.size}px;
-				height: {orb.size}px;
-				left: 0;
-				top: 0;
-				filter: blur({orb.blurAmount}px);
-				--x-start: {orb.x}vw;
-				--y-start: {orb.y}vh;
-				--x-end: {orb.endX}vw;
-				--y-end: {orb.endY}vh;
-				--move-duration: {orb.moveDuration}s;
-				--flicker-duration: {orb.flickerDuration}s;
-				--opacity-min: {orb.baseOpacity * 0.8};
-				--opacity-max: {orb.baseOpacity};
-				--move-delay: {orb.moveDelay}s;
-				--flicker-delay: {orb.flickerDelay}s;
-				background: radial-gradient(circle at center, {getOrbColor(orb.colorMix)} 0%, transparent 70%);
-			"
-		></div>
-	{/each}
+	{#if animateOrbs}
+		<!-- Ambient light orbs -->
+		{#each orbs as orb (orb.id)}
+			<div
+				class="orb absolute rounded-full transition-colors duration-1000"
+				style="
+					width: {orb.size}px;
+					height: {orb.size}px;
+					left: 0;
+					top: 0;
+					filter: blur({orb.blurAmount}px);
+					--x-start: {orb.x}vw;
+					--y-start: {orb.y}vh;
+					--x-end: {orb.endX}vw;
+					--y-end: {orb.endY}vh;
+					--move-duration: {orb.moveDuration}s;
+					--flicker-duration: {orb.flickerDuration}s;
+					--opacity-min: {orb.baseOpacity * 0.8};
+					--opacity-max: {orb.baseOpacity};
+					--move-delay: {orb.moveDelay}s;
+					--flicker-delay: {orb.flickerDelay}s;
+					background: radial-gradient(circle at center, {getOrbColor(orb.colorMix)} 0%, transparent 70%);
+				"
+			></div>
+		{/each}
+	{/if}
 
 	<!-- Soft vignette for depth -->
 	<div
@@ -123,6 +130,12 @@
 			animation: none;
 			opacity: var(--opacity-max);
 			transform: translate(var(--x-start), var(--y-start));
+		}
+	}
+
+	@media (pointer: coarse), (max-width: 768px) {
+		.orb {
+			display: none;
 		}
 	}
 
