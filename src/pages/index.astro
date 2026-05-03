@@ -1,5 +1,8 @@
 ---
+import AppLayout from '../layouts/AppLayout.astro';
 import RedirectPage from '$lib/pages/RedirectPage.svelte';
 ---
 
-<RedirectPage basePath={import.meta.env.BASE_URL} client:load />
+<AppLayout>
+	<RedirectPage basePath={import.meta.env.BASE_URL} client:load />
+</AppLayout>
