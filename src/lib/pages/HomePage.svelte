@@ -407,7 +407,7 @@
 		<p class="text-[10px] tracking-wider text-white/20 uppercase">
 			OPEN ROSARY • 2025 • {t.ui.footer_made_by || 'MADE BY'}
 			<a
-				href="https://guidrezza.com"
+				href="https://nickdrezza.com"
 				target="_blank"
 				rel="noopener noreferrer"
 				class="hover:text-white/60 hover:underline">GUIDREZZA</a
