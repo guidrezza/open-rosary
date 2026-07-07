@@ -1,10 +1,10 @@
-# [Open Rosary](https://rosary.guidrezza.com)
+# [Open Rosary](https://rosary.nickdrezza.com)
 
 A beautiful, modern, and open-source web application for praying the Rosary. Designed with a focus on aesthetics, simplicity, and accessibility.
 
-hosted here: https://rosary.guidrezza.com
+hosted here: https://rosary.nickdrezza.com
 
-My personal website: https://guidrezza.com
+My personal website: https://nickdrezza.com
 
 ## ✨ Features
 
@@ -18,6 +18,12 @@ My personal website: https://guidrezza.com
 -   **PWA**: Installable on mobile devices and works offline.
 -   **Responsive**: Optimized for both mobile and desktop experiences.
 -   **AI Imagery**: The images were generated with AI (Google Nano Bana Pro (Gemini 3 Pro)). They were carefully reviewed and edited for accuracy.
+
+## Portfolio Notes
+
+-   **Problem:** most digital Rosary tools are either visually dated, single-language, or not built around both physical and digital prayer habits.
+-   **Approach:** Astro generates fast static routes while Svelte islands handle the interactive prayer state, language switching, PWA behavior, and liturgical theme logic.
+-   **What it shows:** multilingual product work, religious-domain accuracy, offline-first UX, and date-sensitive testing for liturgical seasons and feast days.
 
 ## 🛠️ Tech Stack
 
@@ -39,7 +45,7 @@ My personal website: https://guidrezza.com
 1.  **Clone the repository**:
 
     ```bash
-    git clone https://github.com/guidrezza/open-rosary.git
+    git clone https://github.com/nickdrezza/open-rosary.git
     cd open-rosary
     ```
 
