@@ -9,6 +9,9 @@ const prayersDir = fileURLToPath(new URL('./prayers-and-verses', import.meta.url
 export default defineConfig({
 	integrations: [svelte()],
 	trailingSlash: 'always',
+	devToolbar: {
+		enabled: false
+	},
 	vite: {
 		plugins: [tailwindcss()],
 		server: {
